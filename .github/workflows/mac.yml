@@ -33,6 +33,8 @@ jobs:
             cat bench.txt
             cargo run -q --release -p kanopy-cli -- world-bench
             cargo run -q --release -p kanopy-cli -- scene-bench
+            cargo run -q --release -p kanopy-cli -- render examples/forests/sparse-forest.kanopy-forest.json --minutes 1 --out r.wav
+            echo "render hash: $(shasum -a 256 r.wav | cut -c1-16)"
           } > results.txt
           body=$(sed -e 's/%/%25/g' results.txt | awk '{printf "%s%%0A", $0}')
           echo "::notice title=kanopy bench::${body}"

@@ -2,15 +2,19 @@
 //!
 //! - `world`: the slice, layers, trees and shrubs. `species` and `life`: habitats, groups and
 //!   how individuals move.
+//! - `calls`, `scale`, `scene`: calls, keys, and the forest calling, hearing and answering.
 //! - `voice`, `wavetable`, `filter`: the prototype voice. `propagation` and `mixer`: how calls
-//!   reach the listener.
+//!   reach the listener. `master`: the Ear, limiters and reverb.
+//! - `files`: forest and species files. `render`: a forest file to a WAV.
 
 pub mod calls;
+pub mod files;
 pub mod filter;
 pub mod life;
 pub mod master;
 pub mod mixer;
 pub mod propagation;
+pub mod render;
 pub mod rng;
 pub mod scale;
 pub mod scene;
@@ -20,12 +24,15 @@ pub mod wav;
 pub mod wavetable;
 pub mod world;
 
+/// kanopy's version, written into renders.
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 /// Samples per processing block. Coefficients (cutoff, shape, gains) update once per block
 /// and are ramped across it.
 pub const BLOCK: usize = 64;
 
-/// Provisional: the source level (dB SPL) that a sine of amplitude 1.0 represents.
-/// Batch 04 replaces this with the Ear and the starting gain.
+/// The physical scale inside the mixer: a sine of amplitude 1.0 is this many dB SPL. The output
+/// chain (`master`) maps it to the file's level.
 pub const FULL_SCALE_SPL: f32 = 100.0;
 
 /// A point or velocity in the forest slice: x left to right, y height, in metres.

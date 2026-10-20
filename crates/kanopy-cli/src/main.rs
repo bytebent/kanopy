@@ -11,6 +11,11 @@
 //!       --out FILE --medium earth|mars|titan|venus|water --box X0,X1,Y0,Y1 --ear fixed|adapting
 //!       --no-reverb --reverb AMOUNT --no-bodies --underwater-stereo --compensation 0..1 --normalise
 //!   kanopy scene-bench [--scale K] how fast calling and hearing run with many individuals
+//!   score and listen also take --forest FILE: that forest instead of the demo (its own settings)
+//!
+//!   kanopy render FILE [options]   a forest file (or a kanopy WAV) to a WAV, any length
+//!       --minutes M --seed N --fade-in S --fade-out S --bits 16|24 --out FILE
+//!   kanopy examples [--out DIR]    write the example forest and species files
 
 use kanopy_core::mixer::{Listener, Mixer};
 use kanopy_core::propagation::Medium;
@@ -53,9 +58,33 @@ fn main() {
                 &PathBuf::from(opt("--out").unwrap_or_else(|| "out/world.json".into())),
             )
         }
+        Some("render") => {
+            let f = |n: &str| {
+                opt(n).map(|s| {
+                    s.parse::<f64>()
+                        .unwrap_or_else(|_| fail(&format!("{n}: not a number")))
+                })
+            };
+            let Some(file) = args.get(1).filter(|a| !a.starts_with("--")) else {
+                fail("usage: kanopy render FILE [--minutes M] [--seed N] [--out FILE]")
+            };
+            render_cmd(
+                Path::new(file),
+                f("--minutes"),
+                f("--seed").map(|x| x as u64),
+                f("--fade-in"),
+                f("--fade-out"),
+                f("--bits").map(|x| x as u16),
+                opt("--out").map(PathBuf::from),
+            );
+        }
+        Some("examples") => examples(&PathBuf::from(
+            opt("--out").unwrap_or_else(|| "examples".into()),
+        )),
         Some(cmd @ ("score" | "listen" | "scene-bench")) => {
             let f = |n: &str, d: f64| opt(n).map(|s| s.parse().expect(n)).unwrap_or(d);
             let o = SceneOpts {
+                forest: opt("--forest").map(PathBuf::from),
                 seed: f("--seed", 1.0) as u64,
                 density: f("--density", 0.5),
                 minutes: f("--minutes", if cmd == "score" { 1.0 } else { 2.0 }),
@@ -496,6 +525,7 @@ struct SceneOpts {
     y: f64,
     radius: f64,
     cap: usize,
+    forest: Option<PathBuf>,
     medium: kanopy_core::propagation::Medium,
     boxed: Option<kanopy_core::world::Rect>,
     fixed_ear: bool,
@@ -508,6 +538,10 @@ struct SceneOpts {
 
 fn make_scene(o: &SceneOpts) -> kanopy_core::scene::Scene {
     use kanopy_core::life::{Life, Zone};
+    if let Some(path) = &o.forest {
+        let f = load_forest(path);
+        return f.scene().unwrap_or_else(|e| fail(&e));
+    }
     use kanopy_core::scene::{Scene, SceneSettings};
     use kanopy_core::species::demo as demo_species;
     use kanopy_core::world::{Forest, ForestSettings};
@@ -686,4 +720,175 @@ fn scene_bench(o: &SceneOpts) {
         cpu / secs * 100.0
     );
     summary(&sc, sc.time());
+}
+
+fn fail(msg: &str) -> ! {
+    eprintln!("kanopy: {msg}");
+    std::process::exit(1)
+}
+
+/// A forest file, or the forest stored in a kanopy WAV.
+fn load_forest(path: &Path) -> kanopy_core::files::ForestFile {
+    use kanopy_core::files::ForestFile;
+    let wav = path
+        .extension()
+        .is_some_and(|e| e.eq_ignore_ascii_case("wav"));
+    let r = if wav {
+        ForestFile::from_wav(path)
+    } else {
+        ForestFile::load(path)
+    };
+    r.unwrap_or_else(|e| fail(&e))
+}
+
+fn slug(s: &str) -> String {
+    let mut out = String::new();
+    for c in s.chars() {
+        if c.is_ascii_alphanumeric() {
+            out.push(c.to_ascii_lowercase());
+        } else if !out.ends_with('-') {
+            out.push('-');
+        }
+    }
+    out.trim_matches('-').to_string()
+}
+
+#[allow(clippy::too_many_arguments)]
+fn render_cmd(
+    file: &Path,
+    minutes: Option<f64>,
+    seed: Option<u64>,
+    fade_in: Option<f64>,
+    fade_out: Option<f64>,
+    bits: Option<u16>,
+    out: Option<PathBuf>,
+) {
+    use std::io::Write as _;
+    let mut forest = load_forest(file);
+    if let Some(s) = seed {
+        forest.seed = s;
+    }
+    let mut opts = forest.render.clone();
+    if let Some(m) = minutes {
+        opts.minutes = m;
+    }
+    if let Some(x) = fade_in {
+        opts.fade_in = x;
+    }
+    if let Some(x) = fade_out {
+        opts.fade_out = x;
+    }
+    if let Some(b) = bits {
+        opts.bits = b;
+    }
+    let out = out.unwrap_or_else(|| {
+        PathBuf::from(format!(
+            "renders/{}_{}_{}min.wav",
+            slug(&forest.name),
+            forest.seed,
+            opts.minutes
+        ))
+    });
+    if let Some(dir) = out.parent().filter(|d| !d.as_os_str().is_empty()) {
+        std::fs::create_dir_all(dir).unwrap_or_else(|e| fail(&format!("{}: {e}", dir.display())));
+    }
+    let f =
+        std::fs::File::create(&out).unwrap_or_else(|e| fail(&format!("{}: {e}", out.display())));
+    println!(
+        "{} · seed {} · {} min · {} species, {} individuals",
+        forest.name,
+        forest.seed,
+        opts.minutes,
+        forest.species.len(),
+        forest
+            .species
+            .iter()
+            .map(|s| s.habitat.individuals)
+            .sum::<usize>()
+    );
+    let total = opts.minutes * 60.0;
+    let tty = std::io::IsTerminal::is_terminal(&std::io::stdout());
+    let (_, rep) =
+        kanopy_core::render::render(&forest, &opts, std::io::BufWriter::new(f), |done| {
+            if tty && (done as u64) % 10 == 0 {
+                print!("\r{:5.1} %", 100.0 * done / total.max(1e-9));
+                std::io::stdout().flush().ok();
+            }
+        })
+        .unwrap_or_else(|e| fail(&e));
+    if tty {
+        print!("\r");
+    }
+    println!(
+        "{} · {:.0} s in {:.1} s ({:.1}× real time) · {} calls · peak {:.1} dBFS, RMS {:.1} dBFS · Ear {:+.1} → {:+.1} dB · limiters {:.1} dB",
+        out.display(), rep.seconds, rep.cpu_seconds, rep.seconds / rep.cpu_seconds.max(1e-9), rep.calls, rep.peak_dbfs, rep.rms_dbfs, rep.ear_start_db, rep.ear_end_db, rep.limited_db
+    );
+}
+
+fn examples(dir: &Path) {
+    use kanopy_core::files::{ForestFile, KeyFile, ListenFile, MediumFile, SpeciesFile};
+    use kanopy_core::scale::{Key, Scale};
+    let forests = dir.join("forests");
+    let species = dir.join("species");
+    for d in [&forests, &species] {
+        std::fs::create_dir_all(d).unwrap_or_else(|e| fail(&format!("{}: {e}", d.display())));
+    }
+    let demo = ForestFile::demo();
+    for sp in &demo.species {
+        let p = species.join(format!("{}.kanopy-species.json", slug(&sp.name)));
+        SpeciesFile::save(sp, &p).unwrap_or_else(|e| fail(&e));
+        println!("{}", p.display());
+    }
+    let sparse: Vec<_> = kanopy_core::species::demo(0.15);
+    let list = [
+        ForestFile {
+            name: "Demo forest".into(),
+            ..demo.clone()
+        },
+        ForestFile {
+            name: "Sparse forest".into(),
+            species: sparse.clone(),
+            ..demo.clone()
+        },
+        ForestFile {
+            name: "Mars woodland".into(),
+            density: 0.1,
+            medium: MediumFile::Preset("mars".into()),
+            species: sparse.clone(),
+            ..demo.clone()
+        },
+        ForestFile {
+            name: "Sunken kelp".into(),
+            medium: MediumFile::Preset("water".into()),
+            underwater_stereo: true,
+            key: Some(KeyFile::from_key(&Key::new(9, Scale::Dorian))),
+            species: sparse.clone(),
+            ..demo.clone()
+        },
+        ForestFile {
+            name: "Canopy box".into(),
+            listen: ListenFile::Box {
+                x0: 60.0,
+                x1: 110.0,
+                y0: 12.0,
+                y1: 32.0,
+            },
+            ..demo.clone()
+        },
+        ForestFile {
+            name: "Under the floor".into(),
+            listen: ListenFile::Listener {
+                x: 60.0,
+                y: -2.0,
+                radius: 150.0,
+            },
+            species: sparse,
+            ..demo
+        },
+    ];
+    for f in &list {
+        let p = forests.join(format!("{}.kanopy-forest.json", slug(&f.name)));
+        f.save(&p).unwrap_or_else(|e| fail(&e));
+        println!("{}", p.display());
+    }
 }

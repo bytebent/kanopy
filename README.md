@@ -3,15 +3,26 @@
 A renderer for living forests: species you design, placed in a forest on any world, heard from
 wherever you stand. Each animal only reacts to what actually reaches its ears.
 
-Status: **design agreed; batches 01–04 built**: the sound path, the forest and how its animals move, how they call, hear, answer, chorus, harmonise and copy each other, and the worlds, Box listening, the Ear, limiters and reverb.
+Status: **design agreed; batches 01–05 built**: the sound path, the forest and how its animals move, how they call, hear, answer, chorus, harmonise and copy each other, the worlds, Box listening, the Ear, limiters and reverb, and forest files rendered to WAV.
 
 - `design.md`: what kanopy is and how it works
 - `plan.md`: build batches
 - `experiments.md`: every test and screenshot, briefly
 
+## Render a forest
+
+```sh
+cargo run --release -p kanopy-cli -- render examples/forests/sparse-forest.kanopy-forest.json --minutes 10
+```
+
+The WAV lands in `renders/`. Forest files are JSON: see `examples/forests/` (and one species
+per file in `examples/species/`). A file only needs what differs from the defaults. Options:
+`--minutes`, `--seed`, `--fade-in`, `--fade-out`, `--bits 16|24`, `--out FILE`. Every render
+carries its forest file inside, so `kanopy render some-render.wav` renders it again exactly.
+
 ## Build and run
 
-Needs Rust (install from https://rustup.rs). No other dependencies.
+Needs Rust (install from https://rustup.rs).
 
 ```sh
 cargo test --release                              # all tests
@@ -24,7 +35,10 @@ cargo run --release -p kanopy-cli -- world-bench  # how fast 20,000 individuals 
 cargo run --release -p kanopy-cli -- score --minutes 1 --scale 0.15   # every call as text
 cargo run --release -p kanopy-cli -- listen --minutes 1 --scale 0.15 --out out/forest.wav
 cargo run --release -p kanopy-cli -- scene-bench  # 20,000 individuals calling, hearing, sounding
+cargo run --release -p kanopy-cli -- examples     # rewrite the example files
 ```
+
+`score` and `listen` take `--forest FILE` to use a forest file instead of the demo.
 
 Listen options: `--seed`, `--density`, `--minutes`, `--scale` (share of the demo forest's
 animals), `--x`/`--y` (listener; negative y is underground), `--radius` (active zone), `--cap`,

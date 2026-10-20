@@ -1,0 +1,58 @@
+{
+  "format": "kanopy-species",
+  "version": 1,
+  "name": "Swifts",
+  "habitat": {
+    "movement": "flyer",
+    "area": {
+      "x0": 0.0,
+      "x1": 200.0,
+      "y0": 0.0,
+      "y1": 50.0
+    },
+    "individuals": 400,
+    "spread": "random",
+    "spacing": 20.0,
+    "group_size": [20, 40],
+    "cohesion": 0.4,
+    "flock": true,
+    "flight": {
+      "band": [34.0, 50.0],
+      "perch": "emergent",
+      "share": 0.85
+    },
+    "migration_per_hour": 6.0,
+    "migration_distance": 80.0
+  },
+  "voice": {
+    "shape": [2.0, 3.0],
+    "cutoff": [1500.0, 4000.0],
+    "resonance": [0.4, 0.8],
+    "pitch": [88.0, 98.0],
+    "contour": [-5.0, -1.0],
+    "attack": [0.01, 0.03],
+    "release": [0.05, 0.1],
+    "level": [70.0, 80.0]
+  },
+  "calls": {
+    "units": [1, 4],
+    "unit_length": [0.2, 0.5],
+    "gap": [0.05, 0.2],
+    "rest": [5.0, 20.0],
+    "evolve": "steady",
+    "evolve_amount": [0.0, 0.1],
+    "signature": 0.2,
+    "variation": 0.3
+  },
+  "behaviour": {
+    "talkative": 0.6,
+    "response": 0.3,
+    "chorus": 0.8,
+    "harmonise": 0.0,
+    "mimicry_chance": 0.0,
+    "mimicry_accuracy": 0.7,
+    "timbre_match": 0.5,
+    "pitch_match": 0.5,
+    "hearing": 30.0
+  }
+}

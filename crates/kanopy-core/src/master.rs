@@ -31,7 +31,8 @@ pub const FINAL_LIMIT_DB: f32 = -1.0;
 /// Limiter release, seconds.
 const RELEASE: f32 = 0.15;
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Ear {
     Fixed,
     Adapting,

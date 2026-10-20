@@ -2,9 +2,12 @@
 //! behaviour (§5.5). Every voice and call number is a range; each call rolls inside it, and
 //! lo = hi locks it.
 
+use serde::{Deserialize, Serialize};
+
 use crate::world::{Layer, Rect, WIDTH};
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Movement {
     /// On the floor and in the shrubs (seabed in a liquid).
     Walker,
@@ -28,7 +31,8 @@ impl Movement {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Spread {
     /// Evenly spaced across the area, like territories.
     Even,
@@ -38,7 +42,8 @@ pub enum Spread {
     Clumped,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(try_from = "String", into = "String")]
 pub enum Perch {
     /// Rests in this layer: a tree layer (in crowns), Shrubs, or Floor (on the ground).
     At(Layer),
@@ -46,7 +51,8 @@ pub enum Perch {
     Never,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Flight {
     /// Heights it flies in, metres.
     pub band: (f64, f64),
@@ -55,7 +61,8 @@ pub struct Flight {
     pub share: f64,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Habitat {
     pub movement: Movement,
     /// Where it lives. Every individual stays inside.
@@ -99,7 +106,8 @@ impl Default for Habitat {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Species {
     pub name: String,
     pub habitat: Habitat,
@@ -130,7 +138,8 @@ impl Species {
 pub type Range = (f64, f64);
 
 /// The prototype voice (§5.1).
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Voice {
     /// 0 sine · 1 triangle · 2 saw · 3 square, continuous.
     pub shape: Range,
@@ -164,7 +173,8 @@ impl Default for Voice {
 }
 
 /// How units change across a call.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Evolve {
     Steady,
     Rise,
@@ -174,7 +184,8 @@ pub enum Evolve {
 }
 
 /// Call grammar (§5.2) and signature.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Calls {
     /// Units per call, 1–32.
     pub units: (u32, u32),
@@ -209,7 +220,8 @@ impl Default for Calls {
 }
 
 /// Behaviour (§5.5–5.6).
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
 pub struct Behaviour {
     /// How readily it calls when its rest is over, 0…1.
     pub talkative: f64,
@@ -575,4 +587,48 @@ pub fn demo(scale: f64) -> Vec<Species> {
             },
         ),
     ]
+}
+
+impl Default for Flight {
+    fn default() -> Self {
+        Self {
+            band: (5.0, 30.0),
+            perch: Perch::At(Layer::Canopy),
+            share: 0.5,
+        }
+    }
+}
+
+impl Default for Species {
+    fn default() -> Self {
+        Species::new("Unnamed", Habitat::default())
+    }
+}
+
+impl From<Perch> for String {
+    fn from(p: Perch) -> String {
+        match p {
+            Perch::Never => "never".into(),
+            Perch::At(Layer::Floor) => "ground".into(),
+            Perch::At(l) => l.name().to_lowercase(),
+        }
+    }
+}
+
+impl TryFrom<String> for Perch {
+    type Error = String;
+    fn try_from(s: String) -> Result<Self, String> {
+        let s = s.to_lowercase();
+        if s == "never" {
+            return Ok(Perch::Never);
+        }
+        if s == "ground" || s == "floor" {
+            return Ok(Perch::At(Layer::Floor));
+        }
+        Layer::ALL
+            .iter()
+            .find(|l| l.name().to_lowercase() == s)
+            .map(|l| Perch::At(*l))
+            .ok_or_else(|| format!("unknown perch \"{s}\": emergent, canopy, subcanopy, understorey, shrubs, ground or never"))
+    }
 }

@@ -38,6 +38,9 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 04 | Eight listening minutes: Earth, Mars, Titan, Venus, water (underwater stereo), a box in the canopy, listener underground, Earth without reverb | Each world lands at −22 to −26 dBFS RMS. On Mars and Titan the species limiters catch animals calling right next to the listener | `docs/experiments/04-worlds-spectrograms.png` |
 | 20 Oct 2026 | 04 | Scene bench with the whole output chain (container) | 49 % of one core for 20,010 individuals: path losses, limiters and reverb cost almost nothing | |
 | 20 Oct 2026 | 04 | Scene bench on GitHub's Intel Mac (i7-8700B) with the whole output chain | 34.8 % of one core for 20,010 individuals, all tests pass there | |
+| 20 Oct 2026 | 05 | 9 file and render tests: species and forest files round-trip; all example files load and make a forest; a file with only a species name works (defaults); custom medium, Free, box listening, perch "never" from JSON; wrong format, newer version, unknown medium, root or perch, and bad values give clear errors; note roots with sharps and flats; same file and seed give the same bytes, another seed different audio; exact length, fades to silence, 16/24-bit; the WAV carries its forest and rendering that gives the same file; Earth, water and Venus renders stay under −1 dBFS | All pass first time | |
+| 20 Oct 2026 | 05 | Render the sparse example for 1 min, then render again from that WAV | Byte-identical (SHA-256 5b49d7ac…); seed 2 differs | |
+| 20 Oct 2026 | 05 | Full demo forest (2,300 animals) for 2 and 20 min (container) | 5.8× real time; memory 15.9 MB and 16.2 MB: flat. 20 min = 346 MB of 24-bit WAV | |
 
 ## Notes
 
@@ -56,3 +59,6 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 - **03 · not yet audible:** media other than Earth, foliage loss, the Ear, reverb and Box
   listening (no distance) are batch 04. The listen files were normalised instead. From batch
   04 on they come out at the Ear's level.
+- **05 · same bytes across machines?** Rust's maths functions (sin, exp, log…) come from each
+  system's library, which may differ in the last bit between macOS and Linux. The Mac run posts the
+  hash of the sparse 1-minute render to compare with Linux's 5b49d7ac15779e53.

@@ -2,3 +2,4 @@ target/
 out/
 *.wav
 .DS_Store
+renders/

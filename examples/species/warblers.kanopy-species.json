@@ -1,0 +1,58 @@
+{
+  "format": "kanopy-species",
+  "version": 1,
+  "name": "Warblers",
+  "habitat": {
+    "movement": "flyer",
+    "area": {
+      "x0": 0.0,
+      "x1": 200.0,
+      "y0": 0.0,
+      "y1": 30.0
+    },
+    "individuals": 400,
+    "spread": "even",
+    "spacing": 6.0,
+    "group_size": [1, 3],
+    "cohesion": 0.6,
+    "flock": false,
+    "flight": {
+      "band": [5.0, 25.0],
+      "perch": "subcanopy",
+      "share": 0.3
+    },
+    "migration_per_hour": 1.0,
+    "migration_distance": 20.0
+  },
+  "voice": {
+    "shape": [0.0, 1.2],
+    "cutoff": [300.0, 1200.0],
+    "resonance": [0.1, 0.5],
+    "pitch": [79.0, 96.0],
+    "contour": [-7.0, 7.0],
+    "attack": [0.003, 0.015],
+    "release": [0.01, 0.05],
+    "level": [65.0, 78.0]
+  },
+  "calls": {
+    "units": [6, 16],
+    "unit_length": [0.06, 0.2],
+    "gap": [0.02, 0.1],
+    "rest": [2.0, 8.0],
+    "evolve": "arc",
+    "evolve_amount": [0.1, 0.5],
+    "signature": 0.5,
+    "variation": 0.3
+  },
+  "behaviour": {
+    "talkative": 0.7,
+    "response": 0.3,
+    "chorus": 0.0,
+    "harmonise": 0.0,
+    "mimicry_chance": 0.35,
+    "mimicry_accuracy": 0.7,
+    "timbre_match": 0.6,
+    "pitch_match": 0.5,
+    "hearing": 30.0
+  }
+}

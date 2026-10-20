@@ -363,6 +363,15 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   framework such as React or Vue on top. Simpler to read and change, nothing to install. [Decided]
 - **Files**: `.kanopy-species.json` and `.kanopy-forest.json`, both versioned. A forest file
   contains its species so it opens on its own. [Decided]
+- As built in batch 05 [Proposed]: JSON, ranges as `[lo, hi]`, names lowercase. A forest file
+  holds the seed, density, tree variation, medium (a preset name or custom speed, density and
+  absorption), key (or null for Free), listening (listener x, y and radius, or a box), cap, Ear,
+  medium compensation, reverb amount (or null), bodies follow, underwater stereo, render settings
+  (minutes, fades, bits) and its species. Missing fields take defaults, so a file only needs what
+  differs; a file from a newer kanopy is refused with a clear message.
+- As built: `kanopy render` streams to disk (memory stays at about 16 MB however long), fades in
+  and out (default 5 s / 10 s, raised cosine), and stores the forest file with its render
+  settings inside the WAV (`knpy` chunk), so a WAV can be opened and rendered again exactly.
 - Output 48 kHz, 24-bit WAV, with the seed and settings written into the file. [Decided, for now]
 
 ## 12. Later

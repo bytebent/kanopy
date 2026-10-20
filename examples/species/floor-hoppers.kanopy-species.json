@@ -1,0 +1,58 @@
+{
+  "format": "kanopy-species",
+  "version": 1,
+  "name": "Floor hoppers",
+  "habitat": {
+    "movement": "walker",
+    "area": {
+      "x0": 0.0,
+      "x1": 200.0,
+      "y0": 0.0,
+      "y1": 3.0
+    },
+    "individuals": 300,
+    "spread": "clumped",
+    "spacing": 10.0,
+    "group_size": [3, 8],
+    "cohesion": 0.6,
+    "flock": false,
+    "flight": {
+      "band": [5.0, 30.0],
+      "perch": "canopy",
+      "share": 0.5
+    },
+    "migration_per_hour": 3.0,
+    "migration_distance": 30.0
+  },
+  "voice": {
+    "shape": [1.5, 2.5],
+    "cutoff": [800.0, 2500.0],
+    "resonance": [0.5, 0.9],
+    "pitch": [72.0, 84.0],
+    "contour": [-1.0, 1.0],
+    "attack": [0.002, 0.006],
+    "release": [0.01, 0.03],
+    "level": [60.0, 70.0]
+  },
+  "calls": {
+    "units": [3, 8],
+    "unit_length": [0.03, 0.08],
+    "gap": [0.04, 0.12],
+    "rest": [4.0, 15.0],
+    "evolve": "steady",
+    "evolve_amount": [0.0, 0.1],
+    "signature": 0.4,
+    "variation": 0.2
+  },
+  "behaviour": {
+    "talkative": 0.6,
+    "response": 0.4,
+    "chorus": 0.6,
+    "harmonise": 0.0,
+    "mimicry_chance": 0.0,
+    "mimicry_accuracy": 0.7,
+    "timbre_match": 0.5,
+    "pitch_match": 0.5,
+    "hearing": 30.0
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "format": "kanopy-species",
+  "version": 1,
+  "name": "Gliders",
+  "habitat": {
+    "movement": "flyer",
+    "area": {
+      "x0": 20.0,
+      "x1": 180.0,
+      "y0": 0.0,
+      "y1": 50.0
+    },
+    "individuals": 200,
+    "spread": "clumped",
+    "spacing": 20.0,
+    "group_size": [6, 12],
+    "cohesion": 0.5,
+    "flock": true,
+    "flight": {
+      "band": [15.0, 35.0],
+      "perch": "canopy",
+      "share": 0.6
+    },
+    "migration_per_hour": 3.0,
+    "migration_distance": 50.0
+  },
+  "voice": {
+    "shape": [0.0, 0.3],
+    "cutoff": [100.0, 400.0],
+    "resonance": [0.1, 0.3],
+    "pitch": [74.0, 86.0],
+    "contour": [-2.0, 12.0],
+    "attack": [0.05, 0.2],
+    "release": [0.1, 0.4],
+    "level": [68.0, 76.0]
+  },
+  "calls": {
+    "units": [1, 2],
+    "unit_length": [0.5, 1.5],
+    "gap": [0.2, 0.6],
+    "rest": [8.0, 25.0],
+    "evolve": "rise",
+    "evolve_amount": [0.0, 0.3],
+    "signature": 0.4,
+    "variation": 0.2
+  },
+  "behaviour": {
+    "talkative": 0.5,
+    "response": 0.3,
+    "chorus": 0.0,
+    "harmonise": 0.0,
+    "mimicry_chance": 0.1,
+    "mimicry_accuracy": 0.7,
+    "timbre_match": 0.5,
+    "pitch_match": 0.5,
+    "hearing": 30.0
+  }
+}

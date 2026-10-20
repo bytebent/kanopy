@@ -10,7 +10,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 02 | World: trees from seed, Density and Tree variation, shrubs, layers; species areas, spread, groups; movement types, flight and perch, migration, flocking; active zone | Seeded worlds repeat exactly; placement tests | Done |
 | 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | Done |
 | 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | Done |
-| 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | |
+| 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | Done |
 | 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | |
 | 07 | Species page | | |
 | 08 | Designer page | | |
@@ -66,4 +66,17 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
   through the medium and the ground.
 - CLI `listen`: `--medium`, `--box`, `--ear`, `--reverb`/`--no-reverb`, `--no-bodies`,
   `--underwater-stereo`, `--compensation`, `--normalise`.
+- Done 20 Oct.
+
+## Batch 05 in detail
+
+- `files.rs`: forest and species files (serde JSON), defaults, version and format checks,
+  readable errors, ranges on one line.
+- `render.rs` and `wav.rs`: streamed WAV with fades, the forest inside (`knpy`), software name
+  (`LIST/INFO`); reading the forest back out of a WAV.
+- CLI: `render FILE` (forest file or kanopy WAV; `--minutes`, `--seed`, `--fade-in`,
+  `--fade-out`, `--bits`, `--out`), `examples`, and `--forest FILE` for `score` and `listen`.
+- `examples/`: the 7 demo species, and 6 forests (demo, sparse, Mars woodland, sunken kelp,
+  canopy box, under the floor).
+- First dependencies: serde and serde_json.
 - Done 20 Oct.

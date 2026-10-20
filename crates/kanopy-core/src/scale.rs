@@ -1,7 +1,10 @@
 //! Keys (design §6): In key snaps anchor notes to a scale; Free leaves them alone. Also the
 //! consonant intervals Harmonise picks from: scale steps in key, simple ratios when Free.
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
 pub enum Scale {
     Major,
     Minor,

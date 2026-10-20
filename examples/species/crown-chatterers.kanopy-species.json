@@ -1,0 +1,58 @@
+{
+  "format": "kanopy-species",
+  "version": 1,
+  "name": "Crown chatterers",
+  "habitat": {
+    "movement": "climber",
+    "area": {
+      "x0": 0.0,
+      "x1": 200.0,
+      "y0": 15.0,
+      "y1": 30.0
+    },
+    "individuals": 600,
+    "spread": "random",
+    "spacing": 15.0,
+    "group_size": [5, 15],
+    "cohesion": 0.7,
+    "flock": false,
+    "flight": {
+      "band": [5.0, 30.0],
+      "perch": "canopy",
+      "share": 0.5
+    },
+    "migration_per_hour": 4.0,
+    "migration_distance": 40.0
+  },
+  "voice": {
+    "shape": [1.0, 3.0],
+    "cutoff": [600.0, 2000.0],
+    "resonance": [0.3, 0.7],
+    "pitch": [76.0, 90.0],
+    "contour": [-3.0, 5.0],
+    "attack": [0.003, 0.01],
+    "release": [0.02, 0.05],
+    "level": [65.0, 75.0]
+  },
+  "calls": {
+    "units": [4, 12],
+    "unit_length": [0.04, 0.12],
+    "gap": [0.02, 0.08],
+    "rest": [3.0, 12.0],
+    "evolve": "wander",
+    "evolve_amount": [0.1, 0.4],
+    "signature": 0.3,
+    "variation": 0.3
+  },
+  "behaviour": {
+    "talkative": 0.6,
+    "response": 0.6,
+    "chorus": 0.0,
+    "harmonise": 0.5,
+    "mimicry_chance": 0.15,
+    "mimicry_accuracy": 0.7,
+    "timbre_match": 0.5,
+    "pitch_match": 0.5,
+    "hearing": 30.0
+  }
+}

@@ -5,6 +5,8 @@
 //! differ. The tallest tree always reaches 50 m. A crown is an ellipse from its bottom to the top
 //! of the tree. Shrubs are one band (0.5–3 m) whose fullness follows Density.
 
+use serde::{Deserialize, Serialize};
+
 use crate::rng::Rng;
 use crate::Vec2;
 
@@ -14,7 +16,8 @@ pub const BOTTOM: f64 = -3.0;
 /// Top of the shrub band: walkers live from the floor up to here.
 pub const SHRUB_TOP: f64 = 3.0;
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Layer {
     Soil,
     Floor,
@@ -72,7 +75,7 @@ impl Layer {
 }
 
 /// An axis-aligned box in the slice, metres.
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Rect {
     pub x0: f64,
     pub x1: f64,
