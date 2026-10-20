@@ -3,6 +3,7 @@
     python3 tools/plot_world.py out/world.json docs/experiments/02-forest.png
 """
 import json, sys
+import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -11,15 +12,26 @@ from matplotlib.patches import Ellipse, Rectangle
 COLOURS = ["#61bb46", "#fdb827", "#f5821f", "#e03a3e", "#963d97", "#009ddc", "#8f8f8f", "#c0e070"]
 LAYERS = [("Soil", -1, 0), ("Floor", 0, 0.5), ("Shrubs", 0.5, 2), ("Understorey", 2, 5),
           ("Subcanopy", 5, 15), ("Canopy", 15, 30), ("Emergent", 30, 50)]
+# The drawing stretches the low layers so they're readable: soil gets 8 % of the height, floor
+# and shrubs together 10 %, the 48 m above share the rest. Positions are unchanged; only the
+# picture's vertical scale is.
+KNOTS_M = [-1.0, 0.0, 0.5, 2.0, 50.0]
+KNOTS_D = [0.0, 8.0, 11.0, 18.0, 100.0]
+def to_draw(y):
+    return np.interp(y, KNOTS_M, KNOTS_D, left=KNOTS_D[0] - 1, right=KNOTS_D[-1] + 1)
+def from_draw(d):
+    return np.interp(d, KNOTS_D, KNOTS_M, left=KNOTS_M[0] - 0.1, right=KNOTS_M[-1] + 0.5)
+
 MARK = {"walker": "s", "burrower": "s", "climber": "o", "flyer": "^"}
 
 def main(src, dst):
     w = json.load(open(src))
-    fig, ax = plt.subplots(figsize=(14, 4.6), facecolor="#0b0b0e")
+    fig, ax = plt.subplots(figsize=(14, 5.2), facecolor="#0b0b0e")
     ax.set_facecolor("#060608")
     ax.add_patch(Rectangle((0, -1), 200, 1, color="#5a3a1a", alpha=0.7, lw=0))
     ax.add_patch(Rectangle((0, 0.5), 200, 1.5, color="#2f6b2a", alpha=0.15 + 0.45 * w["shrubs"], lw=0))
-    for name, lo, hi in LAYERS[2:]:
+    ax.set_yscale("function", functions=(to_draw, from_draw))
+    for name, lo, hi in LAYERS:
         ax.axhline(lo, color="#8f8", lw=0.4, alpha=0.25, ls="--")
         ax.text(201, (lo + hi) / 2, name, color="#8f8", fontsize=7, va="center", family="monospace", alpha=0.8)
     for x, h, cb, hw in w["trees"]:
@@ -38,7 +50,9 @@ def main(src, dst):
             m = "v" if mode == "perched" else MARK[s["movement"]]
             ax.scatter([a["x"] for a in sel], [a["y"] for a in sel], s=7, marker=m, color=COLOURS[si % 8],
                        alpha=alpha, lw=0, zorder=3, label=s["name"] if mode == "flying" or s["movement"] != "flyer" and mode == "still" else None)
-    ax.set_xlim(0, 214); ax.set_ylim(-1.2, 51)
+    ax.set_xlim(0, 214); ax.set_ylim(-1.0, 50.5)
+    ax.set_yticks([-1, 0, 2, 5, 15, 30, 50])
+    ax.set_yticklabels(["-1", "0", "2", "5", "15", "30", "50 m"])
     ax.tick_params(colors="#8f8", labelsize=7)
     for sp in ax.spines.values():
         sp.set_color("#333")

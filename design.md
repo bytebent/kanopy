@@ -272,7 +272,9 @@ Many quiet animals add up quickly: 1,000 equal callers are 30 dB louder than one
 Same look as the bytebent pages (platinum window, black screen first, etched groups, knobs and
 range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 
-- **Forest**: the screen shows the slice: trees, layer guides, the listener or the box, and every
+- **Forest**: the screen shows the slice, with the soil and the floor-and-shrubs band drawn taller
+  than their real height so they're readable (soil 8 %, floor and shrubs 10 % of the picture).
+  Only the picture is stretched, not the world. [Proposed] The screen shows trees, layer guides, the listener or the box, and every
   individual as a dot in its species colour that lights up when it calls. Drag the listener, or draw
   and drag the box. Controls: Listen (Listener · Box), Density, Medium, Reverb, Key, Ear, Path,
   Seed, Play, Export.
