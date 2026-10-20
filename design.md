@@ -1,6 +1,6 @@
 # kanopy · design
 
-**Pass 2 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
+**Pass 3 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
 built until it's agreed.
 
 kanopy is a renderer for living forests. You build species, place them in a forest on any world
@@ -116,11 +116,11 @@ same; only what you hear changes.
 
 ### 4.2 Box
 - Draw a **box** on the forest picture; you hear only the individuals inside it. [Decided]
-- Inside the box there is no distance: no spreading, absorption, foliage loss or delay. Each
+- Inside the box there is **no distance**: no spreading, absorption, foliage loss or delay. Each
   individual sounds at its own source level (with the medium's loudness and body shift), panned by
-  its position across the box's width. [Proposed]
-- Individuals fade in and out over the last 2 m at the box edges, so flyers crossing it don't
-  click. [Proposed]
+  its position across the box's width. [Decided]
+- **Nothing outside the box is heard.** [Decided] Individuals fade in and out over the last 2 m
+  inside the box edges, so flyers crossing it don't click. [Proposed]
 - The box can be moved and resized while playing. Reverb and Ear apply as usual.
 
 ## 5. Species
@@ -163,7 +163,8 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   - **Perch**: Emergent · Canopy · Subcanopy · Understorey · Shrubs · Ground · **Never** (always
     airborne). It can call in flight and on its perch. In water, perching means resting on kelp or
     the seabed. [Proposed]
-  - **Flight share**: how much of its time it spends flying rather than perched. [Proposed]
+  - **Flight share**: how much of its time it spends flying rather than perched. It calls just as
+    much in flight as perched. [Decided]
 - **Spread**: Even · Random · Clumped, plus **Spacing** (territory size). [Proposed]
 - **Migration** [Decided: species move between trees from time to time]: how often an individual
   (or its whole group) moves to another tree or place, and how far. Climbers hop between crowns
@@ -178,6 +179,7 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 | Group size | Range, 1 = solitary |
 | Cohesion | How close group members stay |
 | Flock | Movers only: the group moves together, boids-style, inside its height band |
+| Group signature | Each group has its own signature call, shared by its members, so a group sounds like a family. The species' Signature amount and Variation still apply. [Decided] |
 
 ### 5.5 Behaviour
 
@@ -189,6 +191,7 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 | Harmonise | Same **group** only | Group members pick pitches consonant with their group mates [Decided: group only] |
 | Mimicry chance | Any sound | How often it copies something it heard instead of making its own call |
 | Mimicry accuracy | — | How close its copies are to what it heard |
+| Timbre match | — | How far it tries to sound like the caller, not just copy its gesture (§5.6) |
 | Hearing | — | The quietest level (dB SPL) it reacts to |
 
 ### 5.6 Mimicry
@@ -199,6 +202,12 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   position inside the caller's own range (0–1).
 - A copy maps those positions into the copier's ranges: the caller's gesture in the copier's
   voice. [Proposed]
+- **Timbre match** (0–1) [Decided: try to match timbre too]. At 0 a copy keeps the copier's own
+  sound, with only the gesture carried over. At 1 the copier aims for the caller's actual Shape,
+  body cutoff and resonance, as far as its own ranges reach. A species' ranges are its anatomy: a
+  mimic with wide ranges can sound like almost anyone, a narrow one only gets close. Cheap in the
+  prototype, since every species uses the same voice. Matching across different voice engines is
+  [Later]. [Proposed]
 - **Accuracy** sets how much the copy drifts: at 1 the gesture is exact (within the copier's
   ranges); lower values add errors in pitch steps, timing and unit count, and may drop or add
   units. [Proposed]
@@ -271,10 +280,7 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 - Time of day (dawn and dusk choruses). [Later]
 - A richer voice engine for the Designer. [Later]
 
-## 13. Questions for pass 3
-1. Do group members share one signature, so a group sounds like a family? (carried over)
-2. Box: is "no distance inside the box" right, or should it keep distance from the box's centre as
-   an option?
-3. Box: should calls from outside the box still be heard faintly, or nothing at all?
-4. Flight share and perch: is a single Flight share enough, or should flying and perching have
-   their own Talkative (e.g. some only sing perched)?
+## 13. Questions for pass 4
+1. Should mimics also match the caller's **actual pitch** (as far as their pitch range reaches),
+   with the same 0–1 control as Timbre match, or keep copying pitch as steps from their own range?
+2. Everything still marked [Proposed]: confirm as is, or go through it item by item?
