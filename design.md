@@ -1,6 +1,6 @@
 # kanopy · design
 
-**Pass 3 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
+**Pass 4 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
 built until it's agreed.
 
 kanopy is a renderer for living forests. You build species, place them in a forest on any world
@@ -192,6 +192,7 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 | Mimicry chance | Any sound | How often it copies something it heard instead of making its own call |
 | Mimicry accuracy | — | How close its copies are to what it heard |
 | Timbre match | — | How far it tries to sound like the caller, not just copy its gesture (§5.6) |
+| Pitch match | — | Copy the caller's pitch steps (0) or its actual pitch (1) (§5.6) |
 | Hearing | — | The quietest level (dB SPL) it reacts to |
 
 ### 5.6 Mimicry
@@ -205,9 +206,13 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 - **Timbre match** (0–1) [Decided: try to match timbre too]. At 0 a copy keeps the copier's own
   sound, with only the gesture carried over. At 1 the copier aims for the caller's actual Shape,
   body cutoff and resonance, as far as its own ranges reach. A species' ranges are its anatomy: a
-  mimic with wide ranges can sound like almost anyone, a narrow one only gets close. Cheap in the
-  prototype, since every species uses the same voice. Matching across different voice engines is
-  [Later]. [Proposed]
+  mimic with wide ranges can sound like almost anyone, a narrow one only gets close. In the
+  prototype every species uses the same voice, so this is cheap. The real aim is matching across
+  **different sources and bodies**, once there are more than one: [Later, wanted]. [Proposed: keep
+  the simple version in the prototype]
+- **Pitch match** (0–1) [Decided]. At 0 a copy carries the caller's pitch **steps**, placed in the
+  copier's own pitch range. At 1 it aims for the caller's **actual pitch**, as far as its pitch
+  range reaches. In key, the result still snaps to the scale.
 - **Accuracy** sets how much the copy drifts: at 1 the gesture is exact (within the copier's
   ranges); lower values add errors in pitch steps, timing and unit count, and may drop or add
   units. [Proposed]
@@ -280,7 +285,5 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 - Time of day (dawn and dusk choruses). [Later]
 - A richer voice engine for the Designer. [Later]
 
-## 13. Questions for pass 4
-1. Should mimics also match the caller's **actual pitch** (as far as their pitch range reaches),
-   with the same 0–1 control as Timbre match, or keep copying pitch as steps from their own range?
-2. Everything still marked [Proposed]: confirm as is, or go through it item by item?
+## 13. Questions for pass 5
+All [Proposed] and [Open] items are listed in `design-review-pass4.csv`, to answer in one go.
