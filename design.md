@@ -294,7 +294,7 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   - **Calling cap**: the most individuals that may be calling at once, even inside the active zone,
     so a box over the whole forest doesn't make everything sound. An individual that wants to call
     while the cap is full skips that call and rests again; the ones closest to the listener (or
-    anywhere, in a box) get priority. [Proposed: priority rule]
+    anywhere, in a box) get priority. [Decided]
   - Defaults for both come from the batch 01 benchmark on your Mac. Export may use a higher cap,
     since it doesn't have to keep up with real time.
 - **Threads**: live play renders a little ahead (~100 ms) on **one render thread**, separate from
@@ -318,4 +318,4 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 - A richer voice engine for the Designer. [Later]
 
 ## 13. Still open
-- Priority rule when the calling cap is full (§10). [Proposed: closest first]
+Nothing.
