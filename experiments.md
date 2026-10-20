@@ -53,6 +53,7 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 07 | Rust tests: library (seeding once, save by name, delete, import, sort) and the species command (refuses empty or over 20,000; shared colours allowed) | 87 pass | |
 | 20 Oct 2026 | 07 | Page checks, Forest page again after moving the screen into screen.js | 8 of 8 pass | 07-forest-page.png, 07-listener-in-canopy.png, 07-box.png, 07-underwater-following.png, 07-thicker.png |
 | 20 Oct 2026 | 07 | Page checks, Species page: shared colour, area drag, add from library, Apply, Revert, library after reload | 10 of 10 pass; nothing changes before Apply | 07-species-editing.png, 07-species-page.png |
+| 20 Oct 2026 | 07 | Mac CI: tests, benches and app build on GitHub's Intel Mac | All pass; audio hash 8edeab3383fc8db3 (same as before colours); app published as the Latest Mac build | |
 
 ## Notes
 
