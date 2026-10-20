@@ -16,6 +16,8 @@
 //!   kanopy render FILE [options]   a forest file (or a kanopy WAV) to a WAV, any length
 //!       --minutes M --seed N --fade-in S --fade-out S --bits 16|24 --out FILE
 //!   kanopy examples [--out DIR]    write the example forest and species files
+//!   kanopy serve [options]         the app's pages in a browser, playing live
+//!       --forest FILE --port N (8710) --ui DIR (ui) --no-audio
 
 use kanopy_core::mixer::{Listener, Mixer};
 use kanopy_core::propagation::Medium;
@@ -78,6 +80,14 @@ fn main() {
                 opt("--out").map(PathBuf::from),
             );
         }
+        Some("serve") => serve(
+            opt("--forest").map(PathBuf::from),
+            opt("--port")
+                .map(|p| p.parse().unwrap_or_else(|_| fail("--port: a number")))
+                .unwrap_or(8710),
+            PathBuf::from(opt("--ui").unwrap_or_else(|| "ui".into())),
+            !args.iter().any(|a| a == "--no-audio"),
+        ),
         Some("examples") => examples(&PathBuf::from(
             opt("--out").unwrap_or_else(|| "examples".into()),
         )),
@@ -890,5 +900,156 @@ fn examples(dir: &Path) {
         let p = forests.join(format!("{}.kanopy-forest.json", slug(&f.name)));
         f.save(&p).unwrap_or_else(|e| fail(&e));
         println!("{}", p.display());
+    }
+}
+
+fn serve(forest: Option<PathBuf>, port: u16, ui: PathBuf, audio: bool) {
+    use kanopy_core::files::ForestFile;
+    use kanopy_live::{Cmd, Live};
+    let examples_dir = PathBuf::from("examples/forests");
+    let start = match &forest {
+        Some(p) => load_forest(p),
+        None => ForestFile::load(&examples_dir.join("sparse-forest.kanopy-forest.json"))
+            .unwrap_or_else(|_| ForestFile::demo()),
+    };
+    let live = Live::start(start, audio).unwrap_or_else(|e| fail(&e));
+    let server = tiny_http::Server::http(("127.0.0.1", port))
+        .unwrap_or_else(|e| fail(&format!("port {port}: {e}")));
+    println!(
+        "kanopy · http://127.0.0.1:{port} · {} Hz · {}",
+        live.sample_rate,
+        if live.audio {
+            "sound on"
+        } else {
+            "no sound output (silent, paced in real time)"
+        }
+    );
+    let examples = || -> Vec<(String, PathBuf)> {
+        let mut v: Vec<(String, PathBuf)> = std::fs::read_dir(&examples_dir)
+            .into_iter()
+            .flatten()
+            .flatten()
+            .filter_map(|e| ForestFile::load(&e.path()).ok().map(|f| (f.name, e.path())))
+            .collect();
+        v.sort();
+        v
+    };
+    let header =
+        |k: &str, v: &str| tiny_http::Header::from_bytes(k.as_bytes(), v.as_bytes()).unwrap();
+    for mut rq in server.incoming_requests() {
+        let url = rq.url().split('?').next().unwrap_or("/").to_string();
+        let mut body = String::new();
+        let _ = rq.as_reader().read_to_string(&mut body);
+        let json = |v: serde_json::Value| {
+            tiny_http::Response::from_string(v.to_string())
+                .with_header(header("Content-Type", "application/json"))
+        };
+        let bad = |e: String| tiny_http::Response::from_string(e).with_status_code(400);
+        let arg = |k: &str| {
+            serde_json::from_str::<serde_json::Value>(&body)
+                .ok()
+                .and_then(|v| v.get(k).cloned())
+        };
+        let r = match url.as_str() {
+            "/api/info" => tiny_http::Response::from_string(live.info())
+                .with_header(header("Content-Type", "application/json")),
+            "/api/frame" => tiny_http::Response::from_data(live.frame())
+                .with_header(header("Content-Type", "application/octet-stream")),
+            "/api/command" => match serde_json::from_str::<Cmd>(&body) {
+                Ok(cmd) => {
+                    live.send(cmd);
+                    json(serde_json::json!(live.error()))
+                }
+                Err(e) => bad(format!("command: {e}")),
+            },
+            "/api/error" => json(serde_json::json!(live.error())),
+            "/api/examples" => json(serde_json::json!(examples()
+                .into_iter()
+                .map(|e| e.0)
+                .collect::<Vec<_>>())),
+            "/api/open_example" => {
+                let name = arg("name")
+                    .and_then(|v| v.as_str().map(String::from))
+                    .unwrap_or_default();
+                match examples().into_iter().find(|e| e.0 == name) {
+                    Some((n, p)) => match ForestFile::load(&p) {
+                        Ok(f) => {
+                            live.send(Cmd::Load {
+                                forest: Box::new(f),
+                            });
+                            json(serde_json::json!(n))
+                        }
+                        Err(e) => bad(e),
+                    },
+                    None => bad("no such example".into()),
+                }
+            }
+            "/api/open" => {
+                let p = PathBuf::from(
+                    arg("path")
+                        .and_then(|v| v.as_str().map(String::from))
+                        .unwrap_or_default(),
+                );
+                let wav = p.extension().is_some_and(|e| e.eq_ignore_ascii_case("wav"));
+                match if wav {
+                    ForestFile::from_wav(&p)
+                } else {
+                    ForestFile::load(&p)
+                } {
+                    Ok(f) => {
+                        let n = f.name.clone();
+                        live.send(Cmd::Load {
+                            forest: Box::new(f),
+                        });
+                        json(serde_json::json!(n))
+                    }
+                    Err(e) => bad(e),
+                }
+            }
+            "/api/save" => {
+                let p = PathBuf::from(
+                    arg("path")
+                        .and_then(|v| v.as_str().map(String::from))
+                        .unwrap_or_default(),
+                );
+                match live.forest().save(&p) {
+                    Ok(()) => json(serde_json::json!(p.display().to_string())),
+                    Err(e) => bad(e),
+                }
+            }
+            "/api/export" => {
+                let p = arg("path")
+                    .and_then(|v| v.as_str().map(String::from))
+                    .unwrap_or_else(|| "renders/forest.wav".into());
+                let minutes = arg("minutes").and_then(|v| v.as_f64()).unwrap_or(10.0);
+                if let Some(d) = Path::new(&p).parent().filter(|d| !d.as_os_str().is_empty()) {
+                    std::fs::create_dir_all(d).ok();
+                }
+                live.export(p.clone(), minutes);
+                json(serde_json::json!(p))
+            }
+            "/api/export_state" => json(serde_json::to_value(live.export_state()).unwrap()),
+            path => {
+                let rel = if path == "/" {
+                    "index.html"
+                } else {
+                    path.trim_start_matches('/')
+                };
+                let file = ui.join(rel);
+                if rel.contains("..") || !file.is_file() {
+                    tiny_http::Response::from_string("not found").with_status_code(404)
+                } else {
+                    let kind = match file.extension().and_then(|e| e.to_str()) {
+                        Some("html") => "text/html; charset=utf-8",
+                        Some("css") => "text/css",
+                        Some("js") => "text/javascript",
+                        _ => "application/octet-stream",
+                    };
+                    tiny_http::Response::from_data(std::fs::read(&file).unwrap_or_default())
+                        .with_header(header("Content-Type", kind))
+                }
+            }
+        };
+        let _ = rq.respond(r);
     }
 }

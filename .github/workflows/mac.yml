@@ -38,3 +38,33 @@ jobs:
           } > results.txt
           body=$(sed -e 's/%/%25/g' results.txt | awk '{printf "%s%%0A", $0}')
           echo "::notice title=kanopy bench::${body}"
+
+  app:
+    runs-on: macos-26-intel
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build the app
+        working-directory: crates/kanopy-app
+        run: npx -y @tauri-apps/cli@2 build --bundles app
+      - name: Build the command line
+        run: cargo build --release -p kanopy-cli
+      - name: Package
+        run: |
+          mkdir dist
+          ditto -c -k --keepParent target/release/bundle/macos/kanopy.app dist/kanopy-mac-intel.zip
+          cp target/release/kanopy dist/kanopy
+          (cd dist && zip -q kanopy-cli-mac-intel.zip kanopy && rm kanopy)
+          ls -la dist
+      - name: Publish as the latest Mac build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete mac-latest -y --cleanup-tag || true
+          printf '%s\n' "Built from ${GITHUB_SHA::7} on GitHub's Intel Mac." "" \
+            "**kanopy-mac-intel.zip**: the app. Unzip, move kanopy.app to Applications, then right-click it and choose Open the first time (it isn't signed)." "" \
+            "**kanopy-cli-mac-intel.zip**: the kanopy command (render, serve, score…)." > notes.md
+          gh release create mac-latest dist/* --prerelease --title "Latest Mac build" --notes-file notes.md --target "$GITHUB_SHA"
+          echo "::notice title=kanopy app::published mac-latest from ${GITHUB_SHA::7}"

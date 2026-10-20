@@ -11,7 +11,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | Done |
 | 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | Done |
 | 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | Done |
-| 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | |
+| 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | Built; waiting for your first run on the Mac |
 | 07 | Species page | | |
 | 08 | Designer page | | |
 | 09 | Listening round and tuning | Your notes addressed | |
@@ -80,3 +80,16 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
   canopy box, under the floor).
 - First dependencies: serde and serde_json.
 - Done 20 Oct.
+
+## Batch 06 in detail
+
+- `kanopy-core`: live setters on the scene (listener, Listener/Box, key, reverb, Ear), gain
+  changes that glide, who's calling now.
+- `crates/kanopy-live`: the render thread (125 ms ahead), ring buffer to the sound card (cpal,
+  CoreAudio), commands, frames synced to what's heard, listener paths, rebuilds with a fade,
+  export on its own thread. Silent real-time mode without a sound card.
+- `ui/`: the Forest page (kit.css, kit.js, api.js, forest.js), plain HTML/CSS/JS.
+- `crates/kanopy-app`: Tauri 2, the page plus the engine; built-in examples; file dialogs.
+- `kanopy serve`: the same page in a browser over HTTP, playing through the computer's sound.
+- `tools/check-pages.js`: page checks in headless Chromium.
+- CI builds the Mac app and the `kanopy` command and publishes them as a pre-release.

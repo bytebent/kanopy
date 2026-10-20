@@ -327,6 +327,13 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   Seed, Play, Export.
 - **Species**: every species in the forest with its colour, individuals, movement type, area,
   spread, groups and behaviours. Add from file, from the Designer, or duplicate.
+- As built in batch 06 (Forest page) [Proposed: check in use]: the listener glides to where it's
+  dragged at up to 40 m/s, so a drag makes real Doppler; Wander drifts to random spots (a tenth of
+  them underground), Follow keeps 2 m off the nearest group of the chosen species; clicking a
+  species in the legend follows it. "Calls within" sets the active zone radius. Density,
+  variation, seed and world grow a new forest (the old one fades out over 50 ms); listener, box,
+  key, reverb, Ear and volume change while playing. Space plays and stops. Volume is playback
+  only, not part of renders.
 - **Designer**: one species' voice and calls, with **Call** and **Signature** buttons to audition it
   alone, and the behaviour traits of §5.3–5.5.
 
@@ -350,6 +357,8 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   - Calling cap defaults: **600 live, 2,000 for export**, from the batch 01 bench on an Intel
     Mac (i7-8700B: ~940 units at half a core). Active zone radius and margin are set in batch 03,
     once calls have real lengths. [Decided, for now]
+- As built: the render thread stays 125 ms ahead of the sound card; the screen shows each frame
+  when its sound is actually playing, so the dots light up with what you hear.
 - **Threads**: live play renders a little ahead (~100 ms) on **one render thread**, separate from
   the audio callback; that's light on battery and heat. [Decided] Export may use more cores, set
   by a **Render threads** setting (default: all). [Decided]

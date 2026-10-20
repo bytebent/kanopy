@@ -3,3 +3,5 @@ out/
 *.wav
 .DS_Store
 renders/
+node_modules/
+crates/kanopy-app/gen/

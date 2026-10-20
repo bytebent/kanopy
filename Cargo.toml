@@ -1,6 +1,8 @@
 [workspace]
 resolver = "2"
-members = ["crates/kanopy-core", "crates/kanopy-cli"]
+members = ["crates/kanopy-core", "crates/kanopy-cli", "crates/kanopy-live", "crates/kanopy-app"]
+# the app needs a webview to build; `cargo build -p kanopy-app` builds it
+default-members = ["crates/kanopy-core", "crates/kanopy-cli", "crates/kanopy-live"]
 
 [workspace.package]
 version = "0.0.1"

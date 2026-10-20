@@ -44,6 +44,9 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 05 | Same 1-minute render on Linux and on GitHub's Intel Mac | Different (Linux 5b49d7ac…, Mac e2f8dbce…): each system's maths library differs in the last bit, and one bit can change a decision | |
 | 20 Oct 2026 | 05 | All maths that feeds the forest or the sound moved to portable pure-Rust functions (`libm`), `pm.rs` | **Same bytes on both: d7df966e2311a7c0.** Cost: Mac scene bench 28 → 40 % of one core (20,010 individuals); container 49 → 55 % | |
 | 20 Oct 2026 | 05 | Render longer than a WAV can hold (over 4 GB, about 248 min at 24-bit) | Refused with a message saying the limit; test added | |
+| 20 Oct 2026 | 06 | 4 live-engine tests (silent): plays in real time and pauses; the listener glides to a drag and wanders; box, rebuild on density, Load, live reverb and name, bad key reported; export renders the forest as it is (listener inside the WAV) | All pass | |
+| 20 Oct 2026 | 06 | Page checks in headless Chromium through `kanopy serve` (`tools/check-pages.js`): legend, real-time play, dragging the listener into the canopy, drawing a box, loading the underwater example, following a species, a knob that grows a new forest, no page errors | 9 of 9 after two fixes: loading an example didn't update the page (settings now republished after every command); layer labels at the bottom overlapped (now spaced) | `docs/experiments/06-forest-page.png`, `06-listener-in-canopy.png`, `06-box.png`, `06-underwater-following.png`, `06-thicker.png` |
+| 20 Oct 2026 | 06 | The real app (Tauri) on a virtual screen here (Linux, no sound card) | Boots; the page talks to the engine through the app; frames arrive | `docs/experiments/06-app-window.png` |
 
 ## Notes
 
@@ -65,3 +68,5 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 - **05 · same bytes across machines:** yes, since the move to portable maths. The Mac run posts
   the hash of the sparse 1-minute render on every push; compare it with a local render when the
   sound changes on purpose.
+- **06 · the Mac:** the app is built on GitHub's Intel Mac on every push and published as the
+  "Latest Mac build" pre-release. Sound through CoreAudio can only be checked on a real Mac.

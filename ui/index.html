@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kanopy</title>
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <span class="closebox"></span>
+    <span class="badge" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <h1>kanopy</h1><span class="sub">forest</span>
+    <span class="lines"></span>
+    <input class="namefield" id="name" type="text" spellcheck="false" aria-label="Forest name">
+    <span class="lines"></span>
+    <button class="btn" disabled title="Comes in the next build">Species</button>
+    <button class="btn" disabled title="Comes after that">Designer</button>
+  </div>
+
+  <div class="body">
+    <div class="screen">
+      <canvas id="scene" aria-label="The forest: drag the listener, or draw a box"></canvas>
+      <div class="hint" id="hint"></div>
+      <div class="readouts" id="readouts"></div>
+    </div>
+
+    <div class="legend" id="legend"></div>
+
+    <div class="rows">
+      <fieldset>
+        <legend><span class="dot" style="background:var(--blue)"></span>Listen</legend>
+        <div class="line"><label>Mode</label><span class="seg" id="mode"><button data-v="listener" class="on">Listener</button><button data-v="box">Box</button></span></div>
+        <div class="line"><label>Path</label><span class="seg" id="path"><button data-v="still" class="on">Still</button><button data-v="wander">Wander</button><button data-v="follow">Follow</button></span></div>
+        <div class="line"><label>Follow</label><select id="follow"></select></div>
+        <div class="knobs" id="k-listen"></div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="dot" style="background:var(--green)"></span>Forest</legend>
+        <div class="knobs" id="k-forest"></div>
+        <div class="line"><label>Seed</label><input type="number" id="seed" min="0" step="1"><button class="btn" id="dice" title="A new seed">⚄</button></div>
+        <p class="note">Density, variation and seed grow a new forest.</p>
+      </fieldset>
+      <fieldset>
+        <legend><span class="dot" style="background:var(--orange)"></span>World</legend>
+        <div class="line"><label>Medium</label><select id="medium"><option value="earth">Earth</option><option value="mars">Mars</option><option value="titan">Titan</option><option value="venus">Venus</option><option value="water">Water</option></select></div>
+        <div class="line"><label class="check"><input type="checkbox" id="uwstereo"> Underwater stereo</label></div>
+        <div class="knobs" id="k-world"></div>
+      </fieldset>
+      <fieldset>
+        <legend><span class="dot" style="background:var(--purple)"></span>Sound</legend>
+        <div class="line"><label>Key</label><span class="seg" id="keymode"><button data-v="key" class="on">In key</button><button data-v="free">Free</button></span>
+          <select id="root"></select><select id="scale"></select></div>
+        <div class="line"><label>Ear</label><span class="seg" id="ear"><button data-v="fixed">Fixed</button><button data-v="adapting" class="on">Adapting</button></span>
+          <label class="check"><input type="checkbox" id="reverb-on" checked> Reverb</label></div>
+        <div class="knobs" id="k-sound"></div>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="btn gel" id="play">Play</button>
+    <span class="sep"></span>
+    <select id="examples" aria-label="Example forests"><option value="">Examples…</option></select>
+    <button class="btn" id="open">Open…</button>
+    <button class="btn" id="save">Save…</button>
+    <span class="sep"></span>
+    <button class="btn" id="export">Export…</button>
+    <input type="number" id="export-min" value="10" min="0.1" step="1" title="Minutes"> <span style="font-size:11px">min</span>
+    <span class="status" id="status"></span>
+  </div>
+</div>
+<script src="api.js"></script>
+<script src="kit.js"></script>
+<script src="forest.js"></script>
+</body>
+</html>

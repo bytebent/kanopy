@@ -215,6 +215,10 @@ pub struct Master {
     pub start_db: f64,
     pub gain_db: f64,
     pub reference_shift: f64,
+    /// The shift actually applied: glides to `reference_shift` over about 250 ms, so changing it
+    /// live (a box drawn, a world changed) doesn't jump.
+    shift_now: f64,
+    glide: f64,
     power: f64,
     alpha: f64,
     pub limiters: Vec<Limiter>,
@@ -231,6 +235,8 @@ impl Master {
             start_db: s.start_db,
             gain_db: s.start_db,
             reference_shift: s.reference_shift,
+            shift_now: s.reference_shift,
+            glide: 1.0 - (-(BLOCK as f64) / (0.25 * sample_rate as f64)).exp(),
             power: db_to_amp(TARGET_DBFS as f32).powi(2) as f64,
             alpha: 1.0 - (-(BLOCK as f64) / (EAR_TAU * sample_rate as f64)).p_exp(),
             limiters: (0..buses)
@@ -249,6 +255,15 @@ impl Master {
         self.sample_rate
     }
 
+    /// Reverb on (with this length, brightness and amount) or off, live.
+    pub fn set_reverb(&mut self, r: Option<(f32, f32, f32)>) {
+        match (r, self.reverb.as_mut()) {
+            (None, _) => self.reverb = None,
+            (Some((_, _, a)), Some(rv)) => rv.amount = a,
+            (Some((rt, b, a)), None) => self.reverb = Some(Reverb::new(rt, b, a, self.sample_rate)),
+        }
+    }
+
     /// One block: buses in, adds to `left`/`right`.
     pub fn process(
         &mut self,
@@ -257,7 +272,8 @@ impl Master {
         right: &mut [f32],
     ) {
         let n = left.len();
-        let g = db_to_amp((REFERENCE_DB + self.reference_shift + self.gain_db) as f32);
+        self.shift_now += (self.reference_shift - self.shift_now) * self.glide;
+        let g = db_to_amp((REFERENCE_DB + self.shift_now + self.gain_db) as f32);
         let [sl, sr] = &mut self.sum;
         sl[..n].fill(0.0);
         sr[..n].fill(0.0);

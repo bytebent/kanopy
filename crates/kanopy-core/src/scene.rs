@@ -409,12 +409,8 @@ impl Scene {
         } else {
             1.0
         };
-        let mut reference_shift =
-            -st.medium.level_offset() * st.medium_compensation.clamp(0.0, 1.0);
-        if let Hear::Box(_) = st.hear {
-            // a box has no distance, so there's no physical level to keep: bring it to the target
-            reference_shift = TARGET_DBFS - self.estimate_db();
-        }
+        // a box has no distance, so there's no physical level to keep: it's brought to the target
+        let reference_shift = self.reference_shift();
         let level = self.estimate_db() + reference_shift;
         let start_db = (TARGET_DBFS - level).clamp(-EAR_RANGE, EAR_RANGE);
         let reverb = st.reverb.then(|| {
@@ -433,6 +429,81 @@ impl Scene {
         ));
         self.mixer = Some(m);
         self
+    }
+
+    /// The reference shift for the current settings: medium compensation, or a box brought to
+    /// the target level.
+    fn reference_shift(&mut self) -> f64 {
+        let st = self.settings;
+        match st.hear {
+            Hear::Box(_) => TARGET_DBFS - self.estimate_db(),
+            Hear::Listener => -st.medium.level_offset() * st.medium_compensation.clamp(0.0, 1.0),
+        }
+    }
+
+    // ---- live changes (the app): each takes effect from the next step
+
+    /// Move the listener: where it is now and how fast it's moving (for Doppler).
+    pub fn set_listener(&mut self, pos: Vec2, vel: Vec2) {
+        let t = self.life.time;
+        self.settings.listener = pos;
+        if let Zone::Around { radius, .. } = self.settings.zone {
+            self.settings.zone = Zone::Around { pos, radius };
+        }
+        if let Some(m) = self.mixer.as_mut() {
+            // the mixer's listener is a straight line through world time: pos(t) = p0 + v·t
+            m.listener = Listener {
+                pos: pos.add_scaled(vel, -t),
+                vel,
+            };
+        }
+    }
+
+    /// Listen from the listener (with this active-zone radius) or to a box.
+    pub fn set_hear(&mut self, hear: Hear, radius: f64) {
+        self.settings.hear = hear;
+        self.settings.zone = match hear {
+            Hear::Box(rect) => Zone::Box {
+                rect,
+                margin: BOX_MARGIN,
+            },
+            Hear::Listener => Zone::Around {
+                pos: self.settings.listener,
+                radius,
+            },
+        };
+        let shift = self.reference_shift();
+        if let Some(m) = self.mixer.as_mut() {
+            m.hear = hear;
+            if let Some(master) = m.master.as_mut() {
+                master.reference_shift = shift;
+            }
+        }
+    }
+
+    pub fn set_key(&mut self, key: Option<Key>) {
+        self.settings.key = key;
+    }
+
+    pub fn set_reverb(&mut self, amount: Option<f32>) {
+        self.settings.reverb = amount.is_some();
+        self.settings.reverb_amount = amount.unwrap_or(0.0);
+        let (rt, bright) = reverb_for(self.life.forest.settings.density, &self.settings.medium);
+        if let Some(master) = self.mixer.as_mut().and_then(|m| m.master.as_mut()) {
+            master.set_reverb(amount.map(|a| (rt, bright, a)));
+        }
+    }
+
+    pub fn set_ear(&mut self, ear: Ear) {
+        self.settings.ear = ear;
+        if let Some(master) = self.mixer.as_mut().and_then(|m| m.master.as_mut()) {
+            master.ear = ear;
+        }
+    }
+
+    /// Is this individual calling right now?
+    pub fn calling_now(&self, i: usize) -> bool {
+        self.minds[i].calling_until > self.life.time
     }
 
     /// The scene without the output chain: buses summed at the physical level (100 dB SPL =
