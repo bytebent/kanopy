@@ -30,7 +30,8 @@ to decide · **[Later]** agreed to leave out of the prototype.
 - **Physical first, then musical.** Levels, delays and losses come from distance and the medium.
   Key, harmony and the reverb are layers on top that can be switched off.
 - **Nothing inaudible is computed.** A voice below hearing at the listener isn't rendered.
-- **Repeatable.** Same forest file, same seed, same render: the same WAV, bit for bit.
+- **Repeatable.** Same forest file, same seed, same render: the same WAV, bit for bit. On any
+  machine: kanopy uses its own portable maths, not the system's. [Decided as built]
 - **Plain, short copy.**
 
 ## 3. The world

@@ -41,6 +41,9 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 05 | 9 file and render tests: species and forest files round-trip; all example files load and make a forest; a file with only a species name works (defaults); custom medium, Free, box listening, perch "never" from JSON; wrong format, newer version, unknown medium, root or perch, and bad values give clear errors; note roots with sharps and flats; same file and seed give the same bytes, another seed different audio; exact length, fades to silence, 16/24-bit; the WAV carries its forest and rendering that gives the same file; Earth, water and Venus renders stay under −1 dBFS | All pass first time | |
 | 20 Oct 2026 | 05 | Render the sparse example for 1 min, then render again from that WAV | Byte-identical (SHA-256 5b49d7ac…); seed 2 differs | |
 | 20 Oct 2026 | 05 | Full demo forest (2,300 animals) for 2 and 20 min (container) | 5.8× real time; memory 15.9 MB and 16.2 MB: flat. 20 min = 346 MB of 24-bit WAV | |
+| 20 Oct 2026 | 05 | Same 1-minute render on Linux and on GitHub's Intel Mac | Different (Linux 5b49d7ac…, Mac e2f8dbce…): each system's maths library differs in the last bit, and one bit can change a decision | |
+| 20 Oct 2026 | 05 | All maths that feeds the forest or the sound moved to portable pure-Rust functions (`libm`), `pm.rs` | **Same bytes on both: d7df966e2311a7c0.** Cost: Mac scene bench 28 → 40 % of one core (20,010 individuals); container 49 → 55 % | |
+| 20 Oct 2026 | 05 | Render longer than a WAV can hold (over 4 GB, about 248 min at 24-bit) | Refused with a message saying the limit; test added | |
 
 ## Notes
 
@@ -59,6 +62,6 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 - **03 · not yet audible:** media other than Earth, foliage loss, the Ear, reverb and Box
   listening (no distance) are batch 04. The listen files were normalised instead. From batch
   04 on they come out at the Ear's level.
-- **05 · same bytes across machines?** Rust's maths functions (sin, exp, log…) come from each
-  system's library, which may differ in the last bit between macOS and Linux. The Mac run posts the
-  hash of the sparse 1-minute render to compare with Linux's 5b49d7ac15779e53.
+- **05 · same bytes across machines:** yes, since the move to portable maths. The Mac run posts
+  the hash of the sparse 1-minute render on every push; compare it with a local render when the
+  sound changes on purpose.
