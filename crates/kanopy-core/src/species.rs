@@ -80,7 +80,7 @@ impl Default for Habitat {
     fn default() -> Self {
         Self {
             movement: Movement::Walker,
-            area: Rect::new(0.0, WIDTH, 0.0, 2.0),
+            area: Rect::new(0.0, WIDTH, 0.0, 3.0),
             individuals: 20,
             spread: Spread::Random,
             spacing: 5.0,
@@ -123,7 +123,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
             "Floor hoppers",
             Habitat {
                 movement: Movement::Walker,
-                area: Rect::new(0.0, w, 0.0, 2.0),
+                area: Rect::new(0.0, w, 0.0, 3.0),
                 individuals: n(300.0),
                 spread: Spread::Clumped,
                 spacing: 10.0,
@@ -138,7 +138,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
             "Diggers",
             Habitat {
                 movement: Movement::Burrower,
-                area: Rect::new(0.0, 120.0, -1.0, 0.0),
+                area: Rect::new(0.0, 120.0, -3.0, 0.0),
                 individuals: n(100.0),
                 spread: Spread::Even,
                 spacing: 1.0,
@@ -166,7 +166,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
             "Lower climbers",
             Habitat {
                 movement: Movement::Climber,
-                area: Rect::new(50.0, w, 2.0, 15.0),
+                area: Rect::new(50.0, w, 3.0, 15.0),
                 individuals: n(300.0),
                 spread: Spread::Even,
                 spacing: 8.0,

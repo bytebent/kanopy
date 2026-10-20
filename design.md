@@ -37,7 +37,7 @@ to decide · **[Later]** agreed to leave out of the prototype.
 
 ### 3.1 The slice
 - The forest is a **2D side-on slice**: x is left to right, y is height. **No depth.** [Decided]
-- Width is **fixed at 200 m** for every forest. [Decided] Heights run from −1 m (soil) to 50 m.
+- Width is **fixed at 200 m** for every forest. [Decided] Heights run from −3 m (soil) to 50 m.
 
 ### 3.2 Layers
 Height bands, used for habitat and drawn as faint guides on the scene. [Decided: these seven]
@@ -47,10 +47,10 @@ Height bands, used for habitat and drawn as faint guides on the scene. [Decided:
 | Emergent | 30–50 m |
 | Canopy | 15–30 m |
 | Subcanopy | 5–15 m |
-| Understorey | 2–5 m |
-| Shrubs | 0.5–2 m |
+| Understorey | 3–5 m |
+| Shrubs | 0.5–3 m |
 | Floor | 0–0.5 m |
-| Soil | −1–0 m |
+| Soil | −3–0 m |
 
 ### 3.3 Trees
 - Trees are **objects** generated from the forest seed: an x position, a height and a crown (the
@@ -272,9 +272,7 @@ Many quiet animals add up quickly: 1,000 equal callers are 30 dB louder than one
 Same look as the bytebent pages (platinum window, black screen first, etched groups, knobs and
 range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 
-- **Forest**: the screen shows the slice, with the soil and the floor-and-shrubs band drawn taller
-  than their real height so they're readable (soil 8 %, floor and shrubs 10 % of the picture).
-  Only the picture is stretched, not the world. [Proposed] The screen shows trees, layer guides, the listener or the box, and every
+- **Forest**: the screen shows the slice: trees, layer guides, the listener or the box, and every
   individual as a dot in its species colour that lights up when it calls. Drag the listener, or draw
   and drag the box. Controls: Listen (Listener · Box), Density, Medium, Reverb, Key, Ear, Path,
   Seed, Play, Export.

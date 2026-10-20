@@ -1,16 +1,18 @@
 //! The forest slice: its size, layers, trees and shrubs.
 //!
-//! A 200 m wide side-on slice from −1 m (soil) to 50 m. Trees are generated from the seed:
+//! A 200 m wide side-on slice from −3 m (soil) to 50 m. Trees are generated from the seed:
 //! Density sets how many there are and how full their crowns are, Tree variation how much they
 //! differ. The tallest tree always reaches 50 m. A crown is an ellipse from its bottom to the top
-//! of the tree. Shrubs are one band (0.5–2 m) whose fullness follows Density.
+//! of the tree. Shrubs are one band (0.5–3 m) whose fullness follows Density.
 
 use crate::rng::Rng;
 use crate::Vec2;
 
 pub const WIDTH: f64 = 200.0;
 pub const TOP: f64 = 50.0;
-pub const BOTTOM: f64 = -1.0;
+pub const BOTTOM: f64 = -3.0;
+/// Top of the shrub band: walkers live from the floor up to here.
+pub const SHRUB_TOP: f64 = 3.0;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Layer {
@@ -39,8 +41,8 @@ impl Layer {
         match self {
             Layer::Soil => (BOTTOM, 0.0),
             Layer::Floor => (0.0, 0.5),
-            Layer::Shrubs => (0.5, 2.0),
-            Layer::Understorey => (2.0, 5.0),
+            Layer::Shrubs => (0.5, SHRUB_TOP),
+            Layer::Understorey => (SHRUB_TOP, 5.0),
             Layer::Subcanopy => (5.0, 15.0),
             Layer::Canopy => (15.0, 30.0),
             Layer::Emergent => (30.0, TOP),

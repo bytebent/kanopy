@@ -18,7 +18,7 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 02 | Snapshots of the demo forest (7 species, 2,300 individuals) after 10 min: woodland, forest, thicket | Climbers in crowns with trails down trunks when they change trees; perched flyers in their layers; burrowers only in their part of the soil | `docs/experiments/02-woodland.png`, `02-forest.png`, `02-thicket.png` |
 | 20 Oct 2026 | 02 | Look at the first snapshots | Flocks streaked across the whole width (pull home too weak); climbers lined up on crown edges their area only clipped. Fixed: stronger pull past the roaming distance; prefer trees that reach well into the area; crown half-width capped at 12 m | |
 | 20 Oct 2026 | 02 | World bench: demo forest ×8.7 (20,010 individuals, 4,749 groups), 20 steps a second (container) | 42 ms per second of forest time: about 4 % of one core. Set-up 21 ms | `docs/experiments/02-forest-20k.png` |
-| 20 Oct 2026 | 02 | Your note: soil and shrubs too thin in the pictures | Drawing now stretches the low layers (soil 8 %, floor + shrubs 10 % of the height); the world is unchanged. Images redrawn | `docs/experiments/02-*.png` |
+| 20 Oct 2026 | 02 | Your note: soil and shrubs too thin | Made them bigger in the world: soil −1 → −3 m deep, shrubs up to 3 m (was 2), understorey now 3–5 m. Walkers live 0–3 m. Images redrawn | `docs/experiments/02-*.png` |
 | 20 Oct 2026 | 01 | Bench on GitHub's Apple Silicon Mac | Never ran: no runner free within 15 min (GitHub capacity). Switched to `macos-26-intel`, matching your Intel laptop | |
 
 ## Notes

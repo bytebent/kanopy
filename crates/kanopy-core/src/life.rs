@@ -15,7 +15,7 @@
 
 use crate::rng::Rng;
 use crate::species::{Movement, Perch, Species, Spread};
-use crate::world::{Forest, Layer, Rect, BOTTOM, TOP};
+use crate::world::{Forest, Layer, Rect, BOTTOM, SHRUB_TOP, TOP};
 use crate::Vec2;
 
 /// Simulation step, seconds.
@@ -96,7 +96,7 @@ pub struct Group {
 /// Where a species can be, worked out once from its habitat and the forest.
 #[derive(Clone, Debug)]
 pub struct Places {
-    /// Its area, clamped to what its movement allows (walkers 0–2 m, burrowers soil).
+    /// Its area, clamped to what its movement allows (walkers 0–3 m, burrowers soil).
     pub live: Rect,
     /// Flyers: flight band inside the area.
     pub fly: Rect,
@@ -121,7 +121,7 @@ fn places(forest: &Forest, sp: &Species) -> Places {
     let h = &sp.habitat;
     let area = h.area.intersect(&Rect::world()).unwrap_or(Rect::world());
     let live = match h.movement {
-        Movement::Walker => band(&area, 0.0, 2.0),
+        Movement::Walker => band(&area, 0.0, SHRUB_TOP),
         Movement::Burrower => band(&area, BOTTOM, 0.0),
         Movement::Climber | Movement::Flyer => area,
     };
@@ -140,7 +140,7 @@ fn places(forest: &Forest, sp: &Species) -> Places {
     };
     let reach = match (h.movement, perch) {
         (Movement::Climber, _) => Some(live),
-        (Movement::Flyer, Some(p)) if p.y0 >= 2.0 => Some(p),
+        (Movement::Flyer, Some(p)) if p.y0 >= SHRUB_TOP => Some(p),
         _ => None,
     };
     let mut homes = Vec::new();
@@ -233,7 +233,7 @@ fn spot(
 fn perch_spot(forest: &Forest, sp: &Species, pl: &Places, x: f64, rng: &mut Rng) -> Vec2 {
     let p = pl.perch.expect("perching flyer without a perch");
     let r = roam(sp.habitat.cohesion).max(10.0);
-    if p.y1 < 2.0 || pl.homes.is_empty() {
+    if p.y1 <= SHRUB_TOP || pl.homes.is_empty() {
         let x = (x + rng.range(-r, r)).clamp(p.x0, p.x1);
         return Vec2::new(x, rng.range(p.y0, p.y1));
     }
@@ -677,7 +677,7 @@ impl Life {
                 if !p.contains(a.pos, eps) {
                     return fail("perched outside its perch layer");
                 }
-                if p.y1 >= 2.0
+                if p.y1 > SHRUB_TOP
                     && !pl.homes.is_empty()
                     && !self.forest.trees.iter().any(|t| t.in_crown(a.pos, eps))
                 {

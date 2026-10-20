@@ -28,7 +28,8 @@ fn check_all(life: &Life) {
 
 #[test]
 fn layers() {
-    assert_eq!(Layer::at(-0.5), Layer::Soil);
+    assert_eq!(Layer::at(-2.5), Layer::Soil);
+    assert_eq!(Layer::at(2.5), Layer::Shrubs);
     assert_eq!(Layer::at(0.2), Layer::Floor);
     assert_eq!(Layer::at(1.0), Layer::Shrubs);
     assert_eq!(Layer::at(3.0), Layer::Understorey);
@@ -156,7 +157,7 @@ fn everyone_stays_where_they_live() {
 #[test]
 fn area_limits_x_too() {
     let mut l = one(Habitat {
-        area: Rect::new(60.0, 90.0, 0.0, 2.0),
+        area: Rect::new(60.0, 90.0, 0.0, 3.0),
         individuals: 60,
         cohesion: 0.0,
         ..Default::default()
@@ -173,8 +174,8 @@ fn walkers_and_burrowers_heights() {
     l.run(300.0);
     for a in &l.animals {
         match l.species[a.species as usize].habitat.movement {
-            Movement::Walker => assert!(a.pos.y >= 0.0 && a.pos.y <= 2.0),
-            Movement::Burrower => assert!(a.pos.y >= -1.0 && a.pos.y <= 0.0),
+            Movement::Walker => assert!(a.pos.y >= 0.0 && a.pos.y <= 3.0),
+            Movement::Burrower => assert!(a.pos.y >= -3.0 && a.pos.y <= 0.0),
             _ => {}
         }
     }
@@ -236,7 +237,7 @@ fn spread_even_random_clumped() {
 fn spread_stays_in_the_area() {
     for spread in [Spread::Even, Spread::Random, Spread::Clumped] {
         let l = one(Habitat {
-            area: Rect::new(120.0, 180.0, 0.0, 2.0),
+            area: Rect::new(120.0, 180.0, 0.0, 3.0),
             spread,
             individuals: 30,
             ..Default::default()
@@ -314,7 +315,7 @@ fn flight_share_matches() {
 fn perches_are_in_their_layer() {
     for (layer, lo, hi) in [
         (Layer::Canopy, 15.0, 30.0),
-        (Layer::Shrubs, 0.5, 2.0),
+        (Layer::Shrubs, 0.5, 3.0),
         (Layer::Floor, 0.0, 0.0),
     ] {
         let mut l = one(flyer(0.4, Perch::At(layer), false, 1));
