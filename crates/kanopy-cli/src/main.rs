@@ -2,6 +2,9 @@
 //!
 //!   kanopy bench [--seconds S]     how many sounding units one thread renders in real time
 //!   kanopy demo [--out DIR]        short WAVs to hear the voice and the distance cues
+//!   kanopy world [options]         simulate the demo forest, write a JSON snapshot to plot
+//!       --seed N --density D --variation V --minutes M --scale K --trail S --out FILE
+//!   kanopy world-bench [--scale K] how fast the world steps with many individuals
 
 use kanopy_core::mixer::{Listener, Mixer};
 use kanopy_core::propagation::Medium;
@@ -32,8 +35,25 @@ fn main() {
         Some("demo") => demo(&PathBuf::from(
             opt("--out").unwrap_or_else(|| "out/demo".into()),
         )),
+        Some("world") => {
+            let f = |n: &str, d: f64| opt(n).map(|s| s.parse().expect(n)).unwrap_or(d);
+            world(
+                f("--seed", 1.0) as u64,
+                f("--density", 0.5),
+                f("--variation", 0.5),
+                f("--minutes", 5.0),
+                f("--scale", 1.0),
+                f("--trail", 20.0),
+                &PathBuf::from(opt("--out").unwrap_or_else(|| "out/world.json".into())),
+            )
+        }
+        Some("world-bench") => world_bench(
+            opt("--scale")
+                .map(|s| s.parse().expect("--scale"))
+                .unwrap_or(8.7),
+        ),
         _ => {
-            eprintln!("usage: kanopy bench [--seconds S] | kanopy demo [--out DIR]");
+            eprintln!("usage: kanopy bench | demo | world | world-bench  (see the top of main.rs)");
             std::process::exit(2);
         }
     }
@@ -277,4 +297,140 @@ fn demo(dir: &Path) {
     }
     let (l, r) = render(&mut m, 20.0);
     write(&dir.join("05-crowd.wav"), &l, &r);
+}
+
+fn world(
+    seed: u64,
+    density: f64,
+    variation: f64,
+    minutes: f64,
+    scale: f64,
+    trail: f64,
+    out: &Path,
+) {
+    use kanopy_core::life::{Life, Mode};
+    use kanopy_core::species::{demo as demo_species, Movement};
+    use kanopy_core::world::{Forest, ForestSettings};
+    use std::fmt::Write as _;
+
+    let forest = Forest::generate(ForestSettings {
+        seed,
+        density,
+        tree_variation: variation,
+        liquid: false,
+    });
+    let mut life = Life::new(forest, demo_species(scale));
+    let total = minutes * 60.0;
+    let trail = trail.min(total);
+    life.run(total - trail);
+    // positions once a second over the last `trail` seconds
+    let mut trails: Vec<Vec<(f64, f64)>> = vec![Vec::new(); life.animals.len()];
+    for _ in 0..trail.round() as usize {
+        for (t, a) in trails.iter_mut().zip(&life.animals) {
+            t.push((a.pos.x, a.pos.y));
+        }
+        life.run(1.0);
+    }
+    let mut j = String::new();
+    write!(j, "{{\"seed\":{seed},\"density\":{density},\"variation\":{variation},\"minutes\":{minutes},\"shrubs\":{:.3},\"trees\":[", life.forest.shrub_fullness).unwrap();
+    for (i, t) in life.forest.trees.iter().enumerate() {
+        write!(
+            j,
+            "{}[{:.2},{:.2},{:.2},{:.2}]",
+            if i > 0 { "," } else { "" },
+            t.x,
+            t.height,
+            t.crown_bottom,
+            t.crown_half_width
+        )
+        .unwrap();
+    }
+    j.push_str("],\"species\":[");
+    for (i, s) in life.species.iter().enumerate() {
+        let m = match s.habitat.movement {
+            Movement::Walker => "walker",
+            Movement::Climber => "climber",
+            Movement::Flyer => "flyer",
+            Movement::Burrower => "burrower",
+        };
+        let a = s.habitat.area;
+        write!(
+            j,
+            "{}{{\"name\":\"{}\",\"movement\":\"{m}\",\"area\":[{},{},{},{}]}}",
+            if i > 0 { "," } else { "" },
+            s.name,
+            a.x0,
+            a.x1,
+            a.y0,
+            a.y1
+        )
+        .unwrap();
+    }
+    j.push_str("],\"animals\":[");
+    for (i, (a, tr)) in life.animals.iter().zip(&trails).enumerate() {
+        let mode = match a.mode {
+            Mode::Perched { .. } => "perched",
+            Mode::Flying { .. } | Mode::Rising { .. } | Mode::ToPerch => "flying",
+            Mode::Travel => "travel",
+            _ => "still",
+        };
+        write!(
+            j,
+            "{}{{\"s\":{},\"g\":{},\"x\":{:.2},\"y\":{:.2},\"m\":\"{mode}\",\"t\":[",
+            if i > 0 { "," } else { "" },
+            a.species,
+            a.group,
+            a.pos.x,
+            a.pos.y
+        )
+        .unwrap();
+        for (k, (x, y)) in tr.iter().enumerate() {
+            write!(j, "{}{:.1},{:.1}", if k > 0 { "," } else { "" }, x, y).unwrap();
+        }
+        j.push_str("]}");
+    }
+    j.push_str("]}");
+    if let Some(dir) = out.parent() {
+        std::fs::create_dir_all(dir).ok();
+    }
+    std::fs::write(out, j).expect("write json");
+    let migrations: u32 = life.groups.iter().map(|g| g.migrations).sum();
+    println!(
+        "{} · {} trees · {} individuals in {} groups · {migrations} migrations · {:.0} min",
+        out.display(),
+        life.forest.trees.len(),
+        life.animals.len(),
+        life.groups.len(),
+        minutes
+    );
+}
+
+fn world_bench(scale: f64) {
+    use kanopy_core::life::{Life, DT};
+    use kanopy_core::species::demo as demo_species;
+    use kanopy_core::world::{Forest, ForestSettings};
+    let t0 = Instant::now();
+    let mut life = Life::new(
+        Forest::generate(ForestSettings::default()),
+        demo_species(scale),
+    );
+    let setup = t0.elapsed().as_secs_f64();
+    life.run(10.0); // settle
+    let world_s = 60.0;
+    let t1 = Instant::now();
+    life.run(world_s);
+    let cpu = t1.elapsed().as_secs_f64();
+    println!(
+        "kanopy world-bench · {} {} · {} individuals · step {} ms",
+        std::env::consts::OS,
+        std::env::consts::ARCH,
+        life.animals.len(),
+        DT * 1000.0
+    );
+    println!(
+        "set-up {:.0} ms · {:.1} ms per second of forest time · {:.2} % of one core",
+        setup * 1000.0,
+        cpu / world_s * 1000.0,
+        cpu / world_s * 100.0
+    );
 }

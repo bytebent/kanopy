@@ -7,7 +7,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 |---|---|---|---|
 | 00 | Design passes, plan, experiments log | `design.md` agreed | Done |
 | 01 | Rust workspace; one voice (wavetable + resonant high-pass); propagation from a listener (spreading, Earth absorption, delay, Doppler, pan); a mixer; **benchmark** | Tests pass; voice counts measured on the Mac; calling-cap default set | Built; waiting for the Mac bench |
-| 02 | World: trees from seed, Density and Tree variation, shrubs, layers; species areas, spread, groups; movement types, flight and perch, migration, flocking; active zone | Seeded worlds repeat exactly; placement tests | |
+| 02 | World: trees from seed, Density and Tree variation, shrubs, layers; species areas, spread, groups; movement types, flight and perch, migration, flocking; active zone | Seeded worlds repeat exactly; placement tests | Done |
 | 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | |
 | 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | |
 | 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | |
@@ -30,3 +30,14 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
   default.
 - Done 20 Oct: all of the above, plus `--example parts` (times each part), units rendered 8 side
   by side, fixed-point oscillator phase. Container: ~12.5 ns per sounding unit-sample.
+
+## Batch 02 in detail
+
+- `world.rs`: layers, trees from the seed (count from Density, heights and crowns from Tree
+  variation, tallest always 50 m, crowns as ellipses), shrub fullness.
+- `species.rs`: habitat traits (movement type, area, individuals, spread, spacing, group size,
+  cohesion, flock, flight band, perch, flight share, migration) and a 7-species demo forest.
+- `life.rs`: placing groups and individuals, moving them in 50 ms steps, migration (climbers via
+  touching crowns or down, along and up), flocking, perching, the active zone.
+- `kanopy world` writes a JSON snapshot; `tools/plot_world.py` draws it. `kanopy world-bench`.
+- Done 20 Oct. 20,010 individuals: about 4 % of one core (container).

@@ -13,6 +13,11 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 01 | Demo WAVs 01–02: shape sweep sine → square, saw through the body with cutoff 40 Hz → 6 kHz | Harmonics appear in order; resonant peak tracks the cutoff | `docs/experiments/01-voice-spectrograms.png` |
 | 20 Oct 2026 | 01 | Demo WAVs 03–05: one call at 2, 8, 32, 128 m; a flyer passing at 25 m/s; 1,500 random units | Farther calls arrive later, quieter and duller; the fly-by bends down through closest approach; crowd is dense and never clips (peak −14 dBFS) | `docs/experiments/01-distance-spectrograms.png` |
 | 20 Oct 2026 | 01 | Steps at 64-sample block edges in the long demo units | None: largest jump at block edges is no bigger than elsewhere | |
+| 20 Oct 2026 | 02 | 17 world tests: layers; tree count follows Density, tallest tree always 50 m, Variation 0 gives an even stand; crowns; same seed same forest after 2 min, bit for bit; counts and group sizes; everyone inside their area and crown/band/perch over 10 min in three forests; walkers 0–2 m, burrowers in soil; Spread Even/Random/Clumped and Spacing; Cohesion; flight share 0.2/0.5/0.8 measured within ±0.08; perch layers; flocks align (>0.8) and loose groups don't (<0.6); migration; a climber reaches a far tree by the floor; active zone (radius and box + margin) | All pass after two fixes below | |
+| 20 Oct 2026 | 02 | First run: flyers just taking off from a perch counted as flying while still below their band | Added a take-off mode (Rising) | |
+| 20 Oct 2026 | 02 | Snapshots of the demo forest (7 species, 2,300 individuals) after 10 min: woodland, forest, thicket | Climbers in crowns with trails down trunks when they change trees; perched flyers in their layers; burrowers only in their part of the soil | `docs/experiments/02-woodland.png`, `02-forest.png`, `02-thicket.png` |
+| 20 Oct 2026 | 02 | Look at the first snapshots | Flocks streaked across the whole width (pull home too weak); climbers lined up on crown edges their area only clipped. Fixed: stronger pull past the roaming distance; prefer trees that reach well into the area; crown half-width capped at 12 m | |
+| 20 Oct 2026 | 02 | World bench: demo forest ×8.7 (20,010 individuals, 4,749 groups), 20 steps a second (container) | 42 ms per second of forest time: about 4 % of one core. Set-up 21 ms | `docs/experiments/02-forest-20k.png` |
 
 ## Notes
 
@@ -21,3 +26,8 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
   by tiny amounts. To check in batch 05.
 - **01 · levels are provisional.** A sine of amplitude 1.0 stands for 100 dB SPL until the Ear and
   starting gain arrive in batch 04.
+- **02 · tuning constants.** Not controls yet: top speeds (walker 1.2, climber 0.8, flyer 9,
+  burrower 0.05 m/s; each individual 60–100 % of that), mean perch time 40 s, pauses 1–15 s,
+  roaming distance 25 m (Cohesion 0) to 1 m (Cohesion 1), 50 ms steps.
+- **02 · liquid worlds** use the same geometry; only the names change (kelp, seabed, swimming).
+  Nothing extra to simulate until the medium arrives in batch 04.

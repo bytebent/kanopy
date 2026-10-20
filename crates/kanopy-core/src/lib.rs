@@ -1,15 +1,20 @@
 //! kanopy-core: the forest world, behaviour and audio. No UI.
 //!
-//! Batch 01 holds the sound side only: one voice (wavetable + resonant high-pass body),
-//! propagation from a source to the listener, and a mixer that renders voices in blocks.
+//! - `world`: the slice, layers, trees and shrubs. `species` and `life`: habitats, groups and
+//!   how individuals move.
+//! - `voice`, `wavetable`, `filter`: the prototype voice. `propagation` and `mixer`: how calls
+//!   reach the listener.
 
 pub mod filter;
+pub mod life;
 pub mod mixer;
 pub mod propagation;
 pub mod rng;
+pub mod species;
 pub mod voice;
 pub mod wav;
 pub mod wavetable;
+pub mod world;
 
 /// Samples per processing block. Coefficients (cutoff, shape, gains) update once per block
 /// and are ramped across it.

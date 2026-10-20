@@ -184,6 +184,8 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   (or its whole group) moves to another tree or place, and how far. Climbers hop between crowns
   that touch, or descend and walk if they don't. [Decided]
 - **Individuals**: how many of this species are in the forest.
+- Speeds, pause and perch times are internal constants for now (listed in `experiments.md`,
+  batch 02). [Proposed: make speed a Designer control later]
 
 ### 5.4 Groups
 [Decided: groups are a species trait, with more traits in the Designer]
