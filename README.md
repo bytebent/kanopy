@@ -3,7 +3,7 @@
 A renderer for living forests: species you design, placed in a forest on any world, heard from
 wherever you stand. Each animal only reacts to what actually reaches its ears.
 
-Status: **design agreed; batches 01–07 built**: the sound path, the forest and how its animals move, how they call, hear, answer, chorus, harmonise and copy each other, the worlds, Box listening, the Ear, limiters and reverb, forest files rendered to WAV, and the app with its Forest and Species pages, playing live.
+Status: **design agreed; batches 01–08 built**: the sound path, the forest and how its animals move, how they call, hear, answer, chorus, harmonise and copy each other, the worlds, Box listening, the Ear, limiters and reverb, forest files rendered to WAV, and the app with its Forest, Species and Designer pages, playing live.
 
 - `design.md`: what kanopy is and how it works
 - `plan.md`: build batches
@@ -16,7 +16,10 @@ release, unzip it, move `kanopy.app` to Applications, and the first time right-c
 **Open** (it isn't signed). It opens on the sparse example forest: press **Play** (or Space), drag
 the listener around the screen, or switch to **Box** and draw one. On the **Species** page, pick
 a species, change it, and press **Apply**. Every species you apply is kept in the library on the
-left, ready to add to any forest.
+left, ready to add to any forest. On the **Designer** page, shape a species' voice and calls and
+press **Call** or **Signature** (or C and S) to hear it on its own; if the forest is playing it
+ducks underneath. Edits on the Species page and the Designer are one set of changes until you
+press **Apply**.
 
 Or run the same page in a browser, from the repo: `cargo run --release -p kanopy-cli -- serve`
 and open http://127.0.0.1:8710.

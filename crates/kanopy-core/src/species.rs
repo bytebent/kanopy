@@ -82,6 +82,17 @@ pub struct Habitat {
     /// How often a group moves on, per hour, and how far, metres.
     pub migration_per_hour: f64,
     pub migration_distance: f64,
+    /// Top speed, m/s. None: the movement type's own (`Movement::speed`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub speed: Option<f64>,
+}
+
+impl Habitat {
+    /// Top speed, m/s: its own, or the movement type's.
+    pub fn top_speed(&self) -> f64 {
+        self.speed
+            .map_or(self.movement.speed(), |v| v.clamp(0.0, 100.0))
+    }
 }
 
 impl Default for Habitat {
@@ -102,6 +113,7 @@ impl Default for Habitat {
             },
             migration_per_hour: 0.0,
             migration_distance: 30.0,
+            speed: None,
         }
     }
 }

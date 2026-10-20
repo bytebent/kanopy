@@ -7,6 +7,7 @@
 //!   reach the listener. `master`: the Ear, limiters and reverb.
 //! - `files`: forest and species files. `render`: a forest file to a WAV.
 
+pub mod audition;
 pub mod calls;
 pub mod files;
 pub mod filter;

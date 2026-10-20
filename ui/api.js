@@ -45,6 +45,8 @@
       const path = prompt('Save the species as (path on this computer):', `${species.name}.kanopy-species.json`);
       return path ? post('/api/species_export', { path, species }) : Promise.resolve(null);
     },
+    audition: (species, take) => invoke ? invoke('audition', { species, take }) : post('/api/audition', { species, take }),
+    check: (species) => invoke ? invoke('check', { species }) : post('/api/check', { species }),
     exportState: () => invoke ? invoke('export_state') : get('/api/export_state').then((r) => r.json()),
   };
 })();

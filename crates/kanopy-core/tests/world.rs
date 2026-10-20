@@ -467,3 +467,54 @@ fn active_zone() {
     });
     assert_eq!(all, l.animals.len());
 }
+
+/// Fastest anyone moved in one step, m/s, over `secs`.
+fn top_speed_seen(mut l: Life, secs: f64) -> f64 {
+    let mut fastest = 0.0f64;
+    let steps = (secs / DT) as usize;
+    for _ in 0..steps {
+        let before: Vec<Vec2> = l.animals.iter().map(|a| a.pos).collect();
+        l.step();
+        for (a, b) in l.animals.iter().zip(&before) {
+            fastest = fastest.max(a.pos.dist(*b) / DT);
+        }
+    }
+    fastest
+}
+
+#[test]
+fn speed_sets_how_fast_they_go() {
+    let h = Habitat {
+        movement: Movement::Walker,
+        individuals: 40,
+        migration_per_hour: 30.0,
+        migration_distance: 60.0,
+        ..Default::default()
+    };
+    assert_eq!(h.top_speed(), Movement::Walker.speed());
+    let default = top_speed_seen(one(h), 120.0);
+    let slow = top_speed_seen(
+        one(Habitat {
+            speed: Some(0.3),
+            ..h
+        }),
+        120.0,
+    );
+    let fast = top_speed_seen(
+        one(Habitat {
+            speed: Some(4.0),
+            ..h
+        }),
+        120.0,
+    );
+    assert!(default <= 1.2 + 1e-6 && default > 0.6, "default {default}");
+    assert!(slow <= 0.3 + 1e-6 && slow > 0.15, "slow {slow}");
+    assert!(fast <= 4.0 + 1e-6 && fast > 2.0, "fast {fast}");
+    // unset leaves the forest exactly as before
+    let a = one(h);
+    let b = one(Habitat { speed: None, ..h });
+    assert_eq!(
+        a.animals.iter().map(|x| x.pos).collect::<Vec<_>>(),
+        b.animals.iter().map(|x| x.pos).collect::<Vec<_>>()
+    );
+}

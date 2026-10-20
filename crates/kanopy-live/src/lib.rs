@@ -10,6 +10,8 @@
 //! - The **listener** glides to where it's dragged (so dragging makes real Doppler), or follows
 //!   its path: Still, Wander (drifts anywhere at Speed) or Follow (the nearest group of a
 //!   species).
+//! - **Auditions** (the Designer's Call and Signature): one creature, dry, from 1 m, played on top.
+//!   While the forest plays it ducks under the creature; when it's stopped only the creature plays.
 //! - Changing the seed, density, tree variation, world or species rebuilds the forest; the old
 //!   one fades out over one step. Listener, box, key, reverb, Ear and volume change live.
 
@@ -19,7 +21,7 @@ use kanopy_core::master::Ear;
 use kanopy_core::mixer::Hear;
 use kanopy_core::rng::Rng;
 use kanopy_core::scene::Scene;
-use kanopy_core::species::Movement;
+use kanopy_core::species::{Movement, Species};
 use kanopy_core::world::{Rect, BOTTOM, TOP, WIDTH};
 use kanopy_core::{db_to_amp, Vec2};
 use ringbuf::traits::{Consumer, Observer, Producer, Split};
@@ -44,6 +46,20 @@ pub const FRAME_MAGIC: &[u8; 4] = b"KNF1";
 /// Bytes before the animals in a frame, and per animal.
 pub const FRAME_HEADER: usize = 68;
 pub const FRAME_ANIMAL: usize = 12;
+/// How far the forest ducks under an audition, dB, and how fast: down, back up (seconds).
+pub const DUCK_DB: f32 = -15.0;
+pub const DUCK_DOWN: f32 = 0.04;
+pub const DUCK_UP: f32 = 0.5;
+
+/// What an audition plays.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Take {
+    /// A fresh call.
+    Call,
+    /// Its signature, as a group repeats it.
+    Signature,
+}
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
@@ -121,6 +137,11 @@ pub enum Cmd {
     Species {
         species: Vec<kanopy_core::species::Species>,
     },
+    /// Play these samples (mono, from `Live::audition`) on top, ducking the forest.
+    #[serde(skip)]
+    Sound(Vec<f32>),
+    /// Stop an audition.
+    Hush,
 }
 
 #[derive(Clone, Debug, Default, PartialEq, Serialize)]
@@ -144,6 +165,8 @@ struct Shared {
     export: Mutex<ExportState>,
     underruns: AtomicU64,
     stop: AtomicBool,
+    /// Auditions so far (each press is a new call).
+    takes: AtomicU64,
 }
 
 pub struct Live {
@@ -260,6 +283,60 @@ impl Live {
 
     pub fn export_state(&self) -> ExportState {
         self.shared.export.lock().unwrap().clone()
+    }
+
+    /// The forest's key, seed and how its world moves bodies.
+    fn world_of(&self) -> Result<(Option<kanopy_core::scale::Key>, u64, f64, String), String> {
+        let f = self.forest();
+        let key = f.key.as_ref().map(|k| k.key()).transpose()?;
+        let m = f.medium.medium()?;
+        let ratio = if f.bodies_follow { m.body_ratio() } else { 1.0 };
+        let name = match &f.medium {
+            MediumFile::Preset(n) => n.clone(),
+            _ => "custom".into(),
+        };
+        Ok((key, f.seed, ratio, name))
+    }
+
+    /// Audition one species: a fresh call or its signature, dry from 1 m, played on top of the
+    /// forest (ducked while it plays). Returns the call for the page to draw.
+    pub fn audition(&self, species: &Species, take: Take) -> Result<serde_json::Value, String> {
+        use kanopy_core::audition;
+        let (key, seed, ratio, _) = self.world_of()?;
+        let n = self.shared.takes.fetch_add(1, Ordering::Relaxed);
+        let m = match take {
+            Take::Call => audition::call(species, key.as_ref(), seed, n),
+            Take::Signature => audition::signature(species, key.as_ref(), seed, n),
+        };
+        let samples = audition::render(&m, ratio as f32, self.sample_rate as f32);
+        self.send(Cmd::Sound(samples));
+        let units: Vec<serde_json::Value> = m
+            .units
+            .iter()
+            .map(|u| {
+                serde_json::json!({ "at": u.at, "dur": u.dur, "note": u.note, "contour": u.contour,
+                    "level": u.level, "shape": u.shape, "cutoff": u.cutoff * ratio })
+            })
+            .collect();
+        Ok(serde_json::json!({
+            "take": take,
+            "duration": m.duration() + audition::TAIL,
+            "units": units,
+            "ahead": AHEAD,
+        }))
+    }
+
+    /// What the forest's world does to this species' body (the Designer's below-hearing flag).
+    pub fn check(&self, species: &Species) -> Result<serde_json::Value, String> {
+        let (key, seed, ratio, medium) = self.world_of()?;
+        let c = kanopy_core::audition::check(species, ratio, key.as_ref(), seed);
+        Ok(serde_json::json!({
+            "medium": medium,
+            "ratio": c.ratio,
+            "cutoff": [c.cutoff.0, c.cutoff.1],
+            "loss_db": c.loss_db,
+            "pinned": c.pinned,
+        }))
     }
 }
 
@@ -386,6 +463,12 @@ struct Player {
     version: u64,
     cpu: f64,
     peak: [f32; 2],
+    /// An audition playing: its samples and how far it's got.
+    audition: Option<(Vec<f32>, usize)>,
+    /// The forest's gain under an audition (1 = not ducked).
+    duck: f32,
+    /// Safety limiter on what goes to the sound card (gain now).
+    safety: f32,
 }
 
 fn world() -> Rect {
@@ -413,6 +496,9 @@ impl Player {
             version: 0,
             cpu: 0.0,
             peak: [0.0; 2],
+            audition: None,
+            duck: 1.0,
+            safety: 1.0,
             forest,
         };
         p.scene.set_listener(pos, Vec2::default());
@@ -528,6 +614,8 @@ impl Player {
                 self.scene.set_ear(ear);
             }
             Cmd::Volume { db } => self.volume = db.clamp(-60.0, 12.0),
+            Cmd::Sound(samples) => self.audition = Some((samples, 0)),
+            Cmd::Hush => self.audition = None,
             Cmd::Name { name } => f.name = name,
             Cmd::Species { species } => {
                 if species.is_empty() {
@@ -655,6 +743,54 @@ impl Player {
         self.scene.set_listener(self.pos, vel);
     }
 
+    /// Duck the forest in `l`/`r` under the audition, add the audition on top, apply the volume
+    /// and a safety limit at −1 dBFS. Returns the peaks.
+    fn finish(&mut self, l: &mut [f32], r: &mut [f32], out: &mut [f32]) -> [f32; 2] {
+        let sr = self.sr as f32;
+        let (down, up) = (1.0 / (DUCK_DOWN * sr), 1.0 / (DUCK_UP * sr));
+        let floor = db_to_amp(DUCK_DB);
+        let vol = db_to_amp(self.volume);
+        let thr = db_to_amp(-1.0);
+        let release = (-1.0 / (0.2 * sr)).exp();
+        let centre = std::f32::consts::FRAC_1_SQRT_2;
+        let mut pk = [0f32; 2];
+        for i in 0..l.len() {
+            let (a, more) = match self.audition.as_mut() {
+                Some((x, at)) if *at < x.len() => {
+                    *at += 1;
+                    (x[*at - 1], true)
+                }
+                _ => (0.0, false),
+            };
+            if !more && self.audition.is_some() {
+                self.audition = None;
+            }
+            // linear glide in dB-ish terms is plenty here
+            let target = if more { floor } else { 1.0 };
+            self.duck += if target < self.duck {
+                -(self.duck - target).min((1.0 - floor) * down)
+            } else {
+                (target - self.duck).min((1.0 - floor) * up)
+            };
+            let mut x = [
+                (l[i] * self.duck + a * centre) * vol,
+                (r[i] * self.duck + a * centre) * vol,
+            ];
+            let peak = x[0].abs().max(x[1].abs());
+            self.safety = 1.0 - (1.0 - self.safety) * release;
+            if peak * self.safety > thr {
+                self.safety = thr / peak;
+            }
+            for (c, v) in x.iter_mut().enumerate() {
+                *v *= self.safety;
+                pk[c] = pk[c].max(v.abs());
+            }
+            out[2 * i] = x[0];
+            out[2 * i + 1] = x[1];
+        }
+        pk
+    }
+
     fn info(&self) -> String {
         let f = &self.scene.life.forest;
         let trees: Vec<[f64; 4]> = f
@@ -686,6 +822,12 @@ impl Player {
             "volume": self.volume,
             "default_species": kanopy_core::species::Species::new("New species", Default::default()),
             "max_individuals": MAX_INDIVIDUALS,
+            "speeds": {
+                "walker": Movement::Walker.speed(),
+                "climber": Movement::Climber.speed(),
+                "flyer": Movement::Flyer.speed(),
+                "burrower": Movement::Burrower.speed(),
+            },
         })
         .to_string()
     }
@@ -694,7 +836,7 @@ impl Player {
 /// A frame: what the screen draws.
 ///
 /// Header (68 bytes, little-endian): magic "KNF1"; time f64 (s); version u32 (changes when the
-/// forest is rebuilt); playing u8, hear u8 (0 listener, 1 box), 2 bytes pad; calling u32;
+/// forest is rebuilt); playing u8, hear u8 (0 listener, 1 box), auditioning u8, 1 byte pad; calling u32;
 /// active u32; cpu f32 (share of real time); peak L, R f32 (dBFS); listener x, y f32; box x0,
 /// x1, y0, y1 f32; Ear gain f32 (dB). Then per animal (12 bytes): x f32, y f32, species u16,
 /// flags u8 (1 active, 2 calling, 4 flying), pad.
@@ -706,7 +848,7 @@ fn encode_frame(p: &Player) -> Vec<u8> {
     b.extend_from_slice(&s.time().to_le_bytes());
     b.extend_from_slice(&(p.version as u32).to_le_bytes());
     let boxed = matches!(s.settings.hear, Hear::Box(_));
-    b.extend_from_slice(&[p.playing as u8, boxed as u8, 0, 0]);
+    b.extend_from_slice(&[p.playing as u8, boxed as u8, p.audition.is_some() as u8, 0]);
     let mut calling = 0u32;
     let mut active = 0u32;
     for (i, a) in s.life.animals.iter().enumerate() {
@@ -816,14 +958,17 @@ fn render_thread(
             *sh.forest.lock().unwrap() = p.forest.clone();
             *sh.frame.lock().unwrap() = encode_frame(&p);
         }
-        if p.playing != was_playing {
-            was_playing = p.playing;
+        // sounding: the forest playing, or an audition on its own
+        let on = p.playing || p.audition.is_some();
+        if on != was_playing {
+            was_playing = on;
             silent_start = Instant::now();
             paused_at = sent as f64 / sr as f64;
             *sh.info.lock().unwrap() = p.info();
         }
-        if !p.playing {
+        if !on {
             p.peak = [0.0; 2];
+            p.duck = 1.0;
             *sh.frame.lock().unwrap() = encode_frame(&p);
             std::thread::sleep(Duration::from_millis(15));
             continue;
@@ -841,16 +986,11 @@ fn render_thread(
             let t0 = Instant::now();
             l.fill(0.0);
             r.fill(0.0);
-            p.move_listener();
-            p.scene.step_audio(&mut l, &mut r);
-            let g = db_to_amp(p.volume);
-            let mut pk = [0f32; 2];
-            for i in 0..n {
-                inter[2 * i] = l[i] * g;
-                inter[2 * i + 1] = r[i] * g;
-                pk[0] = pk[0].max(l[i].abs());
-                pk[1] = pk[1].max(r[i].abs());
+            if p.playing {
+                p.move_listener();
+                p.scene.step_audio(&mut l, &mut r);
             }
+            let pk = p.finish(&mut l, &mut r, &mut inter);
             if let Some(pr) = prod.as_mut() {
                 pr.push_slice(&inter);
             }
@@ -889,4 +1029,47 @@ pub fn frame_header(b: &[u8]) -> Option<(f64, u32, bool, u32, u32)> {
     let f64_at = |i: usize| f64::from_le_bytes(b[i..i + 8].try_into().unwrap());
     let u32_at = |i: usize| u32::from_le_bytes(b[i..i + 4].try_into().unwrap());
     Some((f64_at(4), u32_at(12), b[16] != 0, u32_at(20), u32_at(24)))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_forest_ducks_under_an_audition_and_comes_back() {
+        let mut p = Player::new(ForestFile::demo(), 48_000).unwrap();
+        let n = 2400;
+        let mut out = vec![0f32; 2 * n];
+        let forest = 0.1f32;
+        let run = |p: &mut Player, out: &mut Vec<f32>| {
+            let (mut l, mut r) = (vec![forest; n], vec![forest; n]);
+            p.finish(&mut l, &mut r, out)
+        };
+        run(&mut p, &mut out);
+        assert!(
+            (out[2 * n - 2] - forest).abs() < 1e-6,
+            "untouched without an audition"
+        );
+        // half a second of silence as the audition: the forest goes down to −15 dB within 40 ms
+        p.audition = Some((vec![0.0; 24_000], 0));
+        run(&mut p, &mut out);
+        let ducked = out[2 * 2000];
+        assert!(
+            (kanopy_core::amp_to_db(ducked / forest) - DUCK_DB).abs() < 0.1,
+            "{ducked}"
+        );
+        for _ in 0..10 {
+            run(&mut p, &mut out);
+        }
+        assert!(p.audition.is_none(), "it ends");
+        // and back up over half a second
+        for _ in 0..12 {
+            run(&mut p, &mut out);
+        }
+        assert!((out[2 * n - 2] - forest).abs() < 1e-4);
+        // a loud audition on top never passes −1 dBFS
+        p.audition = Some((vec![3.0; 4800], 0));
+        let pk = run(&mut p, &mut out);
+        assert!(pk[0] <= db_to_amp(-1.0) + 1e-6 && pk[1] <= db_to_amp(-1.0) + 1e-6);
+    }
 }

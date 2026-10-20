@@ -207,8 +207,9 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   (or its whole group) moves to another tree or place, and how far. Climbers hop between crowns
   that touch, or descend and walk if they don't. [Decided]
 - **Individuals**: how many of this species are in the forest.
-- Speeds, pause and perch times are internal constants for now (listed in `experiments.md`,
-  batch 02). [Proposed: make speed a Designer control later]
+- **Speed**: top speed in m/s, a Designer control. Left unset it's the movement type's own
+  (walker 1.2, climber 0.8, flyer 9, burrower 0.05); each individual moves at 60–100 % of it.
+  [Decided] Pause and perch times stay internal constants (listed in `experiments.md`, batch 02).
 
 ### 5.4 Groups
 [Decided: groups are a species trait, with more traits in the Designer]
@@ -346,7 +347,26 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
     species. Apply saves the forest's species to it, by name. Import… and Export… are for single
     species files. Forest files still carry full copies of their species.
 - **Designer**: one species' voice and calls, with **Call** and **Signature** buttons to audition it
-  alone, and the behaviour traits of §5.3–5.5.
+  alone, and the behaviour traits of §5.3–5.5. Decided for batch 08:
+  - **Same edits as the Species page**: one draft shared by both pages, **Apply** and **Revert**.
+    Moving between the pages keeps the draft. [Decided]
+  - The Species page keeps habitat, groups and behaviour; the Designer has the voice (§5.1),
+    the calls (§5.2) and Speed (§5.3). [Decided]
+  - **Auditioning is dry and close**: the creature as heard from 1 m, no distance, no reverb, no
+    Ear. **Call** plays a fresh call, **Signature** its signature as a group repeats it (with
+    Variation). Both are in the forest's key. [Decided]
+  - **If the forest is playing**, it ducks while the creature plays on top, then comes back.
+    If it's stopped, only the creature plays. [Decided]
+  - The screen shows the last call heard: each unit as a stroke of pitch over time.
+  - **Below hearing**: the page says when the forest's world moves the body (Bodies follow) so
+    far that most of the call is cut, with how much quieter it gets. [Decided]
+  - As built [Proposed: check by ear]: the forest ducks by **15 dB**, going down in 40 ms and
+    back up over 0.5 s. Live output has a safety limit at −1 dBFS, since a creature at 1 m can
+    peak above full scale. 80 dB SPL at 1 m is full scale, as in the forest. The audition's body
+    moves with the world (as it sounds there); its loudness doesn't (medium compensation). The
+    flag: 3–12 dB lost "thinner", 12 dB or more "most of the call is cut", body past 20 kHz
+    "almost nothing is left". A signature here is the species' own (one per species and seed),
+    not any one group's.
 
 ## 10. Limits and performance
 

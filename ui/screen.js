@@ -9,7 +9,7 @@
     const dv = new DataView(buf);
     if (dv.byteLength < HEADER || dv.getUint8(0) !== 0x4b) return null;
     return {
-      time: dv.getFloat64(4, true), version: dv.getUint32(12, true), playing: dv.getUint8(16) === 1, boxed: dv.getUint8(17) === 1,
+      time: dv.getFloat64(4, true), version: dv.getUint32(12, true), playing: dv.getUint8(16) === 1, boxed: dv.getUint8(17) === 1, auditioning: dv.getUint8(18) === 1,
       calling: dv.getUint32(20, true), active: dv.getUint32(24, true), cpu: dv.getFloat32(28, true),
       peak: [dv.getFloat32(32, true), dv.getFloat32(36, true)], lx: dv.getFloat32(40, true), ly: dv.getFloat32(44, true),
       box: [dv.getFloat32(48, true), dv.getFloat32(52, true), dv.getFloat32(56, true), dv.getFloat32(60, true)], ear: dv.getFloat32(64, true),

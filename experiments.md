@@ -54,6 +54,10 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 07 | Page checks, Forest page again after moving the screen into screen.js | 8 of 8 pass | 07-forest-page.png, 07-listener-in-canopy.png, 07-box.png, 07-underwater-following.png, 07-thicker.png |
 | 20 Oct 2026 | 07 | Page checks, Species page: shared colour, area drag, add from library, Apply, Revert, library after reload | 10 of 10 pass; nothing changes before Apply | 07-species-editing.png, 07-species-page.png |
 | 20 Oct 2026 | 07 | Mac CI: tests, benches and app build on GitHub's Intel Mac | All pass; audio hash 8edeab3383fc8db3 (same as before colours); app published as the Latest Mac build | |
+| 21 Oct 2026 | 08 | Rust tests: a call from 1 m has its length and level (65–78 dB peaks −15…+1 dBFS; the body's resonance can pass full scale, so the live path limits it); presses differ, the same press repeats, notes in key; a signature at Variation 0 repeats exactly, at 1 changes; water's ×4.3 body shift takes over 20 dB off a 500 Hz tone with a 2–3 kHz body and under 1 dB off a 20–40 Hz body; a body past the filter's top is flagged; Speed unset moves exactly as before, 0.3 and 4 m/s set the top speed | All pass after fixing two wrong expectations (the demo swifts only lose 6 dB in water; diggers lose 4.5 dB) | |
+| 21 Oct 2026 | 08 | Live engine: an audition with the forest stopped plays alone (forest time stands still) and ends by itself; over a playing forest the forest keeps going; the forest ducks to −15 dB within 40 ms and is back after half a second; a loud audition never passes −1 dBFS; the check follows the world (Earth 0 dB, water >20 dB) | All pass; 95 Rust tests in all | |
+| 21 Oct 2026 | 08 | Audio hash of the sparse example after adding Speed (unset) | 8edeab3383fc8db3: unchanged | |
+| 21 Oct 2026 | 08 | Page checks: the Forest and Species pages again, then the Designer: opens on the species picked on the Species page with its unapplied edit; a Pitch range drag; Call alone, Signature over the forest (readout DUCKED); both edits in one draft back on the Species page; in water a body pushed up is flagged; Speed from its movement's own to 1.95 m/s, applied | 29 of 29. First run had 6 misses from play timing on a cold browser start (2 cores here); the next three runs all passed. Fixed on the way: the call drawing stopped before its sound began, and the C lines took the last stroke's width | `docs/experiments/08-designer-call.png`, `08-designer-ducked.png`, `08-designer-water.png`, `08-forest-page.png`, `08-species-page.png` and the rest of `08-*.png` |
 
 ## Notes
 
@@ -79,3 +83,5 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
   "Latest Mac build" pre-release. Sound through CoreAudio can only be checked on a real Mac.
 - **07 · library folder:** `~/Library/Application Support/kanopy/species` on the Mac. Deleting a
   demo species there sticks; the demo set is only written the first time.
+- **08 · auditions on the Mac:** the page checks run silent. Whether Call and Signature sound
+  right, and the duck feels right, can only be heard on your Mac.

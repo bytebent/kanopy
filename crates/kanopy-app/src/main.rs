@@ -6,7 +6,7 @@ use kanopy_core::files::ForestFile;
 use kanopy_core::files::SpeciesFile;
 use kanopy_core::species::Species;
 use kanopy_live::library::Library;
-use kanopy_live::{Cmd, ExportState, Live};
+use kanopy_live::{Cmd, ExportState, Live, Take};
 use std::path::PathBuf;
 use tauri::ipc::Response;
 use tauri::State;
@@ -201,6 +201,16 @@ async fn species_export(window: tauri::Window, species: Species) -> Result<Optio
 }
 
 #[tauri::command]
+fn audition(app: State<App>, species: Species, take: Take) -> Result<serde_json::Value, String> {
+    app.0.audition(&species, take)
+}
+
+#[tauri::command]
+fn check(app: State<App>, species: Species) -> Result<serde_json::Value, String> {
+    app.0.check(&species)
+}
+
+#[tauri::command]
 fn export_state(app: State<App>) -> ExportState {
     app.0.export_state()
 }
@@ -227,7 +237,9 @@ fn main() {
             library_save,
             library_delete,
             library_import,
-            species_export
+            species_export,
+            audition,
+            check
         ])
         .run(tauri::generate_context!())
         .expect("kanopy app");

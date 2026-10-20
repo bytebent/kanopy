@@ -1,5 +1,6 @@
-// kanopy · the Species page. Edits a copy of the forest's species; Apply grows the forest with
-// them and saves them to the library, Revert throws the edits away.
+// kanopy · the Species page. Edits a copy of the forest's species (the draft, shared with the
+// Designer); Apply grows the forest with them and saves them to the library, Revert throws the
+// edits away.
 (function () {
   const api = window.kanopy;
   const kit = window.kit;
@@ -31,6 +32,7 @@
   }
   function changed() {
     dirty = true;
+    if (info) window.drafts.save(info, draft);
     showDirty();
     drawLists();
   }
@@ -233,6 +235,7 @@
   }
   function fill() {
     const on = !!sp();
+    window.drafts.select(draft, sel);
     document.querySelectorAll('#editor input, #editor select, #editor button').forEach((el) => (el.disabled = !on));
     drawLists();
     if (!on) return;
@@ -292,6 +295,7 @@
       const e = await api.cmd({ type: 'species', species: draft });
       if (e) return status(e, true);
       await api.librarySave(draft);
+      window.drafts.clear();
       dirty = false;
       showDirty();
       await loadLibrary();
@@ -303,6 +307,7 @@
   $('revert').addEventListener('click', () => {
     draft = clone(info.forest.species);
     sel = Math.min(sel, draft.length - 1);
+    window.drafts.clear();
     dirty = false;
     showDirty();
     fill();
@@ -318,8 +323,11 @@
     scr.drawBackground();
     $('forestname').textContent = info.forest.name;
     if (!dirty) {
-      draft = clone(info.forest.species);
-      sel = Math.min(sel, draft.length - 1);
+      const d = window.drafts.load(info);
+      draft = d.species;
+      dirty = d.dirty;
+      sel = window.drafts.selected(draft);
+      showDirty();
       fill();
     }
   }
@@ -344,7 +352,6 @@
     requestAnimationFrame(tick);
   }
   window.addEventListener('resize', () => scr.resize());
-  window.addEventListener('beforeunload', (e) => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
   scr.resize();
   Promise.all([loadInfo(), loadLibrary()]).then(() => requestAnimationFrame(tick)).catch((e) => status(String(e.message || e), true));
 })();

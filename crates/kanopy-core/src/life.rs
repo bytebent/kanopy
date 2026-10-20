@@ -441,7 +441,7 @@ impl Life {
                     };
                     let a = arng.f64() * std::f64::consts::TAU;
                     let vel = if matches!(mode, Mode::Flying { .. }) {
-                        let v = h.movement.speed() * 0.6;
+                        let v = h.top_speed() * 0.6;
                         Vec2::new(a.p_cos() * v, a.p_sin() * 0.3 * v)
                     } else {
                         Vec2::default()
@@ -720,7 +720,7 @@ fn move_toward(a: &mut Individual, to: Vec2, speed: f64) -> bool {
 }
 
 fn ground_step(a: &mut Individual, sp: &Species, pl: &Places, g: &Group, forest: &Forest, t: f64) {
-    let speed = sp.habitat.movement.speed() * a.pace;
+    let speed = sp.habitat.top_speed() * a.pace;
     match a.mode {
         Mode::Idle { until } => {
             a.vel = Vec2::default();
@@ -765,7 +765,7 @@ fn fly_step(
     t: f64,
 ) {
     let h = &sp.habitat;
-    let v = h.movement.speed() * a.pace;
+    let v = h.top_speed() * a.pace;
     match a.mode {
         Mode::Perched { until } => {
             a.vel = Vec2::default();

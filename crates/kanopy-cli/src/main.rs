@@ -1035,6 +1035,23 @@ fn serve(forest: Option<PathBuf>, port: u16, ui: PathBuf, audio: bool, library: 
                 live.export(p.clone(), minutes);
                 json(serde_json::json!(p))
             }
+            "/api/audition" => match (
+                arg("species").map(serde_json::from_value::<Species>),
+                arg("take").map(serde_json::from_value::<kanopy_live::Take>),
+            ) {
+                (Some(Ok(sp)), Some(Ok(take))) => match live.audition(&sp, take) {
+                    Ok(v) => json(v),
+                    Err(e) => bad(e),
+                },
+                _ => bad("audition: species and take (call or signature) expected".into()),
+            },
+            "/api/check" => match arg("species").map(serde_json::from_value::<Species>) {
+                Some(Ok(sp)) => match live.check(&sp) {
+                    Ok(v) => json(v),
+                    Err(e) => bad(e),
+                },
+                _ => bad("check: species expected".into()),
+            },
             "/api/library" => json(serde_json::to_value(lib.list()).unwrap()),
             "/api/library_save" => match arg("species").map(serde_json::from_value::<Vec<Species>>)
             {

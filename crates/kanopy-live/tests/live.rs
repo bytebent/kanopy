@@ -2,7 +2,7 @@
 
 use kanopy_core::files::ForestFile;
 use kanopy_core::species::demo;
-use kanopy_live::{frame_header, Cmd, Live, PathKind, FRAME_ANIMAL, FRAME_HEADER};
+use kanopy_live::{frame_header, Cmd, Live, PathKind, Take, FRAME_ANIMAL, FRAME_HEADER};
 use std::time::Duration;
 
 fn small() -> ForestFile {
@@ -200,4 +200,65 @@ fn species_apply_checks_then_rebuilds() {
         f.species[1].colour, f.species[0].colour,
         "two species may share a colour"
     );
+}
+
+fn auditioning(live: &Live) -> bool {
+    live.frame()[18] != 0
+}
+
+#[test]
+fn auditions_play_alone_or_over_the_forest() {
+    let live = Live::start(small(), false).unwrap();
+    let sp = demo(1.0)[5].clone(); // warblers
+                                   // stopped: only the creature plays, the forest's time stands still
+    let a = live.audition(&sp, Take::Call).unwrap();
+    let dur = a["duration"].as_f64().unwrap();
+    assert!(dur > 0.2 && dur < 6.0, "duration {dur}");
+    assert!(!a["units"].as_array().unwrap().is_empty());
+    wait(150);
+    assert!(auditioning(&live));
+    let (t0, _, playing, ..) = frame_header(&live.frame()).unwrap();
+    assert!(!playing && t0 == 0.0);
+    wait((dur * 1000.0) as u64 + 400);
+    assert!(!auditioning(&live), "an audition ends by itself");
+    // presses differ; Signature at Variation 0 repeats exactly
+    let b = live.audition(&sp, Take::Call).unwrap();
+    assert_ne!(a["units"], b["units"]);
+    let mut fixed = sp.clone();
+    fixed.calls.variation = 0.0;
+    let s1 = live.audition(&fixed, Take::Signature).unwrap();
+    let s2 = live.audition(&fixed, Take::Signature).unwrap();
+    assert_eq!(s1["units"], s2["units"]);
+    live.send(Cmd::Hush);
+    wait(150);
+    assert!(!auditioning(&live));
+    // playing: the forest keeps going under it
+    live.send(Cmd::Play { on: true });
+    wait(300);
+    live.audition(&sp, Take::Call).unwrap();
+    wait(200);
+    let (t1, _, playing, ..) = frame_header(&live.frame()).unwrap();
+    assert!(playing && auditioning(&live));
+    wait(500);
+    let (t2, ..) = frame_header(&live.frame()).unwrap();
+    assert!(t2 > t1 + 0.3, "the forest plays on: {t1} → {t2}");
+}
+
+#[test]
+fn check_follows_the_world() {
+    let live = Live::start(small(), false).unwrap();
+    let mut whistler = demo(1.0)[4].clone();
+    whistler.voice.shape = (0.0, 0.1);
+    whistler.voice.pitch = (70.0, 74.0);
+    whistler.voice.cutoff = (2000.0, 3000.0);
+    let c = live.check(&whistler).unwrap();
+    assert_eq!(c["medium"], "earth");
+    assert_eq!(c["loss_db"].as_f64().unwrap(), 0.0);
+    live.send(Cmd::Medium {
+        medium: "water".into(),
+    });
+    wait(400);
+    let c = live.check(&whistler).unwrap();
+    assert_eq!(c["medium"], "water");
+    assert!(c["loss_db"].as_f64().unwrap() > 20.0, "{c}");
 }

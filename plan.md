@@ -13,7 +13,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | Done |
 | 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | Done (your Mac: under 20 % CPU) |
 | 07 | Species page: palette, manual colours, Apply/Revert, species library | Page checks pass; Apply rebuilds; library keeps species | Done |
-| 08 | Designer page | | |
+| 08 | Designer page: voice, calls and speed; one draft shared with the Species page; Call and Signature auditions, dry, ducking the forest; below-hearing flag | Page checks pass; auditions heard on the Mac | Built; to hear on your Mac |
 | 09 | Listening round and tuning | Your notes addressed | |
 
 ## Batch 01 in detail
@@ -103,3 +103,15 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 - `ui/`: `palette.js`, `screen.js` (the black screen, shared by both pages), the Species page
   (`species.html`, `species.js`); page links in the title bar.
 - App and `kanopy serve`: library list, save, delete, import, and species export.
+
+## Batch 08 in detail
+
+- `kanopy-core`: `audition.rs` (a fresh call or the signature, rendered dry from 1 m; the
+  below-hearing check), and an optional Speed per species (`habitat.speed`; unset keeps the
+  movement's own, same sound).
+- `kanopy-live`: `audition` and `check`; the forest ducks under an audition and comes back; an
+  audition plays on its own when the forest is stopped; a safety limit on the output.
+- `ui/`: `designer.html` and `designer.js` (voice, calls and speed, Call and Signature, the call
+  drawn as pitch over time, the flag), `draft.js` (one draft for the Species page and the
+  Designer, kept across pages), a two-thumb range control in `kit.js`.
+- App and `kanopy serve`: `audition` and `check`.

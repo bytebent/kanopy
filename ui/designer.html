@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kanopy · designer</title>
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <span class="closebox"></span>
+    <span class="badge" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <h1>kanopy</h1><span class="sub">designer</span>
+    <span class="lines"></span>
+    <span class="sub" id="forestname"></span>
+    <span class="lines"></span>
+    <nav class="pages"><a class="btn" href="index.html">Forest</a><a class="btn" href="species.html">Species</a><a class="btn on" href="designer.html">Designer</a></nav>
+  </div>
+
+  <div class="body">
+    <div class="screen">
+      <canvas id="call" style="height:220px;cursor:default" aria-label="The last call heard: each unit as a stroke of pitch over time"></canvas>
+      <div class="hint" id="hint">CALL · SIGNATURE<br>C · S</div>
+      <div class="readouts" id="readouts"></div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="sidehead">In this forest</div>
+        <div class="list" id="forest-list" style="max-height:330px"></div>
+        <fieldset style="margin-top:10px">
+          <legend><span class="dot" style="background:var(--blue)"></span>Hear it</legend>
+          <div class="audition">
+            <button class="btn gel" id="call-btn">Call</button>
+            <button class="btn gel" id="sig-btn">Signature</button>
+          </div>
+          <p class="note">Dry, from 1 m. If the forest is playing it ducks while this plays.</p>
+          <div class="flag" id="flag"></div>
+        </fieldset>
+      </div>
+
+      <div class="designer" id="editor">
+        <fieldset>
+          <legend><span class="dot" style="background:var(--green)"></span>Voice</legend>
+          <div class="line"><input class="name" id="sp-name" type="text" spellcheck="false" aria-label="Name"></div>
+          <div class="ranges" id="r-voice"></div>
+        </fieldset>
+        <fieldset>
+          <legend><span class="dot" style="background:var(--orange)"></span>Calls</legend>
+          <div class="ranges" id="r-calls"></div>
+          <div class="line"><label>Evolve</label><span class="seg" id="sp-evolve"><button data-v="steady">Steady</button><button data-v="rise">Rise</button><button data-v="fall">Fall</button><button data-v="arc">Arc</button><button data-v="wander">Wander</button></span></div>
+          <div class="ranges" id="r-evolve"></div>
+          <div class="knobs" id="k-signature"></div>
+        </fieldset>
+        <fieldset style="grid-column: 1 / -1">
+          <legend><span class="dot" style="background:var(--purple)"></span>Moving</legend>
+          <div class="line">
+            <div class="knobs" id="k-moving" style="margin:0;justify-content:flex-start"></div>
+            <label class="check"><input type="checkbox" id="sp-own-speed"> Its movement's own speed</label>
+            <span class="note" id="speed-note" style="margin:0"></span>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="btn gel" id="apply" disabled>Apply</button>
+    <button class="btn" id="revert" disabled>Revert</button>
+    <span class="sep"></span>
+    <button class="btn" id="play">Play</button>
+    <span class="status" id="status"></span>
+  </div>
+</div>
+<script src="api.js"></script>
+<script src="palette.js"></script>
+<script src="draft.js"></script>
+<script src="screen.js"></script>
+<script src="kit.js"></script>
+<script src="designer.js"></script>
+</body>
+</html>
