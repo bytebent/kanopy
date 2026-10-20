@@ -1,0 +1,28 @@
+name: mac
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-and-bench:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Machine
+        run: |
+          sysctl -n machdep.cpu.brand_string
+          sysctl -n hw.ncpu hw.memsize
+          rustc --version || true
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Test
+        run: cargo test --release
+      - name: Bench
+        run: cargo run --release -p kanopy-cli -- bench --seconds 5 | tee bench.txt
+      - name: Timing per part
+        run: cargo run --release -p kanopy-core --example parts | tee -a bench.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bench
+          path: bench.txt
