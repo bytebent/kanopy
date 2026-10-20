@@ -32,6 +32,19 @@
       const path = prompt('Render to (path on this computer):', 'renders/forest.wav');
       return path ? post('/api/export', { path, minutes }) : Promise.resolve(null);
     },
+    library: () => invoke ? invoke('library') : get('/api/library').then((r) => r.json()),
+    librarySave: (species) => invoke ? invoke('library_save', { species }) : post('/api/library_save', { species }),
+    libraryDelete: (name) => invoke ? invoke('library_delete', { name }) : post('/api/library_delete', { name }),
+    libraryImport: () => {
+      if (invoke) return invoke('library_import');
+      const path = prompt('Species file to add to the library (path on this computer):');
+      return path ? post('/api/library_import', { path }) : Promise.resolve(null);
+    },
+    speciesExport: (species) => {
+      if (invoke) return invoke('species_export', { species });
+      const path = prompt('Save the species as (path on this computer):', `${species.name}.kanopy-species.json`);
+      return path ? post('/api/species_export', { path, species }) : Promise.resolve(null);
+    },
     exportState: () => invoke ? invoke('export_state') : get('/api/export_state').then((r) => r.json()),
   };
 })();

@@ -3,13 +3,16 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use kanopy_core::files::ForestFile;
+use kanopy_core::files::SpeciesFile;
+use kanopy_core::species::Species;
+use kanopy_live::library::Library;
 use kanopy_live::{Cmd, ExportState, Live};
 use std::path::PathBuf;
 use tauri::ipc::Response;
 use tauri::State;
 use tauri_plugin_dialog::DialogExt;
 
-struct App(Live);
+struct App(Live, Library);
 
 /// The example forests, built in: (file name, JSON).
 const EXAMPLES: [(&str, &str); 6] = [
@@ -146,6 +149,58 @@ async fn export(
 }
 
 #[tauri::command]
+fn library(app: State<App>) -> Vec<Species> {
+    app.1.list()
+}
+
+#[tauri::command]
+fn library_save(app: State<App>, species: Vec<Species>) -> Result<(), String> {
+    species.iter().try_for_each(|s| app.1.save(s))
+}
+
+#[tauri::command]
+fn library_delete(app: State<App>, name: String) -> Result<(), String> {
+    app.1.delete(&name)
+}
+
+#[tauri::command]
+async fn library_import(
+    window: tauri::Window,
+    app: State<'_, App>,
+) -> Result<Option<Species>, String> {
+    let Some(p) = window
+        .dialog()
+        .file()
+        .add_filter("kanopy species", &["json"])
+        .blocking_pick_file()
+    else {
+        return Ok(None);
+    };
+    let path: PathBuf = p.into_path().map_err(|e| e.to_string())?;
+    app.1.import(&path).map(Some)
+}
+
+#[tauri::command]
+async fn species_export(window: tauri::Window, species: Species) -> Result<Option<String>, String> {
+    let name = format!(
+        "{}.kanopy-species.json",
+        kanopy_live::library::slug(&species.name)
+    );
+    let Some(p) = window
+        .dialog()
+        .file()
+        .set_file_name(&name)
+        .add_filter("kanopy species", &["json"])
+        .blocking_save_file()
+    else {
+        return Ok(None);
+    };
+    let path: PathBuf = p.into_path().map_err(|e| e.to_string())?;
+    SpeciesFile::save(&species, &path)?;
+    Ok(Some(path.display().to_string()))
+}
+
+#[tauri::command]
 fn export_state(app: State<App>) -> ExportState {
     app.0.export_state()
 }
@@ -153,9 +208,10 @@ fn export_state(app: State<App>) -> ExportState {
 fn main() {
     let start = ForestFile::from_json(EXAMPLES[0].1).expect("built-in example");
     let live = Live::start(start, true).expect("kanopy engine");
+    let lib = Library::open(&Library::default_dir()).expect("species library");
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
-        .manage(App(live))
+        .manage(App(live, lib))
         .invoke_handler(tauri::generate_handler![
             info,
             frame,
@@ -166,7 +222,12 @@ fn main() {
             open_forest,
             save_forest,
             export,
-            export_state
+            export_state,
+            library,
+            library_save,
+            library_delete,
+            library_import,
+            species_export
         ])
         .run(tauri::generate_context!())
         .expect("kanopy app");

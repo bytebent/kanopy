@@ -2,6 +2,7 @@
   "format": "kanopy-species",
   "version": 1,
   "name": "Floor hoppers",
+  "colour": "#61bb46",
   "habitat": {
     "movement": "walker",
     "area": {

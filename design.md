@@ -334,12 +334,23 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   variation, seed and world grow a new forest (the old one fades out over 50 ms); listener, box,
   key, reverb, Ear and volume change while playing. Space plays and stops. Volume is playback
   only, not part of renders.
+- As built in batch 07 (Species page) [Decided]:
+  - **Colours** come from one palette: the six kanopy colours and the six in between, each dark,
+    normal and light, plus three greys (39 in all). Colours are picked by hand on the Species
+    page; two species may share one. A species with no colour of its own gets the next free one.
+  - **Not live.** Edits are a draft: **Apply** grows a new forest with them, **Revert** throws
+    them away. The screen shows the selected species bright and the rest faint; its area is
+    dragged or redrawn there.
+  - **Library.** Every species made so far is kept in one folder (Application Support on the
+    Mac) and listed on the page; **Add** puts a copy in the forest. It starts with the demo
+    species. Apply saves the forest's species to it, by name. Import… and Export… are for single
+    species files. Forest files still carry full copies of their species.
 - **Designer**: one species' voice and calls, with **Call** and **Signature** buttons to audition it
   alone, and the behaviour traits of §5.3–5.5.
 
 ## 10. Limits and performance
 
-- **Species**: no low cap, no hard limit in the files; colours generated around the colour wheel;
+- **Species**: no low cap, no hard limit in the files; colours from the palette (§9);
   the list scrolls. We test with 64. [Decided, for now]
 - **Individuals** are cheap (a position, a state, a timer). Target ceiling **20,000** per forest,
   for testing. The app's real limit will likely be lower, set from the benchmark. [Decided]

@@ -2,6 +2,7 @@
   "format": "kanopy-species",
   "version": 1,
   "name": "Lower climbers",
+  "colour": "#e03a3e",
   "habitat": {
     "movement": "climber",
     "area": {

@@ -31,6 +31,7 @@
   "species": [
     {
       "name": "Floor hoppers",
+      "colour": "#61bb46",
       "habitat": {
         "movement": "walker",
         "area": {
@@ -87,6 +88,7 @@
     },
     {
       "name": "Diggers",
+      "colour": "#fdb827",
       "habitat": {
         "movement": "burrower",
         "area": {
@@ -143,6 +145,7 @@
     },
     {
       "name": "Crown chatterers",
+      "colour": "#f5821f",
       "habitat": {
         "movement": "climber",
         "area": {
@@ -199,6 +202,7 @@
     },
     {
       "name": "Lower climbers",
+      "colour": "#e03a3e",
       "habitat": {
         "movement": "climber",
         "area": {
@@ -255,6 +259,7 @@
     },
     {
       "name": "Swifts",
+      "colour": "#963d97",
       "habitat": {
         "movement": "flyer",
         "area": {
@@ -311,6 +316,7 @@
     },
     {
       "name": "Warblers",
+      "colour": "#009ddc",
       "habitat": {
         "movement": "flyer",
         "area": {
@@ -367,6 +373,7 @@
     },
     {
       "name": "Gliders",
+      "colour": "#c8c8ce",
       "habitat": {
         "movement": "flyer",
         "area": {

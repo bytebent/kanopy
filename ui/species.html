@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kanopy · species</title>
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <span class="closebox"></span>
+    <span class="badge" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <h1>kanopy</h1><span class="sub">species</span>
+    <span class="lines"></span>
+    <span class="sub" id="forestname"></span>
+    <span class="lines"></span>
+    <nav class="pages"><a class="btn" href="index.html">Forest</a><a class="btn on" href="species.html">Species</a><span class="btn" aria-disabled="true" title="Comes in the next build">Designer</span></nav>
+  </div>
+
+  <div class="body">
+    <div class="screen">
+      <canvas id="scene" style="height:250px" aria-label="The forest, with the selected species' area: drag it, or draw a new one"></canvas>
+      <div class="hint">DRAG THE AREA · CORNERS RESIZE · DRAW OUTSIDE IT FOR A NEW ONE</div>
+      <div class="readouts" id="readouts"></div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <div class="sidehead">In this forest</div>
+        <div class="list" id="forest-list"></div>
+        <div class="sidebtns">
+          <button class="btn" id="new">New</button>
+          <button class="btn" id="dup">Duplicate</button>
+          <button class="btn" id="remove">Remove</button>
+        </div>
+        <div class="sidehead">Library <button class="btn" id="import">Import…</button></div>
+        <div class="list" id="library-list"></div>
+        <p class="note">Every species you've made. Applying saves the forest's species here.</p>
+      </div>
+
+      <div class="editor" id="editor">
+        <fieldset>
+          <legend><span class="dot" style="background:var(--yellow)"></span>Species</legend>
+          <div class="line"><input class="name" id="sp-name" type="text" spellcheck="false" aria-label="Name"></div>
+          <div class="swatches" id="swatches"></div>
+          <div class="line"><label class="check"><input type="checkbox" id="sp-auto"> Automatic colour</label>
+            <button class="btn" id="export-sp" style="margin-left:auto">Export…</button></div>
+        </fieldset>
+        <fieldset>
+          <legend><span class="dot" style="background:var(--green)"></span>Habitat</legend>
+          <div class="line"><label>Moves</label><span class="seg" id="sp-move"><button data-v="walker">Walker</button><button data-v="climber">Climber</button><button data-v="flyer">Flyer</button><button data-v="burrower">Burrower</button></span></div>
+          <div class="line"><label>Count</label><input type="number" id="sp-count" min="0" max="20000" step="1">
+            <label>Spread</label><span class="seg" id="sp-spread"><button data-v="even">Even</button><button data-v="random">Random</button><button data-v="clumped">Clumped</button></span></div>
+          <div class="line"><label>Area</label><span class="note" id="sp-area" style="margin:0"></span></div>
+          <div class="knobs" id="k-habitat"></div>
+        </fieldset>
+        <fieldset>
+          <legend><span class="dot" style="background:var(--orange)"></span>Groups and moving</legend>
+          <div class="line"><label>Group</label><input type="number" id="sp-gmin" min="1" max="500" step="1"> to <input type="number" id="sp-gmax" min="1" max="500" step="1">
+            <label class="check"><input type="checkbox" id="sp-flock"> Flock</label></div>
+          <div class="knobs" id="k-groups"></div>
+        </fieldset>
+        <fieldset id="flight">
+          <legend><span class="dot" style="background:var(--blue)"></span>Flight</legend>
+          <div class="line"><label>Perch</label><select id="sp-perch">
+            <option value="emergent">Emergent</option><option value="canopy">Canopy</option><option value="subcanopy">Subcanopy</option>
+            <option value="understorey">Understorey</option><option value="shrubs">Shrubs</option><option value="ground">Ground</option><option value="never">Never</option></select></div>
+          <div class="knobs" id="k-flight"></div>
+        </fieldset>
+        <fieldset style="grid-column: 1 / -1">
+          <legend><span class="dot" style="background:var(--purple)"></span>Behaviour</legend>
+          <div class="knobs" id="k-behaviour"></div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button class="btn gel" id="apply" disabled>Apply</button>
+    <button class="btn" id="revert" disabled>Revert</button>
+    <span class="sep"></span>
+    <button class="btn" id="play">Play</button>
+    <span class="status" id="status"></span>
+  </div>
+</div>
+<script src="api.js"></script>
+<script src="palette.js"></script>
+<script src="screen.js"></script>
+<script src="kit.js"></script>
+<script src="species.js"></script>
+</body>
+</html>

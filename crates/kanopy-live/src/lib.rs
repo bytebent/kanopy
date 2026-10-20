@@ -31,8 +31,12 @@ use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
+pub mod library;
+
 /// How far ahead of the sound card the render thread stays, seconds.
 pub const AHEAD: f64 = 0.125;
+/// Most individuals a forest may have in the app (the tested ceiling, design §10).
+pub const MAX_INDIVIDUALS: usize = 20_000;
 /// Fastest the listener glides to where it's dragged, m/s.
 pub const DRAG_SPEED: f64 = 40.0;
 /// Frame layout version (first 4 bytes of every frame).
@@ -112,6 +116,10 @@ pub enum Cmd {
     /// Rename it.
     Name {
         name: String,
+    },
+    /// Replace the forest's species (the Species page's Apply): grows a new forest.
+    Species {
+        species: Vec<kanopy_core::species::Species>,
     },
 }
 
@@ -521,6 +529,24 @@ impl Player {
             }
             Cmd::Volume { db } => self.volume = db.clamp(-60.0, 12.0),
             Cmd::Name { name } => f.name = name,
+            Cmd::Species { species } => {
+                if species.is_empty() {
+                    return Err("a forest needs at least one species".into());
+                }
+                let n: usize = species.iter().map(|s| s.habitat.individuals).sum();
+                if n > MAX_INDIVIDUALS {
+                    return Err(format!(
+                        "{n} individuals is more than this build plays ({MAX_INDIVIDUALS})"
+                    ));
+                }
+                let trial = ForestFile {
+                    species: species.clone(),
+                    ..f.clone()
+                };
+                trial.scene()?;
+                f.species = species;
+                return Ok(true);
+            }
             Cmd::Load { forest } => {
                 forest.scene()?;
                 *f = *forest;
@@ -658,6 +684,8 @@ impl Player {
             "species": species,
             "path": { "kind": self.path, "speed": self.speed, "species": self.follow },
             "volume": self.volume,
+            "default_species": kanopy_core::species::Species::new("New species", Default::default()),
+            "max_individuals": MAX_INDIVIDUALS,
         })
         .to_string()
     }

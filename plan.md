@@ -12,7 +12,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | Done |
 | 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | Done |
 | 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | Done (your Mac: under 20 % CPU) |
-| 07 | Species page | | |
+| 07 | Species page: palette, manual colours, Apply/Revert, species library | Page checks pass; Apply rebuilds; library keeps species | Done |
 | 08 | Designer page | | |
 | 09 | Listening round and tuning | Your notes addressed | |
 
@@ -93,3 +93,13 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 - `kanopy serve`: the same page in a browser over HTTP, playing through the computer's sound.
 - `tools/check-pages.js`: page checks in headless Chromium.
 - CI builds the Mac app and the `kanopy` command and publishes them as a pre-release.
+
+## Batch 07 in detail
+
+- `kanopy-core`: species get an optional `colour`; demo species carry the palette's colours
+  (the sound doesn't change: same audio hash).
+- `kanopy-live`: `species` command (checked: at least one species, at most 20,000 individuals,
+  the forest must build), and the species library (`library.rs`).
+- `ui/`: `palette.js`, `screen.js` (the black screen, shared by both pages), the Species page
+  (`species.html`, `species.js`); page links in the title bar.
+- App and `kanopy serve`: library list, save, delete, import, and species export.

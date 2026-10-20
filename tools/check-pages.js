@@ -1,6 +1,7 @@
 // Drives the Forest page through `kanopy serve` in headless Chromium: plays, drags the listener,
 // draws a box, opens an underwater example, follows a species; saves screenshots and fails on
-// page errors. Usage: node tools/check-pages.js [http://127.0.0.1:8710] [out-dir]
+// page errors. Then the Species page: picks a colour, drags an area, adds from the library,
+// applies, and checks the library keeps it. Usage: node tools/check-pages.js [http://127.0.0.1:8710] [out-dir]
 const { chromium } = require('playwright');
 const url = process.argv[2] || 'http://127.0.0.1:8710';
 const out = process.argv[3] || 'docs/experiments';
@@ -36,7 +37,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   let f = await frame();
   check('plays in real time', f.playing === 1 && f.time > 3 && f.time < 5, `t=${f.time.toFixed(2)}`);
   check('animals calling', f.calling > 0 && f.active > 0, `calling ${f.calling}, active ${f.active}, of ${f.n}`);
-  await page.screenshot({ path: `${out}/06-forest-page.png` });
+  await page.screenshot({ path: `${out}/07-forest-page.png` });
 
   // drag the listener up into the canopy
   const a = await toPx(100, 1.5), b = await toPx(140, 22);
@@ -47,7 +48,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await wait(2500);
   f = await frame();
   check('listener follows the drag', Math.abs(f.lx - 140) < 1.5 && Math.abs(f.ly - 22) < 1.5, `at ${f.lx.toFixed(1)}, ${f.ly.toFixed(1)}`);
-  await page.screenshot({ path: `${out}/06-listener-in-canopy.png` });
+  await page.screenshot({ path: `${out}/07-listener-in-canopy.png` });
 
   // box mode: draw a box over the floor
   await page.click('#mode button[data-v=box]');
@@ -60,7 +61,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await wait(2500);
   f = await frame();
   check('box listening', f.boxed === 1, '');
-  await page.screenshot({ path: `${out}/06-box.png` });
+  await page.screenshot({ path: `${out}/07-box.png` });
 
   // an underwater example, following a species
   await page.click('#mode button[data-v=listener]');
@@ -72,7 +73,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   f = await frame();
   check('example loads and keeps playing', f.playing === 1 && f.calling >= 0, `t=${f.time.toFixed(1)}`);
   check('following moved the listener', !(Math.abs(f.lx - 140) < 0.5 && Math.abs(f.ly - 22) < 0.5), `at ${f.lx.toFixed(1)}, ${f.ly.toFixed(1)}`);
-  await page.screenshot({ path: `${out}/06-underwater-following.png` });
+  await page.screenshot({ path: `${out}/07-underwater-following.png` });
 
   // a knob that grows a new forest
   const before = (await frame()).version;
@@ -84,7 +85,67 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await page.mouse.up();
   await wait(1500);
   check('density knob rebuilds', (await frame()).version !== before, '');
-  await page.screenshot({ path: `${out}/06-thicker.png` });
+  await page.screenshot({ path: `${out}/07-thicker.png` });
+
+  // ---------- the Species page
+  await page.click('#play'); // stop, so the page loads quietly
+  await page.goto(`${url}/species.html`);
+  await page.waitForFunction(() => document.querySelectorAll('#forest-list .row').length > 0 && document.querySelectorAll('#library-list .row').length > 0);
+  const nForest = await page.locator('#forest-list .row').count();
+  const nLib = await page.locator('#library-list .row').count();
+  check('species page lists forest and library', nForest >= 1 && nLib >= 1, `${nForest} in forest, ${nLib} in library`);
+  await page.locator('#forest-list .row').nth(1).click();
+  const name = await page.inputValue('#sp-name');
+  // a colour another species already has: allowed
+  const taken = await page.evaluate(() => getComputedStyle(document.querySelector('#forest-list .row i')).backgroundColor);
+  const swatch = await page.evaluate((rgb) => [...document.querySelectorAll('.swatch')].findIndex((b) => getComputedStyle(b).backgroundColor === rgb), taken);
+  await page.locator('.swatch').nth(swatch).click();
+  check('nothing live before Apply', !(await page.locator('#apply').isDisabled()) && (await page.evaluate(() => window.kanopy.info())).forest.species[1].colour !== (await page.locator('.swatch').nth(swatch).getAttribute('data-c')), '');
+  // drag the area a little to the right
+  const box = await page.locator('#scene').boundingBox();
+  const geo = (x, y) => {
+    const padL = 10, padR = 92, padT = 8, padB = 8, W = 200, TOP = 50, BOTTOM = -3;
+    const s = Math.min((box.width - padL - padR) / W, (box.height - padT - padB) / (TOP - BOTTOM));
+    const y0 = padT + (box.height - padT - padB - s * (TOP - BOTTOM)) / 2;
+    return { x: box.x + padL + x * s, y: box.y + y0 + (TOP - y) * s };
+  };
+  const area = await page.evaluate(() => window.kanopy.info().then((i) => i.forest.species[1].habitat.area));
+  const mid = geo((area.x0 + area.x1) / 2, (area.y0 + area.y1) / 2);
+  const shift = Math.min(10, 200 - area.x1);
+  const to = geo((area.x0 + area.x1) / 2 + shift, (area.y0 + area.y1) / 2);
+  await page.mouse.move(mid.x, mid.y);
+  await page.mouse.down();
+  await page.mouse.move(to.x, to.y, { steps: 6 });
+  await page.mouse.up();
+  // add a library species, then apply
+  await page.locator('#library-list .row').first().locator('.add').click();
+  const v0s = (await frame()).version;
+  await page.screenshot({ path: `${out}/07-species-editing.png` });
+  await page.click('#apply');
+  await page.waitForFunction((v) => window.kanopy.frame().then((b) => new DataView(b).getUint32(12, true) !== v), v0s, { timeout: 8000 });
+  const after = await page.evaluate(() => window.kanopy.info());
+  const want = await page.locator('.swatch').nth(swatch).getAttribute('data-c');
+  check('Apply grows the forest with the edits', after.forest.species.length === nForest + 1 && after.forest.species[1].colour === want, `${after.forest.species.length} species, colour ${after.forest.species[1].colour}`);
+  const shared = await page.evaluate((sp) => window.palette.colours(sp), after.forest.species);
+  check('two species may share a colour', shared[0] === shared[1], `${shared[0]} and ${shared[1]}`);
+  const a2 = after.forest.species[1].habitat.area;
+  check('area drag applied', Math.abs(a2.x0 - area.x0 - shift) < 1.5, `x0 ${area.x0} → ${a2.x0}`);
+  check('Apply and Revert off after applying', await page.locator('#apply').isDisabled() && await page.locator('#revert').isDisabled(), '');
+  // the library keeps every species, across reloads
+  await page.reload();
+  await page.waitForFunction(() => document.querySelectorAll('#library-list .row').length > 0);
+  const lib = await page.evaluate(() => window.kanopy.library());
+  const saved = lib.find((s) => s.name === name);
+  check('library keeps the applied species', !!saved && saved.colour === want, saved ? saved.colour : 'missing');
+  // revert throws edits away
+  await page.locator('#forest-list .row').first().click();
+  await page.click('#new');
+  check('New adds a draft', (await page.locator('#forest-list .row').count()) === nForest + 2, '');
+  await page.click('#revert');
+  check('Revert drops the draft', (await page.locator('#forest-list .row').count()) === nForest + 1, '');
+  await page.click('#play');
+  await wait(2500);
+  await page.screenshot({ path: `${out}/07-species-page.png` });
 
   check('no page errors', errors.length === 0, errors.join(' | '));
   await browser.close();

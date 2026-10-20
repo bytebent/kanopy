@@ -17,7 +17,7 @@
 //!       --minutes M --seed N --fade-in S --fade-out S --bits 16|24 --out FILE
 //!   kanopy examples [--out DIR]    write the example forest and species files
 //!   kanopy serve [options]         the app's pages in a browser, playing live
-//!       --forest FILE --port N (8710) --ui DIR (ui) --no-audio
+//!       --forest FILE --port N (8710) --ui DIR (ui) --library DIR --no-audio
 
 use kanopy_core::mixer::{Listener, Mixer};
 use kanopy_core::propagation::Medium;
@@ -87,6 +87,7 @@ fn main() {
                 .unwrap_or(8710),
             PathBuf::from(opt("--ui").unwrap_or_else(|| "ui".into())),
             !args.iter().any(|a| a == "--no-audio"),
+            opt("--library").map(PathBuf::from),
         ),
         Some("examples") => examples(&PathBuf::from(
             opt("--out").unwrap_or_else(|| "examples".into()),
@@ -903,7 +904,12 @@ fn examples(dir: &Path) {
     }
 }
 
-fn serve(forest: Option<PathBuf>, port: u16, ui: PathBuf, audio: bool) {
+fn serve(forest: Option<PathBuf>, port: u16, ui: PathBuf, audio: bool, library: Option<PathBuf>) {
+    use kanopy_core::files::SpeciesFile;
+    use kanopy_core::species::Species;
+    use kanopy_live::library::Library;
+    let lib =
+        Library::open(&library.unwrap_or_else(Library::default_dir)).unwrap_or_else(|e| fail(&e));
     use kanopy_core::files::ForestFile;
     use kanopy_live::{Cmd, Live};
     let examples_dir = PathBuf::from("examples/forests");
@@ -916,8 +922,9 @@ fn serve(forest: Option<PathBuf>, port: u16, ui: PathBuf, audio: bool) {
     let server = tiny_http::Server::http(("127.0.0.1", port))
         .unwrap_or_else(|e| fail(&format!("port {port}: {e}")));
     println!(
-        "kanopy · http://127.0.0.1:{port} · {} Hz · {}",
+        "kanopy · http://127.0.0.1:{port} · {} Hz · library {} · {}",
         live.sample_rate,
+        lib.dir.display(),
         if live.audio {
             "sound on"
         } else {
@@ -1027,6 +1034,49 @@ fn serve(forest: Option<PathBuf>, port: u16, ui: PathBuf, audio: bool) {
                 }
                 live.export(p.clone(), minutes);
                 json(serde_json::json!(p))
+            }
+            "/api/library" => json(serde_json::to_value(lib.list()).unwrap()),
+            "/api/library_save" => match arg("species").map(serde_json::from_value::<Vec<Species>>)
+            {
+                Some(Ok(v)) => match v.iter().try_for_each(|s| lib.save(s)) {
+                    Ok(()) => json(serde_json::json!(null)),
+                    Err(e) => bad(e),
+                },
+                _ => bad("library_save: species expected".into()),
+            },
+            "/api/library_delete" => match lib.delete(
+                arg("name")
+                    .and_then(|v| v.as_str().map(String::from))
+                    .unwrap_or_default()
+                    .as_str(),
+            ) {
+                Ok(()) => json(serde_json::json!(null)),
+                Err(e) => bad(e),
+            },
+            "/api/library_import" => {
+                let p = PathBuf::from(
+                    arg("path")
+                        .and_then(|v| v.as_str().map(String::from))
+                        .unwrap_or_default(),
+                );
+                match lib.import(&p) {
+                    Ok(sp) => json(serde_json::to_value(sp).unwrap()),
+                    Err(e) => bad(e),
+                }
+            }
+            "/api/species_export" => {
+                let p = PathBuf::from(
+                    arg("path")
+                        .and_then(|v| v.as_str().map(String::from))
+                        .unwrap_or_default(),
+                );
+                match arg("species").map(serde_json::from_value::<Species>) {
+                    Some(Ok(sp)) => match SpeciesFile::save(&sp, &p) {
+                        Ok(()) => json(serde_json::json!(p.display().to_string())),
+                        Err(e) => bad(e),
+                    },
+                    _ => bad("species_export: species expected".into()),
+                }
             }
             "/api/export_state" => json(serde_json::to_value(live.export_state()).unwrap()),
             path => {

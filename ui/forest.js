@@ -4,8 +4,7 @@
   const kit = window.kit;
   const W = 200, TOP = 50, BOTTOM = -3, SHRUB_TOP = 3;
   const LAYERS = [['Soil', -3, 0], ['Floor', 0, 0.5], ['Shrubs', 0.5, 3], ['Understorey', 3, 5], ['Subcanopy', 5, 15], ['Canopy', 15, 30], ['Emergent', 30, 50]];
-  const BASE = ['#61bb46', '#fdb827', '#f5821f', '#e03a3e', '#c86ad0', '#009ddc', '#d9d9d9', '#9be36b'];
-  const colour = (i) => (i < BASE.length ? BASE[i] : `hsl(${(i * 137.508) % 360} 70% 60%)`);
+  const colour = (i) => speciesColours[i] || '#888';
   const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
   const SCALES = [['major', 'Major'], ['minor', 'Minor'], ['dorian', 'Dorian'], ['phrygian', 'Phrygian'], ['lydian', 'Lydian'], ['mixolydian', 'Mixolydian'],
     ['pentatonic-major', 'Pentatonic major'], ['pentatonic-minor', 'Pentatonic minor'], ['whole-tone', 'Whole tone'], ['chromatic', 'Chromatic']];
@@ -33,182 +32,34 @@
     }
   }
 
-  // ---------- screen geometry
+  // ---------- the screen (screen.js)
 
   const canvas = $('scene');
-  const ctx = canvas.getContext('2d');
-  const bg = document.createElement('canvas');
-  let G = { s: 5, x0: 10, y0: 10, w: 1000, h: 330, dpr: 1 };
-  const X = (x) => G.x0 + x * G.s;
-  const Y = (y) => G.y0 + (TOP - y) * G.s;
-  const toWorld = (px, py) => ({ x: (px - G.x0) / G.s, y: TOP - (py - G.y0) / G.s });
-  const layerAt = (y) => (LAYERS.find(([, lo, hi]) => y < hi) || LAYERS[LAYERS.length - 1])[0];
-
-  function resize() {
-    const r = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = Math.round(r.width * dpr);
-    canvas.height = Math.round(r.height * dpr);
-    const padL = 10, padR = 92, padT = 8, padB = 8;
-    const s = Math.min((r.width - padL - padR) / W, (r.height - padT - padB) / (TOP - BOTTOM));
-    G = { s, x0: padL, y0: padT + (r.height - padT - padB - s * (TOP - BOTTOM)) / 2, w: r.width, h: r.height, dpr };
-    drawBackground();
-  }
-
-  function drawBackground() {
-    bg.width = canvas.width;
-    bg.height = canvas.height;
-    const b = bg.getContext('2d');
-    b.setTransform(G.dpr, 0, 0, G.dpr, 0, 0);
-    const liquid = info && info.liquid;
-    b.fillStyle = liquid ? '#03101a' : '#060608';
-    b.fillRect(0, 0, G.w, G.h);
-    if (liquid) {
-      const g = b.createLinearGradient(0, Y(TOP), 0, Y(0));
-      g.addColorStop(0, 'rgba(40,120,170,.22)');
-      g.addColorStop(1, 'rgba(10,40,70,.10)');
-      b.fillStyle = g;
-      b.fillRect(X(0), Y(TOP), W * G.s, (TOP) * G.s);
-    }
-    // soil and shrubs
-    b.fillStyle = liquid ? 'rgba(90,80,60,.55)' : 'rgba(92,60,30,.6)';
-    b.fillRect(X(0), Y(0), W * G.s, -BOTTOM * G.s);
-    const full = info ? info.shrubs : 0.5;
-    b.fillStyle = `rgba(60,130,60,${0.1 + 0.35 * full})`;
-    b.fillRect(X(0), Y(SHRUB_TOP), W * G.s, (SHRUB_TOP - 0.5) * G.s);
-    // layer guides
-    b.font = '9px ' + getComputedStyle(document.body).getPropertyValue('--mono');
-    b.textBaseline = 'middle';
-    // labels at each layer's middle, pushed apart where layers are thin
-    let last = -Infinity;
-    for (const [name, lo, hi] of [...LAYERS].reverse()) {
-      b.strokeStyle = 'rgba(136,255,136,.13)';
-      b.setLineDash([3, 4]);
-      b.beginPath();
-      b.moveTo(X(0), Y(hi) + 0.5);
-      b.lineTo(X(W), Y(hi) + 0.5);
-      b.stroke();
-      b.setLineDash([]);
-      b.fillStyle = 'rgba(136,255,136,.55)';
-      const y = Math.max((Y(lo) + Y(hi)) / 2, last + 10);
-      last = y;
-      b.fillText(name.toUpperCase(), X(W) + 8, y);
-    }
-    if (!info) return;
-    // trees (kelp in water)
-    for (const [x, h, cb, hw] of info.trees) {
-      if (liquid) {
-        b.strokeStyle = 'rgba(120,170,90,.55)';
-        b.lineWidth = 1.5;
-        b.beginPath();
-        for (let y = 0; y <= h; y += 0.5) {
-          const sx = X(x + Math.sin(y * 0.35 + x) * 0.8);
-          y === 0 ? b.moveTo(sx, Y(y)) : b.lineTo(sx, Y(y));
-        }
-        b.stroke();
-        b.fillStyle = 'rgba(90,150,80,.18)';
-        b.beginPath();
-        b.ellipse(X(x), Y((cb + h) / 2), hw * 0.55 * G.s, ((h - cb) / 2) * G.s, 0, 0, Math.PI * 2);
-        b.fill();
-      } else {
-        b.strokeStyle = 'rgba(120,85,50,.85)';
-        b.lineWidth = Math.max(1.2, 0.35 * G.s);
-        b.beginPath();
-        b.moveTo(X(x), Y(0));
-        b.lineTo(X(x), Y(cb + (h - cb) * 0.35));
-        b.stroke();
-        b.fillStyle = 'rgba(46,94,42,.42)';
-        b.strokeStyle = 'rgba(110,190,100,.28)';
-        b.lineWidth = 1;
-        b.beginPath();
-        b.ellipse(X(x), Y((cb + h) / 2), hw * G.s, ((h - cb) / 2) * G.s, 0, 0, Math.PI * 2);
-        b.fill();
-        b.stroke();
-      }
-    }
-  }
-
-  // ---------- frames
-
-  function decode(buf) {
-    const dv = new DataView(buf);
-    if (dv.byteLength < 68 || dv.getUint8(0) !== 0x4b) return null;
-    const f = {
-      time: dv.getFloat64(4, true), version: dv.getUint32(12, true), playing: dv.getUint8(16) === 1, boxed: dv.getUint8(17) === 1,
-      calling: dv.getUint32(20, true), active: dv.getUint32(24, true), cpu: dv.getFloat32(28, true),
-      peak: [dv.getFloat32(32, true), dv.getFloat32(36, true)], lx: dv.getFloat32(40, true), ly: dv.getFloat32(44, true),
-      box: [dv.getFloat32(48, true), dv.getFloat32(52, true), dv.getFloat32(56, true), dv.getFloat32(60, true)], ear: dv.getFloat32(64, true),
-      n: (dv.byteLength - 68) / 12, dv,
-    };
-    return f;
-  }
-
-  function drawListener(x, y, ghost) {
-    const px = X(x), py = Y(y), s = Math.max(1, G.s / 5);
-    ctx.globalAlpha = ghost ? 0.4 : 1;
-    ctx.fillStyle = '#5cc8f5';
-    ctx.beginPath();
-    ctx.arc(px, py - 9 * s, 2.6 * s, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillRect(px - 2.4 * s, py - 6 * s, 4.8 * s, 6 * s);
-    ctx.fillRect(px - 2.4 * s, py, 1.8 * s, 4 * s);
-    ctx.fillRect(px + 0.6 * s, py, 1.8 * s, 4 * s);
-    ctx.globalAlpha = 1;
-  }
+  const scr = window.screen2.create(canvas);
+  const ctx = scr.ctx;
+  const { X, Y } = scr;
+  const decode = window.screen2.decode;
+  const layerAt = scr.layerAt;
+  const resize = () => scr.resize();
+  const drawBackground = () => { scr.info = info; scr.drawBackground(); };
+  const drawListener = scr.drawListener;
+  let speciesColours = [];
 
   function drawFrame() {
-    ctx.setTransform(G.dpr, 0, 0, G.dpr, 0, 0);
-    ctx.clearRect(0, 0, G.w, G.h);
-    ctx.drawImage(bg, 0, 0, G.w, G.h);
+    scr.clear();
     if (!frame) return;
-    const dv = frame.dv;
-    const n = frame.n;
-    // animals: quiet ones first, calling ones on top with a glow
-    const r = Math.max(1, G.s * 0.28);
-    const calling = [];
-    for (let i = 0; i < n; i++) {
-      const o = 68 + i * 12;
-      const flags = dv.getUint8(o + 10);
-      const x = dv.getFloat32(o, true), y = dv.getFloat32(o + 4, true), sp = dv.getUint16(o + 8, true);
-      if (flags & 2) { calling.push(x, y, sp); continue; }
-      ctx.globalAlpha = flags & 1 ? 0.75 : 0.22;
-      ctx.fillStyle = colour(sp);
-      ctx.fillRect(X(x) - r, Y(y) - r, 2 * r, 2 * r);
-    }
-    for (let k = 0; k < calling.length; k += 3) {
-      const px = X(calling[k]), py = Y(calling[k + 1]);
-      ctx.globalAlpha = 0.28;
-      ctx.fillStyle = colour(calling[k + 2]);
-      ctx.beginPath();
-      ctx.arc(px, py, r * 4, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 1;
-      ctx.beginPath();
-      ctx.arc(px, py, r * 1.6, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
+    scr.drawAnimals(frame, speciesColours);
     // listener, or the box
     if (frame.boxed || mode.value === 'box') {
       const b = drag && drag.kind !== 'listener' && boxRect ? boxRect : frame.boxed ? frame.box : boxRect;
-      if (b) {
-        const [x0, x1, y0, y1] = b;
-        ctx.strokeStyle = '#fdb827';
-        ctx.setLineDash([5, 4]);
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(X(x0), Y(y1), (x1 - x0) * G.s, (y1 - y0) * G.s);
-        ctx.setLineDash([]);
-        ctx.fillStyle = 'rgba(253,184,39,.06)';
-        ctx.fillRect(X(x0), Y(y1), (x1 - x0) * G.s, (y1 - y0) * G.s);
-        ctx.fillStyle = '#fdb827';
-        for (const [cx, cy] of [[x0, y0], [x1, y0], [x0, y1], [x1, y1]]) ctx.fillRect(X(cx) - 3, Y(cy) - 3, 6, 6);
-      }
-    } else {
+      if (b) scr.drawRect(b, '#fdb827', 'rgba(253,184,39,.06)');
+    }
+else {
       const radius = info && info.forest.listen.mode === 'listener' ? info.forest.listen.radius : 150;
       ctx.strokeStyle = 'rgba(92,200,245,.18)';
       ctx.setLineDash([2, 5]);
       ctx.beginPath();
-      ctx.arc(X(frame.lx), Y(frame.ly), radius * G.s, 0, Math.PI * 2);
+      ctx.arc(X(frame.lx), Y(frame.ly), radius * scr.G.s, 0, Math.PI * 2);
       ctx.stroke();
       ctx.setLineDash([]);
       if (drag && drag.kind === 'listener') drawListener(drag.x, drag.y, true);
@@ -245,7 +96,6 @@
 
   let drag = null;
   let lastSend = 0;
-  const clampW = (p) => ({ x: Math.min(W, Math.max(0, p.x)), y: Math.min(TOP, Math.max(BOTTOM, p.y)) });
   function sendBox(force) {
     const now = performance.now();
     if (!force && now - lastSend < 150) return;
@@ -254,34 +104,18 @@
     if (x1 - x0 > 1 && y1 - y0 > 1) send({ type: 'hear', rect: [x0, x1, y0, y1] });
   }
   canvas.addEventListener('pointerdown', (e) => {
-    const r = canvas.getBoundingClientRect();
-    const p = clampW(toWorld(e.clientX - r.left, e.clientY - r.top));
+    const p = scr.pointer(e);
     canvas.setPointerCapture(e.pointerId);
     if (mode.value === 'listener') {
       drag = { kind: 'listener', ...p };
       send({ type: 'listener', x: p.x, y: p.y });
       return;
     }
-    const near = (a, b) => Math.abs(a - b) * G.s < 8;
-    if (boxRect) {
-      const [x0, x1, y0, y1] = boxRect;
-      for (const [cx, cy, kx, ky] of [[x0, y0, 0, 2], [x1, y0, 1, 2], [x0, y1, 0, 3], [x1, y1, 1, 3]]) {
-        if (near(p.x, cx) && near(p.y, cy)) {
-          drag = { kind: 'corner', kx, ky };
-          return;
-        }
-      }
-      if (p.x > x0 && p.x < x1 && p.y > y0 && p.y < y1) {
-        drag = { kind: 'move', from: p, start: [...boxRect] };
-        return;
-      }
-    }
-    drag = { kind: 'new', from: p };
-    boxRect = [p.x, p.x, p.y, p.y];
+    drag = { kind: 'box', rd: scr.rectDrag(p, boxRect) };
+    if (!boxRect) boxRect = [p.x, p.x, p.y, p.y];
   });
   canvas.addEventListener('pointermove', (e) => {
-    const r = canvas.getBoundingClientRect();
-    const p = clampW(toWorld(e.clientX - r.left, e.clientY - r.top));
+    const p = scr.pointer(e);
     cursor = p;
     if (!drag) return;
     if (drag.kind === 'listener') {
@@ -292,23 +126,8 @@
         lastSend = now;
         send({ type: 'listener', x: p.x, y: p.y });
       }
-    } else if (drag.kind === 'new') {
-      boxRect = [Math.min(drag.from.x, p.x), Math.max(drag.from.x, p.x), Math.min(drag.from.y, p.y), Math.max(drag.from.y, p.y)];
-      sendBox(false);
-    } else if (drag.kind === 'move') {
-      const [x0, x1, y0, y1] = drag.start;
-      let dx = p.x - drag.from.x, dy = p.y - drag.from.y;
-      dx = Math.min(W - x1, Math.max(-x0, dx));
-      dy = Math.min(TOP - y1, Math.max(BOTTOM - y0, dy));
-      boxRect = [x0 + dx, x1 + dx, y0 + dy, y1 + dy];
-      sendBox(false);
-    } else if (drag.kind === 'corner') {
-      const b = [...boxRect];
-      b[drag.kx] = p.x;
-      b[drag.ky] = p.y;
-      boxRect = [Math.min(b[0], b[1]), Math.max(b[0], b[1]), Math.min(b[2], b[3]), Math.max(b[2], b[3])];
-      drag.kx = boxRect[0] === b[drag.kx] ? 0 : 1;
-      drag.ky = boxRect[2] === b[drag.ky] ? 2 : 3;
+    } else {
+      boxRect = drag.rd.move(p);
       sendBox(false);
     }
   });
@@ -466,6 +285,7 @@
     path.set(info.path.kind);
     speed.set(info.path.speed);
     following = info.path.kind === 'follow' ? info.path.species : null;
+    speciesColours = window.palette.colours(f.species);
     // species: legend and follow list
     const follow = $('follow');
     follow.innerHTML = '';

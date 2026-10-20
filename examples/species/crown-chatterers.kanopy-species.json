@@ -2,6 +2,7 @@
   "format": "kanopy-species",
   "version": 1,
   "name": "Crown chatterers",
+  "colour": "#f5821f",
   "habitat": {
     "movement": "climber",
     "area": {

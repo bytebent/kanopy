@@ -161,3 +161,43 @@ fn export_renders_the_forest_as_it_is() {
         _ => panic!("listener expected"),
     }
 }
+
+#[test]
+fn species_apply_checks_then_rebuilds() {
+    let live = Live::start(small(), false).unwrap();
+    let v0 = frame_header(&live.frame()).map(|_| ()).is_some();
+    assert!(v0);
+    let version = |l: &Live| u32::from_le_bytes(l.frame()[12..16].try_into().unwrap());
+    let start = version(&live);
+
+    live.send(Cmd::Species { species: vec![] });
+    wait(300);
+    assert!(live.error().unwrap().contains("at least one"));
+
+    let mut many = demo(0.05);
+    many[0].habitat.individuals = 30_000;
+    live.send(Cmd::Species { species: many });
+    wait(300);
+    assert!(live.error().unwrap().contains("more than"));
+    assert_eq!(
+        version(&live),
+        start,
+        "a refused change leaves the forest alone"
+    );
+
+    let mut sp = demo(0.05);
+    sp[0] = sp[0].clone().coloured("#963d97");
+    sp[1] = sp[1].clone().coloured("#963d97");
+    sp.truncate(3);
+    live.send(Cmd::Species { species: sp });
+    wait(600);
+    assert!(live.error().is_none());
+    assert_ne!(version(&live), start);
+    let f = live.forest();
+    assert_eq!(f.species.len(), 3);
+    assert_eq!(f.species[0].colour.as_deref(), Some("#963d97"));
+    assert_eq!(
+        f.species[1].colour, f.species[0].colour,
+        "two species may share a colour"
+    );
+}

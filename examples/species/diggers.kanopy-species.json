@@ -2,6 +2,7 @@
   "format": "kanopy-species",
   "version": 1,
   "name": "Diggers",
+  "colour": "#fdb827",
   "habitat": {
     "movement": "burrower",
     "area": {

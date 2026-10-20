@@ -34,7 +34,7 @@ jobs:
             cargo run -q --release -p kanopy-cli -- world-bench
             cargo run -q --release -p kanopy-cli -- scene-bench
             cargo run -q --release -p kanopy-cli -- render examples/forests/sparse-forest.kanopy-forest.json --minutes 1 --out r.wav
-            echo "render hash: $(shasum -a 256 r.wav | cut -c1-16)"
+            echo "audio hash: $(python3 -c "import hashlib;b=open('r.wav','rb').read();i=b.find(b'data');print(hashlib.sha256(b[i+8:]).hexdigest()[:16])")"
           } > results.txt
           body=$(sed -e 's/%/%25/g' results.txt | awk '{printf "%s%%0A", $0}')
           echo "::notice title=kanopy bench::${body}"

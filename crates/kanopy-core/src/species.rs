@@ -110,6 +110,9 @@ impl Default for Habitat {
 #[serde(default)]
 pub struct Species {
     pub name: String,
+    /// Its colour on the pages ("#rrggbb"), picked from the palette. None: the next free one.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub colour: Option<String>,
     pub habitat: Habitat,
     pub voice: Voice,
     pub calls: Calls,
@@ -120,11 +123,16 @@ impl Species {
     pub fn new(name: &str, habitat: Habitat) -> Self {
         Self {
             name: name.into(),
+            colour: None,
             habitat,
             voice: Voice::default(),
             calls: Calls::default(),
             behaviour: Behaviour::default(),
         }
+    }
+    pub fn coloured(mut self, colour: &str) -> Self {
+        self.colour = Some(colour.into());
+        self
     }
     pub fn with(mut self, voice: Voice, calls: Calls, behaviour: Behaviour) -> Self {
         self.voice = voice;
@@ -280,6 +288,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
                 ..Default::default()
             },
         )
+        .coloured("#61bb46")
         .with(
             Voice {
                 shape: (1.5, 2.5),
@@ -321,6 +330,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
                 ..Default::default()
             },
         )
+        .coloured("#fdb827")
         .with(
             Voice {
                 shape: (0.0, 0.5),
@@ -365,6 +375,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
                 ..Default::default()
             },
         )
+        .coloured("#f5821f")
         .with(
             Voice {
                 shape: (1.0, 3.0),
@@ -409,6 +420,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
                 ..Default::default()
             },
         )
+        .coloured("#e03a3e")
         .with(
             Voice {
                 shape: (0.0, 0.8),
@@ -458,6 +470,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
                 ..Default::default()
             },
         )
+        .coloured("#963d97")
         .with(
             Voice {
                 shape: (2.0, 3.0),
@@ -506,6 +519,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
                 ..Default::default()
             },
         )
+        .coloured("#009ddc")
         .with(
             Voice {
                 shape: (0.0, 1.2),
@@ -558,6 +572,7 @@ pub fn demo(scale: f64) -> Vec<Species> {
                 ..Default::default()
             },
         )
+        .coloured("#c8c8ce")
         .with(
             Voice {
                 shape: (0.0, 0.3),

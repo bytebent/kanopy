@@ -49,6 +49,10 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 06 | The real app (Tauri) on a virtual screen here (Linux, no sound card) | Boots; the page talks to the engine through the app; frames arrive | `docs/experiments/06-app-window.png` |
 | 20 Oct 2026 | 06 | Mac CI: tests, benches and the app build on GitHub's Intel Mac | All pass; app built in 12.5 min and published as the Latest Mac build. Render hash still d7df966e (matches Linux) | |
 | 20 Oct 2026 | 06 | Your first run of the app on your Intel Mac laptop | Plays live, no trouble; CPU readout usually under 20 % | |
+| 20 Oct 2026 | 07 | Demo species given palette colours: sound unchanged? | Audio-only hash 8edeab3383fc8db3 before and after; the full-file hash changes (colours sit in the WAV's forest chunk), so CI now posts an audio hash | |
+| 20 Oct 2026 | 07 | Rust tests: library (seeding once, save by name, delete, import, sort) and the species command (refuses empty or over 20,000; shared colours allowed) | 87 pass | |
+| 20 Oct 2026 | 07 | Page checks, Forest page again after moving the screen into screen.js | 8 of 8 pass | 07-forest-page.png, 07-listener-in-canopy.png, 07-box.png, 07-underwater-following.png, 07-thicker.png |
+| 20 Oct 2026 | 07 | Page checks, Species page: shared colour, area drag, add from library, Apply, Revert, library after reload | 10 of 10 pass; nothing changes before Apply | 07-species-editing.png, 07-species-page.png |
 
 ## Notes
 
@@ -72,3 +76,5 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
   sound changes on purpose.
 - **06 · the Mac:** the app is built on GitHub's Intel Mac on every push and published as the
   "Latest Mac build" pre-release. Sound through CoreAudio can only be checked on a real Mac.
+- **07 · library folder:** `~/Library/Application Support/kanopy/species` on the Mac. Deleting a
+  demo species there sticks; the demo set is only written the first time.

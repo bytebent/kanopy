@@ -2,6 +2,7 @@
   "format": "kanopy-species",
   "version": 1,
   "name": "Gliders",
+  "colour": "#c8c8ce",
   "habitat": {
     "movement": "flyer",
     "area": {
