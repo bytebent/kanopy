@@ -5,6 +5,10 @@
 //!   kanopy world [options]         simulate the demo forest, write a JSON snapshot to plot
 //!       --seed N --density D --variation V --minutes M --scale K --trail S --out FILE
 //!   kanopy world-bench [--scale K] how fast the world steps with many individuals
+//!   kanopy score [options]         the demo forest's calls as text
+//!       --seed N --density D --minutes M --scale K --free --x X --y Y --radius R --cap C
+//!   kanopy listen [options]        the demo forest as a WAV (same options, plus --out FILE)
+//!   kanopy scene-bench [--scale K] how fast calling and hearing run with many individuals
 
 use kanopy_core::mixer::{Listener, Mixer};
 use kanopy_core::propagation::Medium;
@@ -46,6 +50,28 @@ fn main() {
                 f("--trail", 20.0),
                 &PathBuf::from(opt("--out").unwrap_or_else(|| "out/world.json".into())),
             )
+        }
+        Some(cmd @ ("score" | "listen" | "scene-bench")) => {
+            let f = |n: &str, d: f64| opt(n).map(|s| s.parse().expect(n)).unwrap_or(d);
+            let o = SceneOpts {
+                seed: f("--seed", 1.0) as u64,
+                density: f("--density", 0.5),
+                minutes: f("--minutes", if cmd == "score" { 1.0 } else { 2.0 }),
+                scale: f("--scale", if cmd == "scene-bench" { 8.7 } else { 1.0 }),
+                free: args.iter().any(|a| a == "--free"),
+                x: f("--x", 100.0),
+                y: f("--y", 1.5),
+                radius: f("--radius", 150.0),
+                cap: f("--cap", 600.0) as usize,
+            };
+            match cmd {
+                "score" => score(&o),
+                "listen" => listen(
+                    &o,
+                    &PathBuf::from(opt("--out").unwrap_or_else(|| "out/listen.wav".into())),
+                ),
+                _ => scene_bench(&o),
+            }
         }
         Some("world-bench") => world_bench(
             opt("--scale")
@@ -433,4 +459,174 @@ fn world_bench(scale: f64) {
         cpu / world_s * 1000.0,
         cpu / world_s * 100.0
     );
+}
+
+struct SceneOpts {
+    seed: u64,
+    density: f64,
+    minutes: f64,
+    scale: f64,
+    free: bool,
+    x: f64,
+    y: f64,
+    radius: f64,
+    cap: usize,
+}
+
+fn make_scene(o: &SceneOpts) -> kanopy_core::scene::Scene {
+    use kanopy_core::life::{Life, Zone};
+    use kanopy_core::scene::{Scene, SceneSettings};
+    use kanopy_core::species::demo as demo_species;
+    use kanopy_core::world::{Forest, ForestSettings};
+    let forest = Forest::generate(ForestSettings {
+        seed: o.seed,
+        density: o.density,
+        ..Default::default()
+    });
+    let life = Life::new(forest, demo_species(o.scale));
+    let listener = Vec2::new(o.x, o.y);
+    let mut settings = SceneSettings {
+        listener,
+        zone: Zone::Around {
+            pos: listener,
+            radius: o.radius,
+        },
+        cap: o.cap,
+        ..Default::default()
+    };
+    if o.free {
+        settings.key = None;
+    }
+    Scene::new(life, settings)
+}
+
+fn summary(sc: &kanopy_core::scene::Scene, seconds: f64) {
+    let s = &sc.stats;
+    println!(
+        "{:.0} s · {} calls ({:.1}/s) · {} answers · {} signatures · {} mimics · {} harmonised · most at once {} · skipped: {} quiet, {} cap, {} inactive · {} hearings",
+        seconds, s.calls, s.calls as f64 / seconds, s.answers, s.signatures, s.mimics, s.harmonised, s.max_calling, s.skipped_quiet, s.skipped_cap, s.skipped_inactive, s.heard
+    );
+}
+
+fn score(o: &SceneOpts) {
+    use kanopy_core::scale::note_name;
+    use kanopy_core::scene::Source;
+    let mut sc = make_scene(o);
+    sc.keep_score = true;
+    let seconds = o.minutes * 60.0;
+    sc.run(seconds);
+    let names: Vec<String> = sc.life.species.iter().map(|s| s.name.clone()).collect();
+    println!(
+        "kanopy score · seed {} · density {} · {} · listener ({}, {})",
+        o.seed,
+        o.density,
+        if o.free {
+            "free".to_string()
+        } else {
+            format!("{:?}", sc.settings.key.unwrap())
+        },
+        o.x,
+        o.y
+    );
+    println!(
+        "{:>8}  {:<17} {:>6} {:>5}  {:<26} {:>6}  notes",
+        "time", "species", "#", "group", "kind", "length"
+    );
+    for c in &sc.score {
+        let mut kind = match c.source {
+            Source::Fresh => "fresh".to_string(),
+            Source::Signature => "signature".to_string(),
+            Source::Mimic { of } => format!("copy of {}", names[of as usize]),
+        };
+        if c.answer {
+            kind = format!("answer · {kind}");
+        }
+        if c.harmonised {
+            kind.push_str(" · harm.");
+        }
+        let notes: Vec<String> = c
+            .motif
+            .units
+            .iter()
+            .take(10)
+            .map(|u| note_name(u.note))
+            .collect();
+        let more = if c.motif.units.len() > 10 { " …" } else { "" };
+        println!(
+            "{:>8.3}  {:<17} {:>6} {:>5}  {:<26} {:>5.2}s  {}{}",
+            c.start,
+            names[c.species as usize],
+            c.who,
+            c.group,
+            kind,
+            c.motif.duration(),
+            notes.join(" "),
+            more
+        );
+    }
+    summary(&sc, seconds);
+}
+
+fn listen(o: &SceneOpts, out: &Path) {
+    let mut sc = make_scene(o).with_sound(SR);
+    let steps = (o.minutes * 60.0 / kanopy_core::life::DT).round() as usize;
+    let n = sc.step_samples();
+    let mut l = vec![0f32; steps * n];
+    let mut r = vec![0f32; steps * n];
+    let t = Instant::now();
+    for k in 0..steps {
+        sc.step_audio(&mut l[k * n..(k + 1) * n], &mut r[k * n..(k + 1) * n]);
+    }
+    let cpu = t.elapsed().as_secs_f64();
+    // no Ear or limiter yet (batch 04): normalise the whole file to -1 dBFS
+    let peak = l
+        .iter()
+        .chain(&r)
+        .fold(0f32, |a, x| a.max(x.abs()))
+        .max(1e-9);
+    let g = kanopy_core::db_to_amp(-1.0) / peak;
+    l.iter_mut().chain(r.iter_mut()).for_each(|x| *x *= g);
+    if let Some(dir) = out.parent() {
+        std::fs::create_dir_all(dir).ok();
+    }
+    write(out, &l, &r);
+    println!(
+        "normalised by {:+.1} dB · rendered {:.0} s in {:.1} s ({:.1}× real time)",
+        amp_to_db(g),
+        o.minutes * 60.0,
+        cpu,
+        o.minutes * 60.0 / cpu
+    );
+    summary(&sc, o.minutes * 60.0);
+}
+
+fn scene_bench(o: &SceneOpts) {
+    let mut sc = make_scene(o).with_sound(SR);
+    let n = sc.step_samples();
+    let mut l = vec![0f32; n];
+    let mut r = vec![0f32; n];
+    for _ in 0..200 {
+        sc.step_audio(&mut l, &mut r); // settle 10 s
+    }
+    let steps = (o.minutes.min(1.0) * 60.0 / kanopy_core::life::DT) as usize;
+    let t = Instant::now();
+    for _ in 0..steps {
+        l.fill(0.0);
+        r.fill(0.0);
+        sc.step_audio(&mut l, &mut r);
+    }
+    let cpu = t.elapsed().as_secs_f64();
+    let secs = steps as f64 * kanopy_core::life::DT;
+    println!(
+        "kanopy scene-bench · {} {} · {} individuals · cap {} · whole forest active",
+        std::env::consts::OS,
+        std::env::consts::ARCH,
+        sc.life.animals.len(),
+        o.cap
+    );
+    println!(
+        "{:.1} % of one core for life, calls, hearing and sound together",
+        cpu / secs * 100.0
+    );
+    summary(&sc, sc.time());
 }

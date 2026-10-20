@@ -8,7 +8,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 00 | Design passes, plan, experiments log | `design.md` agreed | Done |
 | 01 | Rust workspace; one voice (wavetable + resonant high-pass); propagation from a listener (spreading, Earth absorption, delay, Doppler, pan); a mixer; **benchmark** | Tests pass; voice counts measured on the Mac; calling-cap default set | Done (Intel Mac bench: cap 600 live) |
 | 02 | World: trees from seed, Density and Tree variation, shrubs, layers; species areas, spread, groups; movement types, flight and perch, migration, flocking; active zone | Seeded worlds repeat exactly; placement tests | Done |
-| 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | |
+| 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | Done |
 | 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | |
 | 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | |
 | 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | |
@@ -41,3 +41,15 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
   touching crowns or down, along and up), flocking, perching, the active zone.
 - `kanopy world` writes a JSON snapshot; `tools/plot_world.py` draws it. `kanopy world-bench`.
 - Done 20 Oct. 20,010 individuals: about 4 % of one core (container).
+
+## Batch 03 in detail
+
+- `scale.rs`: keys, snapping, consonances (tempered in key, just ratios when free).
+- `species.rs`: voice, call and behaviour traits as ranges; voices for the 7 demo species.
+- `calls.rs`: motifs; fresh calls with Evolve; vary (signature Variation, mimic errors); copy
+  (gesture, Pitch match, Timbre match, Accuracy); harmonise.
+- `scene.rs`: events at exact times, the active zone, hearing within reach (per-species grid),
+  one answer per call, chorus, harmonise, lazy mimic memory, the calling cap with near-first
+  priority, units to the mixer with the animal's position and velocity.
+- CLI: `score` (calls as text), `listen` (WAV, normalised), `scene-bench`.
+- Done 20 Oct. 20,010 individuals all active: 51 % of one core including ~590 voices (container).

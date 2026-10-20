@@ -1,0 +1,1738 @@
+kanopy score · seed 1 · density 0.5 · Key { root: 2, scale: Minor } · listener (100, 1.5)
+    time  species                # group  kind                       length  notes
+   0.054  Warblers             305    74  signature                   2.02s  F6 G6 G6 F6 C7 A6 A6 A6 G6 G6 …
+   0.081  Crown chatterers     148    31  fresh                       0.65s  F6 F6 F6 E6
+   0.207  Crown chatterers     120    28  signature                   0.83s  E6 D6 D6 D6 D6 D6
+   0.349  Warblers             264    55  signature                   1.62s  F6 G6 G6 A6 A#6 A#6 C7 C7 A#6 A#6 …
+   0.415  Warblers             259    52  fresh                       3.54s  A#5 A#5 C6 C6 C6 C6 C6 C6 C6 C6 …
+   0.490  Warblers             301    72  signature                   1.57s  D6 F6 G6 A6 A6 A6 F6 E6 E6
+   0.535  Swifts               213    48  fresh                       2.06s  C7 C7 C7 C7
+   0.641  Swifts               225    49  signature                   1.88s  F6 F6 G6 F6
+   0.659  Swifts               205    48  fresh                       2.08s  C7 C7 C7 C7
+   0.697  Swifts               218    48  signature                   2.02s  A#6 A#6 A#6 A#6
+   0.705  Swifts               233    49  signature                   1.76s  F6 F6 F6 F6
+   0.728  Swifts               231    49  fresh                       0.88s  A#6 A#6 A#6
+   0.752  Swifts               208    48  signature                   2.17s  A#6 A#6 A#6 A#6
+   0.773  Crown chatterers      61    23  copy of Swifts              0.52s  F6 F6 F6 F6
+   0.776  Swifts               244    49  signature                   1.78s  E6 F6 F6 F6
+   0.783  Swifts               241    49  signature                   1.60s  E6 F6 F6 F6
+   0.811  Swifts               246    49  fresh                       1.48s  A6 A6 A6
+   0.813  Swifts               240    49  fresh                       1.93s  F6 F6 F6 F6
+   0.828  Warblers             293    68  fresh                       1.11s  F6 A6 A#6 A#6 A#6 A6 F6
+   0.958  Floor hoppers         38     6  signature                   0.85s  D5 C5 C5 C5 C5 C5
+   0.994  Crown chatterers      85    26  copy of Swifts              0.51s  F6 F6 F6 F6
+   1.002  Crown chatterers      70    24  fresh                       1.09s  F6 E6 D6 F6 F6 E6 D6 D6 D6 C6 …
+   1.058  Warblers             298    71  copy of Floor hoppers       1.60s  G5 G5 G5 G5 G5 G5 G5
+   1.150  Crown chatterers     127    29  fresh                       1.06s  A5 A5 A5 A5 A5 A5 A5 A5 A5 A5 …
+   1.250  Warblers             311    78  fresh                       0.79s  A5 C6 D6 D6 C6 A5
+   1.280  Crown chatterers     141    30  fresh                       0.45s  D6 C6 A5 A#5
+   1.299  Lower climbers       150    32  signature                   1.37s  G4 E4
+   1.472  Warblers             308    75  copy of Lower climbers      0.28s  A5 G5
+   1.530  Lower climbers       172    39  signature                   1.62s  E4 E4 D4
+   1.572  Crown chatterers     139    30  copy of Crown chatterers    1.11s  F6 F6 D6 F6 F6 E6 D6 D6 D6 C6 …
+   1.688  Crown chatterers      96    26  answer · signature          0.98s  F5 C6 D6 F6 F6 D6 E6 D6 D6
+   1.725  Warblers             295    70  fresh                       1.91s  G5 A5 A5 A#5 A#5 A#5 A5 A5 G5
+   1.818  Warblers             255    50  copy of Warblers            1.55s  G5 G5 G5 G5 G5 G5 G5
+   1.910  Floor hoppers         44     7  signature                   0.66s  A5 A5 A5 A5 A5
+   1.938  Gliders              321    80  fresh                       0.66s  G5
+   1.975  Crown chatterers      94    26  answer · fresh              0.33s  G5 C6 A5 A#5
+   2.023  Crown chatterers      95    26  fresh · harm.               0.51s  C6 C6 G5 A5 A#5
+   2.027  Crown chatterers      84    26  signature · harm.           0.82s  F5 C6 D6 F6 F6 F6 E6 D6
+   2.036  Warblers             265    55  signature                   1.63s  F6 G6 G6 A6 A#6 A#6 C7 C7 A#6 A#6 …
+   2.090  Crown chatterers     131    29  copy of Crown chatterers    0.34s  G5 C6 A5 A#5
+   2.103  Crown chatterers      64    23  signature                   1.01s  D6 E6 D6 D6 D6 C6 C6
+   2.153  Floor hoppers         35     5  fresh                       1.20s  A5 A5 A5 A5 A5 A5 A5 A5
+   2.200  Floor hoppers         34     5  signature                   0.35s  C6 C6 C6
+   2.202  Floor hoppers         31     5  signature                   0.35s  C6 C6 C6
+   2.208  Crown chatterers      73    24  answer · copy of Crown chatterers  1.03s  A#5 E6 D6 D6 D6 C6 A5
+   2.286  Warblers             280    62  answer · signature          2.55s  A6 A6 A#6 A#6 C7 A#6 A#6 C7 A#6 A#6 …
+   2.304  Warblers             258    52  signature                   1.57s  C6 D6 E6 E6 G6 A#6 G6 F6 E6 F6 …
+   2.345  Warblers             270    58  answer · signature          1.42s  F6 G6 A6 A#6 A#6 C7 C7 C7 A#6 A#6 …
+   2.394  Gliders              340    82  fresh                       1.22s  G5
+   2.435  Floor hoppers         37     6  answer · fresh              0.96s  D5 D5 D5 D5 D5 D5
+   2.484  Warblers             310    77  fresh                       2.59s  C6 D6 E6 F6 G6 G6 G6 F6 E6 D6 …
+   2.553  Crown chatterers     135    29  answer · fresh              0.87s  A#5 A5 A#5 A5 G5 G5 A5 A5 F5
+   2.675  Crown chatterers     133    29  fresh · harm.               0.81s  D6 E6 D6 D6 D6 D6
+   2.718  Lower climbers       164    36  signature                   1.32s  C4 A3
+   2.770  Crown chatterers     112    28  answer · fresh              0.75s  D6 D6 D6 D6 E6 E6
+   2.774  Swifts               251    49  answer · fresh              0.81s  D7 D7
+   2.786  Swifts               221    48  answer · fresh              0.66s  A6 A6
+   2.914  Warblers             313    79  copy of Warblers            2.47s  C6 E6 E6 F6 G6 G6 G6 F6 E6 E6 …
+   2.948  Swifts               202    48  fresh                       1.78s  A#6 A#6 A#6
+   2.957  Swifts               200    48  answer · fresh              0.33s  C7
+   2.967  Warblers             300    72  signature                   1.55s  D6 F6 A#6 A6 A6 A6 A6 F6 C6
+   3.069  Warblers             278    62  copy of Swifts              0.22s  G6 G6
+   3.081  Swifts               196    48  fresh                       0.57s  F6 F6
+   3.106  Floor hoppers         43     7  answer · signature          0.70s  A5 A5 G5 A5 A5
+   3.227  Lower climbers       193    46  signature                   0.75s  A#3
+   3.240  Warblers             314    79  copy of Warblers            2.44s  C6 D6 E6 F6 A6 G6 G6 F6 E6 E6 …
+   3.262  Crown chatterers     132    29  answer · copy of Warblers   0.15s  E6 E6
+   3.279  Warblers             271    58  copy of Swifts              0.22s  C6 C6
+   3.289  Warblers             281    63  signature                   2.63s  A#5 C6 D6 E6 F6 G6 G6 F6 E6 D6 …
+   3.366  Swifts               230    49  answer · fresh              0.39s  G6
+   3.383  Swifts               242    49  answer · fresh              0.82s  A6 A6
+   3.438  Warblers             286    64  copy of Warblers            0.22s  C6 C6
+   3.481  Crown chatterers      65    23  answer · fresh              0.58s  F5 G5 A5 G5 G5 G5
+   3.486  Lower climbers       159    35  answer · signature          1.61s  D4 D4 C4
+   3.534  Warblers             306    74  answer · fresh              1.67s  C6 D6 F6 F6 G6 G6 F6 F6 D6 C6
+   3.549  Lower climbers       181    43  answer · signature          0.54s  G3
+   3.580  Crown chatterers     137    30  fresh                       1.58s  A#5 A#5 A5 G5 G5 F5 F5 G5 G5 G5
+   3.584  Warblers             282    63  answer · signature          2.62s  A#5 C6 A#5 E6 F6 G6 G6 G6 F6 D6 …
+   3.615  Warblers             297    70  copy of Warblers            0.22s  E6 C6
+   3.663  Crown chatterers      87    26  answer · fresh              0.55s  D6 D6 D6 D6
+   3.682  Crown chatterers     100    27  copy of Warblers            0.23s  A#5 A#5 A#5
+   3.689  Crown chatterers      86    26  fresh                       0.82s  F5 F5 E5 E5 F5 F5
+   3.735  Floor hoppers          8     1  answer · fresh              0.37s  A5 A5 A5 A5
+   3.799  Lower climbers       154    33  signature                   2.98s  C4 C4 A#3
+   3.838  Floor hoppers         23     3  signature                   0.94s  G5 G5 G5 G5 G5 G5
+   3.869  Swifts               219    48  answer · fresh              1.84s  A#6 A#6 A#6 A#6
+   3.870  Floor hoppers         20     3  fresh                       0.91s  G5 G5 G5 G5 G5 G5 G5 G5
+   3.873  Warblers             272    58  answer · fresh              2.44s  A5 C6 C6 D6 E6 E6 E6 E6 E6 D6 …
+   3.875  Crown chatterers     103    27  signature                   0.59s  F6 D6 E6 D6 D6 C6 C6
+   3.899  Crown chatterers      69    24  answer · copy of Warblers   0.15s  D6 A#5
+   3.917  Swifts               235    49  answer · fresh              1.48s  A6 A6 A6
+   3.935  Crown chatterers     126    29  answer · fresh              0.76s  A#5 A#5 A5 A5 G5 G5 G5
+   4.162  Warblers             260    53  answer · fresh              1.91s  G5 A5 C6 D6 D6 D6 D6 C6 A5 G5
+   4.238  Warblers             303    73  answer · fresh              1.80s  A5 A5 A#5 A#5 A#5 C6 C6 C6 C6 A#5 …
+   4.248  Warblers             279    62  signature                   2.73s  A6 F6 A#6 A#6 A#6 A#6 A#6 A#6 A6 C7 …
+   4.304  Crown chatterers      88    26  signature                   0.98s  F5 A#5 C6 F6 F6 D6 E6 D6 E6
+   4.317  Warblers             275    60  answer · copy of Crown chatterers  1.05s  C6 C6 A#5 A5 A5 A5 C6
+   4.319  Crown chatterers      98    27  answer · signature · harm.  0.58s  C6 C6 A#5 G5 A5 G5 G5
+   4.345  Crown chatterers     128    29  fresh · harm.               0.69s  G5 A5 A5 A5 A#5 A5 C6 C6 C6 C6
+   4.437  Crown chatterers      82    25  answer · signature          0.93s  G5 G5 G5 A5 A5 A5 G5 F5 F5 F5 …
+   4.485  Crown chatterers     104    27  signature · harm.           0.60s  F6 F6 E6 D6 D6 C6 C6
+   4.485  Crown chatterers     130    29  answer · signature · harm.  0.68s  A#5 A#5 D6 F6 D6
+   4.523  Gliders              326    81  answer · fresh              2.46s  D5 E5
+   4.529  Warblers             294    69  answer · fresh              0.99s  A5 A#5 D6 E6 E6 E6 E6 D6 A#5 A5
+   4.573  Crown chatterers     129    29  fresh · harm.               1.09s  F5 F5 G5 A5 A5 G5 A5 A5
+   4.588  Lower climbers       191    45  answer · signature          1.75s  E4 D4
+   4.603  Swifts               195    48  answer · signature          2.24s  G6 A#6 A#6 A#6
+   4.690  Swifts               240    49  fresh                       1.43s  C7 C7 C7
+   4.789  Swifts               199    48  fresh                       1.19s  C7 C7 C7
+   4.791  Warblers             289    66  answer · fresh              3.19s  E6 F6 G6 G6 A6 A6 A6 A6 G6 G6 …
+   4.801  Crown chatterers      63    23  copy of Gliders             0.19s  E5 E5
+   4.829  Crown chatterers     121    28  signature                   0.83s  E6 D6 D6 D6 D6 D6
+   4.893  Swifts               220    48  signature                   2.18s  C7 A#6 A#6 A#6
+   4.913  Floor hoppers         15     2  fresh                       0.89s  G5 G5 G5 G5 G5 G5 G5
+   4.935  Warblers             263    54  fresh                       2.74s  E6 G6 A6 A#6 A#6 C7 C7 C7 A#6 A#6 …
+   4.974  Swifts               223    48  fresh                       0.93s  A6 A6
+   4.977  Diggers               53    16  signature                   0.99s  D2 C2
+   4.995  Crown chatterers     108    27  answer · fresh              0.60s  G5 G5 G5 A5
+   5.057  Floor hoppers         36     6  fresh                       0.42s  A5 A5 A5 A5
+   5.060  Floor hoppers         38     6  fresh                       1.29s  D5 D5 D5 D5 D5 D5 D5 D5
+   5.099  Floor hoppers         18     3  answer · signature          0.98s  G5 A#5 G5 G5 G5 G5
+   5.111  Floor hoppers          2     0  signature                   0.38s  E5 E5 E5 E5
+   5.115  Swifts               206    48  fresh                       0.53s  F6 F6
+   5.126  Warblers             269    57  signature                   1.24s  G5 A5 A#5 C6 C6 A#5 A5 G5
+   5.134  Crown chatterers      93    26  answer · fresh              1.07s  E6 E6 D6 D6 D6 C6 A#5 C6 A#5 A5 …
+   5.138  Crown chatterers     145    31  answer · signature          1.13s  F5 F5 A#5 G5 F5 A5 F5 F5
+   5.148  Lower climbers       153    32  answer · signature          1.41s  G4 D4
+   5.158  Floor hoppers         24     4  signature                   0.32s  D5 D5 D5
+   5.275  Swifts               201    48  answer · fresh              1.03s  A6 A6
+   5.285  Warblers             299    71  copy of Crown chatterers    1.47s  G6 E6 F6 F6 F6 E6 D6 E6 D6 C6 …
+   5.316  Floor hoppers          6     1  fresh                       0.84s  A#5 A#5 C6 A#5 A#5 A#5 C6
+   5.317  Warblers             256    51  fresh                       1.26s  D6 E6 F6 G6 G6 G6 F6 E6 D6
+   5.329  Crown chatterers      70    24  fresh                       1.73s  D6 C6 D6 A#5 A5 G5 A5 C6 D6 E6 …
+   5.418  Floor hoppers         29     5  answer · fresh              0.74s  D5 D5 D5 D5 D5 D5 D5 D5
+   5.454  Swifts               213    48  fresh                       1.84s  G6 G6 G6 G6
+   5.502  Warblers             307    75  fresh                       2.20s  D6 E6 F6 G6 A6 A6 A6 A6 A6 G6 …
+   5.556  Crown chatterers      72    24  signature                   0.51s  A#5 A5 A5 E5
+   5.559  Warblers             283    63  answer · fresh              1.75s  D6 D6 E6 E6 E6 D6 D6
+   5.576  Crown chatterers     120    28  copy of Floor hoppers       0.73s  E5 E5 E5 E5 E5 E5 E5 E5
+   5.601  Warblers             266    55  copy of Floor hoppers       1.06s  G5 G5 G5 G5 G5 G5 G5 G5
+   5.668  Crown chatterers     134    29  signature · harm.           0.67s  A5 A5 C6 D6 C6
+   5.832  Warblers             312    78  answer · signature          1.10s  A5 C6 D6 E6 F6 F6 F6 E6 D6 D6 …
+   5.886  Crown chatterers     125    29  copy of Crown chatterers    0.65s  G5 A5 C6 A#5 D6
+   5.967  Warblers             311    78  signature                   1.12s  A5 C6 D6 E6 F6 F6 A6 E6 D6 C6 …
+   6.024  Warblers             264    55  signature                   1.68s  F6 G6 G6 G6 A#6 A#6 C7 C7 A6 A#6 …
+   6.042  Crown chatterers     111    27  answer · signature          0.59s  F6 F6 E6 D6 E6 A#5 C6
+   6.065  Crown chatterers     147    31  answer · copy of Crown chatterers  0.65s  A5 A5 C6 D6 D6
+   6.069  Warblers             302    73  answer · fresh              1.59s  A5 A#5 A#5 C6 C6 C6 C6 C6 C6 C6 …
+   6.134  Crown chatterers      76    25  answer · fresh              1.31s  C6 A#5 C6 C6 C6 A#5 A#5 A#5
+   6.179  Crown chatterers     140    30  fresh                       0.72s  A5 A5 C6 C6 E6 F6
+   6.212  Diggers               56    19  fresh                       0.34s  E2
+   6.218  Gliders              341    83  copy of Crown chatterers    9.36s  E5 D5 D5 D5 D5 D5 D5 D5 E5
+   6.281  Warblers             276    61  signature                   2.43s  D6 F6 E6 A6 A#6 A#6 A#6 A#6 A#6 A#6 …
+   6.344  Warblers             308    75  fresh                       1.22s  G6 A6 A#6 A#6 A6 G6
+   6.371  Warblers             301    72  signature                   1.47s  E6 F6 G6 A6 A6 A6 A#6 D6
+   6.378  Crown chatterers     119    28  fresh                       1.74s  A#5 A5 C6 D6 F6 E6 D6 C6 C6 C6
+   6.420  Lower climbers       192    46  signature                   0.80s  A#3
+   6.465  Warblers             271    58  copy of Warblers            2.45s  D6 E6 E6 A6 A#6 A#6 A#6 A#6 C7 C7 …
+   6.545  Warblers             304    73  answer · copy of Warblers   2.46s  D6 F6 E6 A6 A#6 A#6 A#6 A#6 A#6 A#6 …
+   6.548  Crown chatterers     149    31  answer · fresh · harm.      0.44s  D6 D6 D6 D6 D6
+   6.624  Diggers               47    10  fresh                       0.16s  C2
+   6.658  Floor hoppers          9     1  answer · fresh              0.65s  F5 F5 F5 F5 F5
+   6.865  Warblers             288    65  answer · fresh              0.99s  A5 A#5 C6 D6 D6 D6 D6 C6 A#5 A5
+   7.073  Crown chatterers      91    26  answer · fresh              0.56s  F5 G5 G5 A5 A#5
+   7.084  Floor hoppers          7     1  answer · fresh              0.57s  C6 C6 C6 C6 C6 C6 C6
+   7.114  Lower climbers       160    35  answer · fresh              1.34s  A#3 A3
+   7.127  Warblers             296    70  fresh                       2.42s  D6 D6 D6 D6 D6 D6 E6 E6 E6 D6 …
+   7.147  Crown chatterers     101    27  answer · copy of Crown chatterers  0.44s  D6 D6 D6 C6 D6
+   7.157  Crown chatterers      89    26  answer · copy of Warblers   0.74s  G5 G5 A#5 C6 C6 C6 C6 A#5 A5 G5
+   7.166  Crown chatterers     123    29  answer · signature          0.65s  G5 G5 A#5 C6 C6
+   7.170  Lower climbers       188    45  answer · signature          1.81s  E4 F4
+   7.208  Crown chatterers     132    29  fresh                       1.12s  A5 A#5 A5 A#5 A5 A5 A5 G5 A5 A5 …
+   7.212  Warblers             274    59  answer · fresh              1.12s  G5 C6 D6 E6 D6 C6 G5
+   7.230  Crown chatterers     117    28  answer · signature · harm.  0.81s  D6 E6 E6 E6 E6 E6
+   7.251  Warblers             257    52  signature                   1.51s  C6 D6 E6 F6 G6 G6 G6 F6 F6 D6 …
+   7.283  Lower climbers       152    32  answer · signature          1.43s  G4 E4
+   7.285  Crown chatterers      71    24  answer · fresh              2.08s  G5 G5 G5 A5 C6 C6 C6 C6 D6 D6 …
+   7.380  Warblers             298    71  copy of Warblers            1.18s  G5 A#5 D6 E6 D6 C6 G5
+   7.381  Swifts               209    48  answer · fresh              1.39s  A6 A6 A6
+   7.394  Warblers             287    65  copy of Warblers            1.09s  G5 C6 A#5 E6 E6 C6 A5
+   7.447  Crown chatterers      81    25  signature                   0.94s  A#5 G5 G5 A#5 A5 G5 G5 F5 A5 F5 …
+   7.450  Warblers             273    59  fresh                       1.50s  C6 D6 F6 F6 F6 D6 C6
+   7.473  Diggers               57    20  answer · signature          0.19s  A2
+   7.523  Crown chatterers      97    26  answer · fresh · harm.      0.48s  G5 A5 A5 A5 A5 A5
+   7.540  Swifts               197    48  fresh                       0.29s  F6
+   7.556  Crown chatterers     118    28  fresh · harm.               1.36s  A5 A5 A5 A5 A5 A#5 A#5 C6
+   7.562  Crown chatterers     138    30  copy of Lower climbers      0.23s  G5 E5
+   7.628  Swifts               238    49  fresh                       1.66s  G6 G6 G6 G6
+   7.647  Swifts               223    48  fresh                       2.28s  E6 E6 E6 E6
+   7.653  Gliders              330    81  answer · signature          1.06s  D5
+   7.655  Floor hoppers         33     5  answer · signature          0.34s  C6 C6 C6
+   7.684  Swifts               245    49  fresh                       0.40s  A#6
+   7.790  Floor hoppers         22     3  signature                   0.96s  G5 G5 G5 G5 F5 G5
+   7.835  Floor hoppers         30     5  signature                   0.34s  C6 C6 C6
+   7.888  Crown chatterers      99    27  fresh                       0.92s  A#5 A#5 A5 A#5 A5 A5 A#5 C6
+   7.899  Lower climbers       179    42  answer · signature          1.45s  F4 E4
+   7.987  Crown chatterers     109    27  fresh · harm.               1.43s  D6 C6 D6 E6 E6 E6 E6 E6 F6 F6 …
+   7.996  Swifts               231    49  fresh                       1.61s  A#6 A#6 A#6 A#6
+   8.048  Warblers             305    74  signature                   2.01s  F6 F6 G6 G6 A6 A6 A#6 A6 G6 G6 …
+   8.048  Warblers             270    58  copy of Swifts              0.13s  G6
+   8.080  Crown chatterers     139    30  copy of Swifts              0.09s  F6
+   8.083  Crown chatterers      78    25  answer · fresh · harm.      0.62s  A#5 A#5 A#5 A#5 A#5
+   8.155  Warblers             262    54  answer · copy of Floor hoppers  0.54s  F6 F6 F6
+   8.171  Warblers             285    64  answer · fresh              2.49s  A#5 D6 E6 F6 F6 F6 F6 F6 E6 D6 …
+   8.193  Swifts               222    48  answer · fresh              0.34s  C7
+   8.320  Swifts               199    48  signature                   2.11s  A#6 A#6 A#6 A#6
+   8.336  Crown chatterers     105    27  fresh · harm.               0.62s  A#5 A#5 A5 A5
+   8.343  Warblers             268    56  fresh                       2.03s  D6 F6 G6 A6 A6 G6 F6 D6
+   8.387  Warblers             260    53  copy of Warblers            2.00s  D6 F6 G6 A6 A6 A#6 F6 D6
+   8.406  Crown chatterers      84    26  fresh                       0.37s  A5 G5 G5 G5
+   8.459  Floor hoppers         40     6  fresh                       0.54s  C5 C5 C5 C5 C5
+   8.486  Warblers             284    64  answer · copy of Crown chatterers  0.89s  C6 C6 C6 C6 C6
+   8.521  Warblers             281    63  copy of Swifts              0.09s  A#6
+   8.523  Crown chatterers     135    29  fresh                       1.34s  C6 C6 D6 F6 D6 D6 C6 A5 G5
+   8.585  Warblers             297    70  copy of Warblers            0.90s  C6 C6 C6 C6 C6
+   8.588  Crown chatterers      83    25  answer · copy of Warblers   1.41s  A5 D6 E6 E6 E6 E6 C6 D6 D6 A5
+   8.634  Warblers             291    67  fresh                       2.99s  D6 E6 E6 F6 F6 F6 G6 G6 G6 G6 …
+   8.652  Gliders              335    82  fresh                       2.58s  A#5 D6
+   8.669  Warblers             292    67  answer · signature          1.90s  A#5 D6 E6 E6 E6 D6 A#5
+   8.691  Floor hoppers         16     2  fresh                       0.80s  E5 E5 E5 E5 E5 E5
+   8.709  Warblers             293    68  copy of Crown chatterers    2.31s  D6 D6 F6 G6 E6 E6 E6 D6 A#5 A5
+   8.746  Floor hoppers         12     2  fresh                       0.33s  C5 C5 C5 C5
+   8.761  Crown chatterers     136    29  fresh · harm.               1.10s  E6 D6 D6 C6 A#5 C6 A#5 D6
+   8.838  Crown chatterers     107    27  fresh                       0.99s  C6 A#5 A#5 A5 G5 G5 F5
+   8.864  Warblers             258    52  fresh                       1.34s  G6 A#6 C7 C7 A#6 G6
+   8.865  Crown chatterers     106    27  answer · signature          0.58s  F6 F6 E6 D6 D6 D6 C6
+   8.877  Lower climbers       169    38  answer · signature          1.89s  C4 A3
+   8.944  Lower climbers       151    32  signature                   1.38s  E4 E4
+   8.997  Floor hoppers         32     5  answer · signature          0.34s  C6 A5 C6
+   9.017  Warblers             286    64  answer · signature          2.44s  E6 F6 G6 A6 A#6 A#6 A#6 C7 A#6 A6 …
+   9.034  Crown chatterers     141    30  answer · fresh              1.50s  D6 D6 D6 D6 E6 E6 D6 D6 F6
+   9.054  Crown chatterers     113    28  answer · fresh              0.58s  E6 F6 E6 F6 F6
+   9.059  Warblers             272    58  copy of Gliders             0.34s  D6 F6
+   9.063  Crown chatterers      73    24  answer · fresh · harm.      0.27s  C6 C6 C6 C6
+   9.087  Crown chatterers      92    26  signature                   0.95s  F5 C6 D6 F6 F6 D6 D6 D6 F6
+   9.096  Crown chatterers     100    27  answer · fresh              0.85s  G5 G5 G5 A5 G5 G5 G5 A5 A#5
+   9.127  Crown chatterers     121    28  copy of Floor hoppers       0.34s  D6 A#5 D6
+   9.225  Floor hoppers         35     5  fresh                       0.27s  F5 F5 F5
+   9.243  Warblers             312    78  copy of Crown chatterers    1.27s  A5 A5 A5 A#5 A5 A5 G5 A5 A#5
+   9.266  Crown chatterers     124    29  fresh                       0.62s  F5 A5 A5 G5 A#5 C6
+   9.300  Crown chatterers     148    31  answer · signature          1.10s  F5 F5 G5 A#5 F5 G5 F5 E5
+   9.355  Lower climbers       177    41  signature                   0.39s  A3
+   9.548  Lower climbers       167    37  signature                   0.77s  A3
+   9.583  Crown chatterers     108    27  signature                   0.59s  F6 F6 E6 D6 D6 C6 A#5
+   9.615  Crown chatterers      82    25  fresh                       0.72s  A5 G5 F5 F5 F5
+   9.621  Warblers             280    62  answer · signature          2.68s  A6 A6 A#6 A#6 A6 A#6 A#6 C7 A#6 C7 …
+   9.709  Warblers             278    62  fresh                       1.72s  A#5 D6 F6 G6 G6 G6 F6 D6 A#5
+   9.722  Crown chatterers     104    27  answer · fresh · harm.      1.76s  F5 G5 A#5 A#5 A#5 A#5 A5 A5 G5 A5 …
+   9.724  Warblers             282    63  copy of Lower climbers      0.17s  G5
+   9.734  Warblers             299    71  signature                   1.19s  D6 E6 F6 G6 G6 A6 E6 C6
+   9.745  Crown chatterers      69    24  answer · signature          0.50s  A#5 A5 A5 F5
+   9.760  Warblers             295    70  answer · signature          3.10s  E6 E6 G6 F6 G6 G6 G6 G6 F6 F6 …
+   9.786  Crown chatterers     114    28  fresh                       1.51s  F5 G5 A5 A5 G5 G5 A5 A5 A5 G5 …
+   9.794  Warblers             255    50  answer · fresh              1.66s  A#5 A#5 C6 C6 C6 C6 C6 C6 C6 A#5 …
+   9.861  Gliders              325    81  signature                   1.02s  D5
+   9.884  Lower climbers       156    34  answer · signature          0.80s  G4
+   9.949  Crown chatterers      74    24  answer · fresh · harm.      1.73s  F6 F6 F6 F6 E6 E6 F6 E6 F6 E6 …
+   9.952  Floor hoppers         28     4  answer · signature          0.35s  D5 C5 D5
+  10.092  Floor hoppers          8     1  answer · signature          0.78s  D5 D5 D5 D5 D5 D5 F5
+  10.120  Floor hoppers         24     4  fresh                       0.38s  G5 G5 G5
+  10.216  Warblers             300    72  fresh                       2.89s  A5 A#5 C6 D6 D6 D6 D6 D6 C6 A#5 …
+  10.239  Floor hoppers          0     0  fresh                       1.21s  C5 C5 C5 C5 C5 C5 C5 C5
+  10.263  Crown chatterers      77    25  answer · fresh              0.35s  A#5 A5 A#5 A#5 A#5
+  10.281  Floor hoppers          5     0  fresh                       0.41s  F5 F5 E5 E5
+  10.288  Crown chatterers     128    29  answer · fresh              1.66s  A#5 A5 A5 A5 A5 A5 A5 A5 G5 G5 …
+  10.289  Floor hoppers         31     5  signature                   0.31s  A#5 C6 C6
+  10.462  Warblers             306    74  answer · copy of Warblers   2.91s  A5 A5 C6 D6 D6 A#5 E6 D6 C6 A#5 …
+  10.489  Diggers               51    14  signature                   1.45s  C3 A#2 A#2
+  10.507  Floor hoppers         43     7  fresh                       1.01s  E5 E5 E5 E5 E5 E5 E5 E5
+  10.550  Crown chatterers     127    29  answer · fresh              1.74s  A5 A5 C6 C6 A#5 A5 A5 A5 A5 G5
+  10.601  Gliders              328    81  signature                   0.97s  D5
+  10.630  Warblers             259    52  copy of Floor hoppers       0.54s  E6 F6 F6
+  10.638  Crown chatterers     131    29  answer · copy of Crown chatterers  0.36s  A#5 A5 A#5 A#5 A#5
+  10.695  Crown chatterers      68    24  signature                   0.48s  A#5 F5 A5 G5
+  10.713  Floor hoppers         25     4  answer · fresh              0.68s  G5 A5 A5 G5 G5
+  10.729  Crown chatterers      94    26  answer · fresh              1.20s  G5 G5 G5 G5 G5 A5 A5 A5 G5 G5 …
+  10.744  Gliders              331    81  fresh                       2.03s  G5 A5
+  10.788  Crown chatterers     110    27  fresh                       1.76s  E6 D6 D6 E6 E6 D6 D6 C6 D6 D6 …
+  10.828  Gliders              318    80  signature                   1.33s  C6
+  10.835  Crown chatterers      88    26  signature                   0.99s  F5 C6 D6 F6 F6 D6 D6 D6 E6
+  10.840  Warblers             265    55  signature                   1.64s  F6 G6 G6 A6 A#6 A#6 C7 C7 A#6 A#6 …
+  10.935  Floor hoppers          6     1  answer · fresh              0.82s  A#5 A#5 A#5 A#5 A#5
+  10.977  Warblers             261    53  answer · signature          2.70s  D6 G6 G6 A6 A#6 A#6 A6 C7 A#6 A#6 …
+  11.011  Floor hoppers          2     0  answer · fresh              0.71s  F5 F5 F5 F5 F5 F5
+  11.052  Lower climbers       170    38  answer · signature          1.93s  C4 A3
+  11.062  Lower climbers       168    37  answer · signature          0.76s  A3
+  11.063  Warblers             277    61  answer · fresh              0.67s  F6 A6 A#6 A#6 A6 F6
+  11.079  Crown chatterers     137    30  answer · fresh              1.47s  D6 E6 F6 E6 E6 D6 C6 A#5 C6 G5 …
+  11.151  Crown chatterers      85    26  fresh                       1.33s  C6 C6 C6 C6 A#5 C6 C6 C6 C6
+  11.163  Floor hoppers         42     7  signature                   0.65s  G5 A5 A5 A5 A5
+  11.165  Floor hoppers          1     0  fresh                       0.45s  C6 C6 C6 C6
+  11.174  Floor hoppers         19     3  fresh                       0.46s  F5 F5 F5 F5
+  11.193  Warblers             311    78  copy of Crown chatterers    0.51s  D6 A#5 C6 E6 C6
+  11.222  Lower climbers       186    44  fresh                       1.51s  A#3 A3
+  11.225  Crown chatterers      67    24  answer · signature          0.51s  A#5 A5 G5 F5
+  11.289  Crown chatterers      86    26  answer · signature · harm.  0.97s  F5 C6 D6 F6 F6 D6 D6 D6 D6
+  11.334  Crown chatterers      93    26  fresh                       1.06s  A5 G5 G5 G5 A5 A#5 G5
+  11.355  Crown chatterers     126    29  signature                   0.66s  G5 G5 A#5 C6 A#5
+  11.394  Floor hoppers         10     1  signature                   0.80s  D5 D5 D5 D5 D5 D5 D5
+  11.433  Floor hoppers          7     1  fresh                       0.94s  D5 D5 D5 D5 D5 D5
+  11.442  Warblers             314    79  fresh                       1.77s  A5 C6 D6 E6 F6 F6 E6 D6 C6 A5
+  11.567  Warblers             309    76  copy of Crown chatterers    1.37s  G5 D6 E6 G6 A6 E6 E6 E6 E6
+  11.596  Warblers             294    69  signature                   1.40s  D6 D6 D6 D6 D6 D6 C6
+  11.642  Floor hoppers         37     6  fresh                       0.78s  C5 C5 C5 C5 C5 C5 C5
+  11.646  Warblers             284    64  copy of Crown chatterers    1.61s  C6 A5 A#5 A#5 D6 D6 A#5
+  11.710  Lower climbers       176    40  signature                   1.10s  G4 F4
+  11.727  Crown chatterers     133    29  answer · fresh              1.68s  C6 D6 C6 A#5 C6 D6 D6 D6 C6 C6 …
+  11.803  Floor hoppers         23     3  answer · signature          0.96s  G5 G5 G5 G5 G5 G5
+  11.812  Warblers             310    77  copy of Crown chatterers    1.05s  A5 A5 E6 D6 C6
+  11.820  Warblers             269    57  answer · fresh              1.46s  A5 C6 D6 E6 E6 E6 D6 C6 A5
+  11.872  Warblers             303    73  answer · fresh              1.51s  G5 A5 A#5 C6 C6 D6 D6 D6 D6 D6 …
+  11.876  Gliders              333    81  answer · copy of Crown chatterers 10.37s  E5 A#5 C6 D6 D6 C6 C6 C6 C6
+  11.955  Crown chatterers      75    25  fresh                       0.58s  E6 E6 E6 E6 E6 D6
+  11.979  Warblers             266    55  answer · fresh              2.90s  A6 A#6 A#6 A#6 C7 C7 C7 A#6 A#6 A#6 …
+  12.038  Crown chatterers     145    31  answer · signature          1.25s  E5 F5 F5 G5 G5 F5 F5 F5 F5
+  12.167  Crown chatterers      72    24  answer · signature          0.49s  A#5 A#5 A5 F5
+  12.171  Crown chatterers      66    24  answer · fresh              1.26s  D6 D6 A#5 C6 A#5 G5 A5 A#5
+  12.371  Crown chatterers     132    29  answer · fresh · harm.      0.69s  C6 C6 C6 D6 E6 D6
+  12.412  Floor hoppers         11     1  answer · fresh              0.53s  A5 A5 A5 A5
+  12.458  Lower climbers       162    36  answer · fresh              2.55s  D4 C4 C4
+  12.478  Crown chatterers      90    26  fresh                       0.52s  E6 D6 D6 D6
+  12.481  Gliders              334    82  signature                   0.77s  G5
+  12.620  Gliders              342    83  signature                   1.40s  D6
+  12.639  Floor hoppers          9     1  fresh                       0.66s  F5 F5 F5 F5 F5 F5
+  12.726  Swifts               206    48  signature                   1.98s  A#6 A#6 A#6 A#6
+  12.776  Crown chatterers      95    26  answer · copy of Gliders    0.06s  A#5
+  12.824  Crown chatterers     129    29  fresh                       1.42s  A5 G5 A5 G5 G5 G5 F5 F5 F5 E5 …
+  12.826  Swifts               212    48  signature                   2.20s  C7 G6 A#6 A#6
+  12.834  Warblers             256    51  signature                   1.47s  A#5 A#5 C6 C6 C6 C6 C6 C6 A#5 A#5
+  12.837  Crown chatterers      99    27  fresh                       0.34s  G5 A5 A#5 C6
+  12.837  Swifts               243    49  fresh                       0.26s  D7
+  12.844  Crown chatterers      87    26  answer · signature · harm.  1.00s  G5 D6 C6 F6 F6 E6 C6 E6 E6
+  12.848  Crown chatterers     102    27  answer · fresh · harm.      0.32s  C6 E6 E6 A#5
+  12.849  Swifts               234    49  fresh                       0.42s  A6
+  12.855  Swifts               216    48  fresh                       0.65s  C7 C7
+  12.857  Swifts               205    48  fresh                       0.46s  F6
+  12.862  Swifts               201    48  fresh                       0.43s  A#6
+  12.866  Swifts               254    49  signature                   1.75s  G6 F6 E6 F6
+  12.914  Floor hoppers         20     3  answer · fresh              1.21s  G5 G5 G5 G5 G5 G5 G5 G5
+  12.919  Swifts               221    48  fresh                       1.48s  A6 A6 A6 A6
+  12.934  Crown chatterers      96    26  answer · copy of Gliders    0.10s  C6
+  12.956  Crown chatterers     112    28  copy of Swifts              0.09s  C6
+  13.069  Floor hoppers         33     5  fresh                       0.88s  G5 G5 G5 G5 G5 G5 G5 G5
+  13.125  Diggers               50    13  fresh                       0.34s  A2
+  13.155  Warblers             308    75  answer · signature          3.84s  D6 D6 D6 E6 E6 E6 F6 F6 G6 E6 …
+  13.190  Crown chatterers      97    26  answer · fresh              1.11s  A#5 A5 A5 A5 A5 F5 G5 F5 E5 E5
+  13.196  Crown chatterers     111    27  answer · signature          0.61s  E6 F6 E6 D6 D6 C6 C6
+  13.276  Warblers             263    54  signature                   2.38s  C6 F6 A6 A6 A#6 A#6 A#6 A6 G6 G6 …
+  13.311  Crown chatterers     106    27  fresh · harm.               0.96s  E6 D6 A#5 A5 G5 E5 F5 F5 F5 F5
+  13.443  Warblers             257    52  answer · copy of Warblers   2.37s  C6 F6 A6 A6 A#6 A#6 A6 F6 G6 A#6 …
+  13.504  Warblers             296    70  answer · copy of Warblers   3.76s  D6 D6 D6 E6 E6 E6 F6 F6 G6 E6 …
+  13.555  Warblers             270    58  copy of Warblers            3.85s  D6 D6 D6 E6 E6 E6 F6 E6 G6 E6 …
+  13.717  Lower climbers       172    39  answer · signature          1.61s  E4 D4 D4
+  13.750  Gliders              327    81  answer · signature          0.98s  D5
+  13.770  Lower climbers       157    34  answer · signature          0.67s  G4
+  13.788  Warblers             301    72  answer · fresh              1.76s  C6 C6 D6 E6 E6 E6 E6 D6 C6 C6
+  13.801  Floor hoppers         18     3  answer · fresh              0.86s  E5 E5 E5 E5 E5
+  13.812  Crown chatterers     125    29  answer · fresh · harm.      1.18s  F5 F5 G5 A5 A5 A5 A5 A#5 A#5
+  13.815  Crown chatterers      61    23  answer · fresh              0.47s  D6 E6 F6 F6 E6
+  13.830  Crown chatterers     146    31  fresh                       1.08s  D6 E6 D6 D6 D6 C6 C6 D6 F6 E6
+  13.844  Crown chatterers      62    23  answer · signature · harm.  0.97s  F6 F6 F6 F6 F6 E6 E6
+  13.869  Swifts               227    49  answer · fresh              1.82s  G6 G6 G6 G6
+  13.873  Crown chatterers     149    31  answer · signature · harm.  1.07s  G5 A#5 A#5 G5 A5 A#5 G5 A5
+  13.965  Swifts               237    49  fresh                       1.77s  C7 C7 C7
+  13.986  Warblers             267    56  copy of Warblers            3.77s  D6 D6 D6 E6 E6 E6 F6 E6 G6 E6 …
+  14.048  Swifts               217    48  fresh                       1.65s  A6 A6 A6 A6
+  14.064  Warblers             289    66  fresh                       1.29s  D6 G6 A6 A#6 A6 G6 D6
+  14.075  Lower climbers       184    43  signature                   0.59s  G3
+  14.102  Swifts               211    48  fresh                       2.25s  G6 F6 G6 G6
+  14.131  Gliders              316    80  answer · signature          1.41s  C6
+  14.136  Floor hoppers          3     0  fresh                       0.96s  A5 A5 A5 A5 A5 A5 A5 A5
+  14.154  Crown chatterers      70    24  answer · signature          0.51s  A#5 A5 A5 F5
+  14.155  Crown chatterers      89    26  answer · signature · harm.  0.97s  F5 D6 E6 F6 F6 E6 E6 E6 E6
+  14.189  Warblers             302    73  answer · copy of Lower climbers  0.14s  G5
+  14.192  Swifts               238    49  fresh                       1.46s  A6 A6 A6 A6
+  14.193  Warblers             307    75  answer · copy of Crown chatterers  1.61s  C6 C6 C6 A5 C6 C6 A5 A#5
+  14.206  Crown chatterers      84    26  answer · fresh              1.14s  E6 E6 E6 F6 E6 E6 D6 D6 D6
+  14.278  Floor hoppers         15     2  signature                   0.63s  D5 F5 F5 F5 F5
+  14.283  Floor hoppers         14     2  fresh                       0.53s  E5 E5 E5 E5
+  14.333  Swifts               229    49  answer · fresh              0.82s  G6 G6
+  14.393  Swifts               224    48  answer · signature          2.08s  A#6 A6 C7 A#6
+  14.415  Floor hoppers         37     6  signature                   0.84s  C5 C5 C5 C5 C5 C5
+  14.444  Crown chatterers     120    28  fresh                       0.54s  F5 G5 F5 G5 G5 G5
+  14.489  Crown chatterers     123    29  fresh                       1.29s  C6 C6 D6 C6 D6 C6 D6 D6 C6 E6 …
+  14.496  Floor hoppers         21     3  answer · fresh              0.50s  E5 E5 E5 E5
+  14.511  Crown chatterers     136    29  fresh · harm.               1.10s  F6 F6 E6 F6 E6 D6 D6
+  14.619  Warblers             282    63  copy of Crown chatterers    1.98s  D6 D6 E6 D6 E6 C6 E6 E6 D6 F6 …
+  14.637  Warblers             264    55  fresh                       1.11s  A5 C6 D6 D6 D6 C6 A5
+  14.664  Swifts               200    48  fresh                       1.35s  E6 E6 E6
+  14.721  Warblers             297    70  copy of Floor hoppers       1.40s  G5 G5 G5 G5 G5 G5
+  14.745  Crown chatterers     124    29  answer · signature          0.67s  G5 G5 A#5 A5 A#5
+  14.822  Crown chatterers     101    27  answer · fresh              0.80s  D6 D6 C6 C6 A#5
+  14.839  Warblers             278    62  fresh                       0.81s  C6 C6 D6 D6 D6 C6 C6
+  14.852  Swifts               214    48  fresh                       1.03s  A6 A6
+  14.929  Lower climbers       175    40  signature                   1.16s  G4 F4
+  15.057  Warblers             294    69  copy of Warblers            0.67s  C6 A#5 D6 D6 D6 C6
+  15.106  Crown chatterers      80    25  answer · fresh              0.44s  C6 D6 E6 E6
+  15.116  Crown chatterers     108    27  answer · signature · harm.  0.59s  A#5 A#5 A#5 G5 G5 F5 F5
+  15.125  Warblers             285    64  copy of Warblers            0.81s  C6 C6 E6 D6 D6 A5 C6
+  15.129  Floor hoppers         34     5  answer · fresh              1.20s  C6 C6 C6 C6 C6 C6 C6 C6
+  15.250  Crown chatterers      69    24  answer · fresh              1.78s  D6 C6 C6 C6 C6 D6 D6 D6 D6 D6 …
+  15.251  Warblers             283    63  fresh                       1.00s  F6 A6 C7 C7 A6 F6
+  15.287  Lower climbers       189    45  signature                   1.82s  E4 D4
+  15.324  Lower climbers       150    32  answer · fresh              2.93s  F4 E4 D4
+  15.333  Lower climbers       190    45  signature · harm.           1.79s  E4 D4
+  15.347  Warblers             280    62  copy of Lower climbers      0.68s  G5 G5 G5
+  15.352  Crown chatterers      65    23  answer · copy of Warblers   0.70s  D6 F6 F6 F6 F6 D6
+  15.358  Crown chatterers     148    31  signature                   1.07s  E5 G5 G5 E5 F5 G5 F5 F5
+  15.418  Crown chatterers     147    31  answer · fresh              0.81s  A#5 A#5 A#5 A#5 A#5
+  15.469  Warblers             274    59  fresh                       0.63s  A#5 D6 E6 E6 D6 A#5
+  15.493  Floor hoppers         32     5  answer · signature          0.31s  C6 A5 C6
+  15.569  Lower climbers       173    39  answer · signature          1.64s  E4 E4 D4
+  15.645  Crown chatterers      79    25  fresh                       1.18s  C6 A#5 A5 A#5 A5 A5 A#5 A5 G5
+  15.702  Crown chatterers     135    29  answer · fresh              0.42s  E6 E6 E6 E6 E6 E6
+  15.714  Crown chatterers     144    31  answer · fresh              0.83s  F5 F5 F5 G5 G5 G5 F5
+  15.742  Crown chatterers     141    30  fresh                       0.93s  F5 F5 F5 E5 F5 G5 F5 A5 A5 A5
+  15.811  Swifts               235    49  answer · fresh              0.90s  F6 F6 F6
+  15.817  Crown chatterers      78    25  answer · copy of Lower climbers  0.23s  E5 E5 E5
+  15.825  Floor hoppers         12     2  answer · fresh              0.75s  D5 D5 D5 D5 D5 D5 D5 D5
+  15.832  Warblers             272    58  copy of Floor hoppers       0.54s  F6 D6 F6
+  15.866  Lower climbers       161    35  answer · signature          1.52s  D4 D4 C4
+  15.882  Swifts               248    49  fresh                       1.84s  A#6 A#6 C7
+  15.927  Floor hoppers         17     2  fresh                       1.05s  A5 A5 A5 A5 A5 A5 A5 A5
+  15.955  Warblers             262    54  copy of Crown chatterers    1.80s  D6 C6 A#5 C6 A#5 A#5 D6 A#5 A5
+  15.958  Crown chatterers      81    25  signature                   0.91s  G5 F5 G5 A5 A5 G5 G5 F5 A5 F5 …
+  15.990  Warblers             273    59  answer · copy of Crown chatterers  1.19s  G5 G5 G5 A5 A5 A5 A5
+  16.004  Swifts               204    48  fresh                       1.47s  F6 F6 F6
+  16.024  Floor hoppers         16     2  signature                   0.66s  F5 F5 F5 F5 F5
+  16.058  Swifts               220    48  fresh                       2.31s  A6 A6 A6 A6
+  16.092  Crown chatterers      83    25  answer · copy of Warblers   0.52s  D6 A#5 A#5 D6
+  16.096  Swifts               251    49  fresh                       0.66s  D7 D7
+  16.137  Floor hoppers         39     6  answer · signature          0.82s  C5 C5 C5 C5 C5 C5
+  16.193  Floor hoppers         27     4  fresh                       0.42s  E5 E5 E5 E5
+  16.205  Warblers             281    63  answer · signature          2.53s  A#5 C6 D6 E6 F6 F6 A6 F6 C6 E6 …
+  16.263  Crown chatterers     142    30  fresh · harm.               0.83s  F6 F6 F6 F6 F6 F6 F6 F6
+  16.303  Warblers             312    78  copy of Floor hoppers       1.01s  A5 A#5 G5 G5 G5 G5 G5 G5
+  16.317  Crown chatterers      95    26  copy of Crown chatterers    0.52s  D6 A#5 A5 D6
+  16.380  Lower climbers       159    35  signature · harm.           1.53s  F4 F4 E4
+  16.422  Crown chatterers     104    27  answer · fresh              1.45s  C6 C6 C6 A#5 A#5 C6 A5 G5 F5 G5 …
+  16.489  Crown chatterers     127    29  signature                   0.54s  G5 G5 C6 A#5
+  16.516  Crown chatterers     114    28  answer · copy of Warblers   1.74s  A5 A#5 C6 D6 F6 F6 F6 E6 A#5 D6 …
+  16.539  Warblers             261    53  copy of Crown chatterers    0.77s  F6 D6 A#5 F6
+  16.542  Lower climbers       164    36  answer · signature          1.32s  C4 A#3
+  16.610  Crown chatterers      82    25  answer · fresh · harm.      1.16s  F6 E6 E6 F6 E6 D6 D6 E6
+  16.615  Floor hoppers         22     3  answer · fresh              0.31s  A#5 A#5 A#5
+  16.633  Warblers             291    67  copy of Crown chatterers    0.81s  F6 D6 C6 F6
+  16.652  Floor hoppers         29     5  answer · fresh              0.99s  F5 F5 F5 F5 F5 F5 F5 F5
+  16.661  Warblers             305    74  answer · copy of Lower climbers  0.30s  G5 A5 G5
+  16.707  Warblers             306    74  signature                   1.83s  F6 F6 A6 G6 A6 A6 A6 A#6 G6 F6 …
+  16.708  Warblers             304    73  copy of Lower climbers      0.29s  G5 A5
+  16.719  Crown chatterers      73    24  answer · copy of Lower climbers  0.20s  E5 E5
+  16.723  Warblers             313    79  answer · fresh              1.07s  F6 G6 A#6 A#6 A#6 G6 F6
+  16.755  Warblers             276    61  answer · signature          2.40s  D6 F6 G6 A6 A#6 A#6 A#6 A#6 A#6 A#6 …
+  16.762  Floor hoppers         31     5  signature                   0.32s  C6 A#5 C6
+  16.777  Floor hoppers         23     3  signature                   0.94s  G5 G5 G5 G5 G5 G5
+  16.789  Floor hoppers         10     1  signature                   0.79s  E5 D5 D5 D5 D5 D5 D5
+  16.816  Gliders              340    82  fresh                       0.74s  E5
+  16.850  Crown chatterers     143    31  answer · signature          1.05s  F5 F5 G5 G5 F5 F5 F5 F5
+  16.895  Crown chatterers     134    29  answer · fresh              0.71s  G5 A5 A5 G5 A5
+  16.942  Diggers               59    22  fresh                       1.40s  A#2 A#2 A#2
+  16.970  Floor hoppers          9     1  fresh                       0.99s  E5 E5 E5 E5 E5 E5 E5 E5
+  17.006  Crown chatterers      76    25  answer · signature · harm.  0.94s  A#5 A#5 A#5 C6 C6 A#5 A#5 A5 A5 A5 …
+  17.079  Diggers               49    12  fresh                       1.28s  C2 C2 C2
+  17.118  Crown chatterers     128    29  answer · fresh · harm.      1.55s  E5 E5 E5 E5 E5 E5 E5 E5 E5 E5 …
+  17.132  Warblers             279    62  signature                   2.58s  C7 A6 A#6 A#6 A#6 A#6 A#6 A#6 A#6 A#6 …
+  17.155  Warblers             258    52  signature                   1.49s  C6 D6 E6 F6 G6 G6 G6 F6 F6 E6 …
+  17.162  Crown chatterers     140    30  answer · copy of Floor hoppers  0.94s  G5 G5 G5 G5 F5 A5 G5 G5
+  17.215  Swifts               228    49  answer · signature          1.70s  E6 A6 F6 F6
+  17.244  Swifts               203    48  answer · fresh              1.64s  C7 C7 C7
+  17.250  Warblers             299    71  signature                   1.19s  D6 E6 G6 G6 G6 E6 E6 F6
+  17.295  Crown chatterers     115    28  signature                   0.81s  D6 D6 D6 D6 D6 D6
+  17.297  Swifts               195    48  answer · fresh              1.18s  G6 G6 G6
+  17.305  Floor hoppers         42     7  answer · fresh              0.70s  D5 D5 D5 D5 D5
+  17.323  Warblers             265    55  answer · copy of Warblers   1.48s  C6 D6 E6 F6 G6 G6 G6 G6 F6 E6 …
+  17.351  Crown chatterers     131    29  answer · signature · harm.  0.66s  E5 E5 G5 A5 G5
+  17.410  Swifts               199    48  fresh                       0.75s  C7 C7
+  17.422  Swifts               233    49  fresh                       1.57s  A6 A6 A6 A6
+  17.444  Swifts               237    49  fresh                       1.94s  A6 A6 A6 A6
+  17.446  Swifts               242    49  fresh                       0.80s  G6 G6
+  17.468  Lower climbers       192    46  answer · fresh              0.66s  D4
+  17.468  Floor hoppers         24     4  answer · signature          0.34s  D5 F5 D5
+  17.479  Swifts               253    49  fresh                       0.36s  A6
+  17.522  Lower climbers       177    41  fresh                       0.45s  A#3
+  17.527  Warblers             309    76  signature                   1.94s  A#5 C6 D6 E6 D6 F6 F6 F6 E6 E6 …
+  17.554  Lower climbers       160    35  signature                   1.57s  D4 D4 C4
+  17.567  Floor hoppers         36     6  fresh                       0.92s  G5 G5 G5 G5 G5 G5 G5
+  17.574  Floor hoppers          1     0  answer · fresh              0.90s  A5 A5 A5 A5 A5 A5 A5 A5
+  17.612  Warblers             268    56  fresh                       1.10s  G6 A6 A6 A6 A6 G6
+  17.680  Floor hoppers         28     4  fresh                       0.67s  G5 G5 A5 G5 G5 G5
+  17.692  Swifts               218    48  answer · fresh              1.60s  D7 D7 D7
+  17.694  Floor hoppers         38     6  fresh                       0.66s  F5 F5 F5 F5 F5
+  17.727  Warblers             302    73  answer · signature          0.68s  E6 G6 A6 A6 G6 E6
+  17.747  Crown chatterers      64    23  answer · fresh              1.72s  A#5 C6 C6 A#5 A#5 G5 G5 F5 F5 G5 …
+  17.751  Crown chatterers     126    29  signature                   0.68s  G5 G5 A#5 D6 A#5
+  17.755  Warblers             290    66  answer · signature          3.36s  D6 F6 F6 G6 F6 G6 A6 A6 G6 G6 …
+  17.757  Crown chatterers     137    30  answer · fresh              1.82s  G5 F5 F5 F5 G5 G5 G5 G5 G5 G5 …
+  17.796  Crown chatterers      90    26  answer · copy of Floor hoppers  0.89s  A#5 A#5 A#5 A#5 A#5 A#5 A5
+  17.806  Floor hoppers          7     1  answer · fresh              1.04s  G5 G5 G5 G5 G5 G5 G5 G5
+  17.988  Lower climbers       155    33  answer · signature          2.98s  C4 C4 A#3
+  17.994  Lower climbers       156    34  signature                   1.75s  G4 G4
+  18.085  Crown chatterers      60    23  answer · copy of Crown chatterers  0.93s  A#5 A#5 A#5 A#5 A#5 A#5 G5
+  18.104  Warblers             257    52  copy of Floor hoppers       1.58s  D6 C6 C6 C6 C6 C6 C6 C6
+  18.162  Crown chatterers     133    29  fresh                       1.93s  E6 F6 F6 E6 E6 C6 D6 A#5 A#5 C6 …
+  18.179  Warblers             303    73  answer · copy of Lower climbers  0.70s  G5 G5 A5
+  18.220  Lower climbers       182    43  signature                   0.59s  G3
+  18.339  Warblers             260    53  answer · signature          2.66s  G6 G6 G6 A6 A#6 A#6 A#6 C7 C7 A6 …
+  18.395  Warblers             259    52  answer · copy of Warblers   2.67s  G6 G6 G6 G6 A#6 A#6 A#6 C7 C7 A6 …
+  18.457  Lower climbers       163    36  signature                   1.24s  C4 A#3
+  18.460  Crown chatterers     138    30  answer · fresh              0.52s  A#5 A#5 A#5 D6 C6 A5
+  18.461  Warblers             310    77  signature                   3.61s  D6 E6 F6 A6 G6 A6 A6 A6 A6 A6 …
+  18.471  Lower climbers       187    44  fresh                       1.04s  D4 A#3
+  18.504  Crown chatterers      67    24  signature                   0.46s  A#5 A5 A5 F5
+  18.567  Crown chatterers      88    26  fresh                       0.86s  F5 F5 G5 G5 A5 A5
+  18.599  Crown chatterers      77    25  answer · copy of Warblers   1.82s  E6 E6 E6 F6 F6 F6 F6 F6 F6 D6 …
+  18.607  Lower climbers       158    35  answer · signature · harm.  1.55s  A#3 A3 A3
+  18.651  Crown chatterers     132    29  answer · copy of Lower climbers  0.15s  E5 G5
+  18.801  Lower climbers       154    33  answer · signature · harm.  1.68s  C4 A#3
+  18.867  Diggers               48    11  answer · signature          1.00s  E2 D2 D2
+  18.873  Crown chatterers     119    28  fresh                       1.09s  C6 C6 A5 A5 G5 G5 F5
+  18.880  Crown chatterers      84    26  fresh · harm.               0.41s  A#5 A5 A5 A5
+  18.957  Crown chatterers      68    24  answer · fresh · harm.      0.77s  A#5 C6 A#5 A#5 A5
+  18.993  Floor hoppers         25     4  answer · fresh              0.85s  E5 E5 E5 E5 E5 E5
+  19.043  Floor hoppers          5     0  answer · signature          0.32s  E5 E5 E5
+  19.098  Lower climbers       179    42  answer · signature          1.44s  F4 E4
+  19.212  Crown chatterers     117    28  signature · harm.           0.83s  C6 A#5 A#5 A#5 A#5 A#5
+  19.229  Floor hoppers         16     2  fresh                       0.81s  A5 A5 A5 A5 A5
+  19.265  Warblers             284    64  answer · copy of Lower climbers  0.32s  G5 G5
+  19.267  Floor hoppers         13     2  signature                   0.64s  F5 F5 F5 F5 F5
+  19.276  Gliders              320    80  fresh                       0.81s  G5
+  19.300  Crown chatterers     111    27  signature                   0.59s  F6 F6 E6 E6 D6 C6 C6
+  19.315  Floor hoppers          0     0  answer · signature          0.32s  E5 F5 E5
+  19.319  Warblers             298    71  copy of Floor hoppers       0.84s  A#5 A#5 A#5 A#5
+  19.348  Swifts               207    48  answer · fresh              1.88s  A#6 A#6 A#6 A#6
+  19.348  Crown chatterers      70    24  answer · signature          0.47s  A#5 A5 A5 F5
+  19.379  Warblers             286    64  copy of Floor hoppers       1.18s  D6 C6 C6 D6 D6
+  19.382  Warblers             294    69  copy of Warblers            0.79s  A#5 A#5 G5 A5
+  19.413  Floor hoppers         40     6  answer · signature          0.84s  C5 C5 C5 C5 C5 C5
+  19.426  Crown chatterers     113    28  fresh · harm.               0.74s  E6 E6 E6 E6 D6 E6
+  19.434  Warblers             293    68  answer · copy of Floor hoppers  0.49s  A5 A#5 A5
+  19.455  Floor hoppers         32     5  signature                   0.34s  C6 C6 C6
+  19.489  Swifts               222    48  answer · fresh              1.11s  E6 E6 E6
+  19.513  Swifts               210    48  fresh                       0.49s  E6
+  19.513  Swifts               214    48  fresh                       1.23s  G6 G6 G6 G6
+  19.516  Crown chatterers     130    29  answer · fresh              0.40s  G5 C6 D6 F6
+  19.533  Floor hoppers         30     5  answer · signature          0.33s  C6 C6 C6
+  19.533  Warblers             314    79  copy of Floor hoppers       0.50s  G5 A#5 A5
+  19.535  Warblers             256    51  signature                   1.53s  A#5 A#5 C6 C6 C6 C6 A#5 C6 A#5 A#5
+  19.543  Swifts               224    48  fresh                       0.48s  D7
+  19.564  Swifts               202    48  fresh                       1.89s  G6 G6 G6 G6
+  19.569  Floor hoppers          8     1  signature                   0.77s  D5 D5 D5 D5 D5 D5 D5
+  19.571  Warblers             270    58  copy of Warblers            0.79s  C6 D6 G5 C6
+  19.580  Swifts               234    49  fresh                       1.26s  C7 C7 C7
+  19.585  Warblers             271    58  fresh                       3.52s  C6 C6 D6 D6 D6 E6 E6 E6 E6 E6 …
+  19.607  Gliders              339    82  fresh                       2.75s  G5 A5
+  19.624  Warblers             266    55  fresh                       1.95s  G6 G6 G6 G6 G6 G6 G6 G6 G6 G6 …
+  19.642  Crown chatterers     149    31  answer · signature          1.14s  F5 F5 G5 G5 F5 F5 F5 F5
+  19.661  Swifts               219    48  fresh                       0.57s  A#6 A#6
+  19.681  Floor hoppers         17     2  fresh                       0.34s  G5 G5 G5
+  19.685  Warblers             292    67  answer · signature          1.88s  A#5 D6 E6 E6 E6 D6 A#5
+  19.752  Warblers             273    59  signature                   1.36s  A5 C6 D6 D6 D6 C6 A5
+  19.780  Crown chatterers      99    27  answer · signature          0.58s  F6 F6 E6 F6 D6 C6 D6
+  19.801  Swifts               245    49  answer · fresh              2.17s  D7 D7 D7 D7
+  19.899  Floor hoppers         26     4  signature                   0.34s  D5 D5 D5
+  19.946  Crown chatterers      93    26  answer · copy of Warblers   0.99s  G5 F5 A#5 C6 C6 C6 A#5 G5
+  20.022  Floor hoppers         21     3  answer · fresh              0.29s  G5 G5 G5
+  20.070  Warblers             295    70  signature                   3.00s  D6 C6 F6 F6 G6 G6 G6 G6 F6 E6 …
+  20.106  Crown chatterers      63    23  fresh                       0.60s  F5 F5 E5 F5
+  20.144  Swifts               199    48  fresh                       0.48s  D7
+  20.153  Crown chatterers      61    23  answer · signature          1.01s  D6 D6 F6 D6 D6 C6 C6
+  20.168  Crown chatterers      62    23  answer · fresh              0.70s  D6 D6 D6 D6 D6
+  20.239  Warblers             287    65  answer · copy of Floor hoppers  0.51s  G5 G5 G5
+  20.244  Crown chatterers      66    24  fresh                       1.83s  G5 G5 G5 G5 G5 A5 F5 F5 F5 E5 …
+  20.267  Floor hoppers         18     3  fresh                       0.40s  E5 E5 E5
+  20.283  Diggers               53    16  fresh                       0.19s  G2
+  20.293  Crown chatterers     109    27  answer · fresh · harm.      0.59s  F6 F6 E6 F6 F6
+  20.294  Floor hoppers         15     2  answer · fresh              0.27s  C5 C5 C5
+  20.376  Crown chatterers      74    24  answer · signature · harm.  0.48s  A#5 D6 C6 A5
+  20.391  Crown chatterers     108    27  fresh                       1.55s  G5 G5 G5 G5 F5 F5 G5 G5 G5 F5 …
+  20.415  Swifts               238    49  fresh                       2.03s  A#6 A#6 A#6 A#6
+  20.461  Swifts               221    48  fresh                       0.83s  A#6 A#6
+  20.502  Warblers             282    63  copy of Crown chatterers    2.79s  A5 A5 A5 A5 G5 A#5 G5 G5 G5 G5 …
+  20.513  Crown chatterers      87    26  signature · harm.           0.94s  E5 A#5 C6 E6 E6 C6 C6 C6 C6
+  20.525  Crown chatterers     142    30  fresh                       1.36s  C6 C6 C6 D6 C6 C6 C6 D6 C6 A#5 …
+  20.530  Gliders              336    82  answer · copy of Crown chatterers 20.18s  G5 E5 G5 F5 F5 G5 E5 E5 E5 D5 …
+  20.535  Warblers             289    66  answer · fresh              0.86s  G5 A5 C6 C6 C6 C6 C6 A5 G5
+  20.538  Warblers             311    78  answer · fresh              1.05s  D6 F6 G6 A6 A6 A6 G6 F6 D6
+  20.594  Crown chatterers     116    28  answer · fresh              0.92s  G5 A5 A5 A5 A5 G5 F5
+  20.596  Warblers             277    61  answer · signature          2.42s  C6 G6 G6 A6 A#6 A#6 A#6 A#6 C7 A#6 …
+  20.604  Warblers             300    72  signature                   1.59s  D6 F6 G6 A6 A6 A6 A6 F6 D6
+  20.645  Floor hoppers         37     6  answer · fresh              1.00s  F5 F5 F5 F5 F5 F5 F5 F5
+  20.655  Crown chatterers     136    29  answer · signature          0.66s  G5 G5 A#5 C6 A#5
+  20.704  Swifts               196    48  fresh                       1.01s  D7 D7
+  20.724  Crown chatterers     129    29  answer · fresh · harm.      0.83s  E6 E6 E6 E6 D6
+  20.724  Warblers             307    75  signature                   3.95s  D6 D6 D6 E6 E6 E6 F6 F6 F6 E6 …
+  20.798  Floor hoppers          3     0  answer · fresh              0.84s  C5 C5 C5 C5 C5 C5
+  20.819  Crown chatterers     110    27  answer · fresh              2.07s  C6 C6 C6 C6 C6 C6 C6 C6 A#5 A#5 …
+  20.825  Crown chatterers     125    29  answer · fresh · harm.      1.20s  A5 C6 C6 A#5 C6 C6 A#5 A5 A5 A#5 …
+  20.826  Warblers             283    63  answer · fresh              1.46s  G5 C6 D6 D6 C6 G5
+  20.848  Floor hoppers         14     2  answer · fresh              0.30s  G5 G5 G5
+  20.887  Swifts               201    48  answer · fresh              2.07s  A#6 A#6 A#6 A#6
+  20.943  Floor hoppers          2     0  answer · signature          0.31s  E5 E5 E5
+  20.952  Swifts               230    49  fresh                       0.21s  C7
+  20.957  Swifts               227    49  fresh                       0.25s  A6
+  20.972  Swifts               197    48  answer · fresh              0.89s  C7 C7 C7
+  21.018  Swifts               249    49  answer · fresh              1.00s  F6 F6
+  21.028  Warblers             305    74  copy of Floor hoppers       0.44s  C6 C6 C6
+  21.084  Crown chatterers      65    23  answer · fresh              1.25s  G5 G5 F5 F5 F5 F5 F5 F5 F5 F5
+  21.095  Floor hoppers         27     4  signature                   0.34s  D5 D5 D5
+  21.096  Lower climbers       174    40  answer · signature          1.14s  G4 F4
+  21.171  Crown chatterers      73    24  answer · fresh              0.80s  A#5 A5 C6 A#5 A#5
+  21.186  Crown chatterers      75    25  answer · fresh              0.81s  C6 C6 A5 C6 D6
+  21.200  Swifts               215    48  fresh                       0.49s  A6 A6
+  21.218  Crown chatterers     147    31  answer · copy of Lower climbers  0.18s  A#5 F5
+  21.261  Crown chatterers      71    24  signature                   0.50s  C6 A5 A5 F5
+  21.298  Crown chatterers     103    27  answer · fresh              1.11s  F5 A5 F5 G5 A5 A5 G5 F5
+  21.420  Warblers             272    58  copy of Crown chatterers    1.20s  D6 D6 A#5 D6 C6
+  21.420  Crown chatterers      83    25  fresh · harm.               0.81s  E6 C6 E6 D6 A#5
+  21.448  Lower climbers       166    37  answer · signature          0.74s  A3
+  21.605  Warblers             264    55  signature                   1.67s  F6 G6 G6 A6 A#6 A#6 C7 C7 A#6 A#6 …
+  21.639  Warblers             267    56  signature                   1.38s  C6 F6 G6 E6 E6 C6
+  21.653  Floor hoppers         12     2  answer · signature          0.62s  F5 F5 F5 F5 G5
+  21.695  Warblers             313    79  copy of Swifts              0.15s  G6 A6
+  21.695  Swifts               231    49  answer · fresh              0.40s  A6
+  21.701  Diggers               54    17  fresh                       0.80s  A2 G2
+  21.711  Crown chatterers     102    27  fresh                       0.89s  C6 A#5 A#5 A#5 A#5 D6 D6 E6
+  21.740  Crown chatterers      72    24  answer · fresh              0.51s  C6 C6 D6 D6 C6
+  21.823  Crown chatterers      80    25  answer · fresh · harm.      0.86s  E6 E6 E6 E6 D6 D6 D6
+  21.844  Crown chatterers     143    31  answer · fresh              0.52s  F5 G5 F5 F5 E5
+  21.872  Swifts               209    48  answer · signature          2.04s  C7 A6 A#6 A6
+  21.971  Crown chatterers     135    29  answer · fresh · harm.      0.80s  D6 C6 D6 C6 D6 D6 D6 D6 D6
+  21.986  Lower climbers       168    37  fresh · harm.               0.45s  E4
+  22.027  Warblers             276    61  fresh                       3.99s  A5 A5 A#5 A#5 C6 C6 C6 C6 C6 C6 …
+  22.060  Warblers             301    72  answer · fresh              3.02s  E6 F6 F6 F6 G6 G6 G6 G6 G6 G6 …
+  22.068  Warblers             262    54  fresh                       1.61s  E6 F6 A6 A#6 A#6 A#6 A6 F6 E6
+  22.072  Gliders              343    83  fresh                       0.83s  G5
+  22.077  Swifts               244    49  signature                   1.75s  F6 F6 F6 F6
+  22.092  Crown chatterers     112    28  answer · fresh              0.98s  E6 D6 D6 C6 A#5 A#5
+  22.151  Lower climbers       188    45  signature                   1.90s  E4 D4
+  22.169  Crown chatterers      69    24  answer · fresh              0.88s  F5 G5 A5 A5 A5 A5 A5 A#5 A#5 A#5 …
+  22.198  Crown chatterers      79    25  signature · harm.           0.98s  A5 A5 A5 A#5 A#5 G5 A5 G5 G5 G5 …
+  22.218  Swifts               246    49  fresh                       2.12s  F6 F6 F6 F6
+  22.222  Crown chatterers     101    27  answer · signature          0.59s  F6 F6 E6 D6 D6 C6 C6
+  22.224  Floor hoppers          4     0  answer · fresh              0.98s  G5 G5 G5 G5 G5 G5 G5
+  22.282  Warblers             304    73  fresh                       1.89s  A5 A5 A5 A#5 A#5 A#5 A#5 A#5 A#5 A#5 …
+  22.331  Crown chatterers     124    29  answer · signature · harm.  0.67s  F5 F5 A5 A#5 A5
+  22.473  Floor hoppers         41     7  answer · fresh              0.95s  D5 D5 D5 D5 D5 D5
+  22.583  Crown chatterers     107    27  copy of Floor hoppers       0.97s  D6 A5 A#5 A#5 A#5 A#5 C6
+  22.604  Crown chatterers      96    26  signature                   1.01s  F5 C6 D6 F6 F6 D6 E6 D6 D6
+  22.611  Floor hoppers         43     7  fresh                       0.92s  G5 G5 G5 G5 G5 G5 G5 G5
+  22.612  Warblers             280    62  copy of Warblers            1.87s  A5 A5 A#5 A5 A#5 A5 A#5 C6 A#5 A#5 …
+  22.630  Warblers             285    64  copy of Warblers            1.99s  A5 A5 A5 A5 A#5 A#5 A#5 A#5 A#5 A#5 …
+  22.636  Crown chatterers     145    31  signature                   1.12s  F5 F5 G5 G5 F5 F5 F5 F5
+  22.642  Warblers             278    62  fresh                       3.00s  E6 F6 F6 G6 G6 A6 A6 A6 A6 A6 …
+  22.653  Floor hoppers         19     3  fresh                       0.32s  G5 G5 G5
+  22.693  Floor hoppers          6     1  fresh                       0.90s  A5 A5 A5 A5 A5 A5 A5
+  22.716  Warblers             263    54  copy of Floor hoppers       1.48s  A#5 C6 C6 D6 C6 C6 C6 C6
+  22.731  Floor hoppers         35     5  fresh                       0.52s  D5 D5 D5 D5
+  22.733  Swifts               247    49  answer · fresh              0.24s  D7
+  22.740  Crown chatterers     123    29  fresh                       0.74s  D6 C6 A#5 C6 C6 C6 C6
+  22.742  Crown chatterers      91    26  answer · fresh · harm.      1.68s  C6 D6 E6 E6 D6 E6 D6 D6 E6 E6
+  22.748  Floor hoppers         33     5  fresh                       0.96s  F5 F5 F5 F5 F5 F5 F5 F5
+  22.749  Floor hoppers         44     7  signature                   0.68s  A5 A5 A5 A5 A5
+  22.789  Lower climbers       194    47  signature                   0.56s  A#3
+  22.795  Warblers             291    67  answer · fresh              2.71s  C6 C6 D6 D6 D6 D6 D6 D6 D6 D6 …
+  22.800  Swifts               243    49  answer · fresh              1.56s  A6 A6 A6 A6
+  22.802  Warblers             296    70  copy of Crown chatterers    2.48s  D6 F6 D6 F6 E6 G6 E6 E6 F6 F6
+  22.807  Diggers               58    21  answer · fresh              0.31s  C2
+  22.815  Warblers             286    64  signature                   2.37s  E6 F6 G6 A6 A#6 G6 A#6 C7 A#6 A6 …
+  22.829  Swifts               226    49  fresh                       0.75s  C7 C7
+  22.888  Crown chatterers     122    28  answer · fresh              1.62s  A#5 G5 A#5 C6 C6 C6 D6 D6 C6
+  22.896  Floor hoppers         39     6  answer · fresh              0.51s  E5 E5 E5 E5 E5 E5
+  22.930  Warblers             279    62  fresh                       1.20s  D6 F6 G6 A6 A6 G6 F6 D6
+  22.939  Swifts               237    49  fresh                       0.96s  C7 C7
+  22.971  Crown chatterers     134    29  answer · fresh · harm.      0.87s  F5 F5 F5 F5 E5
+  22.986  Crown chatterers      76    25  answer · signature · harm.  0.95s  E5 E5 E5 F5 G5 E5 E5 E5 E5 E5 …
+  23.020  Warblers             255    50  answer · signature          3.12s  D6 D6 D6 D6 E6 E6 E6 G6 D6 E6 …
+  23.030  Swifts               198    48  fresh                       0.42s  G6
+  23.071  Warblers             294    69  signature                   1.40s  C6 D6 D6 D6 D6 D6 A#5
+  23.085  Crown chatterers      88    26  fresh · harm.               0.41s  C6 C6 A#5 A5
+  23.096  Swifts               227    49  fresh                       0.47s  G6
+  23.107  Crown chatterers     139    30  signature                   0.70s  E6 E6 F6 E6 F6
+  23.165  Lower climbers       153    32  fresh                       1.11s  F4 D4
+  23.202  Warblers             281    63  copy of Lower climbers      0.21s  G5 G5
+  23.249  Crown chatterers      64    23  fresh                       1.34s  E5 F5 G5 F5 E5 F5 G5 G5 F5
+  23.278  Warblers             259    52  signature                   1.52s  C6 C6 E6 F6 G6 A#6 G6 G6 E6 D6 …
+  23.301  Crown chatterers     106    27  copy of Crown chatterers    0.83s  F5 F5 F5 F5 E5
+  23.375  Crown chatterers     105    27  answer · copy of Crown chatterers  0.77s  G5 E5 F5 F5 E5
+  23.411  Warblers             273    59  copy of Warblers            0.22s  G5 G5
+  23.492  Warblers             257    52  copy of Swifts              0.19s  E6
+  23.492  Warblers             268    56  answer · copy of Crown chatterers  1.03s  G6 A6 A6 G6 A6
+  23.496  Crown chatterers      67    24  answer · fresh              0.54s  A#5 D6 F6 F6
+  23.511  Floor hoppers         22     3  answer · signature          0.96s  G5 G5 G5 G5 G5 G5
+  23.525  Crown chatterers     132    29  answer · fresh · harm.      1.13s  A5 C6 A#5 C6 D6 D6 F6 F6 E6 E6
+  23.598  Floor hoppers         32     5  fresh                       0.58s  A#5 A#5 A#5 A#5 A#5 A#5
+  23.613  Crown chatterers     128    29  signature                   0.68s  G5 G5 A#5 C6 A#5
+  23.627  Gliders              324    80  signature                   1.27s  C6
+  23.651  Diggers               51    14  fresh                       1.38s  C2 C2 C2
+  23.676  Crown chatterers      94    26  fresh                       0.59s  G5 G5 G5 A5 A#5
+  23.698  Swifts               254    49  answer · fresh              0.41s  G6
+  23.726  Warblers             308    75  copy of Crown chatterers    1.98s  A5 G5 A5 G5 G5 G5 A5 A#5 G5
+  23.777  Crown chatterers     121    28  answer · signature          0.84s  E6 D6 D6 D6 D6 D6
+  23.814  Warblers             305    74  signature                   2.05s  F6 F6 G6 G6 A6 A6 G6 A6 G6 G6 …
+  23.835  Crown chatterers     144    31  answer · signature          1.11s  F5 F5 G5 G5 F5 F5 F5 F5
+  23.891  Crown chatterers      85    26  signature · harm.           0.96s  A#5 F6 F6 F6 F6 F6 F6 F6 F6
+  23.898  Swifts               234    49  fresh                       0.47s  A#6
+  23.926  Warblers             275    60  answer · signature          2.82s  A5 A#5 C6 E6 D6 C6 D6 E6 E6 D6 …
+  23.954  Swifts               241    49  fresh                       0.89s  G6 G6
+  24.008  Swifts               208    48  fresh                       0.55s  C7 C7
+  24.036  Swifts               203    48  signature                   2.07s  A#6 C7 A#6 G6
+  24.114  Warblers             287    65  copy of Warblers            2.82s  A5 A#5 C6 E6 D6 C6 E6 E6 E6 F6 …
+  24.130  Gliders              335    82  signature                   0.78s  A5
+  24.185  Swifts               204    48  answer · signature          2.02s  A#6 A#6 A#6 A#6
+  24.188  Floor hoppers         29     5  answer · signature          0.33s  C6 C6 C6
+  24.235  Warblers             302    73  copy of Swifts              0.20s  A#6 A#6
+  24.264  Floor hoppers         10     1  answer · signature          0.78s  D5 D5 D5 D5 E5 C5 D5
+  24.267  Lower climbers       191    45  answer · fresh              1.53s  E4 C4
+  24.292  Warblers             265    55  fresh                       1.64s  D6 F6 G6 G6 A6 A6 A6 G6 G6 F6 …
+  24.320  Warblers             292    67  signature                   1.84s  A#5 D6 E6 E6 D6 D6 A#5
+  24.329  Warblers             270    58  answer · copy of Warblers   1.83s  A#5 D6 D6 E6 D6 D6 A#5
+  24.371  Gliders              319    80  signature                   1.35s  C6
+  24.371  Warblers             258    52  answer · copy of Floor hoppers  0.56s  F6 F6 F6
+  24.386  Crown chatterers     117    28  fresh · harm.               1.69s  E6 D6 C6 A#5 D6 C6 D6 D6 A5 A#5 …
+  24.400  Crown chatterers     120    28  answer · fresh · harm.      1.08s  A5 A#5 A#5 A#5 A5 A#5 A5
+  24.421  Floor hoppers         31     5  answer · fresh              0.40s  G5 G5 G5
+  24.539  Crown chatterers      82    25  answer · fresh              0.76s  D6 D6 C6 C6 C6
+  24.555  Gliders              337    82  fresh                       0.63s  C6
+  24.628  Diggers               46     9  fresh                       1.11s  A#2 A2
+  24.637  Lower climbers       167    37  answer · signature          0.71s  A3
+  24.655  Warblers             312    78  signature                   1.08s  G5 C6 D6 E6 F6 F6 F6 E6 D6 C6 …
+  24.675  Crown chatterers     130    29  answer · fresh              0.52s  E6 C6 D6 C6
+  24.676  Crown chatterers     119    28  answer · fresh              0.51s  A5 A#5 A#5 A5
+  24.738  Swifts               250    49  answer · fresh              0.24s  A#6
+  24.843  Crown chatterers      92    26  answer · signature · harm.  0.96s  G5 E6 E6 F6 F6 E6 E6 E6 F6
+  24.915  Crown chatterers     127    29  answer · fresh · harm.      1.55s  E6 E6 E6 D6 D6 D6 E6 E6 F6
+  24.917  Warblers             274    59  answer · fresh              1.62s  F6 G6 A6 A#6 A#6 A#6 A#6 A6 G6 F6
+  24.986  Warblers             272    58  copy of Crown chatterers    0.75s  C6 D6 D6 C6
+  25.031  Swifts               248    49  answer · signature          1.79s  F6 F6 F6 F6
+  25.092  Crown chatterers      98    27  answer · fresh              0.91s  A5 C6 D6 D6 D6 D6 C6 C6
+  25.114  Swifts               224    48  fresh                       1.69s  F6 F6 F6 F6
+  25.141  Crown chatterers     104    27  answer · fresh · harm.      1.54s  C6 C6 C6 C6 C6 C6 C6 C6 C6
+  25.168  Crown chatterers     148    31  answer · fresh              0.46s  E6 E6 F6 F6 D6
+  25.267  Crown chatterers     114    28  answer · copy of Swifts     0.47s  C6 C6 C6 A#5
+  25.290  Crown chatterers      86    26  answer · signature · harm.  0.99s  G5 D6 E6 F6 F6 E6 E6 E6 E6
+  25.301  Swifts               223    48  fresh                       2.31s  A6 A6 A6 A6
+  25.308  Crown chatterers     118    28  answer · fresh · harm.      1.00s  C6 D6 D6 D6 E6 F6
+  25.308  Floor hoppers          9     1  answer · fresh              0.91s  G5 G5 G5 G5 G5 G5 G5 G5
+  25.326  Swifts               229    49  answer · fresh              1.90s  A#6 A#6 A#6 A#6
+  25.351  Warblers             298    71  answer · copy of Crown chatterers  1.40s  A5 E6 F6 G6 G6 F6 F6 F6 F6
+  25.393  Swifts               231    49  fresh                       1.77s  E6 E6 E6 E6
+  25.408  Warblers             260    53  answer · fresh              3.57s  G6 G6 G6 A6 A6 A#6 A#6 A#6 A#6 A#6 …
+  25.445  Floor hoppers         26     4  signature                   0.35s  D5 D5 D5
+  25.572  Lower climbers       170    38  signature                   1.94s  C4 A3
+  25.585  Swifts               216    48  answer · fresh              0.73s  C7 C7
+  25.635  Warblers             300    72  signature                   1.58s  A#5 F6 G6 A6 G6 A6 G6 F6 D6
+  25.647  Gliders              321    80  answer · signature          1.26s  C6
+  25.651  Lower climbers       160    35  signature                   1.47s  D4 C4 C4
+  25.653  Floor hoppers         15     2  fresh                       0.65s  F5 F5 F5 F5 F5 F5 F5 F5
+  25.736  Warblers             277    61  copy of Lower climbers      0.46s  G5 G5
+  25.736  Warblers             311    78  copy of Warblers            1.51s  A5 E6 F6 G6 G6 F6 D6 F6 F6
+  25.737  Lower climbers       165    36  answer · fresh              1.15s  F4 D4
+  25.762  Crown chatterers      80    25  fresh                       1.20s  C6 A5 A5 F5 G5 A5 A5 G5 G5 G5
+  25.821  Swifts               212    48  answer · fresh              0.25s  C7
+  25.834  Warblers             303    73  answer · copy of Lower climbers  0.27s  G5 G5 G5
+  25.837  Crown chatterers     135    29  fresh · harm.               1.04s  A5 A5 A5 A5 G5 A5 A5 A5 A5
+  25.881  Warblers             257    52  signature                   1.56s  C6 D6 E6 F6 G6 G6 G6 F6 E6 D6 …
+  25.891  Lower climbers       172    39  fresh                       0.38s  G3
+  25.905  Warblers             269    57  signature                   1.07s  G5 A5 A#5 C6 C6 A#5 G5
+  26.049  Crown chatterers     115    28  answer · copy of Warblers   1.27s  A#5 C6 D6 D6 E6 F6 F6 F6 E6 D6 …
+  26.144  Warblers             283    63  copy of Crown chatterers    1.45s  C6 C6 C6 C6 A#5 C6 C6 C6 C6
+  26.204  Swifts               245    49  fresh                       0.81s  G6 G6
+  26.395  Crown chatterers      69    24  signature                   0.48s  A#5 A5 A#5 F5
+  26.400  Warblers             288    65  answer · signature          1.25s  A5 A#5 C6 D6 E6 E6 G6 D6 A#5 C6 …
+  26.406  Crown chatterers      74    24  fresh · harm.               0.89s  D6 D6 C6 C6 D6 D6
+  26.432  Crown chatterers     100    27  answer · fresh · harm.      1.44s  G5 A5 A5 A5 G5 F5 F5 G5 F5 G5
+  26.496  Swifts               195    48  answer · signature          2.13s  A#6 A#6 A#6 A#6
+  26.526  Crown chatterers     146    31  answer · copy of Warblers   0.71s  F5 G5 A#5 A#5 A#5 G5 F5
+  26.529  Warblers             268    56  fresh                       1.71s  A5 A#5 C6 D6 C6 A#5 A5
+  26.559  Crown chatterers     141    30  fresh                       0.35s  A#5 A5 G5 F5
+  26.608  Floor hoppers          3     0  answer · fresh              0.56s  C6 C6 C6 C6 C6 C6 C6
+  26.634  Crown chatterers      78    25  answer · fresh              1.25s  F5 A5 G5 A5 A#5 A#5 C6 A#5 A#5 C6 …
+  26.671  Swifts               220    48  answer · signature          2.12s  A#6 A#6 A#6 C7
+  26.716  Crown chatterers     113    28  answer · signature          0.84s  E6 D6 D6 E6 D6 D6
+  26.723  Warblers             284    64  answer · copy of Crown chatterers  1.29s  F6 F6 E6 G6 F6 G6
+  26.726  Crown chatterers     142    30  fresh                       1.14s  F5 F5 F5 G5 G5 F5 F5 E5
+  26.794  Floor hoppers          5     0  fresh                       0.43s  F5 F5 F5 F5
+  26.799  Diggers               49    12  signature                   0.35s  F2
+  26.860  Crown chatterers     110    27  fresh · harm.               1.27s  A#5 A5 A5 A5 A5 A5 A5 A5 A5 A5 …
+  26.865  Crown chatterers      88    26  signature                   0.91s  E5 C6 C6 F6 F6 D6 D6 D6 D6
+  26.966  Lower climbers       171    39  fresh                       1.95s  F4 D4
+  27.059  Warblers             293    68  answer · fresh              1.26s  G5 A5 C6 D6 D6 E6 E6 D6 D6 C6 …
+  27.120  Lower climbers       152    32  signature                   1.37s  G4 E4
+  27.162  Crown chatterers      93    26  fresh                       0.55s  A#5 G5 G5 G5 F5
+  27.296  Diggers               57    20  fresh                       0.22s  G2
+  27.327  Crown chatterers     109    27  answer · fresh              1.10s  A#5 A#5 A5 G5 G5 G5 G5 G5 A5 A5
+  27.389  Crown chatterers     140    30  answer · signature · harm.  0.67s  D6 D6 D6 D6 E6
+  27.408  Crown chatterers     131    29  signature                   0.67s  G5 E5 A#5 C6 C6
+  27.415  Swifts               232    49  answer · signature          1.74s  F6 F6 F6 F6
+  27.416  Crown chatterers      72    24  signature                   0.47s  A#5 A5 A5 F5
+  27.458  Floor hoppers          2     0  answer · signature          0.31s  E5 E5 E5
+  27.533  Warblers             271    58  copy of Crown chatterers    0.63s  A5 A#5 A#5 G5
+  27.539  Crown chatterers      75    25  answer · fresh · harm.      1.26s  A5 A#5 C6 D6 D6 E6 F6 F6
+  27.573  Swifts               228    49  signature                   1.66s  F6 F6 F6 F6
+  27.611  Warblers             314    79  answer · signature          2.77s  A#5 D6 C6 C6 C6 C6 D6 D6 D6 C6 …
+  27.627  Warblers             294    69  copy of Crown chatterers    1.55s  A#5 A#5 A5 A5 A5 A5 A5 G5 A#5 A#5
+  27.651  Swifts               206    48  fresh                       0.51s  A#6 A#6
+  27.654  Warblers             273    59  copy of Crown chatterers    0.67s  A#5 A#5 A#5 G5
+  27.668  Floor hoppers         18     3  signature                   0.94s  G5 F5 G5 G5 G5 G5
+  27.672  Swifts               238    49  fresh                       1.85s  G6 G6 G6 G6
+  27.686  Swifts               200    48  fresh                       1.01s  A6 A6 A6
+  27.693  Swifts               242    49  answer · signature          1.48s  F6 A6 F6
+  27.737  Crown chatterers      83    25  fresh · harm.               2.03s  A5 A5 A5 A#5 A5 G5 F5 G5 E5 F5 …
+  27.750  Lower climbers       176    40  signature                   1.15s  F4 F4
+  27.782  Warblers             290    66  answer · fresh              2.74s  E6 F6 G6 G6 A6 A6 A6 A#6 A6 A6 …
+  27.783  Lower climbers       162    36  answer · signature          1.31s  C4 A#3
+  27.820  Gliders              340    82  signature                   0.77s  A5
+  27.833  Floor hoppers          8     1  fresh                       0.79s  A#5 A#5 A#5 A#5 A#5 A#5
+  27.835  Crown chatterers      66    24  answer · copy of Swifts     0.38s  C6 E6 C6
+  27.839  Swifts               219    48  answer · fresh              0.42s  F6
+  27.853  Warblers             310    77  answer · signature          3.58s  D6 E6 F6 G6 G6 A6 A6 A6 A6 A6 …
+  27.866  Crown chatterers      71    24  answer · fresh · harm.      0.82s  A5 A#5 C6 A#5 C6 A#5 A#5 A#5
+  27.875  Floor hoppers         44     7  signature                   0.67s  A5 A5 A5 A5 A5
+  27.876  Swifts               205    48  signature                   2.18s  A#6 A#6 A#6 A6
+  27.877  Swifts               240    49  fresh                       0.34s  G6
+  27.909  Swifts               217    48  fresh                       1.72s  C7 C7 C7 C7
+  27.956  Floor hoppers         43     7  signature                   0.67s  A5 A5 A5 A5 A5
+  28.076  Crown chatterers      90    26  signature                   0.99s  G5 C6 D6 F6 F6 D6 D6 E6 D6
+  28.078  Crown chatterers     138    30  answer · fresh              0.99s  A#5 A#5 A#5 A#5 C6 C6 C6 C6 C6 C6
+  28.090  Lower climbers       161    35  answer · signature          1.55s  D4 D4 C4
+  28.112  Warblers             265    55  fresh                       2.78s  G6 G6 G6 G6 A6 A6 A6 A6 G6 G6 …
+  28.125  Swifts               252    49  signature                   1.82s  F6 F6 F6 F6
+  28.131  Warblers             266    55  copy of Floor hoppers       1.10s  D6 D6 E6 D6 D6
+  28.143  Crown chatterers     112    28  answer · copy of Floor hoppers  0.73s  C6 C6 C6 C6 E6
+  28.225  Floor hoppers         38     6  signature                   0.84s  C5 C5 C5 C5 C5 C5
+  28.274  Crown chatterers      65    23  answer · signature          1.04s  F6 D6 F6 E6 D6 C6 C6
+  28.294  Crown chatterers     137    30  answer · fresh · harm.      0.69s  F5 F5 G5 G5 G5
+  28.359  Floor hoppers         28     4  fresh                       0.53s  C5 C5 C5 C5
+  28.427  Lower climbers       163    36  fresh · harm.               1.73s  E4 D4
+  28.508  Crown chatterers     149    31  answer · copy of Crown chatterers  1.05s  G5 C6 D6 F6 F6 C6 D6 E6 D6
+  28.528  Floor hoppers         16     2  fresh                       0.40s  A5 A5 A5 A5
+  28.535  Warblers             302    73  fresh                       1.47s  D6 D6 D6 D6 E6 E6 D6 D6 D6 D6
+  28.600  Floor hoppers         36     6  signature                   0.80s  C5 C5 C5 C5 C5 C5
+  28.621  Floor hoppers         24     4  fresh                       0.29s  D5 D5 D5
+  28.629  Crown chatterers      68    24  answer · signature          0.48s  A#5 A5 A5 F5
+  28.712  Crown chatterers      70    24  answer · fresh              1.92s  A5 C6 A#5 A5 A5 C6 C6 A#5 A#5 D6 …
+  28.732  Crown chatterers     101    27  answer · fresh              1.31s  D6 A#5 C6 A5 A5 A5 A#5 A5 A#5 A#5
+  28.741  Swifts               214    48  answer · fresh              1.24s  C7 C7 C7
+  28.762  Crown chatterers     106    27  answer · fresh · harm.      1.28s  A#5 A#5 A5 C6 A5 F5 E5 E5
+  28.771  Crown chatterers      81    25  signature · harm.           0.98s  F5 G5 G5 A5 A5 G5 G5 G5 F5 F5 …
+  28.924  Warblers             264    55  fresh                       1.48s  A#5 C6 C6 D6 C6 C6 A#5
+  28.924  Crown chatterers     147    31  answer · copy of Floor hoppers  0.27s  A#5 C6 D6
+  28.946  Swifts               211    48  fresh                       1.12s  G6 G6
+  28.971  Warblers             261    53  answer · fresh              1.20s  A#5 D6 F6 F6 D6 A#5
+  28.992  Swifts               210    48  answer · fresh              1.34s  C7 C7 C7 C7
+  29.032  Warblers             259    52  answer · fresh              3.16s  G6 G6 A6 A6 A#6 A#6 C7 C7 C7 C7 …
+  29.051  Floor hoppers         35     5  answer · fresh              1.06s  A5 A5 A5 A5 A5 A5 A5 A5
+  29.066  Swifts               254    49  fresh                       1.88s  A#6 A#6 A#6 A#6
+  29.119  Warblers             286    64  copy of Crown chatterers    1.43s  G5 A#5 A5 A#5 A#5 A5 A5 G5 G5 G5 …
+  29.159  Diggers               59    22  signature                   1.63s  F2 D2 D2
+  29.179  Floor hoppers          7     1  answer · fresh              0.80s  C5 C5 C5 C5 C5 C5
+  29.226  Warblers             306    74  signature                   1.96s  F6 F6 G6 G6 A6 A#6 A6 A6 G6 G6 …
+  29.269  Floor hoppers         41     7  answer · signature          0.70s  A5 A5 A5 A5 A5
+  29.286  Crown chatterers      62    23  answer · signature          1.13s  D6 D6 F6 D6 D6 C6 C6 C6
+  29.310  Lower climbers       150    32  answer · signature          1.35s  G4 E4
+  29.413  Floor hoppers         40     6  answer · fresh              0.54s  A5 A5 A#5 A5 A5
+  29.449  Crown chatterers     130    29  signature                   0.65s  G5 G5 A#5 C6 A#5
+  29.464  Warblers             307    75  fresh                       2.77s  F6 F6 F6 G6 G6 G6 G6 G6 G6 G6 …
+  29.530  Crown chatterers      64    23  fresh · harm.               0.50s  G5 F5 G5 A#5 A5
+  29.589  Swifts               253    49  answer · fresh              1.20s  C7 C7
+  29.595  Diggers               47    10  fresh                       1.29s  E2 E2 D2
+  29.639  Floor hoppers         17     2  signature                   0.62s  F5 F5 F5 F5 F5
+  29.666  Floor hoppers         14     2  fresh                       0.42s  E5 E5 E5 E5 E5
+  29.776  Swifts               247    49  fresh                       0.54s  G6 G6
+  29.797  Warblers             270    58  signature                   1.47s  F6 G6 A6 A#6 A#6 C7 C7 C7 A#6 A#6 …
+  29.805  Floor hoppers          5     0  fresh                       1.00s  A#5 A#5 A#5 A#5 A#5 A#5 A#5
+  29.844  Warblers             267    56  answer · copy of Crown chatterers  0.71s  A#5 G5 A#5 C6 A#5
+  29.851  Swifts               221    48  answer · fresh              0.52s  D7 D7
+  29.861  Lower climbers       156    34  answer · signature          0.80s  G4
+  29.871  Warblers             285    64  fresh                       0.72s  G5 C6 D6 D6 C6 G5
+  29.933  Warblers             289    66  answer · signature          3.10s  A#5 E6 F6 G6 G6 A6 A6 G6 G6 F6 …
+  29.971  Crown chatterers     119    28  answer · fresh              0.93s  C6 D6 F6 E6 E6 D6 C6 F6
+  29.972  Crown chatterers     122    28  answer · fresh · harm.      0.89s  A5 A5 C6 D6 D6 F6 F6
+  29.980  Warblers             297    70  copy of Lower climbers      0.40s  A5 A5
+  29.984  Lower climbers       151    32  answer · signature · harm.  1.33s  G4 E4
+  29.986  Warblers             304    73  signature                   0.72s  E6 G6 A6 A6 G6 E6
+  29.999  Crown chatterers     102    27  signature                   0.59s  F6 F6 F6 C6 D6 C6 C6
+  30.035  Lower climbers       185    44  fresh                       2.28s  A3 A3 G3
+  30.139  Crown chatterers     139    30  answer · fresh              0.53s  A#5 C6 C6 C6
+  30.152  Warblers             303    73  fresh                       1.43s  A5 A#5 C6 D6 D6 D6 D6 D6 D6 C6 …
+  30.157  Warblers             278    62  fresh                       0.98s  A5 A#5 C6 C6 A#5 A5
+  30.194  Floor hoppers         37     6  answer · fresh              0.47s  A5 A5 A5 A5 A5 A5
+  30.211  Warblers             255    50  signature                   3.09s  C6 D6 D6 D6 D6 E6 E6 E6 E6 E6 …
+  30.225  Warblers             305    74  signature                   2.02s  F6 F6 G6 G6 A6 A6 A6 A6 G6 G6 …
+  30.265  Crown chatterers     107    27  answer · fresh · harm.      0.98s  F6 E6 F6 F6 E6 E6 F6
+  30.275  Crown chatterers     108    27  answer · fresh              0.41s  F5 F5 G5 G5
+  30.295  Crown chatterers      94    26  signature                   1.07s  F5 C6 D6 F6 F6 D6 D6 D6 D6 D6
+  30.341  Floor hoppers         42     7  answer · fresh              0.46s  D5 D5 D5 D5 D5 D5
+  30.369  Warblers             295    70  copy of Crown chatterers    1.51s  G5 D6 E6 G6 E6 E6 G6 F6 E6 E6
+  30.477  Crown chatterers      63    23  answer · fresh              1.67s  E6 D6 D6 C6 D6 E6 D6 E6 A#5 G5 …
+  30.505  Crown chatterers     118    28  fresh                       0.66s  G5 G5 G5 A5 A5
+  30.575  Floor hoppers         12     2  answer · fresh              0.62s  G5 G5 G5 G5 G5
+  30.615  Floor hoppers         29     5  fresh                       0.56s  F5 F5 F5 F5 F5 F5
+  30.630  Floor hoppers          9     1  signature                   0.75s  D5 D5 D5 E5 D5 D5 D5
+  30.730  Crown chatterers     103    27  answer · signature          0.58s  F6 F6 E6 D6 D6 C6 C6
+  30.730  Crown chatterers     129    29  answer · signature          0.65s  G5 A5 A#5 C6 A#5
+  30.756  Warblers             273    59  fresh                       2.32s  A#5 A#5 C6 C6 C6 C6 C6 C6 C6 C6 …
+  30.802  Floor hoppers          0     0  signature                   0.30s  E5 E5 E5
+  30.949  Warblers             301    72  answer · copy of Crown chatterers  0.81s  G6 G6 F6 E6 E6 D6 D6
+  30.999  Crown chatterers     120    28  signature · harm.           0.84s  D6 C6 C6 C6 C6 C6
+  31.021  Swifts               244    49  answer · signature          1.82s  F6 F6 F6 F6
+  31.127  Swifts               203    48  fresh                       0.48s  A#6
+  31.144  Floor hoppers         31     5  answer · fresh              0.91s  E5 E5 E5 E5 E5 E5 E5
+  31.158  Warblers             298    71  answer · copy of Warblers   0.82s  G6 G6 F6 E6 C6 D6 D6
+  31.196  Swifts               233    49  answer · fresh              2.33s  F6 F6 F6 F6
+  31.214  Warblers             299    71  answer · copy of Warblers   0.79s  G6 G6 F6 E6 E6 D6 D6
+  31.291  Warblers             262    54  answer · signature          2.31s  D6 F6 G6 A6 A#6 C7 A#6 A6 G6 F6 …
+  31.386  Warblers             277    61  answer · fresh              0.72s  A#5 A#5 C6 C6 A#5 A#5
+  31.440  Crown chatterers     116    28  answer · signature · harm.  0.69s  F6 F6 E6 E6 F6
+  31.551  Crown chatterers     114    28  answer · fresh              1.19s  E6 E6 E6 D6 C6 C6 A#5 A5 A5
+  31.581  Crown chatterers     121    28  signature · harm.           0.82s  E6 C6 C6 C6 C6 A#5
+  31.603  Lower climbers       184    43  signature                   0.58s  G3
+  31.604  Floor hoppers         19     3  answer · fresh              0.78s  D5 D5 D5 D5 D5 D5 D5 D5
+  31.645  Crown chatterers     111    27  answer · fresh              1.33s  A#5 C6 D6 D6 D6 D6 A#5 C6 C6
+  31.647  Lower climbers       155    33  answer · signature          2.99s  C4 C4 A#3
+  31.693  Crown chatterers     117    28  answer · copy of Crown chatterers  0.68s  F6 F6 E6 E6 F6
+  31.700  Warblers             309    76  signature                   1.72s  A#5 C6 D6 E6 E6 F6 F6 F6 E6 E6 …
+  31.704  Warblers             274    59  copy of Warblers            0.74s  A#5 A#5 C6 C6 A#5 A#5
+  31.712  Crown chatterers      98    27  answer · fresh              0.71s  G5 G5 G5 G5 G5 G5
+  31.744  Warblers             263    54  signature                   2.42s  D6 F6 G6 A6 A#6 A#6 A#6 A6 A6 G6 …
+  31.752  Crown chatterers      91    26  signature                   0.96s  F5 D6 C6 F6 F6 D6 D6 D6 D6
+  31.775  Diggers               56    19  answer · fresh              0.77s  D2 C2
+  31.827  Warblers             280    62  signature                   2.56s  A6 A6 C7 A#6 A#6 A#6 A#6 A#6 A#6 A#6 …
+  31.903  Crown chatterers     136    29  answer · fresh              0.99s  A5 C6 D6 D6 C6 D6 D6 D6 D6 C6
+  31.912  Crown chatterers      60    23  fresh                       0.50s  A#5 A#5 C6 C6
+  31.924  Lower climbers       164    36  answer · signature          1.26s  E4 A3
+  31.937  Crown chatterers     124    29  fresh · harm.               0.48s  C6 D6 E6 F6
+  32.020  Crown chatterers     133    29  answer · fresh · harm.      1.44s  C6 C6 D6 D6 E6 D6 D6 C6 E6 E6 …
+  32.044  Warblers             276    61  answer · fresh              2.58s  A5 A5 A#5 C6 C6 C6 D6 C6 C6 C6 …
+  32.071  Warblers             294    69  signature                   1.39s  C6 D6 D6 D6 E6 D6 C6
+  32.083  Crown chatterers      89    26  answer · fresh              0.97s  F6 F6 E6 D6 D6 E6 E6 F6 D6
+  32.152  Diggers               45     8  signature                   0.36s  C3
+  32.234  Warblers             272    58  signature                   1.44s  F6 G6 A6 A#6 A#6 C7 C7 C7 A#6 A#6 …
+  32.235  Crown chatterers      99    27  answer · fresh · harm.      2.11s  C6 C6 D6 C6 C6 D6 C6 C6 C6 A#5 …
+  32.380  Crown chatterers     115    28  answer · fresh · harm.      0.71s  A#5 C6 D6 F6 F6 F6 D6 C6 D6 C6
+  32.434  Warblers             291    67  fresh                       2.39s  D6 D6 E6 F6 G6 G6 G6 G6 G6 G6 …
+  32.451  Gliders              333    81  signature                   1.12s  D5
+  32.536  Warblers             279    62  answer · fresh              1.97s  D6 D6 E6 E6 F6 F6 F6 E6 E6 D6 …
+  32.549  Lower climbers       180    42  answer · signature          1.36s  D4 E4
+  32.604  Warblers             261    53  copy of Gliders             0.13s  G5
+  32.620  Lower climbers       193    46  signature                   0.68s  A#3
+  32.644  Warblers             312    78  fresh                       3.78s  C6 D6 D6 E6 E6 F6 F6 F6 F6 F6 …
+  32.731  Warblers             300    72  answer · signature          1.59s  D6 F6 G6 A6 A6 F6 G6 D6 A#5
+  32.858  Lower climbers       158    35  signature                   1.52s  D4 D4 C4
+  32.891  Gliders              320    80  signature                   1.25s  C6
+  32.956  Crown chatterers     145    31  signature                   1.13s  F5 F5 G5 A5 F5 E5 F5 F5
+  32.958  Crown chatterers      82    25  answer · copy of Warblers   1.27s  C6 D6 D6 E6 E6 E6 E6 D6 D6 A#5 …
+  32.989  Crown chatterers     132    29  fresh                       0.68s  C6 D6 D6 C6 D6
+  33.063  Crown chatterers     100    27  answer · fresh · harm.      1.11s  E6 E6 E6 E6 D6 D6 C6 A#5
+  33.079  Lower climbers       189    45  signature                   1.91s  E4 D4
+  33.084  Crown chatterers      61    23  fresh                       0.70s  C6 E6 D6 E6 F6 F6 E6
+  33.116  Crown chatterers      69    24  answer · fresh              0.57s  G5 A#5 A5 G5 F5 F5
+  33.153  Crown chatterers      71    24  fresh · harm.               1.75s  E6 E6 C6 D6 E6 E6 D6 A#5 C6 C6 …
+  33.162  Warblers             288    65  fresh                       2.87s  A#5 C6 D6 E6 F6 F6 G6 F6 F6 E6 …
+  33.168  Warblers             258    52  answer · copy of Gliders    0.16s  F6
+  33.186  Crown chatterers     134    29  copy of Crown chatterers    0.69s  C6 D6 D6 C6 D6
+  33.224  Crown chatterers      80    25  answer · copy of Crown chatterers  0.66s  C6 C6 D6 C6 D6
+  33.270  Lower climbers       177    41  signature                   0.34s  A3
+  33.272  Crown chatterers      77    25  answer · signature          1.00s  G5 A5 G5 A5 A5 A5 G5 F5 F5 F5 …
+  33.303  Lower climbers       186    44  answer · signature          1.38s  G4 G4
+  33.362  Swifts               243    49  answer · signature          1.89s  F6 F6 F6 F6
+  33.369  Warblers             284    64  answer · fresh              2.23s  E6 F6 A6 A#6 A#6 A#6 A6 F6 E6
+  33.395  Crown chatterers     125    29  answer · fresh · harm.      0.64s  A5 A#5 A5 A#5 A#5
+  33.410  Gliders              325    81  signature                   1.17s  D5
+  33.414  Warblers             270    58  fresh                       1.98s  D6 E6 F6 G6 G6 G6 G6 G6 G6 G6 …
+  33.421  Crown chatterers      93    26  answer · fresh              1.15s  E6 D6 D6 C6 C6 F6 D6
+  33.423  Crown chatterers      88    26  signature                   0.97s  E5 C6 D6 F6 F6 A#5 D6 D6 D6
+  33.464  Lower climbers       175    40  signature                   1.24s  G4 F4
+  33.479  Swifts               222    48  fresh                       1.64s  A#6 A#6 A#6
+  33.487  Swifts               199    48  fresh                       0.83s  C7 C7
+  33.496  Swifts               236    49  fresh                       0.55s  G6 G6
+  33.498  Lower climbers       174    40  signature · harm.           1.13s  G4 G4
+  33.526  Warblers             311    78  signature                   1.09s  A5 C6 D6 E6 F6 G6 F6 E6 D6 A#5 …
+  33.539  Swifts               225    49  fresh                       1.88s  G6 G6 G6 G6
+  33.587  Swifts               235    49  fresh                       0.50s  C7
+  33.588  Crown chatterers      92    26  answer · fresh              0.73s  A#5 C6 C6 C6 A#5 A#5 C6
+  33.589  Swifts               237    49  fresh                       1.93s  G6 G6 G6 G6
+  33.591  Swifts               210    48  fresh                       0.48s  D7
+  33.605  Swifts               251    49  fresh                       1.19s  C7 C7
+  33.636  Swifts               207    48  fresh                       0.34s  F6
+  33.645  Swifts               216    48  fresh                       0.57s  C7 C7
+  33.744  Crown chatterers      84    26  answer · fresh · harm.      0.97s  A#5 C6 C6 D6 A#5 C6 A5 A5
+  33.775  Warblers             278    62  signature                   2.63s  A6 A6 A6 A#6 A6 A#6 A#6 A#6 A#6 A#6 …
+  33.817  Crown chatterers     143    31  signature · harm.           1.14s  A5 A5 A#5 A#5 A5 A5 A5 A#5
+  33.858  Crown chatterers     105    27  fresh · harm.               0.99s  E6 E6 E6 F6 E6 E6 E6 D6 C6 A#5 …
+  33.880  Warblers             314    79  fresh                       1.59s  F6 G6 G6 G6 A6 A6 A6 A6 G6 G6 …
+  33.894  Gliders              324    80  fresh                       1.22s  C6
+  33.902  Crown chatterers      67    24  answer · fresh              0.98s  C6 A#5 D6 C6 D6 E6 D6
+  33.904  Crown chatterers     123    29  signature                   0.67s  G5 A5 A#5 C6 A#5
+  33.918  Lower climbers       154    33  signature · harm.           3.02s  A3 A#3 A3
+  33.944  Warblers             281    63  copy of Warblers            2.78s  A6 A6 A6 A6 A#6 A#6 A#6 A#6 A6 A#6 …
+  34.060  Floor hoppers         34     5  fresh                       0.47s  A5 A5 A5 A5 A5
+  34.164  Lower climbers       183    43  answer · fresh              2.94s  D4 D4 C4
+  34.167  Floor hoppers          6     1  signature                   0.78s  D5 D5 D5 D5 D5 D5 D5
+  34.171  Lower climbers       166    37  answer · signature          0.70s  A3
+  34.226  Crown chatterers     131    29  answer · copy of Lower climbers  0.44s  E5 E5 F5
+  34.238  Crown chatterers     144    31  fresh                       0.77s  E6 F6 E6 F6 F6 F6 F6 E6
+  34.260  Crown chatterers     128    29  answer · fresh · harm.      0.95s  C6 C6 C6 A5 A5 A5 A5
+  34.310  Floor hoppers         31     5  fresh                       0.24s  G5 G5 G5
+  34.320  Crown chatterers      65    23  signature                   1.03s  D6 D6 E6 D6 C6 C6 C6
+  34.347  Floor hoppers         22     3  fresh                       0.95s  C5 C5 C5 C5 C5 C5
+  34.379  Floor hoppers         44     7  signature                   0.68s  A5 A5 A5 A5 A5
+  34.489  Warblers             271    58  answer · fresh              1.21s  A#5 C6 C6 C6 D6 D6 D6 C6 C6 C6 …
+  34.531  Warblers             266    55  answer · signature          1.72s  F6 G6 F6 A6 A#6 G6 C7 C7 A#6 C7 …
+  34.594  Crown chatterers      81    25  answer · fresh              1.85s  E6 D6 E6 E6 E6 D6 D6 E6 F6 F6 …
+  34.609  Crown chatterers      76    25  answer · signature · harm.  1.01s  G5 G5 G5 A5 A5 G5 G5 F5 F5 F5 …
+  34.635  Warblers             256    51  signature                   1.45s  A#5 A#5 C6 A#5 C6 C6 C6 C6 A#5 A#5
+  34.652  Floor hoppers          4     0  fresh                       0.94s  E5 E5 E5 E5 E5 E5 E5
+  34.708  Warblers             274    59  copy of Floor hoppers       1.14s  D6 D6 D6 D6 D6
+  34.720  Floor hoppers         38     6  fresh                       0.60s  G5 G5 G5 G5 G5
+  34.747  Swifts               218    48  answer · fresh              1.55s  C7 C7 C7
+  34.752  Crown chatterers     147    31  answer · fresh              0.62s  C6 C6 A5 F5 A#5
+  34.757  Crown chatterers     135    29  answer · signature          0.67s  G5 G5 A#5 C6 A#5
+  34.776  Crown chatterers     127    29  answer · copy of Warblers   0.78s  D6 C6 C6 A#5 D6
+  34.779  Crown chatterers      62    23  signature                   0.98s  D6 D6 F6 D6 D6 C6 C6
+  34.813  Floor hoppers         27     4  fresh                       1.28s  C6 C6 C6 C6 C6 C6 C6 C6
+  34.852  Crown chatterers     101    27  answer · fresh · harm.      0.93s  C6 C6 C6 C6 C6 C6 D6
+  34.886  Lower climbers       168    37  fresh                       0.62s  A#3
+  34.891  Crown chatterers      75    25  answer · fresh · harm.      1.26s  A#5 A5 C6 D6 E6 F6 F6 F6 F6 F6
+  34.920  Crown chatterers      86    26  answer · fresh              0.75s  G5 F5 G5 A5 A5 G5 F5
+  34.983  Lower climbers       169    38  answer · signature          1.91s  C4 A3
+  35.019  Swifts               230    49  signature                   1.32s  F6 F6 F6
+  35.034  Crown chatterers      90    26  answer · signature          1.01s  F5 D6 D6 F6 F6 D6 D6 D6 D6
+  35.056  Crown chatterers      96    26  answer · signature          0.99s  E5 C6 D6 F6 F6 D6 D6 D6 D6
+  35.057  Swifts               232    49  signature                   2.01s  F6 F6 F6 F6
+  35.109  Lower climbers       194    47  fresh                       0.45s  A3
+  35.112  Swifts               215    48  signature                   2.05s  A#6 A#6 G6 A#6
+  35.113  Swifts               202    48  signature                   2.15s  A#6 A#6 A#6 A#6
+  35.119  Swifts               249    49  fresh                       0.34s  A6
+  35.151  Warblers             285    64  copy of Crown chatterers    1.37s  G5 D6 E6 A#6 G6 E6 E6 E6 E6
+  35.191  Warblers             275    60  copy of Crown chatterers    1.04s  A5 G5 A5 A#5 A5 A5 G5
+  35.202  Crown chatterers      72    24  answer · signature          0.46s  A#5 A5 A5 F5
+  35.208  Crown chatterers     146    31  answer · signature · harm.  1.10s  E5 E5 F5 F5 E5 E5 E5 E5
+  35.218  Warblers             304    73  fresh                       2.16s  G6 G6 A6 A#6 A#6 C7 C7 C7 C7 C7 …
+  35.246  Lower climbers       153    32  answer · signature          1.41s  G4 E4
+  35.445  Crown chatterers      87    26  answer · signature          1.07s  F5 F5 C6 D6 F6 F6 D6 D6 D6 D6
+  35.447  Crown chatterers      73    24  answer · copy of Warblers   0.97s  F5 C6 D6 F6 F6 D6 D6 D6 D6
+  35.487  Floor hoppers         23     3  answer · signature          0.94s  F5 G5 G5 G5 G5 G5
+  35.488  Crown chatterers     130    29  answer · signature          0.65s  G5 E5 A#5 C6 A#5
+  35.497  Floor hoppers         33     5  answer · signature          0.32s  C6 C6 C6
+  35.683  Crown chatterers     102    27  signature                   0.59s  F6 F6 E6 D6 D6 C6 C6
+  35.762  Lower climbers       192    46  answer · signature          0.77s  A#3
+  35.817  Warblers             255    50  signature                   3.13s  A#5 D6 D6 D6 E6 E6 E6 E6 E6 E6 …
+  36.008  Warblers             261    53  copy of Crown chatterers    1.35s  G5 D6 E6 G6 G6 E6 E6 D6 E6
+  36.041  Crown chatterers     126    29  answer · fresh              1.30s  A#5 C6 C6 C6 D6 D6 C6 A#5 C6 A#5 …
+  36.118  Warblers             273    59  copy of Crown chatterers    0.97s  A5 G5 C6 D6 C6
+  36.158  Warblers             313    79  fresh                       2.00s  A#5 C6 D6 E6 E6 E6 D6 C6 A#5
+  36.219  Gliders              316    80  signature                   1.31s  C6
+  36.245  Warblers             297    70  fresh                       1.95s  D6 E6 E6 F6 F6 E6 E6 D6
+  36.334  Swifts               219    48  answer · fresh              1.92s  G6 G6 G6 G6
+  36.352  Crown chatterers      78    25  answer · signature          0.95s  G5 E5 G5 A5 A5 G5 G5 F5 F5 G5 …
+  36.353  Floor hoppers         32     5  answer · fresh              0.33s  A5 A5 A5 A5
+  36.382  Crown chatterers     113    28  answer · signature          0.81s  E6 D6 D6 D6 D6 D6
+  36.383  Warblers             257    52  answer · fresh              2.67s  G5 A5 A#5 A#5 C6 C6 C6 C6 C6 A#5 …
+  36.418  Lower climbers       176    40  answer · fresh              0.85s  C4 A#3
+  36.451  Warblers             293    68  answer · copy of Warblers   1.68s  A#5 C6 D6 E6 E6 E6 C6 A#5
+  36.452  Floor hoppers          9     1  fresh                       1.08s  F5 F5 F5 F5 F5 F5 F5
+  36.504  Swifts               240    49  fresh                       1.00s  G6 G6 G6
+  36.506  Swifts               238    49  fresh                       1.65s  F6 F6 F6
+  36.536  Swifts               197    48  fresh                       0.42s  C7
+  36.552  Floor hoppers         10     1  fresh                       0.62s  C5 C5 C5 C5 C5 C5
+  36.557  Swifts               211    48  fresh                       1.03s  G6 G6
+  36.579  Floor hoppers         11     1  signature                   0.78s  D5 D5 D5 D5 D5 D5 D5
+  36.593  Swifts               195    48  fresh                       0.22s  G6
+  36.616  Swifts               239    49  signature                   1.78s  F6 F6 F6 F6
+  36.647  Warblers             283    63  answer · signature          2.45s  A5 C6 D6 E6 F6 E6 G6 F6 E6 D6 …
+  36.650  Swifts               227    49  fresh                       1.06s  E6 E6 E6 E6
+  36.675  Warblers             267    56  answer · copy of Swifts     0.67s  C6 C6 C6
+  36.701  Lower climbers       181    43  signature · harm.           0.60s  A3
+  36.746  Crown chatterers      79    25  answer · fresh              0.92s  D6 D6 D6 D6 D6 C6 A5
+  36.753  Crown chatterers      97    26  signature                   1.06s  F5 C6 E6 F6 F6 E6 D6 D6 D6 D6
+  36.781  Warblers             303    73  answer · fresh              1.76s  F6 G6 A6 A6 A6 A6 A6 G6 F6
+  36.786  Crown chatterers     149    31  answer · copy of Swifts     0.46s  D6 D6 E6 D6
+  36.821  Warblers             260    53  signature                   2.82s  F6 E6 G6 C7 A#6 A#6 A6 C7 A6 A#6 …
+  36.839  Gliders              318    80  signature                   1.39s  C6
+  36.849  Warblers             306    74  copy of Crown chatterers    1.49s  G5 D6 F6 G6 F6 G6 C6 E6 E6 E6
+  36.851  Swifts               247    49  fresh                       0.31s  C7
+  36.946  Crown chatterers     120    28  answer · fresh · harm.      1.80s  E6 E6 E6 E6 E6 E6 D6 A#5 A5 A5 …
+  36.965  Warblers             291    67  copy of Crown chatterers    0.65s  F6 F6 G6 A6
+  37.022  Lower climbers       188    45  answer · signature          1.87s  E4 D4
+  37.274  Warblers             300    72  fresh                       2.49s  C6 D6 D6 E6 E6 E6 E6 E6 D6 D6 …
+  37.285  Warblers             263    54  fresh                       1.88s  F6 G6 A6 A#6 A#6 A#6 A6 G6 F6
+  37.290  Warblers             301    72  copy of Warblers            2.47s  A#5 D6 D6 E6 E6 E6 E6 C6 D6 D6 …
+  37.325  Warblers             292    67  answer · copy of Warblers   0.65s  F6 E6 G6 A6
+  37.351  Crown chatterers     125    29  fresh                       1.07s  C6 D6 A#5 C6 C6 C6
+  37.385  Crown chatterers      94    26  answer · fresh              1.13s  A5 A5 G5 A#5 A#5 A5 A5 A5 A5 G5 …
+  37.499  Crown chatterers     148    31  answer · signature          1.13s  F5 F5 G5 G5 F5 F5 F5 F5
+  37.542  Lower climbers       160    35  answer · signature          1.55s  D4 D4 C4
+  37.573  Lower climbers       187    44  answer · signature          0.59s  G4
+  37.598  Warblers             311    78  signature                   1.09s  A5 C6 D6 E6 F6 F6 F6 G6 E6 C6 …
+  37.601  Crown chatterers     140    30  fresh                       0.93s  D6 D6 C6 D6 C6 D6 F6 D6 E6 D6 …
+  37.671  Crown chatterers      89    26  answer · fresh              0.87s  A5 G5 A#5 A#5 A5 A#5 A5 C6 E6
+  37.689  Warblers             302    73  signature                   0.63s  D6 G6 A6 A#6 G6 E6
+  37.762  Gliders              344    83  signature                   1.27s  D6
+  37.799  Crown chatterers     134    29  copy of Warblers            0.35s  C6 F6 E6 F6 C6
+  37.834  Crown chatterers     117    28  answer · fresh · harm.      1.19s  A5 G5 G5 G5 G5 F5 G5 G5 A5 A5
+  37.849  Warblers             280    62  signature                   2.58s  A6 A6 A#6 A#6 A#6 A#6 A#6 A#6 A#6 A#6 …
+  37.864  Lower climbers       159    35  fresh                       1.86s  E4 D4 D4
+  37.865  Warblers             269    57  answer · fresh              1.90s  C6 D6 F6 G6 G6 G6 F6 D6 C6
+  37.890  Lower climbers       165    36  answer · signature          1.38s  C4 A#3
+  37.928  Crown chatterers      93    26  fresh                       0.53s  F6 F6 F6 D6 D6 C6
+  37.953  Swifts               252    49  answer · fresh              1.60s  C7 C7 C7
+  38.130  Floor hoppers         12     2  fresh                       0.88s  C6 C6 C6 C6 C6 C6 C6 C6
+  38.143  Warblers             262    54  signature                   2.48s  D6 F6 G6 A6 A#6 A#6 A#6 A6 G6 E6 …
+  38.176  Swifts               205    48  fresh                       0.79s  C7 C7
+  38.194  Lower climbers       182    43  answer · signature          0.56s  G3
+  38.202  Swifts               224    48  signature                   1.96s  A#6 A#6 A#6 A#6
+  38.218  Swifts               209    48  fresh                       1.34s  A6 A6 A6
+  38.231  Floor hoppers         15     2  fresh                       0.25s  A#5 A#5 A#5
+  38.255  Crown chatterers     124    29  answer · copy of Crown chatterers  0.54s  F6 F6 F6 D6 D6 C6
+  38.262  Warblers             295    70  answer · copy of Crown chatterers  0.72s  G6 F6 G6 D6 E6 D6
+  38.277  Floor hoppers         39     6  fresh                       0.59s  D5 D5 D5 D5
+  38.297  Crown chatterers     104    27  fresh                       1.03s  C6 D6 C6 C6 C6 D6 C6 D6 C6 D6
+  38.298  Floor hoppers          7     1  answer · fresh              0.92s  A#5 A#5 A#5 A#5 A#5 A#5 A#5
+  38.310  Swifts               246    49  answer · fresh              0.43s  F6
+  38.314  Crown chatterers     128    29  fresh · harm.               0.83s  C6 A5 G5 A5 A#5 A#5 C6 C6 A#5
+  38.320  Diggers               50    13  signature                   0.38s  D2
+  38.342  Gliders              329    81  signature                   1.13s  E5
+  38.345  Floor hoppers         36     6  fresh                       0.53s  A5 A5 A5 A5 A5
+  38.347  Floor hoppers          3     0  fresh                       1.20s  A#5 A#5 A#5 A#5 A#5 A#5 A#5 A#5
+  38.377  Warblers             305    74  fresh                       1.45s  G5 A5 A#5 C6 C6 C6 A#5 A5 G5
+  38.383  Crown chatterers      80    25  fresh                       0.94s  D6 A#5 D6 C6 C6 D6 C6 C6
+  38.383  Floor hoppers         14     2  signature                   0.62s  E5 F5 F5 F5 F5
+  38.386  Floor hoppers         24     4  fresh                       0.84s  G5 G5 G5 G5 G5 G5
+  38.391  Floor hoppers         29     5  signature                   0.33s  C6 C6 C6
+  38.424  Crown chatterers      68    24  answer · fresh              1.38s  A#5 C6 A#5 G5 G5 G5 G5 E5 F5
+  38.439  Floor hoppers         28     4  fresh                       0.95s  G5 G5 G5 G5 G5 G5 G5 G5
+  38.492  Floor hoppers         35     5  fresh                       0.31s  D5 D5 D5
+  38.521  Floor hoppers         44     7  fresh                       0.26s  D5 D5 D5
+  38.619  Swifts               210    48  fresh                       0.49s  G6 G6
+  38.632  Floor hoppers         37     6  fresh                       0.78s  A#5 C6 C6 A#5 A#5 A#5 A#5 A#5
+  38.642  Floor hoppers         19     3  fresh                       0.75s  C5 C5 C5 C5 C5 C5
+  38.673  Warblers             270    58  copy of Floor hoppers       1.41s  C6 C6 C6 C6 C6 A#5
+  38.693  Warblers             286    64  answer · fresh              2.77s  F6 G6 G6 A6 A6 A6 A6 A6 A6 G6 …
+  38.720  Warblers             308    75  signature                   3.99s  D6 C6 D6 E6 E6 E6 F6 F6 F6 E6 …
+  38.748  Warblers             287    65  copy of Floor hoppers       1.17s  F6 F6 F6 C6 E6 E6 E6 E6
+  38.774  Crown chatterers      85    26  answer · fresh              1.50s  C6 C6 A5 A5 C6 A#5 C6 A#5 G5 A5 …
+  38.801  Swifts               231    49  answer · signature          1.85s  F6 F6 F6 F6
+  38.822  Crown chatterers     119    28  fresh                       1.86s  C6 C6 C6 A#5 G5 A5 A#5 A#5 G5 G5 …
+  38.838  Swifts               248    49  fresh                       1.87s  A#6 A#6 A#6
+  38.846  Crown chatterers      92    26  answer · fresh              0.48s  A5 A5 A#5 C6 C6 D6 D6
+  38.914  Crown chatterers      84    26  copy of Warblers            2.46s  C6 A#5 E6 D6 D6 F6 E6 E6 D6 D6 …
+  38.974  Floor hoppers         13     2  answer · fresh              0.52s  A#5 A#5 A#5 A#5
+  38.996  Warblers             296    70  answer · fresh              2.26s  A5 A5 A5 A5 A#5 A#5 A#5 A#5 A#5 A#5 …
+  39.016  Swifts               204    48  fresh                       2.47s  A6 A6 A6 A6
+  39.020  Swifts               226    49  answer · signature          1.52s  F6 F6 E6
+  39.104  Warblers             294    69  copy of Floor hoppers       0.84s  E6 E6 E6 D6
+  39.176  Warblers             268    56  fresh                       2.02s  C6 D6 E6 E6 E6 E6 D6 C6
+  39.211  Diggers               53    16  fresh                       0.71s  G2 F2
+  39.227  Floor hoppers         40     6  signature                   0.82s  C5 C5 C5 C5 C5 C5
+  39.249  Swifts               250    49  answer · signature          1.72s  F6 F6 E6 F6
+  39.252  Warblers             265    55  copy of Crown chatterers    3.64s  D6 C6 F6 E6 E6 A6 F6 F6 E6 E6 …
+  39.292  Lower climbers       152    32  answer · fresh              1.86s  D4 C4
+  39.297  Warblers             289    66  fresh                       1.29s  D6 E6 F6 F6 G6 G6 F6 F6 E6 D6
+  39.319  Warblers             298    71  answer · fresh              2.94s  G5 G5 A5 A5 A#5 A#5 A#5 A#5 A#5 A#5 …
+  39.397  Crown chatterers     107    27  answer · signature          0.62s  E6 F6 E6 D6 D6 C6 A5
+  39.408  Gliders              337    82  fresh                       1.43s  E5 F5
+  39.484  Floor hoppers         18     3  answer · signature          0.94s  G5 G5 A5 G5 G5 G5
+  39.506  Warblers             299    71  copy of Warblers            2.87s  A5 G5 A5 A5 A#5 A#5 A#5 A#5 A#5 C6 …
+  39.522  Crown chatterers      64    23  fresh                       1.53s  D6 E6 E6 E6 E6 E6 E6 E6 D6
+  39.522  Floor hoppers         21     3  answer · fresh              0.36s  E5 E5 E5 E5
+  39.558  Floor hoppers         34     5  answer · fresh              0.47s  C6 C6 C6 C6
+  39.577  Crown chatterers      63    23  fresh                       1.43s  C6 C6 D6 F6 D6 D6 C6 C6 D6
+  39.578  Crown chatterers     133    29  answer · signature          0.64s  G5 G5 A#5 C6 A#5
+  39.600  Lower climbers       190    45  answer · fresh              0.42s  G4
+  39.616  Warblers             285    64  copy of Crown chatterers    0.92s  G6 A6 G6 F6 F6 E6 C6
+  39.666  Floor hoppers         43     7  signature                   0.67s  A5 A5 A#5 A5 A5
+  39.679  Swifts               201    48  answer · fresh              2.13s  F6 F6 F6 F6
+  39.686  Warblers             281    63  fresh                       1.90s  C6 D6 D6 E6 E6 E6 D6 D6 C6
+  39.708  Warblers             288    65  fresh                       1.88s  C6 D6 E6 E6 E6 E6 D6 C6
+  39.716  Crown chatterers     116    28  answer · fresh · harm.      1.60s  A5 A5 A5 A5 G5 G5 A5 A#5 C6 C6 …
+  39.803  Crown chatterers     103    27  answer · fresh · harm.      0.58s  C6 C6 D6 E6 F6
+  39.828  Floor hoppers          8     1  signature                   0.78s  D5 D5 D5 D5 D5 D5 D5
+  39.881  Crown chatterers      99    27  fresh · harm.               0.53s  A5 A#5 A#5 A#5 A#5
+  39.894  Swifts               251    49  fresh                       1.50s  C7 C7 C7
+  39.950  Warblers             259    52  answer · signature          1.57s  C6 D6 E6 F6 G6 G6 F6 F6 E6 D6 …
+  39.969  Gliders              341    83  copy of Crown chatterers   17.48s  A#5 G5 G5 G5 F5 F5 G5 A5 A#5 A#5 …
+  39.975  Lower climbers       150    32  answer · signature          1.34s  G4 E4
+  39.999  Warblers             310    77  signature                   3.61s  D6 E6 F6 G6 F6 A6 A6 A#6 A6 A6 …
+  40.023  Swifts               238    49  signature                   1.82s  F6 E6 F6 F6
+  40.027  Crown chatterers     139    30  copy of Warblers            1.02s  A#5 D6 E6 F6 F6 E6 E6 D6 C6 D6
+  40.048  Warblers             278    62  signature                   2.63s  A6 A6 C7 A#6 A#6 A#6 A#6 A#6 A#6 A#6 …
+  40.141  Crown chatterers      66    24  fresh                       1.10s  G5 G5 G5 A5 A#5 A5 A5 C6 D6
+  40.238  Diggers               52    15  fresh                       0.68s  D2 D2
+  40.404  Warblers             276    61  answer · copy of Crown chatterers  1.77s  A5 A5 A5 A#5 C6 A#5 A#5 D6 E6
+  40.442  Floor hoppers         42     7  answer · signature          0.67s  A5 A5 A5 A5 A5
+  40.464  Crown chatterers      71    24  answer · fresh · harm.      1.11s  E6 C6 C6 A#5 A5 G5 G5 G5 F5 F5
+  40.619  Lower climbers       170    38  fresh                       2.84s  E4 D4 C4
+  40.635  Warblers             271    58  answer · signature          1.55s  F6 G6 A6 A#6 A#6 C7 C7 C7 A#6 A#6 …
+  40.641  Warblers             279    62  copy of Crown chatterers    1.60s  G6 E6 E6 D6 C6 A#5 A#5 A#5 A5 A5
+  40.743  Floor hoppers         31     5  answer · fresh              0.71s  C6 C6 C6 C6 C6 C6
+  40.766  Crown chatterers     122    28  answer · fresh              1.13s  D6 F6 F6 F6 F6 D6 C6 D6 E6
+  40.855  Crown chatterers     111    27  answer · fresh              1.62s  A5 A#5 A#5 A#5 A5 A#5 A#5 A#5 A#5 A#5 …
+  40.881  Crown chatterers     136    29  copy of Warblers            1.09s  E6 C6 C6 A#5 A5 G5 G5 G5 F5 F5
+  40.916  Warblers             284    64  answer · copy of Crown chatterers  1.73s  G6 E6 E6 D6 C6 D6 A#5 A#5 G5 A5
+  40.958  Lower climbers       191    45  answer · fresh              0.76s  F4
+  41.014  Warblers             264    55  fresh                       1.50s  E6 F6 F6 G6 G6 G6 F6 F6 E6
+  41.039  Crown chatterers     114    28  signature                   0.81s  E6 D6 D6 F6 D6 D6
+  41.233  Swifts               236    49  answer · fresh              0.93s  C7 C7 C7
+  41.253  Gliders              332    81  answer · fresh              2.35s  F5 G5
+  41.356  Crown chatterers      83    25  answer · fresh              1.07s  C6 C6 C6 D6 D6 D6 D6 E6 F6 F6
+  41.362  Swifts               243    49  signature                   1.89s  F6 F6 F6 F6
+  41.416  Crown chatterers     144    31  fresh                       1.40s  D6 C6 D6 E6 E6 E6 E6 D6 D6 D6
+  41.463  Warblers             266    55  answer · copy of Crown chatterers  1.23s  G6 F6 F6 A6 F6 F6
+  41.465  Swifts               233    49  fresh                       1.52s  F6 F6 F6
+  41.476  Swifts               219    48  signature                   2.17s  A#6 D7 A#6 A#6
+  41.617  Crown chatterers     138    30  answer · fresh              0.63s  F6 E6 E6 E6 D6 D6
+  41.668  Crown chatterers     118    28  answer · fresh · harm.      1.52s  G5 G5 G5 G5 A#5 A5 A5 A5 A#5
+  41.672  Gliders              330    81  fresh                       2.72s  G5 A5
+  41.674  Crown chatterers     127    29  answer · fresh              0.48s  G5 G5 F5 F5
+  41.679  Lower climbers       175    40  signature                   1.19s  G4 F4
+  41.685  Swifts               253    49  answer · fresh              0.62s  D7 D7
+  41.698  Warblers             291    67  copy of Swifts              0.91s  G6 A#6 G6 F6
+  41.741  Lower climbers       194    47  signature                   0.64s  D4
+  41.745  Swifts               246    49  fresh                       2.25s  D7 D7 D7 D7
+  41.819  Lower climbers       156    34  answer · signature          0.78s  G4
+  41.820  Warblers             256    51  copy of Swifts              0.83s  G6 A#6 G6 G6
+  41.845  Warblers             282    63  copy of Crown chatterers    0.75s  A5 A#5 G5 G5
+  41.908  Floor hoppers         33     5  answer · fresh              0.82s  F5 F5 F5 F5 F5 F5 F5
+  41.923  Lower climbers       157    34  answer · signature · harm.  0.80s  D4
+  41.926  Crown chatterers     121    28  answer · signature          0.98s  E6 E6 D6 D6 E6 D6 D6
+  42.107  Warblers             274    59  answer · signature          1.41s  A5 E6 D6 D6 D6 C6 A5
+  42.108  Floor hoppers         34     5  signature                   0.34s  C6 C6 A#5
+  42.151  Swifts               241    49  answer · signature          1.70s  F6 F6 F6 F6
+  42.154  Crown chatterers      67    24  answer · fresh              0.80s  C6 D6 D6 D6 E6 D6 E6 F6
+  42.160  Gliders              322    80  fresh                       2.17s  C6 D6
+  42.195  Crown chatterers     126    29  copy of Warblers            0.48s  A5 A5 F5 F5
+  42.198  Floor hoppers         23     3  answer · signature          0.97s  G5 G5 G5 G5 G5 G5
+  42.325  Warblers             267    56  answer · signature          1.35s  C6 E6 G6 G6 E6 C6
+  42.338  Swifts               207    48  answer · fresh              0.83s  D7 D7
+  42.378  Crown chatterers      90    26  fresh                       0.49s  F6 F6 F6 D6
+  42.432  Swifts               245    49  answer · fresh              0.25s  A6
+  42.432  Warblers             263    54  signature                   2.43s  C6 F6 G6 G6 C7 A#6 A#6 A6 G6 F6 …
+  42.438  Crown chatterers     131    29  signature                   0.67s  G5 F5 A#5 C6 A#5
+  42.442  Swifts               196    48  fresh                       1.00s  F6 F6 F6
+  42.492  Swifts               199    48  fresh                       0.63s  C7 C7
+  42.513  Crown chatterers      69    24  copy of Floor hoppers       0.99s  A#5 A#5 A#5 A#5 A#5 A#5
+  42.518  Swifts               211    48  fresh                       0.22s  A6
+  42.541  Crown chatterers     123    29  answer · fresh              1.21s  E6 E6 F6 F6 E6 E6 E6 E6 D6 D6 …
+  42.684  Warblers             307    75  fresh                       2.86s  D6 D6 E6 F6 F6 G6 G6 G6 G6 G6 …
+  42.754  Crown chatterers      72    24  answer · fresh · harm.      0.63s  G5 A5 A#5 A5 A5 G5 A5 A#5 A#5
+  42.775  Lower climbers       166    37  answer · signature          0.74s  A3
+  42.826  Warblers             306    74  fresh                       1.32s  A#5 D6 E6 F6 G6 G6 F6 E6 D6 A#5
+  42.850  Floor hoppers         32     5  answer · fresh              0.49s  A#5 A#5 A#5 A#5 A#5
+  42.875  Crown chatterers      92    26  signature                   0.94s  F5 C6 D6 F6 F6 D6 D6 D6 D6
+  42.897  Warblers             273    59  copy of Warblers            3.10s  D6 D6 D6 E6 F6 F6 G6 G6 G6 F6 …
+  42.902  Crown chatterers      88    26  signature · harm.           0.98s  A#5 F6 F6 F6 F6 F6 F6 F6 F6
+  42.920  Lower climbers       189    45  answer · signature          1.86s  E4 A#3
+  42.974  Warblers             258    52  answer · copy of Crown chatterers  0.90s  A5 A#5 C6 A#5 A#5 A5 A#5 C6 C6
+  43.027  Crown chatterers     120    28  fresh                       0.95s  F6 E6 A#5 G5 G5 E5 F5 G5 G5
+  43.043  Crown chatterers     128    29  answer · fresh · harm.      1.07s  E6 D6 D6 D6 F6 F6 F6 F6
+  43.063  Crown chatterers     140    30  answer · fresh              0.96s  A#5 A#5 A#5 A5 G5 G5 G5 G5 A5 A5
+  43.107  Warblers             292    67  answer · fresh              3.01s  A5 A5 A#5 A#5 A#5 C6 C6 C6 C6 C6 …
+  43.124  Crown chatterers      93    26  answer · fresh              0.89s  A#5 A#5 A#5 C6 C6 C6 C6
+  43.191  Floor hoppers          4     0  fresh                       0.40s  D5 E5 E5 E5
+  43.206  Crown chatterers     106    27  answer · copy of Lower climbers  0.28s  E5 E5
+  43.215  Warblers             290    66  answer · fresh              1.34s  A#5 C6 D6 E6 E6 E6 D6 C6 A#5
+  43.256  Warblers             275    60  answer · copy of Crown chatterers  1.32s  C6 C6 C6 A#5 A5 A5 A5 A5 A#5 A#5
+  43.284  Floor hoppers          5     0  signature                   0.31s  E5 E5 E5
+  43.298  Crown chatterers      73    24  copy of Warblers            2.01s  G5 G5 A5 A5 A5 A#5 A#5 A#5 A#5 A#5 …
+  43.319  Floor hoppers          2     0  fresh                       1.09s  G5 G5 G5 G5 G5 G5 G5
+  43.326  Crown chatterers      95    26  answer · fresh              1.00s  D6 D6 D6 D6 D6 E6 E6 D6 D6
+  43.343  Warblers             314    79  answer · fresh              3.54s  G5 A5 C6 C6 D6 D6 E6 E6 D6 D6 …
+  43.348  Lower climbers       151    32  answer · signature          1.45s  G4 E4
+  43.363  Floor hoppers         17     2  fresh                       0.52s  F5 G5 F5 F5 F5 F5
+  43.411  Floor hoppers         10     1  answer · signature          0.78s  D5 D5 D5 D5 D5 D5 D5
+  43.445  Crown chatterers     112    28  answer · signature · harm.  0.82s  F6 D6 E6 E6 E6 E6
+  43.490  Floor hoppers         38     6  fresh                       0.30s  G5 G5 G5
+  43.499  Lower climbers       164    36  signature                   1.32s  C4 A#3
+  43.540  Floor hoppers          6     1  answer · fresh              0.74s  G5 G5 G5 G5 G5
+  43.551  Warblers             311    78  signature                   1.24s  A5 A5 D6 E6 G6 A6 F6 F6 E6 D6 …
+  43.555  Floor hoppers          9     1  answer · fresh              1.02s  F5 F5 F5 F5 F5 F5 F5
+  43.589  Crown chatterers     134    29  answer · fresh · harm.      0.42s  G5 G5 G5 G5
+  43.596  Crown chatterers     125    29  fresh                       1.16s  D6 C6 C6 C6 C6 C6 D6 D6 C6
+  43.671  Crown chatterers      74    24  fresh                       1.21s  A5 A5 A5 A#5 A5 A5 A#5 A#5 A#5 A#5 …
+  43.762  Crown chatterers     105    27  signature                   0.59s  F6 F6 E6 E6 A#5 C6 C6
+  43.801  Floor hoppers          1     0  answer · fresh              1.06s  A#5 A#5 A#5 A#5 A#5 A#5 A#5
+  43.826  Crown chatterers      79    25  answer · fresh              1.40s  A#5 A#5 C6 C6 C6 C6 C6 C6 C6 C6
+  43.854  Crown chatterers      70    24  answer · signature          0.50s  A#5 F5 A5 F5
+  43.938  Swifts               242    49  answer · fresh              1.00s  D7 D7
+  44.017  Swifts               232    49  fresh                       0.50s  A6
+  44.040  Crown chatterers     110    27  fresh · harm.               0.62s  A#5 D6 C6 A5 A5
+  44.056  Floor hoppers         25     4  signature                   0.32s  C5 D5 D5
+  44.063  Crown chatterers      65    23  answer · fresh              1.48s  F5 F5 F5 F5 G5 G5 G5 G5 G5 G5 …
+  44.083  Swifts               247    49  fresh                       2.25s  A6 A6 A6 A6
+  44.137  Swifts               226    49  fresh                       0.72s  G6 G6
+  44.140  Swifts               198    48  fresh                       1.61s  G6 G6 G6 G6
+  44.150  Warblers             259    52  copy of Swifts              0.44s  C7 C7
+  44.161  Lower climbers       153    32  answer · fresh · harm.      0.48s  G3
+  44.198  Crown chatterers     117    28  answer · fresh · harm.      0.71s  F5 F5 F5 G5 G5 A#5 A#5 G5 A#5
+  44.238  Swifts               203    48  fresh                       0.20s  A6
+  44.301  Crown chatterers      97    26  answer · signature          0.99s  F5 C6 D6 F6 F6 E6 D6 D6 D6
+  44.327  Crown chatterers     119    28  fresh                       0.79s  D6 D6 D6 D6 D6 D6 E6 D6 E6 F6
+  44.331  Swifts               217    48  fresh                       1.50s  G6 G6 G6 G6
+  44.341  Crown chatterers      89    26  answer · fresh · harm.      0.53s  A#5 A#5 C6 C6
+  44.360  Swifts               214    48  answer · fresh              0.89s  A#6 A#6 A#6
+  44.404  Gliders              339    82  answer · fresh              0.79s  D6
+  44.496  Floor hoppers         16     2  answer · signature          0.64s  F5 F5 F5 F5 F5
+  44.514  Crown chatterers      91    26  signature · harm.           0.96s  G5 E6 E6 F6 F6 E6 E6 E6 E6
+  44.666  Crown chatterers     137    30  answer · fresh              1.00s  C6 D6 F6 F6 E6 C6 A5 G5 E5
+  44.722  Warblers             261    53  copy of Swifts              0.59s  E6 E6 E6 E6
+  44.750  Warblers             277    61  fresh                       2.69s  D6 E6 F6 G6 A6 A6 A6 A6 A6 G6 …
+  44.751  Warblers             304    73  fresh                       2.92s  D6 E6 F6 G6 G6 G6 G6 G6 G6 G6 …
+  44.782  Warblers             260    53  fresh                       4.24s  C6 D6 E6 F6 G6 G6 G6 A6 A6 G6 …
+  44.824  Lower climbers       177    41  fresh                       3.13s  G4 F4 E4
+  44.843  Crown chatterers     133    29  answer · copy of Gliders    0.06s  E6
+  44.847  Floor hoppers         41     7  answer · fresh              1.13s  D5 D5 D5 D5 D5 D5 D5
+  44.864  Warblers             295    70  answer · copy of Floor hoppers  1.07s  A#5 A#5 A#5 A#5 A#5
+  44.883  Crown chatterers      87    26  answer · fresh · harm.      1.41s  E6 E6 F6 F6 E6 E6 D6 D6 C6 C6 …
+  44.984  Swifts               234    49  answer · fresh              0.25s  D7
+  45.002  Crown chatterers      94    26  answer · fresh              1.62s  G5 A5 A#5 A5 A#5 A#5 A#5 C6 C6 C6 …
+  45.037  Crown chatterers      77    25  answer · fresh              1.04s  E5 A5 G5 A5 A#5 D6 A#5
+  45.041  Floor hoppers         35     5  fresh                       0.52s  A#5 A#5 A#5 A#5 A#5
+  45.091  Swifts               254    49  signature                   1.77s  F6 F6 F6 F6
+  45.106  Warblers             291    67  copy of Warblers            1.07s  A#5 A#5 A#5 A#5 A#5
+  45.111  Warblers             300    72  copy of Crown chatterers    1.77s  G6 G6 A6 G6 G6 F6 A6 E6 E6 C6 …
+  45.124  Crown chatterers     101    27  answer · fresh              1.37s  C6 C6 D6 D6 C6 A#5 C6 C6 A#5
+  45.130  Floor hoppers         27     4  answer · signature          0.35s  D5 D5 C5
+  45.137  Crown chatterers      60    23  fresh · harm.               0.73s  C6 E6 F6 E6 F6 F6
+  45.138  Crown chatterers     145    31  answer · copy of Warblers   0.72s  A#5 A5 A5 A5 A5
+  45.148  Swifts               221    48  fresh                       0.54s  F6 F6
+  45.159  Warblers             272    58  copy of Swifts              0.08s  C7
+  45.166  Lower climbers       174    40  signature                   1.19s  G4 F4
+  45.166  Floor hoppers         21     3  signature                   0.97s  G5 G5 G5 G5 G5 F5
+  45.193  Gliders              319    80  answer · copy of Swifts     0.59s  D6
+  45.249  Lower climbers       179    42  fresh                       0.55s  D4
+  45.260  Crown chatterers     135    29  answer · fresh              1.66s  F6 F6 E6 D6 C6 A#5 A5 A#5 G5 G5 …
+  45.273  Warblers             256    51  copy of Crown chatterers    1.56s  G5 A#5 A5 A#5 C6 E6 C6
+  45.296  Crown chatterers      68    24  answer · signature          0.65s  A#5 A5 A5 A5 F5
+  45.335  Diggers               55    18  fresh                       1.08s  D2 D2
+  45.356  Lower climbers       158    35  signature                   1.51s  C4 D4 C4
+  45.368  Warblers             269    57  answer · fresh              2.25s  C6 D6 E6 F6 F6 G6 G6 G6 G6 F6 …
+  45.374  Swifts               246    49  fresh                       1.69s  A6 A6 A6 A6
+  45.396  Lower climbers       193    46  answer · signature          0.74s  A#3
+  45.408  Warblers             265    55  fresh                       2.06s  C6 D6 E6 F6 G6 G6 G6 G6 G6 G6 …
+  45.432  Diggers               46     9  fresh                       0.27s  E2
+  45.480  Warblers             264    55  fresh                       2.05s  G6 A6 A#6 A#6 A#6 A#6 A6 G6
+  45.500  Swifts               239    49  fresh                       0.20s  G6
+  45.542  Lower climbers       155    33  answer · signature          1.76s  C4 C4
+  45.550  Lower climbers       176    40  fresh · harm.               1.37s  A#3 A3
+  45.626  Warblers             255    50  signature                   3.11s  C6 D6 D6 D6 F6 C6 E6 E6 E6 E6 …
+  45.629  Swifts               196    48  fresh                       2.26s  C7 C7 C7 C7
+  45.647  Swifts               223    48  answer · fresh              2.11s  G6 G6 G6 G6
+  45.692  Crown chatterers      99    27  answer · fresh · harm.      0.89s  F6 F6 F6 F6 F6 F6
+  45.729  Crown chatterers     143    31  answer · signature          1.17s  F5 F5 G5 A#5 F5 F5 F5 F5
+  45.731  Warblers             297    70  copy of Lower climbers      0.32s  G5 G5
+  45.757  Warblers             302    73  signature                   0.70s  F6 G6 A6 A6 G6 E6
+  45.760  Warblers             309    76  answer · fresh              2.66s  A#5 C6 D6 D6 E6 E6 E6 E6 D6 D6 …
+  45.775  Warblers             289    66  copy of Warblers            1.73s  G6 A6 A#6 A#6 A#6 A#6 G6
+  45.846  Warblers             287    65  fresh                       1.28s  A#5 C6 D6 E6 E6 E6 E6 D6 C6 A#5
+  45.847  Warblers             301    72  signature                   1.62s  F6 F6 G6 A6 A6 A6 G6 F6 D6
+  45.861  Warblers             296    70  fresh                       1.37s  G6 A6 A#6 A#6 A#6 A6 G6
+  45.916  Crown chatterers     116    28  answer · signature          0.82s  E6 D6 D6 D6 D6 D6
+  45.922  Crown chatterers     142    30  answer · fresh              0.67s  C6 D6 D6 D6 C6
+  45.986  Gliders              316    80  fresh                       2.53s  G5 A#5
+  46.012  Crown chatterers      96    26  answer · fresh              0.81s  C6 C6 A#5 A#5 A#5 A#5 C6 A#5 A#5 D6
+  46.048  Warblers             280    62  fresh                       3.08s  D6 E6 F6 G6 A6 A6 A#6 A6 A6 G6 …
+  46.083  Crown chatterers     130    29  signature · harm.           0.70s  F5 F5 A5 A#5 A5
+  46.108  Crown chatterers      78    25  answer · signature          0.98s  G5 A#5 G5 A5 G5 G5 G5 F5 F5 F5 …
+  46.150  Gliders              315    80  answer · fresh              0.57s  C6
+  46.169  Warblers             270    58  fresh                       2.94s  D6 E6 F6 F6 G6 G6 G6 G6 F6 F6 …
+  46.181  Lower climbers       181    43  answer · signature          0.65s  G3
+  46.193  Crown chatterers     131    29  fresh · harm.               0.36s  C6 A#5 C6 A#5
+  46.373  Lower climbers       192    46  answer · signature          0.80s  A#3
+  46.447  Warblers             266    55  fresh                       0.94s  G5 A5 A#5 A#5 A#5 A#5 A#5 A5 G5
+  46.505  Warblers             257    52  fresh                       1.84s  D6 D6 E6 E6 E6 E6 E6 D6 D6
+  46.534  Floor hoppers         43     7  answer · fresh              0.83s  G5 G5 G5 G5 G5 G5 G5 G5
+  46.610  Warblers             283    63  answer · fresh              2.46s  C6 D6 D6 E6 F6 F6 G6 G6 G6 G6 …
+  46.707  Diggers               45     8  signature                   0.87s  C3 C3
+  46.730  Crown chatterers      71    24  answer · copy of Floor hoppers  0.85s  A#5 A#5 A#5 A#5 A5 A#5 A#5 A#5
+  46.760  Floor hoppers          7     1  signature                   0.77s  D5 D5 D5 D5 D5 D5 D5
+  46.787  Crown chatterers      63    23  answer · signature          1.00s  D6 E6 F6 D6 D6 C6 D6
+  46.799  Floor hoppers         18     3  answer · signature          0.96s  G5 G5 G5 G5 E5 G5
+  46.840  Warblers             305    74  fresh                       3.07s  C6 D6 D6 E6 E6 E6 F6 F6 E6 E6 …
+  46.916  Swifts               249    49  answer · fresh              0.28s  C7
+  47.014  Crown chatterers     107    27  answer · copy of Warblers   1.62s  A#5 C6 C6 D6 E6 E6 F6 F6 D6 F6 …
+  47.034  Crown chatterers     115    28  answer · signature          0.82s  E6 D6 D6 D6 A#5 E6
+  47.080  Swifts               205    48  signature                   1.52s  A#6 A#6 A#6
+  47.134  Crown chatterers      84    26  answer · signature          0.94s  F5 C6 D6 F6 F6 F6 D6 D6 D6
+  47.167  Lower climbers       180    42  signature                   0.43s  F4
+  47.168  Crown chatterers      98    27  answer · fresh              0.41s  F6 E6 E6 F6
+  47.213  Swifts               213    48  fresh                       0.64s  A#6 A#6
+  47.219  Crown chatterers      88    26  copy of Crown chatterers    1.61s  A#5 C6 C6 D6 E6 E6 F6 F6 D6 F6 …
+  47.226  Warblers             299    71  fresh                       3.42s  C6 D6 E6 F6 F6 G6 G6 G6 G6 G6 …
+  47.283  Crown chatterers     127    29  answer · fresh              1.44s  D6 D6 A#5 A5 C6 C6 A#5 A5 A5 C6
+  47.285  Crown chatterers     120    28  fresh                       0.93s  A#5 G5 C6 E6 C6 D6 D6 F6
+  47.302  Crown chatterers     136    29  answer · signature · harm.  0.49s  A5 C6 D6 A#5
+  47.348  Lower climbers       171    39  answer · signature          1.65s  E4 E4 D4
+  47.364  Crown chatterers     113    28  answer · copy of Swifts     0.39s  F6 F6 F6
+  47.369  Swifts               244    49  fresh                       0.82s  A#6 A#6
+  47.394  Warblers             285    64  answer · signature          2.58s  E6 E6 F6 G6 A6 A#6 A#6 A#6 A#6 A#6 …
+  47.455  Lower climbers       184    43  answer · signature          0.53s  G3
+  47.469  Swifts               202    48  fresh                       1.71s  G6 G6 G6
+  47.497  Crown chatterers     144    31  fresh                       0.96s  F6 F6 E6 E6 E6 E6 E6 E6 F6 F6 …
+  47.509  Crown chatterers      80    25  answer · fresh              0.64s  A5 A5 A5 G5 A5 A#5
+  47.517  Lower climbers       183    43  answer · fresh · harm.      0.30s  A#3
+  47.553  Warblers             298    71  fresh                       1.58s  F6 G6 A6 A#6 A6 G6 F6
+  47.654  Gliders              328    81  answer · signature          1.10s  D5
+  47.719  Warblers             313    79  signature                   2.81s  A#5 C6 C6 C6 E6 C6 D6 F6 D6 C6 …
+  47.828  Crown chatterers     104    27  answer · fresh              0.83s  D6 D6 D6 D6 D6 D6
+  47.882  Crown chatterers      64    23  fresh                       1.22s  F5 G5 G5 A#5 C6 C6 D6 D6 D6 C6
+  47.925  Crown chatterers     106    27  fresh                       1.03s  A#5 D6 D6 D6 D6 D6 E6
+  47.934  Swifts               225    49  answer · signature          1.70s  F6 A6 F6 F6
+  47.951  Warblers             308    75  answer · signature          4.00s  D6 A#5 D6 E6 E6 E6 F6 F6 F6 E6 …
+  47.965  Gliders              340    82  fresh                       2.05s  F5 G5
+  47.967  Diggers               47    10  signature                   1.07s  C2 D2 D2
+  47.999  Crown chatterers     132    29  answer · fresh              0.97s  D6 E6 E6 F6 F6 E6 F6
+  48.069  Floor hoppers         13     2  fresh                       0.77s  A#5 A#5 A#5 A#5 A#5 A#5
+  48.087  Warblers             303    73  answer · signature          0.71s  E6 A#6 A6 A6 G6 E6
+  48.106  Diggers               58    21  fresh                       1.51s  G2 G2 G2
+  48.175  Swifts               200    48  answer · fresh              2.20s  C7 C7 C7 D7
+  48.274  Warblers             262    54  fresh                       1.57s  G5 A5 A#5 C6 D6 D6 D6 D6 D6 D6 …
+  48.321  Floor hoppers         24     4  signature                   0.35s  D5 D5 D5
+  48.326  Floor hoppers          8     1  answer · signature          0.79s  D5 D5 D5 D5 D5 D5 D5
+  48.370  Warblers             276    61  answer · signature          2.40s  D6 E6 G6 A6 A#6 A#6 A#6 A#6 A#6 A#6 …
+  48.375  Swifts               198    48  signature                   2.15s  A#6 A6 A#6 A#6
+  48.409  Swifts               230    49  answer · fresh              0.72s  A6 A6
+  48.412  Crown chatterers     147    31  answer · signature          1.13s  F5 F5 G5 G5 F5 E5 F5 G5
+  48.424  Crown chatterers      72    24  answer · fresh              1.57s  D6 C6 A#5 C6 D6 E6 E6 D6 E6 D6 …
+  48.475  Lower climbers       172    39  answer · signature · harm.  1.13s  G4 E4
+  48.490  Crown chatterers      75    25  answer · fresh              1.31s  A#5 E6 D6 C6 A#5 A#5 C6 G5 G5 G5 …
+  48.520  Swifts               250    49  signature                   1.73s  F6 F6 F6 F6
+  48.554  Swifts               209    48  fresh                       0.43s  A6
+  48.568  Floor hoppers         19     3  fresh                       0.82s  G5 G5 G5 G5 G5 G5 G5 G5
+  48.624  Warblers             271    58  answer · fresh              1.25s  D6 E6 E6 F6 F6 F6 E6 E6 D6
+  48.659  Crown chatterers     146    31  fresh · harm.               1.07s  D6 E6 D6 E6 D6 C6 C6 C6
+  48.666  Warblers             310    77  copy of Crown chatterers    1.58s  G5 G5 A5 A5 G5 G5 G5 A5
+  48.672  Gliders              343    83  fresh                       2.05s  G5 A#5
+  48.688  Crown chatterers     121    28  answer · copy of Swifts     0.11s  E6
+  48.755  Crown chatterers     141    30  signature                   0.74s  E6 D6 E6 E6 F6
+  48.806  Warblers             297    70  copy of Crown chatterers    2.36s  F6 E6 D6 E6 F6 G6 G6 F6 G6 A6 …
+  48.810  Crown chatterers     122    28  answer · fresh              0.53s  D6 D6 D6 E6
+  49.014  Crown chatterers      85    26  fresh                       1.69s  D6 C6 C6 D6 D6 D6 D6 C6 A#5 C6 …
+  49.018  Lower climbers       167    37  answer · signature          0.79s  A3
+  49.076  Crown chatterers     148    31  answer · signature · harm.  1.14s  A5 A#5 A#5 G5 A5 A5 A#5 A5
+  49.111  Swifts               201    48  answer · signature          2.06s  A#6 A#6 A#6 A#6
+  49.137  Crown chatterers      93    26  answer · fresh              1.74s  A#5 A#5 A5 A5 A5 A5 A#5 A#5 C6 C6 …
+  49.141  Warblers             281    63  signature                   2.50s  A#5 C6 D6 E6 F6 G6 A6 F6 E6 D6 …
+  49.257  Crown chatterers     108    27  fresh                       1.85s  C6 C6 C6 C6 D6 D6 E6 F6 D6 E6 …
+  49.286  Warblers             294    69  fresh                       1.99s  A5 A5 A#5 C6 C6 C6 C6 C6 C6 C6 …
+  49.310  Gliders              321    80  answer · fresh              2.63s  G5 A5
+  49.389  Swifts               254    49  fresh                       0.96s  A#6 A#6
+  49.519  Diggers               51    14  answer · signature          1.51s  C3 A2 A#2
+  49.533  Warblers             268    56  answer · signature          1.43s  C6 G6 G6 G6 E6 C6
+  49.622  Floor hoppers         36     6  answer · signature          0.82s  C5 C5 C5 C5 C5 C5
+  49.657  Crown chatterers     102    27  answer · fresh · harm.      0.86s  F6 E6 D6 E6 E6 D6 D6 D6 D6 C6
+  49.657  Warblers             288    65  answer · signature          1.22s  A5 A#5 C6 D6 E6 E6 E6 D6 C6 A#5 …
+  49.759  Warblers             311    78  copy of Warblers            2.41s  A#5 C6 D6 E6 F6 G6 A6 G6 E6 D6 …
+  49.766  Crown chatterers     138    30  answer · fresh              0.87s  A#5 G5 A5 A#5 A5 A5
+  49.892  Crown chatterers     124    29  signature                   0.50s  G5 G5 C6 A#5
+  49.905  Swifts               197    48  answer · fresh              1.12s  A6 A6 A6 A6
+  49.933  Crown chatterers     149    31  answer · signature · harm.  1.09s  F5 F5 G5 G5 F5 F5 F5 F5
+  50.036  Swifts               252    49  fresh                       0.37s  A6
+  50.044  Crown chatterers     119    28  answer · fresh              1.42s  D6 D6 D6 D6 D6 C6 C6 C6 C6 C6 …
+  50.070  Lower climbers       168    37  signature                   0.75s  A#3
+  50.080  Swifts               229    49  fresh                       1.29s  C7 C7 C7
+  50.109  Crown chatterers     125    29  fresh · harm.               1.64s  E5 E5 E5 E5 E5 E5 E5 E5 E5 E5 …
+  50.120  Lower climbers       162    36  answer · fresh              0.73s  A#3
+  50.121  Warblers             306    74  fresh                       1.99s  A5 A#5 A#5 A#5 A#5 A#5 A#5 A#5 A#5 A#5 …
+  50.156  Swifts               211    48  fresh                       1.21s  F6 F6 F6 F6
+  50.207  Warblers             284    64  signature                   2.47s  E6 F6 E6 A6 A#6 A#6 A#6 C7 A#6 G6 …
+  50.271  Crown chatterers     117    28  fresh                       0.70s  A5 A5 A5 A5 A5
+  50.277  Warblers             291    67  fresh                       1.31s  A#5 C6 D6 D6 D6 C6 A#5
+  50.326  Diggers               59    22  answer · fresh              0.64s  G2 G2
+  50.332  Crown chatterers      76    25  fresh                       1.06s  A5 G5 G5 G5 A5 C6 C6 A#5 A#5
+  50.341  Warblers             273    59  copy of Lower climbers      0.20s  A5
+  50.365  Crown chatterers      91    26  answer · signature          0.92s  G5 C6 D6 F6 F6 D6 D6 D6 D6
+  50.376  Swifts               232    49  signature                   1.86s  G6 F6 G6 F6
+  50.516  Lower climbers       152    32  answer · signature          1.32s  G4 E4
+  50.588  Warblers             272    58  signature                   1.43s  F6 G6 A#6 A#6 A6 C7 C7 C7 A#6 A#6 …
+  50.729  Crown chatterers     114    28  fresh · harm.               1.09s  A5 A#5 A#5 E6 E6 E6 F6
+  50.932  Warblers             312    78  fresh                       2.18s  E6 G6 A6 A#6 C7 C7 A#6 A6 G6 E6
+  50.973  Warblers             286    64  fresh                       1.09s  F6 G6 G6 A6 G6 G6 F6
+  50.977  Gliders              327    81  fresh                       0.61s  F5
+  51.172  Gliders              323    80  fresh                       2.36s  G5 A#5
+  51.235  Crown chatterers      96    26  fresh · harm.               0.57s  C6 D6 C6 D6 C6
+  51.256  Crown chatterers      63    23  fresh                       0.50s  D6 D6 E6 F6 F6
+  51.283  Crown chatterers     131    29  fresh · harm.               1.20s  C6 C6 A#5 C6 C6 C6 A#5 C6 C6 C6
+  51.368  Crown chatterers      68    24  answer · fresh              0.97s  F5 F5 F5 F5 G5 G5 F5 F5
+  51.395  Floor hoppers         23     3  fresh                       0.44s  C6 C6 C6 C6 C6
+  51.408  Diggers               48    11  fresh                       0.84s  C3 A#2
+  51.420  Warblers             267    56  fresh                       2.84s  E6 F6 G6 G6 A6 A6 A#6 A#6 A#6 A#6 …
+  51.437  Lower climbers       163    36  signature                   1.28s  C4 A#3
+  51.479  Crown chatterers     105    27  answer · fresh              0.86s  A5 A#5 A#5 G5 G5 G5 F5 F5
+  51.488  Floor hoppers         31     5  signature                   0.34s  C6 A5 C6
+  51.508  Floor hoppers         42     7  signature                   0.67s  A5 A5 A5 A5 A#5
+  51.539  Warblers             280    62  signature                   2.68s  A6 A6 A6 A#6 A#6 A#6 A#6 A#6 A#6 C7 …
+  51.568  Lower climbers       166    37  answer · fresh              1.18s  A3 G3
+  51.568  Floor hoppers          9     1  fresh                       0.82s  G5 G5 G5 G5 G5 G5
+  51.569  Crown chatterers     103    27  fresh                       1.12s  D6 D6 F6 E6 F6 F6 E6 F6
+  51.571  Warblers             290    66  answer · fresh              1.57s  A5 A#5 C6 C6 C6 C6 C6 C6 A#5 A5
+  51.572  Crown chatterers     137    30  answer · fresh              1.12s  A#5 A#5 A#5 C6 C6 A#5 C6 C6 C6
+  51.581  Floor hoppers         21     3  fresh                       0.28s  F5 F5 F5
+  51.587  Floor hoppers         44     7  signature                   0.67s  A5 A5 A5 A5 A5
+  51.681  Swifts               236    49  answer · fresh              1.38s  A6 A6 A6
+  51.715  Crown chatterers      83    25  answer · fresh              0.66s  A5 A5 G5 G5 A5
+  51.729  Warblers             303    73  fresh                       1.32s  D6 E6 F6 G6 G6 A6 A6 A6 G6 G6 …
+  51.810  Floor hoppers          8     1  fresh                       0.31s  A5 A5 A5
+  51.819  Swifts               220    48  fresh                       0.97s  G6 G6
+  51.831  Lower climbers       175    40  answer · signature          1.20s  G4 F4
+  51.872  Swifts               248    49  fresh                       1.51s  C7 C7 C7 C7
+  51.879  Floor hoppers         26     4  signature                   0.33s  D5 D5 D5
+  51.897  Swifts               249    49  signature                   1.74s  F6 F6 F6 G6
+  51.987  Crown chatterers     106    27  copy of Warblers            0.99s  E6 C6 E6 F6 F6 F6 E6 F6 F6 F6 …
+  51.998  Crown chatterers      79    25  copy of Crown chatterers    0.67s  A5 A5 A5 G5 A5
+  52.028  Crown chatterers      73    24  fresh                       0.90s  A#5 A#5 A#5 G5 G5 G5
+  52.054  Warblers             282    63  signature                   2.42s  A#5 C6 D6 E6 F6 G6 G6 F6 F6 D6 …
+  52.135  Crown chatterers      81    25  answer · copy of Swifts     0.45s  C6 C6 C6 D6
+  52.139  Floor hoppers          3     0  signature                   0.30s  E5 E5 E5
+  52.168  Warblers             307    75  answer · signature          3.95s  C6 D6 D6 F6 E6 E6 F6 A6 F6 E6 …
+  52.185  Warblers             266    55  signature                   1.63s  F6 G6 G6 A6 A#6 A#6 C7 C7 A#6 A#6 …
+  52.186  Crown chatterers      95    26  copy of Crown chatterers    0.99s  E6 C6 E6 F6 F6 F6 E6 F6 F6 F6 …
+  52.244  Warblers             270    58  signature                   1.45s  G6 G6 A6 C7 A#6 C7 C7 C7 A#6 A#6 …
+  52.275  Warblers             279    62  answer · fresh              3.39s  D6 D6 E6 F6 F6 G6 G6 G6 G6 F6 …
+  52.306  Warblers             309    76  copy of Warblers            2.34s  A#5 A#5 D6 E6 F6 G6 G6 G6 F6 D6 …
+  52.345  Crown chatterers     112    28  answer · signature          0.81s  E6 E6 D6 D6 D6 D6
+  52.366  Floor hoppers          7     1  answer · fresh              0.43s  E5 E5 E5 E5 E5
+  52.410  Warblers             259    52  signature                   1.59s  C6 D6 E6 F6 G6 G6 G6 F6 E6 D6 …
+  52.474  Crown chatterers      84    26  answer · fresh · harm.      0.83s  C6 D6 C6 C6 A#5 C6 D6
+  52.477  Floor hoppers         18     3  signature                   0.97s  G5 A5 G5 G5 G5 G5
+  52.483  Gliders              333    81  answer · copy of Warblers  24.31s  A#5 A#5 D6 D6 D6 D6 D6 D6 D6 D6 …
+  52.495  Floor hoppers         22     3  fresh                       0.46s  A5 A5 A5 A5
+  52.499  Floor hoppers         12     2  answer · signature          0.61s  F5 F5 F5 F5 F5
+  52.565  Warblers             265    55  fresh                       1.85s  E6 G6 A6 A#6 C7 C7 C7 C7 A#6 A6 …
+  52.582  Crown chatterers     134    29  fresh                       1.54s  A5 A5 A5 A5 G5 G5 G5 G5 G5 G5
+  52.663  Floor hoppers         17     2  fresh                       1.33s  E5 E5 E5 E5 E5 E5 E5 E5
+  52.665  Crown chatterers      74    24  copy of Floor hoppers       0.99s  G5 C6 A#5 C6 A#5 A#5
+  52.720  Crown chatterers     144    31  fresh                       1.56s  D6 C6 D6 D6 D6 D6 D6 D6 D6 D6 …
+  52.753  Crown chatterers     118    28  answer · signature · harm.  0.81s  E6 E6 E6 E6 E6 E6
+  52.800  Warblers             257    52  fresh                       3.36s  D6 E6 F6 G6 G6 A6 A6 A6 A6 A6 …
+  52.803  Warblers             269    57  answer · fresh              1.46s  E6 F6 F6 G6 G6 G6 F6 F6 E6
+  52.813  Warblers             285    64  fresh                       2.11s  G5 A5 A#5 C6 C6 D6 C6 C6 A#5 A5 …
+  52.818  Lower climbers       157    34  signature                   0.80s  G4
+  52.828  Crown chatterers     135    29  copy of Floor hoppers       0.67s  G5 G5 G5 G5 G5
+  52.921  Floor hoppers         38     6  signature                   0.82s  C5 C5 C5 C5 C5 C5
+  52.927  Crown chatterers      78    25  answer · fresh              0.49s  C6 A#5 A5 G5
+  52.980  Warblers             275    60  answer · fresh              3.24s  G6 G6 G6 A6 A6 A6 A6 A6 A6 A6 …
+  52.982  Crown chatterers     109    27  answer · fresh · harm.      1.16s  A5 A5 A5 A5 A5 A5 A5 A5
+  53.060  Crown chatterers     132    29  signature                   0.67s  G5 G5 A#5 C6 A#5
+  53.066  Swifts               238    49  answer · fresh              1.76s  A#6 C7 A#6
+  53.082  Crown chatterers     101    27  answer · copy of Lower climbers  0.10s  G5
+  53.179  Crown chatterers      66    24  fresh · harm.               1.59s  D6 D6 E6 F6 D6 D6 D6 D6 D6 C6
+  53.247  Swifts               243    49  fresh                       0.24s  E6
+  53.302  Crown chatterers     104    27  answer · fresh              0.56s  A5 A5 G5 A5 A#5
+  53.319  Crown chatterers      89    26  fresh                       0.86s  E6 E6 E6 E6 D6 D6 D6
+  53.323  Lower climbers       182    43  signature                   0.60s  G3
+  53.332  Swifts               224    48  fresh                       0.73s  C7 C7
+  53.349  Warblers             274    59  fresh                       1.71s  D6 E6 E6 F6 F6 G6 F6 F6 E6 E6 …
+  53.405  Lower climbers       150    32  answer · signature          1.35s  G4 E4
+  53.412  Crown chatterers      61    23  fresh                       1.76s  A5 G5 G5 G5 E5 F5 G5 A5 A5 A5
+  53.599  Floor hoppers         15     2  answer · fresh              0.78s  C6 C6 C6 C6 C6 C6
+  53.619  Crown chatterers      80    25  answer · signature          0.98s  G5 G5 G5 A#5 A5 G5 G5 F5 F5 E5 …
+  53.629  Warblers             305    74  copy of Warblers            1.67s  D6 E6 E6 F6 F6 G6 F6 F6 E6 F6 …
+  53.641  Warblers             300    72  signature                   1.67s  E6 G6 G6 A6 A6 A6 G6 F6 C6
+  53.718  Floor hoppers          1     0  fresh                       0.70s  A#5 A#5 A#5 A#5 A#5
+  53.739  Floor hoppers         24     4  signature                   0.33s  C5 D5 D5
+  53.748  Crown chatterers     116    28  answer · fresh              0.91s  C6 D6 D6 D6 D6 C6
+  53.782  Warblers             288    65  fresh                       2.58s  A#5 C6 D6 D6 E6 E6 E6 E6 D6 D6 …
+  53.798  Crown chatterers     145    31  fresh · harm.               1.34s  A#5 A5 A#5 C6 A5 A#5 C6 A#5 C6 C6 …
+  53.817  Warblers             301    72  answer · fresh              2.15s  C6 C6 D6 D6 E6 E6 E6 D6 D6 C6 …
+  53.869  Warblers             314    79  copy of Warblers            1.65s  D6 E6 E6 F6 F6 G6 F6 F6 E6 F6 …
+  53.968  Crown chatterers      86    26  answer · fresh · harm.      1.25s  C6 A#5 A#5 C6 C6 G5 G5 G5 G5
+  54.059  Warblers             296    70  signature                   2.87s  E6 E6 F6 F6 G6 G6 G6 G6 F6 F6 …
+  54.163  Warblers             292    67  answer · fresh              1.35s  C6 D6 E6 F6 F6 F6 F6 F6 F6 E6 …
+  54.266  Warblers             277    61  copy of Crown chatterers    1.91s  D6 C6 C6 D6 F6 A5 A5 A5 A5
+  54.351  Warblers             261    53  answer · copy of Crown chatterers  1.36s  E6 C6 E6 E6 E6 D6
+  54.363  Floor hoppers         27     4  answer · fresh              0.44s  C6 C6 C6 C6
+  54.420  Crown chatterers      67    24  answer · fresh · harm.      0.88s  A5 G5 G5 A5 A5 A5 A5 G5
+  54.421  Warblers             302    73  copy of Crown chatterers    1.92s  D6 C6 C6 D6 E6 A5 A5 A5 A5
+  54.421  Floor hoppers          5     0  answer · fresh              0.51s  G5 G5 G5 G5
+  54.422  Crown chatterers      94    26  answer · signature          0.98s  F5 C6 D6 F6 F6 D6 D6 D6 D6
+  54.434  Gliders              344    83  fresh                       2.52s  A5 C6
+  54.568  Crown chatterers      87    26  fresh                       1.46s  D6 D6 D6 D6 D6 D6 D6 D6 D6 D6
+  54.576  Crown chatterers     120    28  answer · signature          0.86s  E6 D6 D6 D6 D6 E6
+  54.624  Gliders              330    81  copy of Gliders             2.61s  A5 C6
+  54.631  Warblers             311    78  signature                   1.12s  A5 C6 D6 E6 F6 F6 F6 E6 D6 A#5 …
+  54.645  Floor hoppers          0     0  signature                   0.30s  E5 E5 E5
+  54.652  Floor hoppers         39     6  answer · signature          0.86s  C5 C5 C5 C5 C5 C5
+  54.719  Floor hoppers          4     0  fresh                       0.83s  A5 A5 A5 A5 A5 A5
+  54.766  Warblers             298    71  copy of Floor hoppers       1.41s  A5 G5 G5 G5 G5 A5
+  54.770  Warblers             281    63  fresh                       1.40s  A5 A#5 C6 C6 A#5 A5
+  54.825  Floor hoppers         20     3  fresh                       0.41s  A#5 A#5 A#5 A#5
+  54.830  Swifts               222    48  answer · fresh              1.52s  A#6 A#6 A#6 A#6
+  54.842  Crown chatterers     133    29  fresh                       1.24s  A#5 A#5 A#5 A5 A5 A5 A5 A5 A#5 A5
+  54.879  Floor hoppers          6     1  fresh                       0.61s  E5 E5 E5 E5 E5
+  54.893  Crown chatterers     147    31  answer · fresh              1.45s  A5 A5 G5 F5 G5 A5 G5 F5 G5 A#5 …
+  54.902  Lower climbers       155    33  signature                   2.93s  C4 C4 A#3
+  54.922  Warblers             260    53  answer · copy of Floor hoppers  0.79s  E6 E6 C6 E6
+  54.958  Crown chatterers      97    26  answer · fresh · harm.      1.37s  A5 A#5 A5 A5 A#5 C6 C6 C6 C6 C6 …
+  55.011  Warblers             283    63  fresh                       2.94s  G5 A#5 C6 D6 E6 E6 E6 E6 D6 C6 …
+  55.020  Swifts               206    48  fresh                       2.28s  E6 E6 E6 E6
+  55.026  Swifts               210    48  signature                   2.13s  A#6 A#6 A#6 A#6
+  55.046  Swifts               242    49  fresh                       0.83s  F6 F6
+  55.057  Warblers             258    52  copy of Swifts              0.62s  G6 F6 G6 G6
+  55.058  Swifts               199    48  fresh                       1.93s  F6 F6 F6 F6
+  55.060  Floor hoppers         10     1  fresh                       0.31s  E5 E5 E5
+  55.067  Swifts               231    49  signature                   1.82s  E6 F6 E6 F6
+  55.108  Warblers             273    59  copy of Lower climbers      0.60s  G5 G5 G5
+  55.135  Swifts               225    49  fresh                       1.38s  G6 G6 G6 G6
+  55.152  Floor hoppers         40     6  answer · fresh              0.75s  D5 D5 D5 D5 D5 D5
+  55.185  Crown chatterers     113    28  answer · fresh · harm.      1.06s  A5 A5 G5 G5 A5 A#5 A#5 A5 A5 A5
+  55.187  Crown chatterers     111    27  signature                   0.61s  F6 F6 E6 D6 D6 E6 C6
+  55.199  Warblers             264    55  fresh                       1.85s  C6 E6 F6 G6 A6 A6 A6 A6 G6 F6 …
+  55.210  Warblers             289    66  copy of Warblers            2.89s  G5 A#5 C6 E6 E6 E6 E6 E6 D6 C6 …
+  55.260  Crown chatterers      72    24  signature · harm.           0.65s  D6 A5 A5 F5 F5
+  55.292  Swifts               251    49  fresh                       1.27s  A#6 A#6 A#6
+  55.340  Floor hoppers         13     2  fresh                       0.53s  D5 D5 D5 D5 D5
+  55.341  Warblers             276    61  answer · signature          2.50s  D6 D6 G6 A6 A#6 A#6 A#6 A#6 A#6 A#6 …
+  55.388  Gliders              336    82  signature                   0.86s  A5
+  55.426  Floor hoppers         26     4  fresh                       0.87s  G5 G5 G5 G5 G5 G5
+  55.495  Floor hoppers         16     2  answer · signature          0.65s  F5 F5 F5 F5 F5
+  55.569  Crown chatterers     139    30  answer · signature          0.67s  E6 E6 E6 E6 F6
+  55.597  Crown chatterers      70    24  signature                   0.47s  C6 A5 A#5 F5
+  55.694  Floor hoppers         34     5  answer · signature          0.34s  C6 C6 C6
+  55.721  Floor hoppers         12     2  signature                   0.62s  F5 F5 F5 F5 F5
+  55.749  Crown chatterers      77    25  fresh                       0.69s  D6 E6 D6 D6 D6 D6 C6
+  55.749  Floor hoppers          2     0  answer · fresh              0.59s  G5 G5 G5 G5 G5
+  55.779  Floor hoppers         11     1  signature                   0.74s  D5 D5 D5 D5 D5 D5 D5
+  55.840  Floor hoppers         37     6  answer · fresh              0.32s  F5 F5 F5
+  55.884  Crown chatterers     117    28  copy of Crown chatterers    0.70s  D6 E6 D6 D6 D6 D6 C6
+  55.923  Crown chatterers     128    29  fresh · harm.               1.04s  F5 F5 E5 E5 E5 E5 E5
+  56.051  Warblers             303    73  fresh                       2.88s  A#5 C6 C6 C6 D6 D6 D6 D6 D6 D6 …
+  56.149  Crown chatterers      85    26  answer · copy of Floor hoppers  0.53s  A#5 A#5 A#5 A#5 C6
+  56.177  Lower climbers       174    40  signature                   1.16s  G4 F4
+  56.222  Crown chatterers     138    30  fresh · harm.               1.15s  E6 D6 D6 D6 D6 C6 C6 D6
+  56.240  Warblers             284    64  fresh                       1.73s  G5 A#5 C6 D6 D6 D6 C6 A#5 G5
+  56.269  Lower climbers       167    37  signature                   0.76s  A3
+  56.290  Warblers             299    71  copy of Crown chatterers    0.72s  C6 C6 C6 C6 D6
+  56.300  Floor hoppers         36     6  answer · fresh              0.61s  D5 D5 D5 D5
+  56.306  Crown chatterers     100    27  answer · fresh              1.18s  A5 C6 E6 D6 C6 A5 A#5 C6
+  56.468  Warblers             313    79  answer · fresh              1.50s  C6 D6 D6 E6 E6 E6 E6 D6 D6 C6
+  56.472  Warblers             271    58  copy of Crown chatterers    0.97s  F6 G6 F6 F6 D6 E6 E6
+  56.481  Crown chatterers     141    30  answer · signature          0.66s  E6 E6 E6 E6 F6
+  56.492  Gliders              337    82  answer · signature          0.81s  A5
+  56.526  Warblers             259    52  signature                   1.56s  C6 D6 E6 E6 G6 G6 G6 D6 D6 D6 …
+  56.553  Crown chatterers      71    24  answer · fresh              0.60s  F6 F6 E6 F6 F6 F6 F6
+  56.578  Lower climbers       191    45  signature                   0.69s  E4
+  56.593  Lower climbers       188    45  signature                   1.72s  E4 A#3
+  56.604  Floor hoppers         25     4  answer · signature          0.35s  D5 D5 D5
+  56.632  Crown chatterers     107    27  answer · copy of Lower climbers  0.09s  E5
+  56.663  Crown chatterers      92    26  answer · fresh · harm.      1.09s  F5 F5 E5 F5 G5 G5 G5 A5 A5 A5 …
+  56.700  Swifts               215    48  answer · fresh              1.58s  G6 G6 G6 G6
+  56.768  Crown chatterers      82    25  fresh                       1.07s  D6 D6 D6 D6 D6 D6 D6 D6
+  56.780  Crown chatterers     125    29  fresh · harm.               0.91s  F5 G5 F5 E5 F5 F5 F5 F5 G5
+  56.861  Crown chatterers     122    28  answer · fresh              1.21s  A5 A5 F5 A5 C6 C6 A5 C6 E6 E6
+  56.882  Lower climbers       179    42  signature                   1.43s  F4 E4
+  56.895  Floor hoppers         17     2  signature                   0.64s  F5 F5 F5 F5 G5
+  56.901  Crown chatterers      63    23  fresh                       0.41s  E5 G5 A#5 G5 A5
+  56.910  Warblers             304    73  fresh                       1.26s  A5 A#5 C6 C6 D6 D6 D6 D6 D6 C6 …
+  56.965  Warblers             262    54  signature                   2.37s  D6 F6 G6 A6 C7 A#6 A#6 A6 G6 F6 …
+  56.975  Crown chatterers     102    27  fresh                       1.11s  C6 C6 D6 C6 C6 A#5 D6 D6 E6 F6
+  57.074  Warblers             291    67  answer · fresh              3.92s  G6 A6 A#6 A#6 C7 C7 C7 C7 C7 C7 …
+  57.181  Floor hoppers         28     4  answer · signature          0.33s  D5 D5 D5
+  57.191  Crown chatterers      68    24  fresh                       1.37s  F6 E6 E6 F6 F6 D6 C6 C6
+  57.202  Crown chatterers     119    28  answer · signature · harm.  0.84s  F6 F6 E6 E6 E6 E6
+  57.260  Floor hoppers         14     2  answer · fresh              0.69s  C5 C5 C5 C5 C5 C5
+  57.322  Crown chatterers      91    26  fresh                       0.67s  D6 C6 C6 A#5 C6 C6
+  57.362  Crown chatterers     130    29  fresh                       1.35s  E6 C6 D6 C6 D6 C6 C6 C6
+  57.379  Swifts               247    49  answer · fresh              0.36s  G6
+  57.575  Lower climbers       176    40  answer · fresh              0.77s  A3
+  57.651  Swifts               198    48  fresh                       1.34s  A6 A6 A6
+  57.697  Swifts               217    48  fresh                       1.52s  C7 C7 C7
+  57.753  Crown chatterers      65    23  answer · fresh              1.16s  G5 G5 A5 A5 A5 A#5 A#5 C6 C6
+  57.755  Crown chatterers     143    31  signature                   1.08s  F5 F5 G5 G5 F5 F5 F5 F5
+  57.783  Crown chatterers     142    30  signature                   0.72s  E6 E6 E6 E6 F6
+  57.786  Gliders              332    81  answer · fresh              0.50s  G5
+  57.879  Swifts               251    49  fresh                       0.45s  A#6
+  57.880  Warblers             300    72  copy of Lower climbers      0.38s  G5 G5
+  57.882  Warblers             294    69  fresh                       2.39s  E6 F6 G6 A6 A6 A#6 A#6 A#6 A#6 A6 …
+  57.987  Crown chatterers     137    30  answer · copy of Gliders    0.04s  A5
+  57.991  Swifts               228    49  fresh                       2.10s  G6 G6 G6 G6
+  58.003  Warblers             268    56  signature                   1.44s  E6 E6 G6 G6 E6 C6
+  58.036  Crown chatterers     148    31  answer · copy of Crown chatterers  1.17s  F5 G5 A5 A5 A5 A#5 A#5 C6 C6
+  58.098  Floor hoppers         41     7  answer · fresh              0.62s  A5 A5 A5 A5 A5
+  58.104  Swifts               243    49  fresh                       0.68s  A#6 A#6
+  58.113  Swifts               218    48  fresh                       0.65s  G6 G6
+  58.178  Swifts               219    48  answer · fresh              2.35s  G6 G6 G6 G6
+  58.189  Swifts               209    48  fresh                       0.20s  C7
+  58.211  Floor hoppers         30     5  fresh                       0.31s  G5 G5 G5
+  58.215  Warblers             272    58  signature                   1.46s  G6 G6 A6 A#6 A#6 C7 C7 C7 A#6 A#6 …
+  58.237  Warblers             306    74  copy of Warblers            2.33s  F6 G6 G6 A6 A6 A#6 A#6 A#6 A6 A6 …
+  58.237  Swifts               195    48  signature                   2.10s  A#6 A#6 G6 A#6
+  58.298  Warblers             298    71  fresh                       3.31s  A5 A#5 A#5 C6 C6 C6 C6 D6 C6 C6 …
+  58.308  Warblers             292    67  signature                   1.87s  A#5 D6 D6 E6 E6 D6 A#5
+  58.357  Floor hoppers         21     3  signature                   0.97s  G5 A5 G5 G5 G5 G5
+  58.388  Floor hoppers         20     3  signature                   0.94s  G5 G5 G5 G5 G5 G5
+  58.401  Warblers             286    64  signature                   2.48s  E6 F6 F6 A6 A#6 A#6 A#6 A#6 A#6 A6 …
+  58.417  Crown chatterers     129    29  fresh                       1.04s  G5 F5 G5 F5 F5 F5 F5
+  58.429  Crown chatterers      69    24  answer · signature · harm.  0.51s  C6 A#5 A#5 G5
+  58.430  Warblers             255    50  signature                   3.16s  C6 D6 D6 E6 E6 E6 E6 E6 E6 E6 …
+  58.505  Crown chatterers      62    23  answer · fresh              0.55s  G5 G5 G5 F5 F5
+  58.619  Warblers             269    57  fresh                       2.48s  G5 A5 A#5 C6 D6 D6 E6 E6 D6 D6 …
+  58.657  Crown chatterers      78    25  answer · signature          0.95s  F5 E5 G5 A5 A5 G5 G5 F5 F5 F5 …
+  58.693  Warblers             265    55  fresh                       0.76s  A5 C6 E6 F6 E6 C6 A5
+  58.699  Crown chatterers     108    27  signature                   0.58s  F6 F6 E6 F6 D6 C6 C6
+  58.797  Lower climbers       173    39  answer · signature          1.59s  E4 E4 D4
+  58.823  Crown chatterers     134    29  signature · harm.           0.65s  C6 A#5 D6 E6 D6
+  58.913  Crown chatterers     140    30  answer · signature          0.73s  E6 E6 D6 E6 F6
+  58.986  Warblers             290    66  fresh                       1.34s  A5 A#5 A#5 C6 A#5 A#5 A5
+  58.991  Crown chatterers      83    25  answer · fresh · harm.      0.93s  C6 A#5 A5 G5 G5 G5 F5 E5
+  58.997  Warblers             275    60  fresh                       2.41s  E6 F6 G6 A6 A6 A#6 A#6 A#6 A#6 A6 …
+  59.065  Warblers             280    62  fresh                       2.17s  G5 A5 A#5 A#5 C6 C6 C6 C6 C6 C6 …
+  59.083  Crown chatterers      61    23  signature                   1.01s  C6 D6 F6 E6 D6 C6 C6
+  59.141  Lower climbers       180    42  answer · signature          1.44s  F4 E4
+  59.179  Crown chatterers      90    26  fresh                       1.13s  F6 E6 E6 E6 E6 F6 E6 D6 D6
+  59.256  Warblers             260    53  copy of Crown chatterers    1.32s  D6 C6 C6 A5 A5 A5 G5 G5
+  59.440  Crown chatterers     132    29  answer · fresh · harm.      0.70s  C6 A5 G5 F5 G5 G5 A#5
+  59.454  Crown chatterers      84    26  answer · fresh              1.41s  C6 C6 A#5 C6 A5 G5 D6 C6 C6 E6 …
+  59.562  Warblers             279    62  copy of Crown chatterers    0.98s  D6 A#5 A5 G5 A5 A5 C6
+  59.569  Crown chatterers      60    23  fresh                       0.80s  C6 E6 D6 E6 F6 E6 D6
+  59.580  Crown chatterers      88    26  answer · signature          1.01s  F5 C6 E6 F6 F6 D6 D6 D6 D6
+  59.674  Crown chatterers     136    29  answer · fresh              1.35s  C6 C6 A5 C6 A#5 A#5 A#5 C6 A#5 C6 …
+  59.710  Floor hoppers         33     5  answer · signature          0.35s  C6 C6 C6
+  59.712  Warblers             308    75  copy of Crown chatterers    1.71s  G6 F6 F6 F6 F6 G6 F6 F6 E6
+  59.764  Crown chatterers     114    28  fresh                       2.04s  D6 D6 C6 C6 D6 D6 D6 D6 D6 E6 …
+  59.775  Gliders              318    80  copy of Crown chatterers    7.08s  A#5 G5 F5 E5 F5 F5 C6
+  59.798  Swifts               220    48  answer · fresh              0.24s  A6
+  59.865  Swifts               202    48  signature                   2.07s  A#6 A#6 A#6 C7
+  59.866  Crown chatterers      86    26  signature                   0.91s  F5 C6 D6 E6 F6 D6 D6 D6 D6
+  59.878  Crown chatterers      89    26  answer · copy of Crown chatterers  1.36s  C6 C6 A#5 C6 A#5 A#5 A#5 C6 A#5 C6 …
+  59.879  Swifts               196    48  fresh                       1.98s  F6 F6 F6 F6
+  59.929  Warblers             299    71  signature                   1.31s  D6 F6 G6 G6 G6 F6 E6 C6
+  59.954  Swifts               203    48  fresh                       0.23s  C7
+  59.965  Floor hoppers         31     5  signature                   0.48s  A5 C6 C6 C6
+  59.985  Swifts               221    48  answer · fresh              1.33s  A6 A6 A6 A6
+  59.989  Swifts               212    48  fresh                       1.18s  A#6 A#6 A#6
+  59.992  Warblers             273    59  answer · signature          1.42s  A5 C6 D6 D6 F6 C6 A5
+60 s · 1735 calls (28.9/s) · 744 answers · 586 signatures · 251 mimics · 160 harmonised · most at once 52 · skipped: 639 quiet, 0 cap, 0 inactive · 89834 hearings

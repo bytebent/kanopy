@@ -211,6 +211,22 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 | Pitch match | — | Copy the caller's pitch steps (0) or its actual pitch (1) (§5.6) |
 | Hearing | — | The quietest level (dB SPL) it reacts to |
 
+**As built in batch 03** [Proposed: check these]:
+- **Talkative**: when its rest is over it calls with these odds, otherwise rests again.
+- **Call and response**: a call gets **at most one answer**. With the species' Response odds,
+  one conspecific that heard it answers (louder hearers likelier), 0.2–1 s after the call has
+  reached it in full, and only if it has rested at least its shortest Rest. So exchanges go back
+  and forth and die out by themselves (Response 0.6: about 2.5 calls long). Answering every call
+  with every hearer flooded the forest.
+- **Chorus, synchronise**: hearing a conspecific pulls its next call forward to join, if that
+  call was coming soon anyway (within Chorus × 40 % of its mean rest), once per rest. It shifts
+  *when* it calls, not how often. **Alternate**: if its next call would land on the one it
+  hears, it waits until that one has finished (odds: |Chorus|).
+- **Harmonise** moves fresh and signature calls, not copies.
+- **Evolve** moves pitch only; its amount is a share of the pitch range. Each call has one sound
+  (Shape, body, level), varied a little per unit.
+- **Copies** keep the caller's number of units (the gesture), 1–32.
+
 ### 5.6 Mimicry
 [Decided: any sound it hears, once is enough; chance and accuracy are separate]
 - **Chance** says how much a species mimics; **Accuracy** says how well. A parrot is high on
@@ -248,6 +264,10 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 - An individual reacts only if the arriving level is above its species' **Hearing**. [Decided]
 - Only **call events** travel between animals, never audio, and a spatial grid limits each call to
   the individuals within its reach. [Decided]
+
+- As built: reach is worked out once per call (spreading and air absorption at the call's first
+  note); a mimic's memory is its last 4 calls heard within 60 s, worked out when it decides to
+  copy. [Decided]
 
 ## 8. Loudness
 
@@ -289,7 +309,8 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   for testing. The app's real limit will likely be lower, set from the benchmark. [Decided]
 - **Sounding voices** are what cost: each animal calling right now needs its sound computed.
   Two limits keep that in hand [Decided]:
-  - **Active zone**: only individuals within an activation range of the listener (a radius around
+  - **Active zone** (default radius 150 m: the whole slice from its middle) [Proposed]: only
+    individuals within an activation range of the listener (a radius around
     it), or of the box (the box plus a margin), call at all. Outside it they keep living, moving
     and migrating, but stay silent, so they cost almost nothing. The margin lets animals just
     outside a box call and set off answers inside it without being heard.

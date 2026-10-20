@@ -32,6 +32,7 @@ jobs:
             sysctl -n machdep.cpu.brand_string
             cat bench.txt
             cargo run -q --release -p kanopy-cli -- world-bench
+            cargo run -q --release -p kanopy-cli -- scene-bench
           } > results.txt
           body=$(sed -e 's/%/%25/g' results.txt | awk '{printf "%s%%0A", $0}')
           echo "::notice title=kanopy bench::${body}"

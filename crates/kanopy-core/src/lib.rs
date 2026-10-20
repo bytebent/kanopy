@@ -5,11 +5,14 @@
 //! - `voice`, `wavetable`, `filter`: the prototype voice. `propagation` and `mixer`: how calls
 //!   reach the listener.
 
+pub mod calls;
 pub mod filter;
 pub mod life;
 pub mod mixer;
 pub mod propagation;
 pub mod rng;
+pub mod scale;
+pub mod scene;
 pub mod species;
 pub mod voice;
 pub mod wav;

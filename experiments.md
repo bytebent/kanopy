@@ -23,6 +23,12 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 01 | Bench on GitHub's Intel Mac (`macos-26-intel`, Core i7-8700B 3.2 GHz, 2018), best of 2 | 400 units 19 % of a core, 800 units 43 %, 1600 units 91 %; ~10–12 ns per unit-sample. About 940 units at half a core | |
 | 20 Oct 2026 | 02 | World bench on the same Mac | 20,010 individuals: 33 ms per second of forest time, 3.3 % of one core | |
 | 20 Oct 2026 | 01 | Calling cap default set from the Mac bench | **600 live** (about a third of one core, leaving room on a laptop that throttles when hot); export uncapped by speed, default 2,000 | |
+| 20 Oct 2026 | 03 | 17 behaviour tests: keys and consonances; fresh calls inside their ranges, in key or free; Evolve; signatures repeat at Variation 0 and drift at 1, groups differ; a perfect mimic matches pitch, sound and timing; Pitch match 0 keeps the steps in its own range; Timbre match 0 keeps its own sound; low Accuracy drifts; mimics copy only what reached them (95 m yes, 105 m no at 70 dB / 30 dB hearing); answers come after the call arrives; only their own species answer, at most one answer per call; chorus synchronise bunches and alternate avoids overlaps; harmonised calls consonant with the mate heard; only the active zone calls; the cap holds and favours the near; same seed same calls and sound | All pass | |
+| 20 Oct 2026 | 03 | First score of the demo forest (2,300 animals) | 456 calls/s, more than half answers: every hearer could answer every call. Changed to at most one answer per call | |
+| 20 Oct 2026 | 03 | Second score | 395 calls/s: Chorus synchronise shortened rests on every hearing, so they collapsed. Changed to a once-per-rest pull, only when the next call was near | |
+| 20 Oct 2026 | 03 | Third score | 195 calls/s, about 40 % answers, mimics and harmonised calls present | `docs/experiments/03-score-sparse.txt` (sparse forest) |
+| 20 Oct 2026 | 03 | Scene bench, 20,010 individuals all active, cap 600 (container) | 88 % of one core: 4.2 M hearings/s. Reach now worked out once per call and species; mimic memory worked out only when copying. Now **51 %** (about two thirds of it the ~590 voices sounding) | |
+| 20 Oct 2026 | 03 | Five listening minutes: full forest from the floor; full forest with only animals within 40 m calling; sparse (15 %) from the floor, from the canopy, and with free pitch. Normalised to −1 dBFS (no Ear yet) | Full forest is a dense wall; sparse ones have air between calls | `docs/experiments/03-listen-spectrograms.png` |
 
 ## Notes
 
@@ -38,3 +44,5 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
   Nothing extra to simulate until the medium arrives in batch 04.
 - **CI.** `.github/workflows/mac.yml` runs all tests and both benches on GitHub's Intel Mac on
   every push and posts the numbers as a run annotation (this session can't download logs).
+- **03 · not yet audible:** media other than Earth, foliage loss, the Ear, reverb and Box
+  listening (no distance) are batch 04. The listen files are normalised instead.
