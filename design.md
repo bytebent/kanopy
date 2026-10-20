@@ -1,7 +1,6 @@
 # kanopy · design
 
-**Pass 5 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
-built until it's agreed.
+**Pass 6 · 20 Oct 2026.** Agreed; changes from here on are noted in the commit log. Settled over six passes in chat.
 
 kanopy is a renderer for living forests. You build species, place them in a forest on any world
 (air, thin air, thick air, water), stand somewhere in it, and hear what you would hear there:
@@ -112,7 +111,7 @@ same; only what you hear changes.
 - The **listener** is drawn as a person but works like a microphone: it can be anywhere in the
   slice, in the open air, inside a crown, in the water or underground. [Decided]
 - Underground, sound from above passes through the soil and comes through heavily muffled;
-  burrowers nearby are clear. [Proposed]
+  burrowers nearby are clear. [Decided]
 - **Path**: Still · Wander (drifts anywhere) · Follow (a species), with a Speed. The listener can
   always be dragged. No following single individuals. [Decided]
 - **Panning**: equal-power, from the horizontal offset relative to distance, so a call straight
@@ -150,7 +149,7 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   animal **rests**. Controls: Units per call, Unit length, Gap, Rest, Evolve (how units change
   across a call). [Decided]
 - **Signature**: each group has one recognisable call of its own, made once from the seed (§5.4).
-  Two controls [Proposed]:
+  Two controls [Decided]:
   - **Signature amount** (0–1): how often a call is the signature rather than a freshly rolled
     call. 0 = every call is new; 1 = it only ever says its signature.
   - **Variation** (0–1): how much each repeat of the signature is changed. 0 = identical every
@@ -166,8 +165,9 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   | Flyer | Anywhere in its flight band, rests at its perch | Freely through open space | Swims |
   | Burrower | Soil | Slowly, underground | Sediment |
 
-- **Height range**: lowest and highest height it lives at, as a range slider over the seven
-  layers. [Decided]
+- **Area**: where the species lives, set on the Species page as a box drawn on the forest picture:
+  a stretch of the width (left–right) and a height range (bottom–top, snapping to the seven
+  layers if you like). Every individual stays inside its area; movers stay inside it too. [Decided]
 - **Flyers** get two extra settings [Decided: flyers need their own perch option]:
   - **Flight band**: the heights it flies in (e.g. above the canopy).
   - **Perch**: Emergent · Canopy · Subcanopy · Understorey · Shrubs · Ground · **Never** (always
@@ -175,10 +175,10 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
     the seabed. [Decided]
   - **Flight share**: how much of its time it spends flying rather than perched. It calls just as
     much in flight as perched. [Decided]
-- **Spread**: how the species' groups are laid out across the forest's 200 m width [Proposed]:
+- **Spread**: how the species' groups are laid out **inside its area** [Decided]:
   - **Even**: evenly spaced, like territorial birds each holding a patch;
-  - **Random**: anywhere their height range allows;
-  - **Clumped**: bunched into a few patches with empty forest between.
+  - **Random**: anywhere in the area;
+  - **Clumped**: bunched into a few patches with empty space between.
   - **Spacing**: the smallest distance kept between neighbouring groups (territory size).
 - **Migration** [Decided: species move between trees from time to time]: how often an individual
   (or its whole group) moves to another tree or place, and how far. Climbers hop between crowns
@@ -252,16 +252,17 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 Many quiet animals add up quickly: 1,000 equal callers are 30 dB louder than one.
 
 1. **Physical levels**: everything is computed in dB SPL at the listener first. [Decided]
-2. **Ear**: how the overall volume follows the forest, two modes [Proposed]:
+2. **Ear**: how the overall volume follows the forest, two modes [Decided]:
    - **Fixed**: one master gain that never moves. A loud thicket stays loud and a sparse Martian
      woodland stays very quiet, so you hear the real differences between forests and places.
    - **Adapting**: the gain slowly turns up when it's quiet and down when it's loud, over tens of
-     seconds, like your ears getting used to a place. It moves at most ±20 dB, so a quiet forest
-     still sounds quieter than a loud one. Default.
+     seconds, like your ears getting used to a place. It moves at most **±5 dB**, so a quiet
+     forest still sounds clearly quieter than a loud one. Default.
 3. **Starting gain**: before playing, kanopy estimates how loud the forest will be on average,
    from how many individuals there are, how loud and how often they call and how far they are from
    the listener, and sets the master gain from that. Play starts at a sensible level, not at a
-   blast or near-silence. It's also Adapting's starting point. [Proposed]
+   blast or near-silence. It's also Adapting's starting point. It too is capped small: at most
+   **±5 dB** from the physical level. [Decided]
 4. **Per-species limiter, then a final limiter at −1 dBFS**, idle in normal use. [Decided]
 
 ## 9. Pages
@@ -273,8 +274,8 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   individual as a dot in its species colour that lights up when it calls. Drag the listener, or draw
   and drag the box. Controls: Listen (Listener · Box), Density, Medium, Reverb, Key, Ear, Path,
   Seed, Play, Export.
-- **Species**: every species in the forest with its colour, individuals, movement type, height
-  range, spread, groups and behaviours. Add from file, from the Designer, or duplicate.
+- **Species**: every species in the forest with its colour, individuals, movement type, area,
+  spread, groups and behaviours. Add from file, from the Designer, or duplicate.
 - **Designer**: one species' voice and calls, with **Call** and **Signature** buttons to audition it
   alone, and the behaviour traits of §5.3–5.5.
 
@@ -284,12 +285,18 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   the list scrolls. We test with 64. [Decided, for now]
 - **Individuals** are cheap (a position, a state, a timer). Target ceiling **20,000** per forest,
   for testing. The app's real limit will likely be lower, set from the benchmark. [Decided]
-- **Sounding voices** are what cost. Most individuals are silent at any moment, but the ones
-  calling right now each need their sound computed. The **voice budget** is the most that can sound
-  at once (say 400). If more are calling than that, the ones quietest at the listener, which you
-  would barely hear anyway, are skipped until there's room. Batch 01 measures the right number for
-  your Mac. Export can use a higher budget, since it doesn't have to keep up with real time.
-  [Proposed]
+- **Sounding voices** are what cost: each animal calling right now needs its sound computed.
+  Two limits keep that in hand [Decided]:
+  - **Active zone**: only individuals within an activation range of the listener (a radius around
+    it), or of the box (the box plus a margin), call at all. Outside it they keep living, moving
+    and migrating, but stay silent, so they cost almost nothing. The margin lets animals just
+    outside a box call and set off answers inside it without being heard.
+  - **Calling cap**: the most individuals that may be calling at once, even inside the active zone,
+    so a box over the whole forest doesn't make everything sound. An individual that wants to call
+    while the cap is full skips that call and rests again; the ones closest to the listener (or
+    anywhere, in a box) get priority. [Proposed: priority rule]
+  - Defaults for both come from the batch 01 benchmark on your Mac. Export may use a higher cap,
+    since it doesn't have to keep up with real time.
 - **Threads**: live play renders a little ahead (~100 ms) on **one render thread**, separate from
   the audio callback; that's light on battery and heat. [Decided] Export may use more cores, set
   by a **Render threads** setting (default: all). [Decided]
@@ -301,7 +308,7 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   - `kanopy-cli`: renders a forest file to WAV, streamed to disk, any length.
   - `kanopy-app`: the desktop app (Tauri), CoreAudio output, hosting the pages.
 - **Pages**: written in plain HTML, CSS and JavaScript, the way the bytebent pages are, with no
-  framework such as React or Vue on top. Simpler to read and change, nothing to install. [Proposed]
+  framework such as React or Vue on top. Simpler to read and change, nothing to install. [Decided]
 - **Files**: `.kanopy-species.json` and `.kanopy-forest.json`, both versioned. A forest file
   contains its species so it opens on its own. [Decided]
 - Output 48 kHz, 24-bit WAV, with the seed and settings written into the file. [Decided, for now]
@@ -310,6 +317,5 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 - Time of day (dawn and dusk choruses). [Later]
 - A richer voice engine for the Designer. [Later]
 
-## 13. Questions for pass 6
-Explained in pass 5 and waiting for a yes or a change: Signature (§5.2), Spread (§5.3), Ear and
-Starting gain (§8), Voice budget (§10), Pages tech (§11), the underground listener (§4.1).
+## 13. Still open
+- Priority rule when the calling cap is full (§10). [Proposed: closest first]
