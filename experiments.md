@@ -29,6 +29,7 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 03 | Third score | 195 calls/s, about 40 % answers, mimics and harmonised calls present | `docs/experiments/03-score-sparse.txt` (sparse forest) |
 | 20 Oct 2026 | 03 | Scene bench, 20,010 individuals all active, cap 600 (container) | 88 % of one core: 4.2 M hearings/s. Reach now worked out once per call and species; mimic memory worked out only when copying. Now **51 %** (about two thirds of it the ~590 voices sounding) | |
 | 20 Oct 2026 | 03 | Five listening minutes: full forest from the floor; full forest with only animals within 40 m calling; sparse (15 %) from the floor, from the canopy, and with free pitch. Normalised to −1 dBFS (no Ear yet) | Full forest is a dense wall; sparse ones have air between calls | `docs/experiments/03-listen-spectrograms.png` |
+| 20 Oct 2026 | 03 | Scene bench on GitHub's Intel Mac (i7-8700B), 20,010 individuals all active, cap 600, ~585 voices | **30 % of one core** for life, calls, hearing and sound together. All tests pass there | |
 
 ## Notes
 
