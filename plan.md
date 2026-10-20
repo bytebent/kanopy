@@ -9,7 +9,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 01 | Rust workspace; one voice (wavetable + resonant high-pass); propagation from a listener (spreading, Earth absorption, delay, Doppler, pan); a mixer; **benchmark** | Tests pass; voice counts measured on the Mac; calling-cap default set | Done (Intel Mac bench: cap 600 live) |
 | 02 | World: trees from seed, Density and Tree variation, shrubs, layers; species areas, spread, groups; movement types, flight and perch, migration, flocking; active zone | Seeded worlds repeat exactly; placement tests | Done |
 | 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | Done |
-| 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | |
+| 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | Done |
 | 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | |
 | 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | |
 | 07 | Species page | | |
@@ -53,3 +53,17 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
   priority, units to the mixer with the animal's position and velocity.
 - CLI: `score` (calls as text), `listen` (WAV, normalised), `scene-bench`.
 - Done 20 Oct. 20,010 individuals all active: 51 % of one core including ~590 voices (container).
+
+## Batch 04 in detail
+
+- `propagation.rs`: media (presets, Custom, loudness offset, body ratio), foliage and soil along
+  the path, height cue, stereo width.
+- `mixer.rs`: per-species buses, Box listening (no distance, edge fades, pan across the box),
+  the medium's loudness and bodies applied per unit.
+- `master.rs`: species limiters, the Ear (Fixed, Adapting, starting gain), reverb (8-line FDN),
+  final limiter.
+- `scene.rs`: settings for all of it, medium compensation, the level estimate, animals hearing
+  through the medium and the ground.
+- CLI `listen`: `--medium`, `--box`, `--ear`, `--reverb`/`--no-reverb`, `--no-bodies`,
+  `--underwater-stereo`, `--compensation`, `--normalise`.
+- Done 20 Oct.

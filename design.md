@@ -98,9 +98,27 @@ power into a denser medium. The Ear (§8) keeps this listenable.
   - **Underwater stereo** (on/off): human ears hear direction badly under water, so this narrows
     the stereo width in a liquid. Default off. [Decided]
 
+- **As built in batch 04** [Proposed: check these]:
+  - Absorption, dB per metre at 1 kHz / 8 kHz: Earth 0.0015 / 0.1; Mars 0.2 / 13; Titan 0.0005 /
+    0.03; Venus 0.001 / 0.06; Water almost none. Custom takes speed, density, absorption and
+    liquid.
+  - **Medium compensation** (0…1, default 1): the reference level moves by the medium's loudness
+    offset, like a microphone set for each world, so every world starts at a comparable level and
+    the Ear's ±5 dB works on top. At 0 it's fully physical: water is 36 dB louder than Earth and
+    the limiters do the work. The ±5 dB Ear can't bridge 55 dB between Mars and water on its own.
+  - Foliage: 20 m of crown takes about 3 dB off 4 kHz. Soil: crossing the surface −20 dB, then per
+    metre −1.5 dB and a strong high loss (2 m of soil: about −11 dB at 4 kHz). Height: straight
+    below is darker by about 1.5 dB at 4 kHz than straight above.
+  - Animals hear through the medium too (louder worlds carry further), with foliage as the
+    forest's average and the surface loss when one is underground.
+  - Underwater stereo narrows the field to 35 %.
+
 ### 3.6 Reverb
 - One cheap diffuse reverb on the mix; its length and brightness follow Density and Medium.
   **On/off switch**, plus an amount. **On by default.** [Decided]
+- As built: an 8-line feedback delay network. Length 0.6 s (woodland) to 2.2 s (thicket); Mars
+  ×0.5 and dark (900 Hz), Titan ×1.3, Venus ×1.4, water ×1.6 and darker (2.5 kHz). Amount 0.3.
+  [Proposed]
 
 ## 4. Listening
 
@@ -126,6 +144,10 @@ same; only what you hear changes.
 - **Nothing outside the box is heard.** [Decided] Individuals fade in and out over the last 2 m
   inside the box edges, so flyers crossing it don't click. [Decided]
 - The box can be moved and resized while playing. Reverb and Ear apply as usual.
+- As built: with no distance, a box is far louder than the forest heard from a listener (every
+  animal as if 1 m away), so the box is brought to the Ear's target level first; the Ear's ±5 dB
+  works on top. Animals within 20 m outside the box still call (and can be answered inside it)
+  but aren't heard. [Proposed]
 
 ## 5. Species
 
@@ -286,6 +308,12 @@ Many quiet animals add up quickly: 1,000 equal callers are 30 dB louder than one
    blast or near-silence. It's also Adapting's starting point. It too is capped small: at most
    **±5 dB** from the physical level. [Decided]
 4. **Per-species limiter, then a final limiter at −1 dBFS**, idle in normal use. [Decided]
+
+As built in batch 04 [Proposed]: the reference maps 80 dB SPL to 0 dBFS, so an ordinary forest
+around 60 dB SPL sits near −20 dBFS RMS, which is where the starting gain aims. Both the starting
+gain and Adapting stay within ±5 dB of the reference (after medium compensation). Adapting's time
+constant is 20 s. Species limiters sit at −3 dBFS; limiters look 1.3 ms ahead. They act when an
+animal calls right next to the listener, which is what they're for.
 
 ## 9. Pages
 

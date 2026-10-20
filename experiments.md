@@ -30,6 +30,13 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 03 | Scene bench, 20,010 individuals all active, cap 600 (container) | 88 % of one core: 4.2 M hearings/s. Reach now worked out once per call and species; mimic memory worked out only when copying. Now **51 %** (about two thirds of it the ~590 voices sounding) | |
 | 20 Oct 2026 | 03 | Five listening minutes: full forest from the floor; full forest with only animals within 40 m calling; sparse (15 %) from the floor, from the canopy, and with free pitch. Normalised to −1 dBFS (no Ear yet) | Full forest is a dense wall; sparse ones have air between calls | `docs/experiments/03-listen-spectrograms.png` |
 | 20 Oct 2026 | 03 | Scene bench on GitHub's Intel Mac (i7-8700B), 20,010 individuals all active, cap 600, ~585 voices | **30 % of one core** for life, calls, hearing and sound together. All tests pass there | |
+| 20 Oct 2026 | 04 | 16 media tests: preset offsets (−19, +4, +18, +36 dB) and body shifts (Titan −9.9, water +25.3 st); water 35.6 dB louder at 10 m and arrives in 0.1 s at 148 m; Mars dulls 20 m far more than Earth and near more than far; bodies follow the medium; path geometry; foliage subtle, soil not; underground muffled (>20 dB quieter, duller) while a burrower 3 m away stays loud; below darker than above; underwater stereo narrows; Box at source level, no delay, panned across the box, silent outside, 2 m fades; limiter never passes its threshold and leaves quiet audio untouched; Ear Fixed holds, Adapting stays within ±5 dB, final limiter holds −1 dBFS; reverb lengths and brightness; the level estimate within 4 dB of the measured level; animals hear further in water; same seed same bits through the whole chain | All pass after the fixes below | |
+| 20 Oct 2026 | 04 | First run of those tests | Height cue too weak (0.4 dB): floor lowered to 6 kHz. Soil muffling too weak (5 dB at 4 kHz through 2 m): soil high loss ×5. The rest were wrong expectations in the tests | |
+| 20 Oct 2026 | 04 | First renders per world with the Ear capped ±5 dB | Water 9 dB over full scale, limiters taking 19 dB off; Mars very quiet. Added medium compensation (default 1) | |
+| 20 Oct 2026 | 04 | Box over the canopy of the full forest | Estimated +0.4 dBFS: limiters taking 14 dB off. A box is now brought to the target level first. Then −19.5 dBFS, limiters idle | |
+| 20 Oct 2026 | 04 | Starting-level estimate vs measured, sparse Earth forest | Predicted −21.1, measured −22.6 dBFS RMS (with reverb); Ear stayed put | |
+| 20 Oct 2026 | 04 | Eight listening minutes: Earth, Mars, Titan, Venus, water (underwater stereo), a box in the canopy, listener underground, Earth without reverb | Each world lands at −22 to −26 dBFS RMS. On Mars and Titan the species limiters catch animals calling right next to the listener | `docs/experiments/04-worlds-spectrograms.png` |
+| 20 Oct 2026 | 04 | Scene bench with the whole output chain (container) | 49 % of one core for 20,010 individuals: path losses, limiters and reverb cost almost nothing | |
 
 ## Notes
 
@@ -46,4 +53,5 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 - **CI.** `.github/workflows/mac.yml` runs all tests and both benches on GitHub's Intel Mac on
   every push and posts the numbers as a run annotation (this session can't download logs).
 - **03 · not yet audible:** media other than Earth, foliage loss, the Ear, reverb and Box
-  listening (no distance) are batch 04. The listen files are normalised instead.
+  listening (no distance) are batch 04. The listen files were normalised instead. From batch
+  04 on they come out at the Ear's level.

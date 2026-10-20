@@ -7,7 +7,9 @@
 //!   kanopy world-bench [--scale K] how fast the world steps with many individuals
 //!   kanopy score [options]         the demo forest's calls as text
 //!       --seed N --density D --minutes M --scale K --free --x X --y Y --radius R --cap C
-//!   kanopy listen [options]        the demo forest as a WAV (same options, plus --out FILE)
+//!   kanopy listen [options]        the demo forest as a WAV (same options, plus:)
+//!       --out FILE --medium earth|mars|titan|venus|water --box X0,X1,Y0,Y1 --ear fixed|adapting
+//!       --no-reverb --reverb AMOUNT --no-bodies --underwater-stereo --compensation 0..1 --normalise
 //!   kanopy scene-bench [--scale K] how fast calling and hearing run with many individuals
 
 use kanopy_core::mixer::{Listener, Mixer};
@@ -63,6 +65,29 @@ fn main() {
                 y: f("--y", 1.5),
                 radius: f("--radius", 150.0),
                 cap: f("--cap", 600.0) as usize,
+                medium: opt("--medium")
+                    .map(|m| {
+                        kanopy_core::propagation::Medium::preset(&m)
+                            .expect("--medium: earth, mars, titan, venus or water")
+                    })
+                    .unwrap_or(kanopy_core::propagation::Medium::earth()),
+                boxed: opt("--box").map(|b| {
+                    let v: Vec<f64> = b
+                        .split(',')
+                        .map(|x| x.parse().expect("--box X0,X1,Y0,Y1"))
+                        .collect();
+                    kanopy_core::world::Rect::new(v[0], v[1], v[2], v[3])
+                }),
+                fixed_ear: opt("--ear").is_some_and(|e| e == "fixed"),
+                reverb: if args.iter().any(|a| a == "--no-reverb") {
+                    None
+                } else {
+                    Some(f("--reverb", 0.3) as f32)
+                },
+                bodies: !args.iter().any(|a| a == "--no-bodies"),
+                underwater_stereo: args.iter().any(|a| a == "--underwater-stereo"),
+                normalise: args.iter().any(|a| a == "--normalise"),
+                compensation: f("--compensation", 1.0),
             };
             match cmd {
                 "score" => score(&o),
@@ -471,6 +496,14 @@ struct SceneOpts {
     y: f64,
     radius: f64,
     cap: usize,
+    medium: kanopy_core::propagation::Medium,
+    boxed: Option<kanopy_core::world::Rect>,
+    fixed_ear: bool,
+    reverb: Option<f32>,
+    bodies: bool,
+    underwater_stereo: bool,
+    normalise: bool,
+    compensation: f64,
 }
 
 fn make_scene(o: &SceneOpts) -> kanopy_core::scene::Scene {
@@ -492,8 +525,22 @@ fn make_scene(o: &SceneOpts) -> kanopy_core::scene::Scene {
             radius: o.radius,
         },
         cap: o.cap,
+        medium: o.medium,
+        ear: if o.fixed_ear {
+            kanopy_core::master::Ear::Fixed
+        } else {
+            kanopy_core::master::Ear::Adapting
+        },
+        reverb: o.reverb.is_some(),
+        reverb_amount: o.reverb.unwrap_or(0.0),
+        bodies_follow: o.bodies,
+        underwater_stereo: o.underwater_stereo,
+        medium_compensation: o.compensation,
         ..Default::default()
     };
+    if let Some(r) = o.boxed {
+        settings = settings.boxed(r);
+    }
     if o.free {
         settings.key = None;
     }
@@ -578,21 +625,31 @@ fn listen(o: &SceneOpts, out: &Path) {
         sc.step_audio(&mut l[k * n..(k + 1) * n], &mut r[k * n..(k + 1) * n]);
     }
     let cpu = t.elapsed().as_secs_f64();
-    // no Ear or limiter yet (batch 04): normalise the whole file to -1 dBFS
-    let peak = l
-        .iter()
-        .chain(&r)
-        .fold(0f32, |a, x| a.max(x.abs()))
-        .max(1e-9);
-    let g = kanopy_core::db_to_amp(-1.0) / peak;
-    l.iter_mut().chain(r.iter_mut()).for_each(|x| *x *= g);
+    let rms = (l.iter().chain(&r).map(|x| (*x as f64).powi(2)).sum::<f64>() / (2 * l.len()) as f64)
+        .sqrt();
+    let est = sc.estimate_db();
+    let m = sc.mixer.as_ref().unwrap().master.as_ref().unwrap();
+    let lim = m.limiters.iter().map(|x| x.min_gain).fold(1f32, f32::min);
+    println!(
+        "{} · estimated {:.1} dBFS · Ear started {:+.1} dB, ended {:+.1} dB · output {:.1} dBFS RMS · limiters: species {:.1} dB, final {:.1} dB",
+        o.medium.name, est, m.start_db, m.gain_db, 20.0 * rms.max(1e-12).log10(), amp_to_db(lim), amp_to_db(m.last.min_gain)
+    );
+    if o.normalise {
+        let peak = l
+            .iter()
+            .chain(&r)
+            .fold(0f32, |a, x| a.max(x.abs()))
+            .max(1e-9);
+        let g = kanopy_core::db_to_amp(-1.0) / peak;
+        l.iter_mut().chain(r.iter_mut()).for_each(|x| *x *= g);
+        println!("normalised by {:+.1} dB", amp_to_db(g));
+    }
     if let Some(dir) = out.parent() {
         std::fs::create_dir_all(dir).ok();
     }
     write(out, &l, &r);
     println!(
-        "normalised by {:+.1} dB · rendered {:.0} s in {:.1} s ({:.1}× real time)",
-        amp_to_db(g),
+        "rendered {:.0} s in {:.1} s ({:.1}× real time)",
         o.minutes * 60.0,
         cpu,
         o.minutes * 60.0 / cpu

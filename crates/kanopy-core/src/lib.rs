@@ -8,6 +8,7 @@
 pub mod calls;
 pub mod filter;
 pub mod life;
+pub mod master;
 pub mod mixer;
 pub mod propagation;
 pub mod rng;

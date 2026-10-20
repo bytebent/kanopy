@@ -29,14 +29,19 @@
 
 use crate::calls::{self, Motif};
 use crate::life::{Life, Zone, DT};
-use crate::mixer::{Listener, Mixer};
-use crate::propagation::Medium;
+use crate::master::{
+    reverb_for, Ear, Master, MasterSettings, EAR_RANGE, REFERENCE_DB, TARGET_DBFS,
+};
+use crate::mixer::{box_fade, Hear, Listener, Mixer};
+use crate::propagation::{
+    foliage_share, path_loss, Medium, PathLoss, FOLIAGE_K, SOIL_DB, SOIL_K, SURFACE_LOSS,
+};
 use crate::rng::Rng;
 use crate::scale::{Key, Scale};
 use crate::voice::{note_to_hz, UnitSpec};
 use crate::wavetable::Wavetables;
 use crate::world::{Rect, BOTTOM, TOP, WIDTH};
-use crate::Vec2;
+use crate::{Vec2, FULL_SCALE_SPL};
 use std::cmp::{Ordering, Reverse};
 use std::collections::BinaryHeap;
 use std::rc::Rc;
@@ -96,6 +101,34 @@ pub struct SceneSettings {
     /// The most that may call at once.
     pub cap: usize,
     pub medium: Medium,
+    /// From the listener, or a box (no distance).
+    pub hear: Hear,
+    pub bodies_follow: bool,
+    /// Narrow the stereo width in a liquid.
+    pub underwater_stereo: bool,
+    pub ear: Ear,
+    /// How much of the medium's loudness offset the reference takes back, 0…1.
+    pub medium_compensation: f64,
+    /// Reverb on, and its amount 0…1.
+    pub reverb: bool,
+    pub reverb_amount: f32,
+}
+
+/// Width of the stereo field under water with Underwater stereo on.
+pub const UNDERWATER_WIDTH: f32 = 0.35;
+/// Active zone margin around a box, metres.
+pub const BOX_MARGIN: f64 = 20.0;
+
+impl SceneSettings {
+    /// Listen to a box instead of from the listener; only animals in it (plus a margin) call.
+    pub fn boxed(mut self, rect: Rect) -> Self {
+        self.hear = Hear::Box(rect);
+        self.zone = Zone::Box {
+            rect,
+            margin: BOX_MARGIN,
+        };
+        self
+    }
 }
 
 impl Default for SceneSettings {
@@ -110,6 +143,13 @@ impl Default for SceneSettings {
             },
             cap: 600,
             medium: Medium::earth(),
+            hear: Hear::Listener,
+            bodies_follow: true,
+            underwater_stereo: false,
+            ear: Ear::Adapting,
+            medium_compensation: 1.0,
+            reverb: true,
+            reverb_amount: 0.3,
         }
     }
 }
@@ -272,11 +312,15 @@ pub struct Scene {
     recent: Vec<Recent>,
     recent_next: usize,
     buf: Vec<u32>,
+    /// Share of the forest in foliage, for animals' hearing.
+    foliage: f64,
 }
 
 impl Scene {
     /// A scene without sound (for scores and tests).
     pub fn new(life: Life, settings: SceneSettings) -> Self {
+        let mut life = life;
+        life.forest.settings.liquid = settings.medium.liquid;
         let seed = life.forest.settings.seed;
         let key = settings.key;
         let mut minds = Vec::with_capacity(life.animals.len());
@@ -330,6 +374,7 @@ impl Scene {
             })
             .collect();
         let grids = (0..n).map(|_| Grid::new()).collect();
+        let foliage = foliage_share(&life.forest);
         Self {
             life,
             settings,
@@ -347,18 +392,106 @@ impl Scene {
             recent: Vec::new(),
             recent_next: 0,
             buf: Vec::new(),
+            foliage,
         }
     }
 
     /// The same with sound at this sample rate.
     pub fn with_sound(mut self, sample_rate: f32) -> Self {
         let wt = Arc::new(Wavetables::new(sample_rate));
-        self.mixer = Some(Mixer::new(
-            wt,
-            self.settings.medium,
-            Listener::still(self.settings.listener),
+        let st = self.settings;
+        let mut m = Mixer::new(wt, st.medium, Listener::still(st.listener));
+        m.hear = st.hear;
+        m.bodies_follow = st.bodies_follow;
+        m.width = if st.medium.liquid && st.underwater_stereo {
+            UNDERWATER_WIDTH
+        } else {
+            1.0
+        };
+        let mut reference_shift =
+            -st.medium.level_offset() * st.medium_compensation.clamp(0.0, 1.0);
+        if let Hear::Box(_) = st.hear {
+            // a box has no distance, so there's no physical level to keep: bring it to the target
+            reference_shift = TARGET_DBFS - self.estimate_db();
+        }
+        let level = self.estimate_db() + reference_shift;
+        let start_db = (TARGET_DBFS - level).clamp(-EAR_RANGE, EAR_RANGE);
+        let reverb = st.reverb.then(|| {
+            let (rt, bright) = reverb_for(self.life.forest.settings.density, &st.medium);
+            (rt, bright, st.reverb_amount)
+        });
+        m.master = Some(Master::new(
+            &MasterSettings {
+                ear: st.ear,
+                start_db,
+                reference_shift,
+                reverb,
+            },
+            self.life.species.len(),
+            sample_rate,
         ));
+        self.mixer = Some(m);
         self
+    }
+
+    /// The scene without the output chain: buses summed at the physical level (100 dB SPL =
+    /// 1.0). For tests.
+    pub fn with_raw_sound(mut self, sample_rate: f32) -> Self {
+        let wt = Arc::new(Wavetables::new(sample_rate));
+        let st = self.settings;
+        let mut m = Mixer::new(wt, st.medium, Listener::still(st.listener));
+        m.hear = st.hear;
+        m.bodies_follow = st.bodies_follow;
+        m.width = if st.medium.liquid && st.underwater_stereo {
+            UNDERWATER_WIDTH
+        } else {
+            1.0
+        };
+        self.mixer = Some(m);
+        self
+    }
+
+    /// Estimated average level of the forest at the reference gain (before medium compensation
+    /// and the Ear), dBFS RMS:
+    /// from who's in the active zone, how loud and how often they call, and how far they are.
+    pub fn estimate_db(&mut self) -> f64 {
+        self.life.mark_active(&self.settings.zone);
+        let st = self.settings;
+        let offset = st.medium.level_offset();
+        let mut power = 0.0;
+        let mut calling = 0.0;
+        for a in self.life.animals.iter().filter(|a| a.active) {
+            let sp = &self.life.species[a.species as usize];
+            let (v, c, b) = (&sp.voice, &sp.calls, &sp.behaviour);
+            let mid = |r: (f64, f64)| 0.5 * (r.0 + r.1);
+            let units = 0.5 * (c.units.0 + c.units.1) as f64;
+            let call_len = units * (mid(c.unit_length) + mid(c.gap)) - mid(c.gap);
+            if b.talkative <= 0.0 {
+                continue;
+            }
+            // answers make chains: about 1 / (1 − Response) calls per spontaneous one
+            let per_call = 1.0 / (1.0 - b.response.min(0.8));
+            let duty = (call_len / (call_len + mid(c.rest) / b.talkative) * per_call).min(1.0);
+            let g2 = match st.hear {
+                Hear::Listener => {
+                    let d = a.pos.dist(st.listener).max(1.0);
+                    let path = path_loss(&self.life.forest, a.pos, st.listener);
+                    10f64.powf(-path.db / 10.0) / (d * d)
+                }
+                Hear::Box(r) => (box_fade(&r, a.pos) as f64).powi(2),
+            };
+            // a unit's power is about half its peak (waveform and envelope)
+            power += 10f64.powf((mid(v.level) + offset - FULL_SCALE_SPL as f64) / 10.0)
+                * 0.5
+                * duty
+                * g2;
+            calling += duty;
+        }
+        if calling > st.cap as f64 {
+            power *= st.cap as f64 / calling;
+        }
+        // per channel: equal-power panning splits it in two
+        10.0 * (power * 0.5).max(1e-20).log10() + REFERENCE_DB
     }
 
     pub fn time(&self) -> f64 {
@@ -457,7 +590,20 @@ impl Scene {
                     if let Some(m) = self.mixer.as_mut() {
                         let a = &self.life.animals[who as usize];
                         let p = a.pos.add_scaled(a.vel, it.at - t0);
-                        m.add(spec, it.at, p.add_scaled(a.vel, -it.at), a.vel);
+                        let path = match self.settings.hear {
+                            Hear::Listener => {
+                                path_loss(&self.life.forest, p, self.settings.listener)
+                            }
+                            Hear::Box(_) => PathLoss::default(),
+                        };
+                        m.add_unit(
+                            spec,
+                            it.at,
+                            p.add_scaled(a.vel, -it.at),
+                            a.vel,
+                            a.species,
+                            path,
+                        );
                     }
                 }
             }
@@ -607,11 +753,13 @@ impl Scene {
 
     /// The call reaches everyone of its species in range who might react.
     fn spread(&mut self, call: &Call) {
-        let level = call.motif.level();
+        // animals hear through the medium; foliage as the forest's average, the ground surface
+        // and a metre of soil when one is above it and the other below
+        let level = call.motif.level() + self.settings.medium.level_offset();
         let f = note_to_hz(call.motif.first_note() as f32) as f64;
         let dur = call.motif.duration();
         let c = self.settings.medium.speed;
-        let absorb = self.settings.medium.absorb_k * f * f;
+        let absorb = (self.settings.medium.absorb_k + FOLIAGE_K * self.foliage) * f * f;
         let entry = Recent {
             who: call.who,
             species: call.species,
@@ -638,6 +786,12 @@ impl Scene {
         let ch = bh.chorus.clamp(-1.0, 1.0);
         let r = reach(level, bh.hearing, absorb);
         let r2 = r * r;
+        let rc = reach(
+            level - SURFACE_LOSS - SOIL_DB - SOIL_K * f * f,
+            bh.hearing,
+            absorb,
+        );
+        let rc2 = rc * rc;
         // does this call get an answer? one roll per call
         let wants_answer =
             bh.response > 0.0 && self.minds[call.who as usize].rng.f64() < bh.response;
@@ -653,7 +807,8 @@ impl Scene {
             let b = &self.life.animals[h];
             let (dx, dy) = (b.pos.x - call.pos.x, b.pos.y - call.pos.y);
             let d2 = dx * dx + dy * dy;
-            if d2 > r2 {
+            let crosses = (b.pos.y < 0.0) != (call.pos.y < 0.0);
+            if d2 > if crosses { rc2 } else { r2 } {
                 continue;
             }
             self.stats.heard += 1;
@@ -756,7 +911,14 @@ fn heard_recently(
             continue;
         }
         let d = e.pos.dist(pos);
-        if e.start + d / c > t || e.level - 20.0 * d.max(1.0).log10() - e.absorb * d < hearing {
+        let cross = if (e.pos.y < 0.0) != (pos.y < 0.0) {
+            SURFACE_LOSS + SOIL_DB
+        } else {
+            0.0
+        };
+        if e.start + d / c > t
+            || e.level - cross - 20.0 * d.max(1.0).log10() - e.absorb * d < hearing
+        {
             continue;
         }
         out.push(i);

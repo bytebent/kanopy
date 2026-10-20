@@ -3,7 +3,7 @@
 A renderer for living forests: species you design, placed in a forest on any world, heard from
 wherever you stand. Each animal only reacts to what actually reaches its ears.
 
-Status: **design agreed; batches 01–03 built**: the sound path, the forest and how its animals move, and how they call, hear, answer, chorus, harmonise and copy each other.
+Status: **design agreed; batches 01–04 built**: the sound path, the forest and how its animals move, how they call, hear, answer, chorus, harmonise and copy each other, and the worlds, Box listening, the Ear, limiters and reverb.
 
 - `design.md`: what kanopy is and how it works
 - `plan.md`: build batches
@@ -27,4 +27,7 @@ cargo run --release -p kanopy-cli -- scene-bench  # 20,000 individuals calling, 
 ```
 
 Listen options: `--seed`, `--density`, `--minutes`, `--scale` (share of the demo forest's
-animals), `--x`/`--y` (listener), `--radius` (active zone), `--cap`, `--free`.
+animals), `--x`/`--y` (listener; negative y is underground), `--radius` (active zone), `--cap`,
+`--free`, `--medium earth|mars|titan|venus|water`, `--box X0,X1,Y0,Y1`, `--ear fixed|adapting`,
+`--reverb AMOUNT` or `--no-reverb`, `--no-bodies`, `--underwater-stereo`, `--compensation 0..1`,
+`--normalise`.
