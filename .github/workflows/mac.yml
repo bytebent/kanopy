@@ -26,3 +26,12 @@ jobs:
         with:
           name: bench
           path: bench.txt
+      - name: Post results as an annotation (readable from the API)
+        run: |
+          {
+            sysctl -n machdep.cpu.brand_string
+            cat bench.txt
+            cargo run -q --release -p kanopy-cli -- world-bench
+          } > results.txt
+          body=$(sed -e 's/%/%25/g' results.txt | awk '{printf "%s%%0A", $0}')
+          echo "::notice title=kanopy bench::${body}"
