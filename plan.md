@@ -11,7 +11,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | Done |
 | 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | Done |
 | 05 | `kanopy-cli render`: forest file → WAV, streamed; file formats | Same seed, same WAV, bit for bit | Done |
-| 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | Built; waiting for your first run on the Mac |
+| 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | Done (your Mac: under 20 % CPU) |
 | 07 | Species page | | |
 | 08 | Designer page | | |
 | 09 | Listening round and tuning | Your notes addressed | |

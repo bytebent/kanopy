@@ -48,6 +48,7 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 06 | Page checks in headless Chromium through `kanopy serve` (`tools/check-pages.js`): legend, real-time play, dragging the listener into the canopy, drawing a box, loading the underwater example, following a species, a knob that grows a new forest, no page errors | 9 of 9 after two fixes: loading an example didn't update the page (settings now republished after every command); layer labels at the bottom overlapped (now spaced) | `docs/experiments/06-forest-page.png`, `06-listener-in-canopy.png`, `06-box.png`, `06-underwater-following.png`, `06-thicker.png` |
 | 20 Oct 2026 | 06 | The real app (Tauri) on a virtual screen here (Linux, no sound card) | Boots; the page talks to the engine through the app; frames arrive | `docs/experiments/06-app-window.png` |
 | 20 Oct 2026 | 06 | Mac CI: tests, benches and the app build on GitHub's Intel Mac | All pass; app built in 12.5 min and published as the Latest Mac build. Render hash still d7df966e (matches Linux) | |
+| 20 Oct 2026 | 06 | Your first run of the app on your Intel Mac laptop | Plays live, no trouble; CPU readout usually under 20 % | |
 
 ## Notes
 
