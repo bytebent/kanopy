@@ -1,6 +1,7 @@
 //! A forest file to a WAV, streamed: any length, in constant memory. The WAV carries the forest
 //! file (with the render settings used) in a `knpy` chunk, so it can be opened and rendered again
 //! exactly. Same file, same seed: the same WAV, bit for bit.
+use crate::pm::Pm;
 
 use crate::files::{ForestFile, RenderFile};
 use crate::life::DT;
@@ -43,7 +44,7 @@ fn ramp(i: u64, len: u64) -> f32 {
     if len == 0 || i >= len {
         1.0
     } else {
-        (0.5 - 0.5 * (std::f64::consts::PI * i as f64 / len as f64).cos()) as f32
+        (0.5 - 0.5 * (std::f64::consts::PI * i as f64 / len as f64).p_cos()) as f32
     }
 }
 
@@ -126,7 +127,7 @@ pub fn render<W: Write + Seek>(
         seconds: steps as f64 * DT,
         cpu_seconds: started.elapsed().as_secs_f64(),
         peak_dbfs: amp_to_db(peak),
-        rms_dbfs: (10.0 * (power / (2 * total.max(1)) as f64).max(1e-20).log10()) as f32,
+        rms_dbfs: (10.0 * (power / (2 * total.max(1)) as f64).max(1e-20).p_log10()) as f32,
         calls: scene.stats.calls,
         ear_start_db: ear_start,
         ear_end_db: master.map_or(0.0, |m| m.gain_db),

@@ -4,6 +4,7 @@
 //! Nyquist. Shape is continuous 0…3 and crossfades between neighbouring tables. All shapes
 //! share sine phase (their fundamentals line up, so a crossfade never cancels) and the same
 //! RMS (so Shape changes colour, not loudness).
+use crate::pm::Pm;
 
 pub const TABLE_BITS: u32 = 11;
 pub const TABLE_LEN: usize = 1 << TABLE_BITS;
@@ -61,7 +62,7 @@ impl Wavetables {
         }
         levels += 1;
         let sintab: Vec<f64> = (0..TABLE_LEN)
-            .map(|i| (std::f64::consts::TAU * i as f64 / TABLE_LEN as f64).sin())
+            .map(|i| (std::f64::consts::TAU * i as f64 / TABLE_LEN as f64).p_sin())
             .collect();
         let mut data = vec![0f32; levels * SHAPES * STRIDE];
         let mut acc = vec![0f64; TABLE_LEN];

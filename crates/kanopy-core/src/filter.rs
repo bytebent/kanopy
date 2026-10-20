@@ -4,6 +4,7 @@
 //! body as a resonant high-pass at 12 dB/oct. Stable under fast cutoff changes.
 //!
 //! `OnePole`: a 6 dB/oct low-pass, used for absorption with distance.
+use crate::pm::Pm;
 
 use std::f32::consts::PI;
 
@@ -17,7 +18,7 @@ pub fn cutoff_max(sample_rate: f32) -> f32 {
 /// Resonance 0…1 to Q: 0.707 (no peak) up to about 20.
 #[inline]
 pub fn resonance_to_q(res: f32) -> f32 {
-    0.707 * 28f32.powf(res.clamp(0.0, 1.0))
+    0.707 * 28f32.p_powf(res.clamp(0.0, 1.0))
 }
 
 #[derive(Clone, Copy, Debug, Default)]
@@ -40,7 +41,7 @@ impl Svf {
     #[inline]
     pub fn set(&mut self, cutoff: f32, res: f32, sample_rate: f32) {
         let fc = cutoff.clamp(CUTOFF_MIN, cutoff_max(sample_rate));
-        let g = (PI * fc / sample_rate).tan();
+        let g = (PI * fc / sample_rate).p_tan();
         let k = 1.0 / resonance_to_q(res);
         self.a1 = 1.0 / (1.0 + g * (g + k));
         self.a2 = g * self.a1;
@@ -91,7 +92,7 @@ impl OnePole {
     /// Coefficient for a -3 dB point at `cutoff` Hz.
     #[inline]
     pub fn coeff(cutoff: f32, sample_rate: f32) -> f32 {
-        1.0 - (-2.0 * PI * cutoff / sample_rate).exp()
+        1.0 - (-2.0 * PI * cutoff / sample_rate).p_exp()
     }
     #[inline]
     pub fn lowpass(&mut self, x: f32, a: f32) -> f32 {

@@ -26,6 +26,7 @@
 //!
 //! The calling cap limits how many call at once; past three quarters of it, only those nearer
 //! the listener may start (none of that in a box: there, plain cap).
+use crate::pm::Pm;
 
 use crate::calls::{self, Motif};
 use crate::life::{Life, Zone, DT};
@@ -61,7 +62,7 @@ const MEMORY_SPAN: f64 = 60.0;
 /// How far a call of this level and pitch carries before it drops below `hearing`: spreading
 /// (−6 dB per doubling from 1 m) and air absorption (absorb dB per metre).
 pub fn reach(level: f64, hearing: f64, absorb: f64) -> f64 {
-    let lost = |r: f64| 20.0 * r.max(1.0).log10() + absorb * r;
+    let lost = |r: f64| 20.0 * r.max(1.0).p_log10() + absorb * r;
     if lost(1.0) > level - hearing {
         return 0.0;
     }
@@ -476,12 +477,12 @@ impl Scene {
                 Hear::Listener => {
                     let d = a.pos.dist(st.listener).max(1.0);
                     let path = path_loss(&self.life.forest, a.pos, st.listener);
-                    10f64.powf(-path.db / 10.0) / (d * d)
+                    10f64.p_powf(-path.db / 10.0) / (d * d)
                 }
                 Hear::Box(r) => (box_fade(&r, a.pos) as f64).powi(2),
             };
             // a unit's power is about half its peak (waveform and envelope)
-            power += 10f64.powf((mid(v.level) + offset - FULL_SCALE_SPL as f64) / 10.0)
+            power += 10f64.p_powf((mid(v.level) + offset - FULL_SCALE_SPL as f64) / 10.0)
                 * 0.5
                 * duty
                 * g2;
@@ -491,7 +492,7 @@ impl Scene {
             power *= st.cap as f64 / calling;
         }
         // per channel: equal-power panning splits it in two
-        10.0 * (power * 0.5).max(1e-20).log10() + REFERENCE_DB
+        10.0 * (power * 0.5).max(1e-20).p_log10() + REFERENCE_DB
     }
 
     pub fn time(&self) -> f64 {
@@ -823,8 +824,8 @@ impl Scene {
                 continue;
             }
             if wants_answer && ta - m.last_end >= rest_lo {
-                let arriving = level - 20.0 * d.max(1.0).log10() - absorb * d;
-                answerers.push((h, ta, 10f64.powf((arriving - bh.hearing) / 20.0)));
+                let arriving = level - 20.0 * d.max(1.0).p_log10() - absorb * d;
+                answerers.push((h, ta, 10f64.p_powf((arriving - bh.hearing) / 20.0)));
             }
             let new_due = if ch > 0.0
                 && !m.nudged
@@ -917,7 +918,7 @@ fn heard_recently(
             0.0
         };
         if e.start + d / c > t
-            || e.level - cross - 20.0 * d.max(1.0).log10() - e.absorb * d < hearing
+            || e.level - cross - 20.0 * d.max(1.0).p_log10() - e.absorb * d < hearing
         {
             continue;
         }

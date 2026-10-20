@@ -10,6 +10,7 @@
 //!   copier's ranges, pitch as steps (Pitch match 0) or aimed at the actual pitch (1), sound kept
 //!   (Timbre match 0) or aimed at the caller's Shape and body (1), then errors from Accuracy.
 //! - `harmonise`: move a call so it starts on a consonance with a heard note.
+use crate::pm::Pm;
 
 use crate::rng::Rng;
 use crate::scale::{consonances, Key};
@@ -97,11 +98,14 @@ pub fn pos(v: f64, r: Range) -> f64 {
 /// The same on a log scale (for cutoff).
 pub fn lin_log(x: f64, r: Range) -> f64 {
     let r = ord(r);
-    lin(x, (r.0.max(1e-3).ln(), r.1.max(1e-3).ln())).exp()
+    lin(x, (r.0.max(1e-3).p_ln(), r.1.max(1e-3).p_ln())).p_exp()
 }
 pub fn pos_log(v: f64, r: Range) -> f64 {
     let r = ord(r);
-    pos(v.max(1e-3).ln(), (r.0.max(1e-3).ln(), r.1.max(1e-3).ln()))
+    pos(
+        v.max(1e-3).p_ln(),
+        (r.0.max(1e-3).p_ln(), r.1.max(1e-3).p_ln()),
+    )
 }
 fn roll(r: Range, rng: &mut Rng) -> f64 {
     let r = ord(r);
@@ -167,7 +171,7 @@ pub fn fresh(sp: &Species, si: u32, key: Option<&Key>, rng: &mut Rng) -> Motif {
                 Evolve::Steady => 0.03 * rng.gauss(),
                 Evolve::Rise => t,
                 Evolve::Fall => -t,
-                Evolve::Arc => (std::f64::consts::PI * t).sin(),
+                Evolve::Arc => (std::f64::consts::PI * t).p_sin(),
                 Evolve::Wander => {
                     if k > 0 {
                         walk += 0.4 * rng.gauss();
@@ -254,9 +258,9 @@ pub fn vary(
             u.note = step(u.note, by, key);
         }
         let ul = ord(c.unit_length);
-        u.dur = (u.dur * (rng.gauss() * a * 0.35).exp()).clamp(ul.0, ul.1);
+        u.dur = (u.dur * (rng.gauss() * a * 0.35).p_exp()).clamp(ul.0, ul.1);
         let gl = ord(c.gap);
-        *g = (*g * (rng.gauss() * a * 0.35).exp()).clamp(gl.0, gl.1);
+        *g = (*g * (rng.gauss() * a * 0.35).p_exp()).clamp(gl.0, gl.1);
         let j = a * 0.15;
         u.shape = lin(jit(pos(u.shape, v.shape), j, rng), v.shape);
         u.cutoff = lin_log(jit(pos_log(u.cutoff, v.cutoff), j, rng), v.cutoff);
@@ -324,7 +328,8 @@ pub fn copy(
                 note,
                 contour: lin(pos(u.contour, fv.contour), tv.contour),
                 shape: toward(shape_g, u.shape, tv.shape),
-                cutoff: (cut_g.ln() + (u.cutoff.clamp(tc_.0, tc_.1).ln() - cut_g.ln()) * tm).exp(),
+                cutoff: (cut_g.p_ln() + (u.cutoff.clamp(tc_.0, tc_.1).p_ln() - cut_g.p_ln()) * tm)
+                    .p_exp(),
                 resonance: toward(res_g, u.resonance, tv.resonance),
                 attack: lin(pos(u.attack, fv.attack), tv.attack),
                 release: lin(pos(u.release, fv.release), tv.release),

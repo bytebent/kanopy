@@ -12,6 +12,7 @@
 //! - **Panning**: equal-power from the horizontal offset relative to distance (straight above is
 //!   centred), narrowed in a liquid with Underwater stereo. **Height**: sources below the listener
 //!   sound a little darker than ones above.
+use crate::pm::Pm;
 
 use crate::world::{Forest, BOTTOM, SHRUB_TOP, TOP, WIDTH};
 use crate::Vec2;
@@ -112,7 +113,7 @@ impl Medium {
 
     /// Source level against Earth air for the same body, dB.
     pub fn level_offset(&self) -> f64 {
-        10.0 * (self.density * self.speed / EARTH_Z).log10()
+        10.0 * (self.density * self.speed / EARTH_Z).p_log10()
     }
 
     /// How far bodies move, as a frequency ratio (cutoff × this).
@@ -163,7 +164,7 @@ pub const BELOW_CUTOFF: f32 = 6_000.0;
 pub fn height_cutoff(elevation: f64, sample_rate: f32) -> f32 {
     let top = 0.45 * sample_rate;
     let e = ((elevation + 1.0) * 0.5).clamp(0.0, 1.0) as f32; // 0 below … 1 above
-    (BELOW_CUTOFF.ln() + (top.ln() - BELOW_CUTOFF.ln()) * e).exp()
+    (BELOW_CUTOFF.p_ln() + (top.p_ln() - BELOW_CUTOFF.p_ln()) * e).p_exp()
 }
 
 /// Equal-power pan gains (left, right) for a source relative to the listener, `width` 0…1.
@@ -182,7 +183,7 @@ pub fn pan_width(listener: Vec2, source: Vec2, width: f32) -> (f32, f32) {
 #[inline]
 pub fn pan_value(p: f32) -> (f32, f32) {
     let a = (p.clamp(-1.0, 1.0) + 1.0) * std::f32::consts::FRAC_PI_4;
-    (a.cos(), a.sin())
+    (a.p_cos(), a.p_sin())
 }
 
 #[inline]

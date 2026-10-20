@@ -4,6 +4,7 @@
 //! Density sets how many there are and how full their crowns are, Tree variation how much they
 //! differ. The tallest tree always reaches 50 m. A crown is an ellipse from its bottom to the top
 //! of the tree. Shrubs are one band (0.5–3 m) whose fullness follows Density.
+use crate::pm::Pm;
 
 use serde::{Deserialize, Serialize};
 
@@ -246,7 +247,7 @@ impl Forest {
                 let height = if i == tallest {
                     TOP
                 } else {
-                    (STAND_HEIGHT * (v * 0.55 * rng.gauss()).exp()).clamp(4.0, TOP - 4.0)
+                    (STAND_HEIGHT * (v * 0.55 * rng.gauss()).p_exp()).clamp(4.0, TOP - 4.0)
                 };
                 let bottom_frac = (0.5 + v * 0.12 * rng.gauss()).clamp(0.25, 0.75);
                 let half =

@@ -1,5 +1,6 @@
 //! Keys (design §6): In key snaps anchor notes to a scale; Free leaves them alone. Also the
 //! consonant intervals Harmonise picks from: scale steps in key, simple ratios when Free.
+use crate::pm::Pm;
 
 use serde::{Deserialize, Serialize};
 
@@ -113,7 +114,7 @@ pub fn consonances(key: Option<&Key>) -> Vec<f64> {
         2.0,
     ]
     .iter()
-    .map(|r: &f64| 12.0 * r.log2())
+    .map(|r: &f64| 12.0 * r.p_log2())
     .collect();
     let base: Vec<f64> = if key.is_some() {
         tempered.to_vec()

@@ -14,6 +14,7 @@
 //!
 //! Limiters look one block (64 samples) ahead and ramp between gains that are both safe for the
 //! block they cover, so nothing gets past them. In normal use they don't act.
+use crate::pm::Pm;
 
 use crate::{db_to_amp, BLOCK};
 
@@ -56,7 +57,7 @@ impl Limiter {
         Self {
             threshold: db_to_amp(threshold_db),
             // gain may rise by this factor per block
-            release_step: (BLOCK as f32 / (RELEASE * sample_rate)).exp(),
+            release_step: (BLOCK as f32 / (RELEASE * sample_rate)).p_exp(),
             gain: 1.0,
             delay: [[0.0; BLOCK]; 2],
             delay_len: 0,
@@ -127,14 +128,14 @@ impl Reverb {
             .collect();
         let mut gains = [0f32; 8];
         for (g, &n) in gains.iter_mut().zip(&lens) {
-            *g = 10f32.powf(-3.0 * n as f32 / (rt60.max(0.05) * sample_rate));
+            *g = 10f32.p_powf(-3.0 * n as f32 / (rt60.max(0.05) * sample_rate));
         }
         Self {
             lines: lens.iter().map(|&n| vec![0.0; n]).collect(),
             pos: vec![0; 8],
             gains,
             damp: [0.0; 8],
-            lp_a: 1.0 - (-2.0 * std::f32::consts::PI * brightness / sample_rate).exp(),
+            lp_a: 1.0 - (-2.0 * std::f32::consts::PI * brightness / sample_rate).p_exp(),
             amount,
         }
     }
@@ -231,7 +232,7 @@ impl Master {
             gain_db: s.start_db,
             reference_shift: s.reference_shift,
             power: db_to_amp(TARGET_DBFS as f32).powi(2) as f64,
-            alpha: 1.0 - (-(BLOCK as f64) / (EAR_TAU * sample_rate as f64)).exp(),
+            alpha: 1.0 - (-(BLOCK as f64) / (EAR_TAU * sample_rate as f64)).p_exp(),
             limiters: (0..buses)
                 .map(|_| Limiter::new(SPECIES_LIMIT_DB, sample_rate))
                 .collect(),
@@ -284,7 +285,7 @@ impl Master {
                 .sum::<f64>())
                 / (2 * n) as f64;
             self.power += (p - self.power) * self.alpha * n as f64 / BLOCK as f64;
-            let measured = 10.0 * self.power.max(1e-20).log10();
+            let measured = 10.0 * self.power.max(1e-20).p_log10();
             let want = self.gain_db + (TARGET_DBFS - measured);
             let to = want.clamp(-EAR_RANGE, EAR_RANGE);
             self.gain_db += (to - self.gain_db) * self.alpha * n as f64 / BLOCK as f64;

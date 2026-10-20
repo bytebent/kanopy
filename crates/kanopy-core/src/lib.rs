@@ -13,6 +13,8 @@ pub mod filter;
 pub mod life;
 pub mod master;
 pub mod mixer;
+pub mod pm;
+use pm::Pm;
 pub mod propagation;
 pub mod render;
 pub mod rng;
@@ -57,11 +59,11 @@ impl Vec2 {
 /// dB to linear amplitude.
 #[inline]
 pub fn db_to_amp(db: f32) -> f32 {
-    10f32.powf(db / 20.0)
+    10f32.p_powf(db / 20.0)
 }
 
 /// Linear amplitude to dB.
 #[inline]
 pub fn amp_to_db(a: f32) -> f32 {
-    20.0 * a.max(1e-12).log10()
+    20.0 * a.max(1e-12).p_log10()
 }

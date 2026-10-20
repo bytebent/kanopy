@@ -12,6 +12,7 @@
 //!   inside the box plus a margin. Everyone keeps living either way.
 //!
 //! Time moves in fixed steps of DT, so the same seed gives the same forest, bit for bit.
+use crate::pm::Pm;
 
 use crate::rng::Rng;
 use crate::species::{Movement, Perch, Species, Spread};
@@ -26,7 +27,7 @@ pub const PERCH_MEAN: f64 = 40.0;
 const PAUSE: (f64, f64) = (1.0, 15.0);
 
 fn exp(rng: &mut Rng, mean: f64) -> f64 {
-    -mean * (1.0 - rng.f64()).ln()
+    -mean * (1.0 - rng.f64()).p_ln()
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -441,7 +442,7 @@ impl Life {
                     let a = arng.f64() * std::f64::consts::TAU;
                     let vel = if matches!(mode, Mode::Flying { .. }) {
                         let v = h.movement.speed() * 0.6;
-                        Vec2::new(a.cos() * v, a.sin() * 0.3 * v)
+                        Vec2::new(a.p_cos() * v, a.p_sin() * 0.3 * v)
                     } else {
                         Vec2::default()
                     };
@@ -815,8 +816,8 @@ fn fly_step(
                 let to_c = Vec2::new(centre.x - p.x, centre.y - p.y);
                 let to_home = Vec2::new(g.anchor.x - p.x, g.anchor.y - p.y);
                 // past its roaming distance the pull home grows, so a flock wheels around home
-                let far =
-                    (to_home.x.hypot(to_home.y) / roam(h.cohesion).max(10.0) - 1.0).clamp(0.0, 3.0);
+                let far = (to_home.x.p_hypot(to_home.y) / roam(h.cohesion).max(10.0) - 1.0)
+                    .clamp(0.0, 3.0);
                 let home = norm(to_home);
                 desired = Vec2::new(
                     norm(mean_v).x + 0.08 * to_c.x + 1.5 * sep.x + 0.8 * far * home.x,
@@ -851,10 +852,10 @@ fn fly_step(
             // turn at most this fast
             let max_dv = 3.0 * v * DT;
             let dv = Vec2::new(want.x - a.vel.x, want.y - a.vel.y);
-            let dl = dv.x.hypot(dv.y);
+            let dl = dv.x.p_hypot(dv.y);
             let s = if dl > max_dv { max_dv / dl } else { 1.0 };
             let mut vel = Vec2::new(a.vel.x + dv.x * s, a.vel.y + dv.y * s);
-            let sp_now = vel.x.hypot(vel.y);
+            let sp_now = vel.x.p_hypot(vel.y);
             if sp_now < 0.3 * v {
                 vel = if sp_now > 1e-9 {
                     Vec2::new(vel.x / sp_now * 0.3 * v, vel.y / sp_now * 0.3 * v)
@@ -878,7 +879,7 @@ fn fly_step(
 }
 
 fn norm(v: Vec2) -> Vec2 {
-    let l = v.x.hypot(v.y);
+    let l = v.x.p_hypot(v.y);
     if l > 1e-12 {
         Vec2::new(v.x / l, v.y / l)
     } else {

@@ -4,6 +4,7 @@
 //! with a pitch glide, an attack/release envelope and a source level. Everything moves in
 //! *source time*: the mixer feeds it at a rate that includes Doppler, so pitch, envelope and
 //! length all stretch together, as they would for a moving animal.
+use crate::pm::Pm;
 
 use crate::filter::Svf;
 use crate::wavetable::{shape_pair, Wavetables, TABLE_BITS, TABLE_LEN};
@@ -45,7 +46,7 @@ impl Default for UnitSpec {
 
 #[inline]
 pub fn note_to_hz(n: f32) -> f32 {
-    440.0 * ((n - 69.0) / 12.0).exp2()
+    440.0 * ((n - 69.0) / 12.0).p_exp2()
 }
 
 #[derive(Clone, Debug)]
@@ -109,7 +110,7 @@ impl Voice {
         };
         let t1 = t0 + valid as f64 * step;
         let pm = self.progress(0.5 * (t0 + t1));
-        let cutoff = s.cutoff_start * (s.cutoff_end / s.cutoff_start.max(1.0)).powf(pm);
+        let cutoff = s.cutoff_start * (s.cutoff_end / s.cutoff_start.max(1.0)).p_powf(pm);
         self.body.set(cutoff, s.resonance, sr);
         let shape = s.shape_start + (s.shape_end - s.shape_start) * pm;
         let (ta, tb, sf) = shape_pair(shape);
