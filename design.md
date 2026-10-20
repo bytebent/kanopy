@@ -297,8 +297,9 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
     so a box over the whole forest doesn't make everything sound. An individual that wants to call
     while the cap is full skips that call and rests again; the ones closest to the listener (or
     anywhere, in a box) get priority. [Decided]
-  - Defaults for both come from the batch 01 benchmark on your Mac. Export may use a higher cap,
-    since it doesn't have to keep up with real time.
+  - Calling cap defaults: **600 live, 2,000 for export**, from the batch 01 bench on an Intel
+    Mac (i7-8700B: ~940 units at half a core). Active zone radius and margin are set in batch 03,
+    once calls have real lengths. [Decided, for now]
 - **Threads**: live play renders a little ahead (~100 ms) on **one render thread**, separate from
   the audio callback; that's light on battery and heat. [Decided] Export may use more cores, set
   by a **Render threads** setting (default: all). [Decided]

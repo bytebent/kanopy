@@ -20,6 +20,9 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 02 | World bench: demo forest ×8.7 (20,010 individuals, 4,749 groups), 20 steps a second (container) | 42 ms per second of forest time: about 4 % of one core. Set-up 21 ms | `docs/experiments/02-forest-20k.png` |
 | 20 Oct 2026 | 02 | Your note: soil and shrubs too thin | Made them bigger in the world: soil −1 → −3 m deep, shrubs up to 3 m (was 2), understorey now 3–5 m. Walkers live 0–3 m. Images redrawn | `docs/experiments/02-*.png` |
 | 20 Oct 2026 | 01 | Bench on GitHub's Apple Silicon Mac | Never ran: no runner free within 15 min (GitHub capacity). Switched to `macos-26-intel`, matching your Intel laptop | |
+| 20 Oct 2026 | 01 | Bench on GitHub's Intel Mac (`macos-26-intel`, Core i7-8700B 3.2 GHz, 2018), best of 2 | 400 units 19 % of a core, 800 units 43 %, 1600 units 91 %; ~10–12 ns per unit-sample. About 940 units at half a core | |
+| 20 Oct 2026 | 02 | World bench on the same Mac | 20,010 individuals: 33 ms per second of forest time, 3.3 % of one core | |
+| 20 Oct 2026 | 01 | Calling cap default set from the Mac bench | **600 live** (about a third of one core, leaving room on a laptop that throttles when hot); export uncapped by speed, default 2,000 | |
 
 ## Notes
 
@@ -33,3 +36,5 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
   roaming distance 25 m (Cohesion 0) to 1 m (Cohesion 1), 50 ms steps.
 - **02 · liquid worlds** use the same geometry; only the names change (kelp, seabed, swimming).
   Nothing extra to simulate until the medium arrives in batch 04.
+- **CI.** `.github/workflows/mac.yml` runs all tests and both benches on GitHub's Intel Mac on
+  every push and posts the numbers as a run annotation (this session can't download logs).

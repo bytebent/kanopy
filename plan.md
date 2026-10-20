@@ -6,7 +6,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | # | Batch | Done when | State |
 |---|---|---|---|
 | 00 | Design passes, plan, experiments log | `design.md` agreed | Done |
-| 01 | Rust workspace; one voice (wavetable + resonant high-pass); propagation from a listener (spreading, Earth absorption, delay, Doppler, pan); a mixer; **benchmark** | Tests pass; voice counts measured on the Mac; calling-cap default set | Built; waiting for the Mac bench |
+| 01 | Rust workspace; one voice (wavetable + resonant high-pass); propagation from a listener (spreading, Earth absorption, delay, Doppler, pan); a mixer; **benchmark** | Tests pass; voice counts measured on the Mac; calling-cap default set | Done (Intel Mac bench: cap 600 live) |
 | 02 | World: trees from seed, Density and Tree variation, shrubs, layers; species areas, spread, groups; movement types, flight and perch, migration, flocking; active zone | Seeded worlds repeat exactly; placement tests | Done |
 | 03 | Calls and behaviour: call grammar, signatures, hearing between animals, call and response, chorus, Harmonise, mimicry (chance, accuracy, pitch and timbre match), calling cap | Behaviour tests; text score of a forest | |
 | 04 | Media and loudness: presets and Custom, absorption curves, foliage loss, bodies follow the medium, underground listener, underwater stereo, Box listening, Ear, starting gain, limiters, reverb | Level tests per medium; no clipping in long renders | |
