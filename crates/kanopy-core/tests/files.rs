@@ -213,3 +213,15 @@ fn renders_stay_within_full_scale() {
         assert!(rep.rms_dbfs > -40.0 && rep.calls > 100, "{medium}: {rep:?}");
     }
 }
+
+#[test]
+fn renders_over_4_gb_are_refused() {
+    let opts = RenderFile {
+        minutes: 300.0,
+        fade_in: 0.0,
+        fade_out: 0.0,
+        bits: 24,
+    };
+    let e = render(&small(), &opts, Cursor::new(Vec::new()), |_| {}).unwrap_err();
+    assert!(e.contains("4 GB") && e.contains("248 minutes"), "{e}");
+}

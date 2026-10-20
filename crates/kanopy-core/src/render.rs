@@ -55,6 +55,16 @@ pub fn render<W: Write + Seek>(
     out: W,
     mut progress: impl FnMut(f64),
 ) -> Result<(W, RenderReport), String> {
+    let bytes = opts.minutes.max(0.0)
+        * 60.0
+        * SAMPLE_RATE as f64
+        * 2.0
+        * if opts.bits == 16 { 2.0 } else { 3.0 };
+    if bytes > u32::MAX as f64 - 1e6 {
+        let most = (u32::MAX as f64 - 1e6)
+            / (60.0 * SAMPLE_RATE as f64 * 2.0 * if opts.bits == 16 { 2.0 } else { 3.0 });
+        return Err(format!("a WAV can't be over 4 GB: at {} bits that's {:.0} minutes at most; render it in parts with different seeds, or use --bits 16", if opts.bits == 16 { 16 } else { 24 }, most.floor()));
+    }
     let mut recorded = forest.clone();
     recorded.render = opts.clone();
     let json = serde_json::to_vec(&recorded).map_err(|e| e.to_string())?;
