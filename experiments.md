@@ -37,6 +37,7 @@ came out. Screenshots go in `docs/experiments/` as `NN-short-name.png` (NN = bat
 | 20 Oct 2026 | 04 | Starting-level estimate vs measured, sparse Earth forest | Predicted −21.1, measured −22.6 dBFS RMS (with reverb); Ear stayed put | |
 | 20 Oct 2026 | 04 | Eight listening minutes: Earth, Mars, Titan, Venus, water (underwater stereo), a box in the canopy, listener underground, Earth without reverb | Each world lands at −22 to −26 dBFS RMS. On Mars and Titan the species limiters catch animals calling right next to the listener | `docs/experiments/04-worlds-spectrograms.png` |
 | 20 Oct 2026 | 04 | Scene bench with the whole output chain (container) | 49 % of one core for 20,010 individuals: path losses, limiters and reverb cost almost nothing | |
+| 20 Oct 2026 | 04 | Scene bench on GitHub's Intel Mac (i7-8700B) with the whole output chain | 34.8 % of one core for 20,010 individuals, all tests pass there | |
 
 ## Notes
 
