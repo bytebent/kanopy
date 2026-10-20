@@ -1,6 +1,6 @@
 # kanopy · design
 
-**Pass 1 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
+**Pass 2 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
 built until it's agreed.
 
 kanopy is a renderer for living forests. You build species, place them in a forest on any world
@@ -38,7 +38,7 @@ to decide · **[Later]** agreed to leave out of the prototype.
 
 ### 3.1 The slice
 - The forest is a **2D side-on slice**: x is left to right, y is height. **No depth.** [Decided]
-- Width is set per forest (default 200 m) [Proposed]. Heights run from −1 m (soil) to 50 m.
+- Width is **fixed at 200 m** for every forest. [Decided] Heights run from −1 m (soil) to 50 m.
 
 ### 3.2 Layers
 Height bands, used for habitat and drawn as faint guides on the scene. [Decided: these seven]
@@ -84,7 +84,10 @@ power into a denser medium. The Ear (§8) keeps this listenable.
 
 - **Bodies follow the medium** (on/off): a resonant cavity's frequency scales with the speed of
   sound, so every species' body filter moves with it: about −10 semitones on Titan, +25 in water.
-  [Proposed: on by default] [Open: is +25 in water too much? We could cap it.]
+  **On by default, no cap.** [Decided] The filter's cutoff only stops at its own top end. A body
+  pushed past hearing cuts most of the call, so some species go thin or silent in water; that's
+  the world, not a bug. The Designer flags a species that falls below hearing in the chosen medium.
+  [Proposed]
 - **Delay is real**: a call 100 m away arrives about 0.3 s late in air, 0.07 s in water, 0.5 s on
   Titan. Animals react to the call when it arrives.
 - **Liquid worlds**: the same forest, read as an underwater one [Decided]:
@@ -98,14 +101,27 @@ power into a denser medium. The Ear (§8) keeps this listenable.
 - One cheap diffuse reverb on the mix; its length and brightness follow Density and Medium.
   **On/off switch**, plus an amount. [Decided: can be turned off] [Proposed: on by default]
 
-## 4. The listener
+## 4. Listening
 
+Two ways to listen, switched on the Forest page. [Decided] Either way the forest itself behaves the
+same; only what you hear changes.
+
+### 4.1 Person
 - A **person** placed anywhere in the slice, including up in the trees (or the water). [Decided]
 - **Path**: Still · Walk (along the floor) · Wander · Climb (up and down a tree) · Follow (a
   species or one individual), with a Speed. The person can always be dragged. [Proposed]
 - **Panning**: equal-power, from the horizontal offset relative to distance, so a call straight
   above is centred. Height adds a light brightness cue (above is slightly brighter). [Proposed]
 - Moving changes delays smoothly, so Doppler comes for free on fast flyers.
+
+### 4.2 Box
+- Draw a **box** on the forest picture; you hear only the individuals inside it. [Decided]
+- Inside the box there is no distance: no spreading, absorption, foliage loss or delay. Each
+  individual sounds at its own source level (with the medium's loudness and body shift), panned by
+  its position across the box's width. [Proposed]
+- Individuals fade in and out over the last 2 m at the box edges, so flyers crossing it don't
+  click. [Proposed]
+- The box can be moved and resized while playing. Reverb and Ear apply as usual.
 
 ## 5. Species
 
@@ -138,10 +154,16 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   |---|---|---|---|
   | Walker | Floor (and shrubs) | Along the ground | Seabed |
   | Climber | Inside tree crowns | Along branches; between trees by **migrating** | Kelp |
-  | Flyer | Anywhere in the open, perches in crowns | Freely through open space | Swims |
+  | Flyer | Anywhere in its flight band, rests at its perch | Freely through open space | Swims |
   | Burrower | Soil | Slowly, underground | Sediment |
 
 - **Height preference**: a curve across the seven layers (drawn on the Species page). [Proposed]
+- **Flyers** get two extra settings [Decided: flyers need their own perch option]:
+  - **Flight band**: the heights it flies in (e.g. above the canopy).
+  - **Perch**: Emergent · Canopy · Subcanopy · Understorey · Shrubs · Ground · **Never** (always
+    airborne). It can call in flight and on its perch. In water, perching means resting on kelp or
+    the seabed. [Proposed]
+  - **Flight share**: how much of its time it spends flying rather than perched. [Proposed]
 - **Spread**: Even · Random · Clumped, plus **Spacing** (territory size). [Proposed]
 - **Migration** [Decided: species move between trees from time to time]: how often an individual
   (or its whole group) moves to another tree or place, and how far. Climbers hop between crowns
@@ -165,16 +187,23 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 | Call and response | Same species | Answers a heard conspecific, with this odds |
 | Chorus | Same species | Its calling rhythm drifts towards the ones it hears: **Alternate** (take turns) … **Free** … **Synchronise** |
 | Harmonise | Same **group** only | Group members pick pitches consonant with their group mates [Decided: group only] |
-| Mimicry | Other species | Chance that, after hearing another species, it copies that call in its own voice |
+| Mimicry chance | Any sound | How often it copies something it heard instead of making its own call |
+| Mimicry accuracy | — | How close its copies are to what it heard |
 | Hearing | — | The quietest level (dB SPL) it reacts to |
 
-### 5.6 Mimicry and motifs
+### 5.6 Mimicry
+[Decided: any sound it hears, once is enough; chance and accuracy are separate]
+- **Chance** says how much a species mimics; **Accuracy** says how well. A parrot is high on
+  both; a species that often tries but gets it wrong is high chance, low accuracy.
 - Every call is kept as a **motif**: per unit its length, gap, pitch step and each parameter's
   position inside the caller's own range (0–1).
 - A copy maps those positions into the copier's ranges: the caller's gesture in the copier's
-  voice. Each copy mutates a little. [Proposed]
-- A mimic remembers the last few calls it heard from other species and draws on them. A species
-  with high Mimicry ends up carrying pieces of the whole forest. [Proposed]
+  voice. [Proposed]
+- **Accuracy** sets how much the copy drifts: at 1 the gesture is exact (within the copier's
+  ranges); lower values add errors in pitch steps, timing and unit count, and may drop or add
+  units. [Proposed]
+- Each individual remembers the last few calls it heard, from any species including its own, and
+  draws on them. A high-chance species ends up carrying pieces of the whole forest. [Proposed]
 
 ## 6. Key
 - Forest-wide switch: **In key** (root and scale; anchor notes snap) or **Free**. [Decided]
@@ -206,9 +235,10 @@ Many quiet animals add up quickly: 1,000 equal callers are 30 dB louder than one
 Same look as the bytebent pages (platinum window, black screen first, etched groups, knobs and
 range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 
-- **Forest**: the screen shows the slice: trees, layer guides, the person, and every individual as
-  a dot in its species colour that lights up when it calls. Drag the person. Controls: Density,
-  Medium, Reverb, Key, Ear, Path, Seed, Play, Export.
+- **Forest**: the screen shows the slice: trees, layer guides, the person or the box, and every
+  individual as a dot in its species colour that lights up when it calls. Drag the person, or draw
+  and drag the box. Controls: Listen (Person · Box), Density, Medium, Reverb, Key, Ear, Path,
+  Seed, Play, Export.
 - **Species**: every species in the forest with its colour, individuals, movement type, height
   curve, spread, groups and behaviours. Add from file, from the Designer, or duplicate.
 - **Designer**: one species' voice and calls, with **Call** and **Signature** buttons to audition it
@@ -222,9 +252,9 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   to confirm by benchmark. [Proposed]
 - **Sounding voices** are what cost: a **voice budget**, quietest-at-the-listener culled first.
   The first build step measures how many voices your Mac runs live. [Proposed]
-- **Threads** [Open]. Live play renders a little ahead (~100 ms) on one render thread, separate
-  from the audio callback; that's light on battery and heat. A **Render threads** setting lets
-  export (and live, if you want) use more cores. Default: 1 live, all for export.
+- **Threads**: live play renders a little ahead (~100 ms) on **one render thread**, separate from
+  the audio callback; that's light on battery and heat. [Decided] Export may use more cores, set
+  by a **Render threads** setting (default: all). [Proposed]
 
 ## 11. Tech
 
@@ -241,10 +271,10 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 - Time of day (dawn and dusk choruses). [Later]
 - A richer voice engine for the Designer. [Later]
 
-## 13. Questions for pass 2
-1. Bodies follow the medium: on by default, and capped in water?
-2. Flyers in air: can they perch on the ground too, or only in crowns?
-3. Do group members share one signature, so a group sounds like a family?
-4. Should Mimicry copy only species it hears often, or anything it hears once?
-5. Forest width: fixed 200 m, or a control?
-6. Live render threads: 1 by default, as in §10?
+## 13. Questions for pass 3
+1. Do group members share one signature, so a group sounds like a family? (carried over)
+2. Box: is "no distance inside the box" right, or should it keep distance from the box's centre as
+   an option?
+3. Box: should calls from outside the box still be heard faintly, or nothing at all?
+4. Flight share and perch: is a single Flight share enough, or should flying and perching have
+   their own Talkative (e.g. some only sing perched)?
