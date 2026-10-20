@@ -1,0 +1,4 @@
+target/
+out/
+*.wav
+.DS_Store

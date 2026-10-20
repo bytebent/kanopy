@@ -1,0 +1,13 @@
+[package]
+name = "kanopy-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "kanopy command line: bench, demo, and later render."
+
+[[bin]]
+name = "kanopy"
+path = "src/main.rs"
+
+[dependencies]
+kanopy-core = { path = "../kanopy-core" }

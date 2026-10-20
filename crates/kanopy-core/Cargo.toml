@@ -1,0 +1,8 @@
+[package]
+name = "kanopy-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "kanopy: forest world, behaviour and audio. No UI."
+
+[dependencies]
