@@ -1,6 +1,6 @@
 # kanopy · design
 
-**Pass 4 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
+**Pass 5 · 20 Oct 2026.** This document is being settled over several passes in chat. Nothing is
 built until it's agreed.
 
 kanopy is a renderer for living forests. You build species, place them in a forest on any world
@@ -55,16 +55,18 @@ Height bands, used for habitat and drawn as faint guides on the scene. [Decided:
 
 ### 3.3 Trees
 - Trees are **objects** generated from the forest seed: an x position, a height and a crown (the
-  span of heights and widths where branches are). A few reach the emergent layer. [Proposed]
+  span of heights and widths where branches are). [Decided]
+- **Tree variation** (slider): how much tree heights and crowns differ, from an even stand to a
+  ragged mix. The tallest tree always reaches the top of the emergent layer. [Decided]
 - Animals that live in trees can only be where a tree is. In an open woodland they cluster around
   the few trees there are; in a thicket they spread out.
-- Shrubs are a continuous band whose fullness follows Density. [Proposed]
+- Shrubs are a continuous band whose fullness follows Density. [Decided]
 
 ### 3.4 Density
 One continuous slider, **Woodland → Forest → Thicket** [Decided]. It sets:
 - how many trees there are and how full their crowns are;
 - **foliage loss**: extra attenuation of high frequencies per metre travelled through vegetation
-  (only for the part of the path that passes through crowns or shrubs) [Proposed];
+  (only for the part of the path that passes through crowns or shrubs). **Kept subtle.** [Decided];
 - the reverb's length and colour (§3.6).
 
 ### 3.5 Medium
@@ -87,31 +89,34 @@ power into a denser medium. The Ear (§8) keeps this listenable.
   **On by default, no cap.** [Decided] The filter's cutoff only stops at its own top end. A body
   pushed past hearing cuts most of the call, so some species go thin or silent in water; that's
   the world, not a bug. The Designer flags a species that falls below hearing in the chosen medium.
-  [Proposed]
+  [Decided]
 - **Delay is real**: a call 100 m away arrives about 0.3 s late in air, 0.07 s in water, 0.5 s on
   Titan. Animals react to the call when it arrives.
 - **Liquid worlds**: the same forest, read as an underwater one [Decided]:
   - flyers **swim** and move anywhere in the open water;
   - tree-dwellers live on **kelp** (trees are drawn as kelp stalks);
   - walkers stay on the **seabed**; burrowers in the sediment.
-  - [Open] Human ears hear direction badly under water. Option: narrow the stereo width when the
-    medium is a liquid. Default off.
+  - **Underwater stereo** (on/off): human ears hear direction badly under water, so this narrows
+    the stereo width in a liquid. Default off. [Decided]
 
 ### 3.6 Reverb
 - One cheap diffuse reverb on the mix; its length and brightness follow Density and Medium.
-  **On/off switch**, plus an amount. [Decided: can be turned off] [Proposed: on by default]
+  **On/off switch**, plus an amount. **On by default.** [Decided]
 
 ## 4. Listening
 
 Two ways to listen, switched on the Forest page. [Decided] Either way the forest itself behaves the
 same; only what you hear changes.
 
-### 4.1 Person
-- A **person** placed anywhere in the slice, including up in the trees (or the water). [Decided]
-- **Path**: Still · Walk (along the floor) · Wander · Climb (up and down a tree) · Follow (a
-  species or one individual), with a Speed. The person can always be dragged. [Proposed]
+### 4.1 Listener
+- The **listener** is drawn as a person but works like a microphone: it can be anywhere in the
+  slice, in the open air, inside a crown, in the water or underground. [Decided]
+- Underground, sound from above passes through the soil and comes through heavily muffled;
+  burrowers nearby are clear. [Proposed]
+- **Path**: Still · Wander (drifts anywhere) · Follow (a species), with a Speed. The listener can
+  always be dragged. No following single individuals. [Decided]
 - **Panning**: equal-power, from the horizontal offset relative to distance, so a call straight
-  above is centred. Height adds a light brightness cue (above is slightly brighter). [Proposed]
+  above is centred. Height adds a light brightness cue (above is slightly brighter). [Decided]
 - Moving changes delays smoothly, so Doppler comes for free on fast flyers.
 
 ### 4.2 Box
@@ -120,13 +125,13 @@ same; only what you hear changes.
   individual sounds at its own source level (with the medium's loudness and body shift), panned by
   its position across the box's width. [Decided]
 - **Nothing outside the box is heard.** [Decided] Individuals fade in and out over the last 2 m
-  inside the box edges, so flyers crossing it don't click. [Proposed]
+  inside the box edges, so flyers crossing it don't click. [Decided]
 - The box can be moved and resized while playing. Reverb and Ear apply as usual.
 
 ## 5. Species
 
 A species is a voice, a habitat and a set of behaviours. Every number below is a **range**
-(min–max); each call rolls inside it, and min = max locks it. [Proposed]
+(min–max); each call rolls inside it, and min = max locks it. [Decided]
 
 ### 5.1 Voice (prototype)
 [Decided: wavetable plus a resonant high-pass body for the prototype]
@@ -143,9 +148,13 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 ### 5.2 Calls
 - A **unit** is one sound; a **call** is 1–32 units with gaps between them; between calls the
   animal **rests**. Controls: Units per call, Unit length, Gap, Rest, Evolve (how units change
-  across a call). [Proposed]
-- **Signature**: each species has its own recognisable call; Signature amount (how often it uses
-  it) and Variation (how much it changes). [Proposed]
+  across a call). [Decided]
+- **Signature**: each group has one recognisable call of its own, made once from the seed (§5.4).
+  Two controls [Proposed]:
+  - **Signature amount** (0–1): how often a call is the signature rather than a freshly rolled
+    call. 0 = every call is new; 1 = it only ever says its signature.
+  - **Variation** (0–1): how much each repeat of the signature is changed. 0 = identical every
+    time; 1 = barely recognisable.
 
 ### 5.3 Habitat and movement
 - **Movement type** [Decided: these four]:
@@ -157,18 +166,23 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
   | Flyer | Anywhere in its flight band, rests at its perch | Freely through open space | Swims |
   | Burrower | Soil | Slowly, underground | Sediment |
 
-- **Height preference**: a curve across the seven layers (drawn on the Species page). [Proposed]
+- **Height range**: lowest and highest height it lives at, as a range slider over the seven
+  layers. [Decided]
 - **Flyers** get two extra settings [Decided: flyers need their own perch option]:
   - **Flight band**: the heights it flies in (e.g. above the canopy).
   - **Perch**: Emergent · Canopy · Subcanopy · Understorey · Shrubs · Ground · **Never** (always
     airborne). It can call in flight and on its perch. In water, perching means resting on kelp or
-    the seabed. [Proposed]
+    the seabed. [Decided]
   - **Flight share**: how much of its time it spends flying rather than perched. It calls just as
     much in flight as perched. [Decided]
-- **Spread**: Even · Random · Clumped, plus **Spacing** (territory size). [Proposed]
+- **Spread**: how the species' groups are laid out across the forest's 200 m width [Proposed]:
+  - **Even**: evenly spaced, like territorial birds each holding a patch;
+  - **Random**: anywhere their height range allows;
+  - **Clumped**: bunched into a few patches with empty forest between.
+  - **Spacing**: the smallest distance kept between neighbouring groups (territory size).
 - **Migration** [Decided: species move between trees from time to time]: how often an individual
   (or its whole group) moves to another tree or place, and how far. Climbers hop between crowns
-  that touch, or descend and walk if they don't. [Proposed]
+  that touch, or descend and walk if they don't. [Decided]
 - **Individuals**: how many of this species are in the forest.
 
 ### 5.4 Groups
@@ -202,73 +216,83 @@ A species is a voice, a habitat and a set of behaviours. Every number below is a
 - Every call is kept as a **motif**: per unit its length, gap, pitch step and each parameter's
   position inside the caller's own range (0–1).
 - A copy maps those positions into the copier's ranges: the caller's gesture in the copier's
-  voice. [Proposed]
+  voice. [Decided]
 - **Timbre match** (0–1) [Decided: try to match timbre too]. At 0 a copy keeps the copier's own
   sound, with only the gesture carried over. At 1 the copier aims for the caller's actual Shape,
   body cutoff and resonance, as far as its own ranges reach. A species' ranges are its anatomy: a
   mimic with wide ranges can sound like almost anyone, a narrow one only gets close. In the
   prototype every species uses the same voice, so this is cheap. The real aim is matching across
-  **different sources and bodies**, once there are more than one: [Later, wanted]. [Proposed: keep
-  the simple version in the prototype]
+  **different sources and bodies**, once there are more than one: [Later, wanted]. The simple
+  version is in the prototype. [Decided]
 - **Pitch match** (0–1) [Decided]. At 0 a copy carries the caller's pitch **steps**, placed in the
   copier's own pitch range. At 1 it aims for the caller's **actual pitch**, as far as its pitch
   range reaches. In key, the result still snaps to the scale.
 - **Accuracy** sets how much the copy drifts: at 1 the gesture is exact (within the copier's
   ranges); lower values add errors in pitch steps, timing and unit count, and may drop or add
-  units. [Proposed]
+  units. [Decided]
 - Each individual remembers the last few calls it heard, from any species including its own, and
-  draws on them. A high-chance species ends up carrying pieces of the whole forest. [Proposed]
+  draws on them. A high-chance species ends up carrying pieces of the whole forest. [Decided]
 
 ## 6. Key
 - Forest-wide switch: **In key** (root and scale; anchor notes snap) or **Free**. [Decided]
 - Harmonise (group only) prefers consonant intervals: scale steps in key, simple ratios when Free.
-  [Proposed]
+  [Decided]
 
 ## 7. Hearing between animals
 
 - A call reaches each other individual with the same propagation the listener gets: spreading
   (−6 dB per doubling of distance), medium absorption, foliage loss and delay. [Decided: they
   only hear what they can hear]
-- An individual reacts only if the arriving level is above its species' **Hearing**. [Proposed]
+- An individual reacts only if the arriving level is above its species' **Hearing**. [Decided]
 - Only **call events** travel between animals, never audio, and a spatial grid limits each call to
-  the individuals within its reach. [Proposed]
+  the individuals within its reach. [Decided]
 
 ## 8. Loudness
 
 Many quiet animals add up quickly: 1,000 equal callers are 30 dB louder than one.
 
-1. **Physical levels**: everything is computed in dB SPL at the listener first. [Proposed]
-2. **Ear**: **Fixed** (one gain, honest: a thicket is loud, Mars nearly silent) or **Adapting**
-   (slowly rides the level, like hearing adapts, within a set range). [Proposed]
-3. **Starting gain** from the expected total power of all species, so play never starts with a
-   blast. [Proposed]
-4. **Per-species limiter, then a final limiter at −1 dBFS**, idle in normal use. [Proposed]
+1. **Physical levels**: everything is computed in dB SPL at the listener first. [Decided]
+2. **Ear**: how the overall volume follows the forest, two modes [Proposed]:
+   - **Fixed**: one master gain that never moves. A loud thicket stays loud and a sparse Martian
+     woodland stays very quiet, so you hear the real differences between forests and places.
+   - **Adapting**: the gain slowly turns up when it's quiet and down when it's loud, over tens of
+     seconds, like your ears getting used to a place. It moves at most ±20 dB, so a quiet forest
+     still sounds quieter than a loud one. Default.
+3. **Starting gain**: before playing, kanopy estimates how loud the forest will be on average,
+   from how many individuals there are, how loud and how often they call and how far they are from
+   the listener, and sets the master gain from that. Play starts at a sensible level, not at a
+   blast or near-silence. It's also Adapting's starting point. [Proposed]
+4. **Per-species limiter, then a final limiter at −1 dBFS**, idle in normal use. [Decided]
 
 ## 9. Pages
 
 Same look as the bytebent pages (platinum window, black screen first, etched groups, knobs and
 range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
 
-- **Forest**: the screen shows the slice: trees, layer guides, the person or the box, and every
-  individual as a dot in its species colour that lights up when it calls. Drag the person, or draw
-  and drag the box. Controls: Listen (Person · Box), Density, Medium, Reverb, Key, Ear, Path,
+- **Forest**: the screen shows the slice: trees, layer guides, the listener or the box, and every
+  individual as a dot in its species colour that lights up when it calls. Drag the listener, or draw
+  and drag the box. Controls: Listen (Listener · Box), Density, Medium, Reverb, Key, Ear, Path,
   Seed, Play, Export.
 - **Species**: every species in the forest with its colour, individuals, movement type, height
-  curve, spread, groups and behaviours. Add from file, from the Designer, or duplicate.
+  range, spread, groups and behaviours. Add from file, from the Designer, or duplicate.
 - **Designer**: one species' voice and calls, with **Call** and **Signature** buttons to audition it
   alone, and the behaviour traits of §5.3–5.5.
 
 ## 10. Limits and performance
 
-- **Species**: no low cap. [Decided] [Proposed: no hard limit in the files; colours generated
-  around the colour wheel; the list scrolls. We test with 64.]
+- **Species**: no low cap, no hard limit in the files; colours generated around the colour wheel;
+  the list scrolls. We test with 64. [Decided, for now]
 - **Individuals** are cheap (a position, a state, a timer). Target ceiling **20,000** per forest,
-  to confirm by benchmark. [Proposed]
-- **Sounding voices** are what cost: a **voice budget**, quietest-at-the-listener culled first.
-  The first build step measures how many voices your Mac runs live. [Proposed]
+  for testing. The app's real limit will likely be lower, set from the benchmark. [Decided]
+- **Sounding voices** are what cost. Most individuals are silent at any moment, but the ones
+  calling right now each need their sound computed. The **voice budget** is the most that can sound
+  at once (say 400). If more are calling than that, the ones quietest at the listener, which you
+  would barely hear anyway, are skipped until there's room. Batch 01 measures the right number for
+  your Mac. Export can use a higher budget, since it doesn't have to keep up with real time.
+  [Proposed]
 - **Threads**: live play renders a little ahead (~100 ms) on **one render thread**, separate from
   the audio callback; that's light on battery and heat. [Decided] Export may use more cores, set
-  by a **Render threads** setting (default: all). [Proposed]
+  by a **Render threads** setting (default: all). [Decided]
 
 ## 11. Tech
 
@@ -276,14 +300,16 @@ range sliders) with kanopy's own name and badge and no bytebent mark. [Decided]
   - `kanopy-core`: world, behaviour, hearing, voices, mixing. No UI.
   - `kanopy-cli`: renders a forest file to WAV, streamed to disk, any length.
   - `kanopy-app`: the desktop app (Tauri), CoreAudio output, hosting the pages.
-- **Pages**: plain HTML/CSS/JS, no framework. [Proposed]
+- **Pages**: written in plain HTML, CSS and JavaScript, the way the bytebent pages are, with no
+  framework such as React or Vue on top. Simpler to read and change, nothing to install. [Proposed]
 - **Files**: `.kanopy-species.json` and `.kanopy-forest.json`, both versioned. A forest file
-  contains its species so it opens on its own. [Proposed]
-- Output 48 kHz, 24-bit WAV, with the seed and settings written into the file. [Proposed]
+  contains its species so it opens on its own. [Decided]
+- Output 48 kHz, 24-bit WAV, with the seed and settings written into the file. [Decided, for now]
 
 ## 12. Later
 - Time of day (dawn and dusk choruses). [Later]
 - A richer voice engine for the Designer. [Later]
 
-## 13. Questions for pass 5
-All [Proposed] and [Open] items are listed in `design-review-pass4.csv`, to answer in one go.
+## 13. Questions for pass 6
+Explained in pass 5 and waiting for a yes or a change: Signature (§5.2), Spread (§5.3), Ear and
+Starting gain (§8), Voice budget (§10), Pages tech (§11), the underground listener (§4.1).
