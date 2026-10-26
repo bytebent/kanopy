@@ -19,7 +19,7 @@ use kanopy_core::files::{ForestFile, KeyFile, ListenFile, MediumFile, RenderFile
 use kanopy_core::life::DT;
 use kanopy_core::master::Ear;
 use kanopy_core::mixer::Hear;
-use kanopy_core::rng::Rng;
+use kanopy_core::path::{PathFile, Walker};
 use kanopy_core::scene::Scene;
 use kanopy_core::species::{Movement, Species};
 use kanopy_core::world::{Rect, BOTTOM, TOP, WIDTH};
@@ -61,14 +61,7 @@ pub enum Take {
     Signature,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
-#[serde(rename_all = "lowercase")]
-pub enum PathKind {
-    #[default]
-    Still,
-    Wander,
-    Follow,
-}
+pub use kanopy_core::path::PathKind;
 
 /// What the page can ask for.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
@@ -90,6 +83,9 @@ pub enum Cmd {
         kind: PathKind,
         speed: f64,
         species: Option<usize>,
+        /// Wander may go underground.
+        #[serde(default)]
+        underground: bool,
     },
     Radius {
         radius: f64,
@@ -452,13 +448,7 @@ struct Player {
     playing: bool,
     pos: Vec2,
     drag: Option<(Vec2, Instant)>,
-    path: PathKind,
-    speed: f64,
-    follow: Option<usize>,
-    follow_group: Option<usize>,
-    wander_goal: Vec2,
-    wander_since: f64,
-    rng: Rng,
+    walker: Walker,
     volume: f32,
     version: u64,
     cpu: f64,
@@ -476,22 +466,24 @@ fn world() -> Rect {
 }
 
 impl Player {
+    /// The forest's path; an unknown Follow species just stands still.
+    fn walker_for(forest: &ForestFile, scene: &Scene, pos: Vec2) -> Walker {
+        Walker::from_file(&forest.path, &scene.life, pos, forest.seed).unwrap_or_else(|_| {
+            Walker::from_file(&PathFile::default(), &scene.life, pos, forest.seed).unwrap()
+        })
+    }
+
     fn new(forest: ForestFile, sr: u32) -> Result<Self, String> {
         let scene = forest.scene()?.with_sound(sr as f32);
         let pos = scene.settings.listener;
+        let walker = Self::walker_for(&forest, &scene, pos);
         let mut p = Player {
             scene,
             sr,
             playing: false,
             pos,
             drag: None,
-            path: PathKind::Still,
-            speed: 1.5,
-            follow: None,
-            follow_group: None,
-            wander_goal: pos,
-            wander_since: 0.0,
-            rng: Rng::new(forest.seed ^ 0x11FE),
+            walker,
             volume: 0.0,
             version: 0,
             cpu: 0.0,
@@ -511,7 +503,9 @@ impl Player {
         let scene = self.forest.scene()?.with_sound(self.sr as f32);
         self.scene = scene;
         self.scene.set_listener(self.pos, Vec2::default());
-        self.follow_group = None;
+        let (pos, vel) = (self.pos, self.walker.vel);
+        self.walker = Self::walker_for(&self.forest, &self.scene, pos);
+        self.walker.place(pos, vel);
         self.version += 1;
         Ok(())
     }
@@ -561,12 +555,16 @@ impl Player {
                 kind,
                 speed,
                 species,
+                underground,
             } => {
-                self.path = kind;
-                self.speed = speed.clamp(0.05, 30.0);
-                self.follow = species;
-                self.follow_group = None;
-                self.wander_since = f64::NEG_INFINITY;
+                let species = species.filter(|&i| i < f.species.len());
+                self.walker.set(kind, speed, species, underground);
+                f.path = PathFile {
+                    kind,
+                    speed: self.walker.speed,
+                    follow: species.map(|i| f.species[i].name.clone()),
+                    underground,
+                };
             }
             Cmd::Radius { radius } => {
                 if let ListenFile::Listener { x, y, .. } = f.listen {
@@ -648,99 +646,37 @@ impl Player {
                 let scene = f.scene()?.with_sound(self.sr as f32);
                 self.scene = scene;
                 self.scene.set_listener(self.pos, Vec2::default());
+                self.walker = Self::walker_for(&self.forest, &self.scene, self.pos);
                 self.version += 1;
-                self.follow_group = None;
             }
         }
         Ok(false)
     }
 
-    /// Where the listener heads this step, and how fast it may go.
-    fn goal(&mut self) -> (Vec2, f64) {
+    /// Move the listener one step: towards a drag, or along its path. Each step starts where
+    /// the last one's motion left it, so the sound never jumps.
+    fn move_listener(&mut self) {
         if let Some((to, at)) = self.drag {
             if at.elapsed().as_secs_f64() < 0.4 || self.pos.dist(to) > 0.05 {
-                return (to, DRAG_SPEED);
+                let start = world().clamp(self.pos.add_scaled(self.walker.vel, DT));
+                let (dx, dy) = (to.x - start.x, to.y - start.y);
+                let d = (dx * dx + dy * dy).sqrt();
+                let step = (DRAG_SPEED * DT).min(d);
+                let vel = if d > 1e-9 {
+                    Vec2::new(dx / d * step / DT, dy / d * step / DT)
+                } else {
+                    Vec2::default()
+                };
+                self.walker.place(start, vel);
+                self.pos = start;
+                self.scene.set_listener(start, vel);
+                return;
             }
             self.drag = None;
-            self.wander_goal = self.pos;
         }
-        let t = self.scene.time();
-        match self.path {
-            PathKind::Still => (self.pos, 0.0),
-            PathKind::Wander => {
-                if self.pos.dist(self.wander_goal) < 1.0 || t - self.wander_since > 40.0 {
-                    let w = world();
-                    // mostly above ground, sometimes under it
-                    let y = if self.rng.f64() < 0.1 {
-                        self.rng.range(BOTTOM + 0.3, -0.5)
-                    } else {
-                        self.rng.range(0.5, TOP - 2.0)
-                    };
-                    let x =
-                        (self.pos.x + self.rng.range(-60.0, 60.0)).clamp(w.x0 + 2.0, w.x1 - 2.0);
-                    self.wander_goal = Vec2::new(x, y);
-                    self.wander_since = t;
-                }
-                (self.wander_goal, self.speed)
-            }
-            PathKind::Follow => {
-                let Some(sp) = self.follow else {
-                    return (self.pos, 0.0);
-                };
-                let life = &self.scene.life;
-                let centre = |g: usize| {
-                    let gr = &life.groups[g];
-                    let mut c = Vec2::default();
-                    for a in &life.animals[gr.first..gr.first + gr.len] {
-                        c = c.add_scaled(a.pos, 1.0 / gr.len as f64);
-                    }
-                    c
-                };
-                let valid = self
-                    .follow_group
-                    .filter(|&g| g < life.groups.len() && life.groups[g].species as usize == sp);
-                let g = match valid {
-                    Some(g) => g,
-                    None => {
-                        let best = (0..life.groups.len())
-                            .filter(|&g| life.groups[g].species as usize == sp)
-                            .min_by(|&a, &b| {
-                                self.pos
-                                    .dist(centre(a))
-                                    .total_cmp(&self.pos.dist(centre(b)))
-                            });
-                        match best {
-                            Some(g) => g,
-                            None => return (self.pos, 0.0),
-                        }
-                    }
-                };
-                self.follow_group = Some(g);
-                // stay a couple of metres off the group, not inside it
-                let c = centre(g);
-                let mover = life.species[sp].habitat.movement;
-                let off = if mover == Movement::Burrower {
-                    Vec2::new(-2.0, 0.0)
-                } else {
-                    Vec2::new(-2.0, -1.5)
-                };
-                (world().clamp(c.add_scaled(off, 1.0)), self.speed)
-            }
-        }
-    }
-
-    fn move_listener(&mut self) {
-        let (goal, max) = self.goal();
-        let (dx, dy) = (goal.x - self.pos.x, goal.y - self.pos.y);
-        let d = (dx * dx + dy * dy).sqrt();
-        let step = (max * DT).min(d);
-        let vel = if d > 1e-9 && step > 0.0 {
-            Vec2::new(dx / d * step / DT, dy / d * step / DT)
-        } else {
-            Vec2::default()
-        };
-        self.pos = world().clamp(self.pos.add_scaled(vel, DT));
-        self.scene.set_listener(self.pos, vel);
+        let (pos, vel) = self.walker.step(&self.scene.life);
+        self.pos = pos;
+        self.scene.set_listener(pos, vel);
     }
 
     /// Duck the forest in `l`/`r` under the audition, add the audition on top, apply the volume
@@ -818,7 +754,7 @@ impl Player {
             "liquid": self.scene.settings.medium.liquid,
             "sample_rate": self.sr,
             "species": species,
-            "path": { "kind": self.path, "speed": self.speed, "species": self.follow },
+            "path": { "kind": self.walker.kind, "speed": self.walker.speed, "species": self.walker.follow, "underground": self.walker.underground },
             "volume": self.volume,
             "default_species": kanopy_core::species::Species::new("New species", Default::default()),
             "max_individuals": MAX_INDIVIDUALS,

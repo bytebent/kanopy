@@ -15,6 +15,7 @@
 //!
 //!   kanopy render FILE [options]   a forest file (or a kanopy WAV) to a WAV, any length
 //!       --minutes M --seed N --fade-in S --fade-out S --bits 16|24 --out FILE
+//!       --path still|wander|follow --speed M/S --follow SPECIES --underground (Wander may go below)
 //!   kanopy examples [--out DIR]    write the example forest and species files
 //!   kanopy serve [options]         the app's pages in a browser, playing live
 //!       --forest FILE --port N (8710) --ui DIR (ui) --library DIR --no-audio
@@ -70,8 +71,20 @@ fn main() {
             let Some(file) = args.get(1).filter(|a| !a.starts_with("--")) else {
                 fail("usage: kanopy render FILE [--minutes M] [--seed N] [--out FILE]")
             };
+            let path = (
+                opt("--path").map(|k| match k.as_str() {
+                    "still" => kanopy_core::path::PathKind::Still,
+                    "wander" => kanopy_core::path::PathKind::Wander,
+                    "follow" => kanopy_core::path::PathKind::Follow,
+                    _ => fail("--path: still, wander or follow"),
+                }),
+                f("--speed"),
+                opt("--follow"),
+                args.iter().any(|a| a == "--underground"),
+            );
             render_cmd(
                 Path::new(file),
+                path,
                 f("--minutes"),
                 f("--seed").map(|x| x as u64),
                 f("--fade-in"),
@@ -765,8 +778,15 @@ fn slug(s: &str) -> String {
 }
 
 #[allow(clippy::too_many_arguments)]
+#[allow(clippy::too_many_arguments)]
 fn render_cmd(
     file: &Path,
+    path: (
+        Option<kanopy_core::path::PathKind>,
+        Option<f64>,
+        Option<String>,
+        bool,
+    ),
     minutes: Option<f64>,
     seed: Option<u64>,
     fade_in: Option<f64>,
@@ -778,6 +798,20 @@ fn render_cmd(
     let mut forest = load_forest(file);
     if let Some(s) = seed {
         forest.seed = s;
+    }
+    let (kind, speed, follow, underground) = path;
+    if let Some(k) = kind {
+        forest.path.kind = k;
+    }
+    if follow.is_some() {
+        forest.path.kind = kanopy_core::path::PathKind::Follow;
+        forest.path.follow = follow;
+    }
+    if let Some(v) = speed {
+        forest.path.speed = v;
+    }
+    if underground {
+        forest.path.underground = true;
     }
     let mut opts = forest.render.clone();
     if let Some(m) = minutes {
@@ -817,6 +851,30 @@ fn render_cmd(
             .map(|s| s.habitat.individuals)
             .sum::<usize>()
     );
+    if let kanopy_core::files::ListenFile::Listener { .. } = forest.listen {
+        let p = &forest.path;
+        match p.kind {
+            kanopy_core::path::PathKind::Still => {}
+            k => println!(
+                "listener: {} at {} m/s{}{}",
+                if k == kanopy_core::path::PathKind::Wander {
+                    "wanders"
+                } else {
+                    "follows"
+                },
+                p.speed,
+                p.follow
+                    .as_ref()
+                    .map(|n| format!(" {n}"))
+                    .unwrap_or_default(),
+                if p.underground {
+                    ", underground too"
+                } else {
+                    ""
+                }
+            ),
+        }
+    }
     let total = opts.minutes * 60.0;
     let tty = std::io::IsTerminal::is_terminal(&std::io::stdout());
     let (_, rep) =

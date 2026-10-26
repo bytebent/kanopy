@@ -7,7 +7,7 @@
 const { chromium } = require('playwright');
 const url = process.argv[2] || 'http://127.0.0.1:8710';
 const out = process.argv[3] || 'docs/experiments';
-const tag = process.argv[4] || '08'; // screenshot prefix: the batch
+const tag = process.argv[4] || '09'; // screenshot prefix: the batch
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 (async () => {
   const browser = await chromium.launch();
@@ -75,6 +75,15 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await wait(5000);
   f = await frame();
   check('example loads and keeps playing', f.playing === 1 && f.calling >= 0, `t=${f.time.toFixed(1)}`);
+  // Wander with Underground: the forest file (and so Export) carries it
+  await page.click('#path button[data-v=wander]');
+  await page.check('#underground');
+  await wait(400);
+  const pf = (await page.evaluate(() => window.kanopy.info())).forest.path;
+  check('export path: wander, underground', pf.kind === 'wander' && pf.underground === true, JSON.stringify(pf));
+  await page.uncheck('#underground');
+  await page.click('#path button[data-v=follow]');
+  await wait(300);
   check('following moved the listener', !(Math.abs(f.lx - 140) < 0.5 && Math.abs(f.ly - 22) < 0.5), `at ${f.lx.toFixed(1)}, ${f.ly.toFixed(1)}`);
   await page.screenshot({ path: `${out}/${tag}-underwater-following.png` });
 

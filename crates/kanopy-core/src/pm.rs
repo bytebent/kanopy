@@ -17,6 +17,8 @@ pub trait Pm: Sized {
     fn p_log2(self) -> Self;
     fn p_powf(self, e: Self) -> Self;
     fn p_hypot(self, o: Self) -> Self;
+    /// atan2(self, x): the angle of (x, self).
+    fn p_atan2(self, x: Self) -> Self;
 }
 
 impl Pm for f64 {
@@ -50,6 +52,9 @@ impl Pm for f64 {
     fn p_hypot(self, o: f64) -> f64 {
         libm::hypot(self, o)
     }
+    fn p_atan2(self, x: f64) -> f64 {
+        libm::atan2(self, x)
+    }
 }
 
 impl Pm for f32 {
@@ -82,5 +87,8 @@ impl Pm for f32 {
     }
     fn p_hypot(self, o: f32) -> f32 {
         libm::hypotf(self, o)
+    }
+    fn p_atan2(self, x: f32) -> f32 {
+        libm::atan2f(self, x)
     }
 }

@@ -70,6 +70,7 @@ fn the_listener_glides_and_wanders() {
         kind: PathKind::Wander,
         speed: 10.0,
         species: None,
+        underground: true,
     });
     wait(1500);
     let (x2, y2) = listener(&live);
@@ -80,6 +81,20 @@ fn the_listener_glides_and_wanders() {
         f.listen,
         kanopy_core::files::ListenFile::Listener { .. }
     ));
+    assert_eq!(f.path.kind, PathKind::Wander);
+    assert!(f.path.underground && f.path.speed == 10.0);
+    // follow by index on the page, by name in the file
+    live.send(Cmd::Path {
+        kind: PathKind::Follow,
+        speed: 3.0,
+        species: Some(2),
+        underground: false,
+    });
+    wait(200);
+    assert_eq!(
+        live.forest().path.follow.as_deref(),
+        Some(small().species[2].name.as_str())
+    );
 }
 
 #[test]
@@ -141,6 +156,15 @@ fn export_renders_the_forest_as_it_is() {
     live.send(Cmd::Listener { x: 50.0, y: 5.0 });
     live.send(Cmd::Play { on: true });
     wait(1500);
+    // a wandering listener: the export wanders too
+    live.send(Cmd::Path {
+        kind: PathKind::Wander,
+        speed: 4.0,
+        species: None,
+        underground: true,
+    });
+    live.send(Cmd::Play { on: false });
+    wait(200);
     let dir = std::env::temp_dir().join("kanopy-live-test");
     std::fs::create_dir_all(&dir).unwrap();
     let path = dir.join("export.wav");
@@ -160,6 +184,8 @@ fn export_renders_the_forest_as_it_is() {
         }
         _ => panic!("listener expected"),
     }
+    assert_eq!(inside.path.kind, PathKind::Wander);
+    assert!(inside.path.underground && inside.path.speed == 4.0);
 }
 
 #[test]

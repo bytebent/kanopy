@@ -14,7 +14,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | Done (your Mac: under 20 % CPU) |
 | 07 | Species page: palette, manual colours, Apply/Revert, species library | Page checks pass; Apply rebuilds; library keeps species | Done |
 | 08 | Designer page: voice, calls and speed; one draft shared with the Species page; Call and Signature auditions, dry, ducking the forest; below-hearing flag | Page checks pass; auditions heard on the Mac | Built; to hear on your Mac |
-| 09 | Listening round and tuning: the clicks (limiter look-ahead), listener paths in renders | Your notes addressed | In progress |
+| 09 | Listening round and tuning: the clicks (limiter look-ahead), listener paths in renders | Your notes addressed | Built; to hear on your Mac |
 
 ## Batch 01 in detail
 
@@ -115,3 +115,13 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
   drawn as pitch over time, the flag), `draft.js` (one draft for the Species page and the
   Designer, kept across pages), a two-thumb range control in `kit.js`.
 - App and `kanopy serve`: `audition` and `check`.
+
+## Batch 09 in detail
+
+- The clicks: `tools/clicks.py` (a click finder that doesn't assume clipping), controls (the
+  same render without limiters; every unit rendered alone), the cause (the limiter's look-ahead
+  and the 2,400-sample step), the limiter rewritten, `tests/clicks.rs`.
+- `path.rs`: Still, Wander, Follow at a Speed, Underground on/off, steering in arcs; shared by
+  renders and live play. Forest files gain `path`; renders and Export follow it.
+- `kanopy render … --path wander|follow|still --speed M/S --follow SPECIES --underground`.
+- Forest page: an Underground switch by the path.

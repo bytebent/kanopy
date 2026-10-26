@@ -142,6 +142,13 @@ same; only what you hear changes.
   - **Underground** (on/off, default off): whether Wander may go below the surface. [Decided]
   - Wander turns smoothly, not at sharp corners, so its Doppler doesn't jump. [Decided]
   - The box doesn't wander. [Decided]
+  - As built [Proposed: check by ear]: turns are arcs; the heading turns at most speed / 3 m
+    per second (never slower than 1 rad/s), so turns are about 3 m across at any speed; speed
+    changes take about 1.5 s. Near the edges of the slice, and the ground with Underground off,
+    it slides along rather than stopping. Wander picks a new spot within 60 m left or right,
+    6 m before reaching the last one; with Underground on, a tenth of the spots are below. In
+    files: `"path": {"kind": "wander", "speed": 2, "underground": false}`; Follow names its
+    species (`"follow": "Swifts"`).
 
 ### 4.2 Box
 - Draw a **box** on the forest picture; you hear only the individuals inside it. [Decided]
@@ -316,6 +323,9 @@ Many quiet animals add up quickly: 1,000 equal callers are 30 dB louder than one
    blast or near-silence. It's also Adapting's starting point. It too is capped small: at most
    **±5 dB** from the physical level. [Decided]
 4. **Per-species limiter, then a final limiter at −1 dBFS**, idle in normal use. [Decided]
+
+Fixed in batch 09: the limiters look exactly 64 samples (1.3 ms) ahead whatever the block
+size; before, they dropped sound at every 50 ms step (the clicks). [Decided as built]
 
 As built in batch 04 [Proposed]: the reference maps 80 dB SPL to 0 dBFS, so an ordinary forest
 around 60 dB SPL sits near −20 dBFS RMS, which is where the starting gain aims. Both the starting

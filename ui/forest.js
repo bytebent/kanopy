@@ -164,10 +164,11 @@ else {
     const kind = path.value;
     const sp = $('follow').value === '' ? null : Number($('follow').value);
     following = kind === 'follow' ? sp : null;
-    send({ type: 'path', kind, speed: speed.value, species: sp });
+    send({ type: 'path', kind, speed: speed.value, species: sp, underground: $('underground').checked });
     legendMarks();
   };
   const path = kit.seg($('path'), sendPath);
+  $('underground').addEventListener('change', sendPath);
   $('follow').addEventListener('change', () => {
     path.set('follow');
     sendPath();
@@ -284,6 +285,7 @@ else {
     }
     path.set(info.path.kind);
     speed.set(info.path.speed);
+    $('underground').checked = !!info.path.underground;
     following = info.path.kind === 'follow' ? info.path.species : null;
     speciesColours = window.palette.colours(f.species);
     // species: legend and follow list

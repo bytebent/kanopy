@@ -31,9 +31,11 @@
       <fieldset>
         <legend><span class="dot" style="background:var(--blue)"></span>Listen</legend>
         <div class="line"><label>Mode</label><span class="seg" id="mode"><button data-v="listener" class="on">Listener</button><button data-v="box">Box</button></span></div>
-        <div class="line"><label>Path</label><span class="seg" id="path"><button data-v="still" class="on">Still</button><button data-v="wander">Wander</button><button data-v="follow">Follow</button></span></div>
+        <div class="line"><label>Path</label><span class="seg" id="path"><button data-v="still" class="on">Still</button><button data-v="wander">Wander</button><button data-v="follow">Follow</button></span>
+          <label class="check" title="Wander may go below the surface"><input type="checkbox" id="underground"> Underground</label></div>
         <div class="line"><label>Follow</label><select id="follow"></select></div>
         <div class="knobs" id="k-listen"></div>
+        <p class="note">Export follows the path too.</p>
       </fieldset>
       <fieldset>
         <legend><span class="dot" style="background:var(--green)"></span>Forest</legend>

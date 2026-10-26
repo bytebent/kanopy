@@ -14,6 +14,7 @@ pub mod filter;
 pub mod life;
 pub mod master;
 pub mod mixer;
+pub mod path;
 pub mod pm;
 use pm::Pm;
 pub mod propagation;

@@ -3,7 +3,7 @@
 A renderer for living forests: species you design, placed in a forest on any world, heard from
 wherever you stand. Each animal only reacts to what actually reaches its ears.
 
-Status: **design agreed; batches 01–08 built**: the sound path, the forest and how its animals move, how they call, hear, answer, chorus, harmonise and copy each other, the worlds, Box listening, the Ear, limiters and reverb, forest files rendered to WAV, and the app with its Forest, Species and Designer pages, playing live.
+Status: **design agreed; batches 01–09 built**: the sound path, the forest and how its animals move, how they call, hear, answer, chorus, harmonise and copy each other, the worlds, Box listening, the Ear, limiters and reverb, forest files rendered to WAV, and the app with its Forest, Species and Designer pages, playing live.
 
 - `design.md`: what kanopy is and how it works
 - `plan.md`: build batches
@@ -32,7 +32,9 @@ cargo run --release -p kanopy-cli -- render examples/forests/sparse-forest.kanop
 
 The WAV lands in `renders/`. Forest files are JSON: see `examples/forests/` (and one species
 per file in `examples/species/`). A file only needs what differs from the defaults. Options:
-`--minutes`, `--seed`, `--fade-in`, `--fade-out`, `--bits 16|24`, `--out FILE`. Every render
+`--minutes`, `--seed`, `--fade-in`, `--fade-out`, `--bits 16|24`, `--out FILE`. The listener can move
+through a render: `--path wander --speed 2` (add `--underground` to let it go below the surface),
+or `--follow swifts --speed 3`. Export in the app follows the path set on the Forest page. Every render
 carries its forest file inside, so `kanopy render some-render.wav` renders it again exactly.
 
 ## Build and run

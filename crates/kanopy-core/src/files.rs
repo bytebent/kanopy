@@ -5,6 +5,7 @@
 
 use crate::life::{Life, Zone};
 use crate::master::Ear;
+use crate::path::PathFile;
 use crate::propagation::Medium;
 use crate::scale::{Key, Scale};
 use crate::scene::{Scene, SceneSettings, BOX_MARGIN};
@@ -143,6 +144,8 @@ pub struct ForestFile {
     /// null: Free.
     pub key: Option<KeyFile>,
     pub listen: ListenFile,
+    /// How the listener moves (listening from the listener only).
+    pub path: PathFile,
     /// Most calling at once.
     pub cap: usize,
     pub ear: Ear,
@@ -173,6 +176,7 @@ impl Default for ForestFile {
                 y: st.listener.y,
                 radius: 150.0,
             },
+            path: PathFile::default(),
             cap: st.cap,
             ear: st.ear,
             medium_compensation: st.medium_compensation,

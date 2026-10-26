@@ -3,9 +3,11 @@
 //! exactly. Same file, same seed: the same WAV, bit for bit.
 use crate::pm::Pm;
 
-use crate::files::{ForestFile, RenderFile};
+use crate::files::{ForestFile, ListenFile, RenderFile};
 use crate::life::DT;
+use crate::path::{PathKind, Walker};
 use crate::wav::WavWriter;
+use crate::Vec2;
 use crate::{amp_to_db, VERSION};
 use std::io::{Seek, Write};
 use std::time::Instant;
@@ -79,6 +81,13 @@ pub fn render<W: Write + Seek>(
     .map_err(|e| e.to_string())?;
 
     let mut scene = forest.scene()?.with_sound(SAMPLE_RATE as f32);
+    // the listener's path (a still listener needs nothing: it stays where the file puts it)
+    let mut walker = match forest.listen {
+        ListenFile::Listener { x, y, .. } if forest.path.kind != PathKind::Still => Some(
+            Walker::from_file(&forest.path, &scene.life, Vec2::new(x, y), forest.seed)?,
+        ),
+        _ => None,
+    };
     let n = scene.step_samples();
     let steps = (opts.minutes.max(0.0) * 60.0 / DT).round() as u64;
     let total = steps * n as u64;
@@ -96,6 +105,10 @@ pub fn render<W: Write + Seek>(
     for k in 0..steps {
         l.fill(0.0);
         r.fill(0.0);
+        if let Some(w) = walker.as_mut() {
+            let (pos, vel) = w.step(&scene.life);
+            scene.set_listener(pos, vel);
+        }
         scene.step_audio(&mut l, &mut r);
         let base = k * n as u64;
         if base < fade_in || base + n as u64 > total.saturating_sub(fade_out) {
