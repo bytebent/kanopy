@@ -109,6 +109,9 @@ pub struct Mixer {
     pub stats: Stats,
     /// Render every unit on its own (no lanes). Same result, slower; for tests.
     pub single: bool,
+    /// Every unit added (after the body shift), with its emission time and bus: for checking
+    /// the mixer against units rendered one by one.
+    pub record: Option<Vec<(UnitSpec, f64, u32)>>,
     sample_rate: f32,
     scratch: [f32; BLOCK],
     jobs: Vec<Job>,
@@ -144,6 +147,7 @@ impl Mixer {
             time: 0.0,
             stats: Stats::default(),
             single: false,
+            record: None,
             sample_rate,
             scratch: [0.0; BLOCK],
             jobs: Vec::new(),
@@ -173,6 +177,9 @@ impl Mixer {
             let r = self.medium.body_ratio() as f32;
             spec.cutoff_start *= r;
             spec.cutoff_end *= r;
+        }
+        if let Some(rec) = self.record.as_mut() {
+            rec.push((spec, emit, bus));
         }
         let db =
             spec.level_db as f64 - FULL_SCALE_SPL as f64 + self.medium.level_offset() - path.db;

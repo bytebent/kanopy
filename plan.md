@@ -14,7 +14,7 @@ Follows `design.md`. Each batch ends with its tests passing and its experiments 
 | 06 | App shell and Forest page: Tauri, live audio on one render thread, the scene, dragging, paths, box | Plays live on the Mac | Done (your Mac: under 20 % CPU) |
 | 07 | Species page: palette, manual colours, Apply/Revert, species library | Page checks pass; Apply rebuilds; library keeps species | Done |
 | 08 | Designer page: voice, calls and speed; one draft shared with the Species page; Call and Signature auditions, dry, ducking the forest; below-hearing flag | Page checks pass; auditions heard on the Mac | Built; to hear on your Mac |
-| 09 | Listening round and tuning | Your notes addressed | |
+| 09 | Listening round and tuning: the clicks (limiter look-ahead), listener paths in renders | Your notes addressed | In progress |
 
 ## Batch 01 in detail
 

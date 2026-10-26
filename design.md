@@ -136,6 +136,12 @@ same; only what you hear changes.
 - **Panning**: equal-power, from the horizontal offset relative to distance, so a call straight
   above is centred. Height adds a light brightness cue (above is slightly brighter). [Decided]
 - Moving changes delays smoothly, so Doppler comes for free on fast flyers.
+- **Paths in renders too** [Decided]: an export follows the listener's path, Still, Wander or
+  Follow, at its Speed, not only a still listener. The route comes from the forest's seed, so
+  the same file renders the same walk. The path is saved in the forest file (and the WAV).
+  - **Underground** (on/off, default off): whether Wander may go below the surface. [Decided]
+  - Wander turns smoothly, not at sharp corners, so its Doppler doesn't jump. [Decided]
+  - The box doesn't wander. [Decided]
 
 ### 4.2 Box
 - Draw a **box** on the forest picture; you hear only the individuals inside it. [Decided]

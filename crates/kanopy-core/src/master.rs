@@ -39,15 +39,20 @@ pub enum Ear {
     Adapting,
 }
 
-/// A stereo-linked peak limiter with one block of look-ahead.
+/// A stereo-linked peak limiter that looks LOOK samples ahead: everything it outputs is
+/// delayed by exactly LOOK samples, whatever size of blocks it's given.
+pub const LOOK: usize = BLOCK;
+
 #[derive(Clone, Debug)]
 pub struct Limiter {
     threshold: f32,
+    /// Gain may rise by this factor per LOOK samples.
     release_step: f32,
     gain: f32,
-    delay: [[f32; BLOCK]; 2],
-    delay_len: usize,
-    delay_peak: f32,
+    /// The last LOOK samples in, not yet out: [channel][i].
+    delay: [[f32; LOOK]; 2],
+    /// Peak of what's in `delay`.
+    pub delay_peak: f32,
     /// Smallest gain it has applied (1 = never acted).
     pub min_gain: f32,
 }
@@ -56,52 +61,56 @@ impl Limiter {
     pub fn new(threshold_db: f32, sample_rate: f32) -> Self {
         Self {
             threshold: db_to_amp(threshold_db),
-            // gain may rise by this factor per block
-            release_step: (BLOCK as f32 / (RELEASE * sample_rate)).p_exp(),
+            release_step: (LOOK as f32 / (RELEASE * sample_rate)).p_exp(),
             gain: 1.0,
-            delay: [[0.0; BLOCK]; 2],
-            delay_len: 0,
+            delay: [[0.0; LOOK]; 2],
             delay_peak: 0.0,
             min_gain: 1.0,
         }
     }
 
-    /// Process one block in place (`n` ≤ BLOCK samples). Output is the previous block, limited.
+    /// Process in place, any length: the output is the input LOOK samples later, limited.
     pub fn process(&mut self, l: &mut [f32], r: &mut [f32]) {
+        let mut at = 0;
+        while at < l.len() {
+            let n = (l.len() - at).min(LOOK);
+            self.chunk(&mut l[at..at + n], &mut r[at..at + n]);
+            at += n;
+        }
+    }
+
+    /// n ≤ LOOK samples. Out go the oldest n delayed samples; in go these n.
+    fn chunk(&mut self, l: &mut [f32], r: &mut [f32]) {
         let n = l.len();
         let peak_in = l.iter().chain(r.iter()).fold(0f32, |a, x| a.max(x.abs()));
-        // gain safe for the delayed block and the incoming one
+        // the previous chunk's end gain is already safe for everything now in the delay, which
+        // covers what goes out now; the end gain must also be safe for what comes in
         let worst = self.delay_peak.max(peak_in);
         let target = if worst > self.threshold {
             self.threshold / worst
         } else {
             1.0
         };
-        let g1 = target.min(self.gain * self.release_step);
-        let g0 = self.gain.min(if self.delay_peak > self.threshold {
-            self.threshold / self.delay_peak
-        } else {
-            1.0
-        });
-        // swap the incoming block with the delayed one, applying a ramp g0 → g1
-        let m = self.delay_len.max(n);
-        for i in 0..n {
-            let f = (i as f32 + 1.0) / m as f32;
-            let g = g0 + (g1 - g0) * f;
-            let (dl, dr) = if i < self.delay_len {
-                (self.delay[0][i], self.delay[1][i])
-            } else {
-                (0.0, 0.0)
-            };
-            self.delay[0][i] = l[i];
-            self.delay[1][i] = r[i];
-            l[i] = dl * g;
-            r[i] = dr * g;
+        let g0 = self.gain;
+        let g1 = target.min(g0 * self.release_step.p_powf(n as f32 / LOOK as f32));
+        let mut next = [[0f32; LOOK]; 2];
+        for (c, x) in [&mut *l, &mut *r].into_iter().enumerate() {
+            // next delay: what's left of the old one, then the input
+            next[c][..LOOK - n].copy_from_slice(&self.delay[c][n..]);
+            next[c][LOOK - n..].copy_from_slice(x);
+            // out: the oldest n delayed samples, at the gain ramp
+            for (i, o) in x.iter_mut().enumerate() {
+                let g = g0 + (g1 - g0) * (i as f32 + 1.0) / n as f32;
+                *o = self.delay[c][i] * g;
+            }
         }
-        self.delay_len = n;
-        self.delay_peak = peak_in;
+        self.delay = next;
+        self.delay_peak = self.delay[0]
+            .iter()
+            .chain(self.delay[1].iter())
+            .fold(0f32, |a, x| a.max(x.abs()));
         self.gain = g1;
-        self.min_gain = self.min_gain.min(g0.min(g1));
+        self.min_gain = self.min_gain.min(g1);
     }
 }
 
@@ -226,6 +235,8 @@ pub struct Master {
     pub reverb: Option<Reverb>,
     sample_rate: f32,
     sum: [[f32; BLOCK]; 2],
+    /// Limiters out of the path (for checking them against a control).
+    pub bypass: bool,
 }
 
 impl Master {
@@ -248,6 +259,7 @@ impl Master {
                 .map(|(rt, b, a)| Reverb::new(rt, b, a, sample_rate)),
             sample_rate,
             sum: [[0.0; BLOCK]; 2],
+            bypass: false,
         }
     }
 
@@ -286,7 +298,9 @@ impl Master {
             for x in bl.iter_mut().chain(br.iter_mut()) {
                 *x *= g;
             }
-            lim.process(bl, br);
+            if !self.bypass {
+                lim.process(bl, br);
+            }
             for i in 0..n {
                 sl[i] += bl[i];
                 sr[i] += br[i];
@@ -309,7 +323,9 @@ impl Master {
         if let Some(r) = self.reverb.as_mut() {
             r.process(&mut sl[..n], &mut sr[..n]);
         }
-        self.last.process(&mut sl[..n], &mut sr[..n]);
+        if !self.bypass {
+            self.last.process(&mut sl[..n], &mut sr[..n]);
+        }
         for i in 0..n {
             left[i] += sl[i];
             right[i] += sr[i];
